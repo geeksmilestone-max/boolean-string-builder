@@ -6,1229 +6,580 @@
 <title>Boolean String Builder · by Ameer</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --bg: #07090f;
-    --surface: #0f1219;
-    --surface2: #161b26;
-    --border: rgba(255,255,255,0.07);
-    --border2: rgba(255,255,255,0.12);
-    --accent: #4f8ef7;
-    --accent2: #7b5cf0;
-    --accent3: #38e8b5;
-    --text: #e8ecf4;
-    --muted: #6b7794;
-    --muted2: #9aa3b8;
-    --li-blue: #0a66c2;
-    --google-red: #ea4335;
-    --tag-bg: rgba(79,142,247,0.10);
-    --tag-border: rgba(79,142,247,0.25);
-    --radius: 14px;
-    --radius-sm: 8px;
-  }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 15px;
-    line-height: 1.6;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-
-  /* Ambient glow background */
-  body::before {
-    content: '';
-    position: fixed;
-    top: -30vh;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80vw;
-    height: 60vh;
-    background: radial-gradient(ellipse at center, rgba(79,142,247,0.08) 0%, rgba(123,92,240,0.05) 50%, transparent 70%);
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .wrapper {
-    position: relative;
-    z-index: 1;
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 48px 24px 80px;
-  }
-
-  /* ── Header ── */
-  .header {
-    text-align: center;
-    margin-bottom: 52px;
-    animation: fadeUp 0.6s ease both;
-  }
-
-  .badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: rgba(79,142,247,0.08);
-    border: 1px solid var(--tag-border);
-    color: var(--accent);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 5px 14px;
-    border-radius: 100px;
-    margin-bottom: 20px;
-  }
-
-  .badge::before {
-    content: '';
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--accent3);
-    animation: pulse 2s infinite;
-  }
-
-  h1 {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(30px, 5vw, 46px);
-    font-weight: 800;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    background: linear-gradient(135deg, #e8ecf4 30%, #6b9cf7 70%, #a387f5 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 14px;
-  }
-
-  .subtitle {
-    color: var(--muted2);
-    font-size: 15px;
-    font-weight: 300;
-    max-width: 480px;
-    margin: 0 auto;
-  }
-
-  /* ── Card ── */
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 32px;
-    margin-bottom: 20px;
-    animation: fadeUp 0.6s ease both;
-    transition: border-color 0.2s;
-  }
-
-  .card:hover { border-color: var(--border2); }
-  .card:nth-child(2) { animation-delay: 0.1s; }
-  .card:nth-child(3) { animation-delay: 0.2s; }
-  .card:nth-child(4) { animation-delay: 0.3s; }
-
-  .card-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 22px;
-  }
-
-  .step-dot {
-    width: 28px; height: 28px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Syne', sans-serif;
-    font-size: 12px;
-    font-weight: 700;
-    flex-shrink: 0;
-  }
-
-  .card-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-  }
-
-  .card-desc {
-    font-size: 13px;
-    color: var(--muted);
-    margin-top: 2px;
-  }
-
-  /* ── Form Elements ── */
-  label {
-    display: block;
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: var(--muted2);
-    margin-bottom: 8px;
-  }
-
-  input[type="text"] {
-    width: 100%;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 15px;
-    padding: 12px 16px;
-    outline: none;
-    transition: border-color 0.2s, box-shadow 0.2s;
-  }
-
-  input[type="text"]:focus {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(79,142,247,0.12);
-  }
-
-  input[type="text"]::placeholder { color: var(--muted); }
-
-  /* Operator toggle */
-  .operator-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 16px;
-  }
-
-  .operator-label {
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--muted);
-    margin-bottom: 0;
-  }
-
-  .toggle-group {
-    display: flex;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 100px;
-    padding: 3px;
-    gap: 2px;
-  }
-
-  .toggle-btn {
-    padding: 5px 14px;
-    border-radius: 100px;
-    border: none;
-    background: transparent;
-    color: var(--muted2);
-    font-family: 'Syne', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .toggle-btn.active {
-    background: var(--accent);
-    color: #fff;
-  }
-
-  /* Tag input area */
-  .tag-input-wrap {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 10px 12px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    align-items: center;
-    min-height: 50px;
-    transition: border-color 0.2s, box-shadow 0.2s;
-    cursor: text;
-  }
-
-  .tag-input-wrap:focus-within {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(79,142,247,0.12);
-  }
-
-  .tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: var(--tag-bg);
-    border: 1px solid var(--tag-border);
-    color: #a0bffa;
-    font-size: 13px;
-    padding: 4px 10px 4px 12px;
-    border-radius: 100px;
-    white-space: nowrap;
-    animation: tagPop 0.18s ease both;
-  }
-
-  .tag-x {
-    background: none;
-    border: none;
-    color: var(--muted);
-    cursor: pointer;
-    font-size: 14px;
-    line-height: 1;
-    padding: 0;
-    display: flex;
-    transition: color 0.15s;
-  }
-  .tag-x:hover { color: #ff6b6b; }
-
-  .tag-inline-input {
-    background: none;
-    border: none;
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    outline: none;
-    min-width: 140px;
-    flex: 1;
-  }
-
-  .tag-inline-input::placeholder { color: var(--muted); }
-
-  /* Multi-select chips */
-  .chip-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 4px;
-  }
-
-  .chip {
-    padding: 7px 16px;
-    border-radius: 100px;
-    border: 1px solid var(--border2);
-    background: var(--surface2);
-    color: var(--muted2);
-    font-size: 13px;
-    cursor: pointer;
-    transition: all 0.18s;
-    user-select: none;
-  }
-
-  .chip:hover { border-color: var(--accent); color: var(--text); }
-
-  .chip.selected {
-    background: rgba(79,142,247,0.12);
-    border-color: var(--accent);
-    color: #a0bffa;
-  }
-
-  /* ── Output Section ── */
-  .output-section {
-    margin-top: 28px;
-    display: none;
-    animation: fadeUp 0.4s ease both;
-  }
-
-  .output-section.visible { display: block; }
-
-  .output-tabs {
-    display: flex;
-    gap: 4px;
-    margin-bottom: 0;
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 0;
-  }
-
-  .output-tab {
-    padding: 10px 20px;
-    border: none;
-    background: none;
-    color: var(--muted);
-    font-family: 'Syne', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    position: relative;
-    transition: color 0.2s;
-    display: flex;
-    align-items: center;
-    gap: 7px;
-  }
-
-  .output-tab.active { color: var(--text); }
-
-  .output-tab.active::after {
-    content: '';
-    position: absolute;
-    bottom: -1px; left: 0; right: 0;
-    height: 2px;
-    background: var(--accent);
-  }
-
-  .tab-icon {
-    width: 14px; height: 14px;
-    border-radius: 3px;
-  }
-
-  .tab-icon.li { background: var(--li-blue); }
-
-  .tab-pane { display: none; padding: 24px 0 0; }
-  .tab-pane.active { display: block; }
-
-  .string-box {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 18px 20px;
-    font-family: 'DM Mono', 'Fira Code', monospace;
-    font-size: 13.5px;
-    line-height: 1.7;
-    color: #c8d8ff;
-    word-break: break-word;
-    min-height: 80px;
-    position: relative;
-  }
-
-  .string-box .kw-and { color: #f6a84f; font-weight: 600; }
-  .string-box .kw-or  { color: #7ee787; font-weight: 600; }
-  .string-box .kw-not { color: #ff7b7b; font-weight: 600; }
-  .string-box .kw-phrase { color: #c792ea; }
-  .string-box .kw-site { color: var(--accent3); }
-
-  .action-row {
-    display: flex;
-    gap: 10px;
-    margin-top: 14px;
-    flex-wrap: wrap;
-  }
-
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 20px;
-    border-radius: var(--radius-sm);
-    font-family: 'Syne', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.2s;
-    border: none;
-    letter-spacing: 0.02em;
-  }
-
-  .btn-primary {
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    color: #fff;
-  }
-  .btn-primary:hover { filter: brightness(1.1); transform: translateY(-1px); }
-
-  .btn-ghost {
-    background: var(--surface2);
-    border: 1px solid var(--border2);
-    color: var(--text);
-  }
-  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
-
-  .btn-success {
-    background: rgba(56,232,181,0.12);
-    border: 1px solid rgba(56,232,181,0.3);
-    color: var(--accent3);
-  }
-
-  /* Generate button */
-  .gen-wrap {
-    text-align: center;
-    margin-top: 36px;
-    animation: fadeUp 0.6s 0.35s ease both;
-  }
-
-  .btn-generate {
-    background: linear-gradient(135deg, #4f8ef7, #7b5cf0);
-    color: #fff;
-    font-family: 'Syne', sans-serif;
-    font-size: 16px;
-    font-weight: 800;
-    padding: 16px 48px;
-    border-radius: 100px;
-    border: none;
-    cursor: pointer;
-    letter-spacing: 0.02em;
-    transition: all 0.25s;
-    box-shadow: 0 4px 24px rgba(79,142,247,0.3);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .btn-generate::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
-    opacity: 0;
-    transition: opacity 0.2s;
-  }
-
-  .btn-generate:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(79,142,247,0.4); }
-  .btn-generate:hover::before { opacity: 1; }
-  .btn-generate:active { transform: translateY(0); }
-
-  /* Footer */
-  .footer {
-    text-align: center;
-    margin-top: 60px;
-    color: var(--muted);
-    font-size: 13px;
-    animation: fadeUp 0.6s 0.5s ease both;
-  }
-
-  .footer a { color: var(--accent); text-decoration: none; }
-  .footer a:hover { text-decoration: underline; }
-
-  /* Toast */
-  .toast {
-    position: fixed;
-    bottom: 28px;
-    right: 28px;
-    background: var(--surface2);
-    border: 1px solid var(--border2);
-    border-left: 3px solid var(--accent3);
-    color: var(--text);
-    padding: 12px 20px;
-    border-radius: var(--radius-sm);
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    z-index: 100;
-    transform: translateY(80px);
-    opacity: 0;
-    transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
-    pointer-events: none;
-  }
-
-  .toast.show { transform: translateY(0); opacity: 1; }
-
-  /* Animations */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(18px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes tagPop {
-    from { transform: scale(0.75); opacity: 0; }
-    to   { transform: scale(1);    opacity: 1; }
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50%       { opacity: 0.4; }
-  }
-
-  /* Divider */
-  .divider {
-    border: none;
-    border-top: 1px solid var(--border);
-    margin: 24px 0;
-  }
-
-  .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-
-  @media (max-width: 560px) {
-    .row-2 { grid-template-columns: 1fr; }
-    .btn-generate { font-size: 14px; padding: 14px 36px; }
-    .card { padding: 22px 18px; }
-  }
-
-  /* ── Social Connect Section ── */
-  .social-section {
-    margin: 48px 0 0;
-    animation: fadeUp 0.6s 0.45s ease both;
-  }
-
-  .social-divider {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 28px;
-  }
-
-  .social-divider::before,
-  .social-divider::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
-
-  .social-divider-label {
-    font-family: 'Syne', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
-    white-space: nowrap;
-  }
-
-  .social-cards {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-  }
-
-  @media (max-width: 480px) { .social-cards { grid-template-columns: 1fr; } }
-
-  .social-card {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 18px 20px;
-    text-decoration: none;
-    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .social-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    transition: opacity 0.2s;
-  }
-
-  .social-card.li-card::before  { background: linear-gradient(135deg, rgba(10,102,194,0.08), transparent); }
-  .social-card.ig-card::before  { background: linear-gradient(135deg, rgba(225,48,108,0.08), transparent); }
-
-  .social-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 28px rgba(0,0,0,0.3);
-  }
-
-  .social-card.li-card:hover { border-color: rgba(10,102,194,0.5); }
-  .social-card.ig-card:hover { border-color: rgba(225,48,108,0.4); }
-
-  .social-card:hover::before { opacity: 1; }
-
-  .social-icon {
-    width: 44px; height: 44px;
-    border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .social-icon.li { background: #0a66c2; }
-  .social-icon.ig { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
-
-  .social-icon svg { width: 22px; height: 22px; fill: #fff; }
-
-  .social-info { flex: 1; min-width: 0; position: relative; z-index: 1; }
-
-  .social-platform {
-    font-family: 'Syne', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 2px;
-  }
-
-  .social-handle {
-    font-size: 12px;
-    color: var(--muted2);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .social-arrow {
-    color: var(--muted);
-    font-size: 16px;
-    position: relative;
-    z-index: 1;
-    transition: transform 0.2s, color 0.2s;
-  }
-
-  .social-card:hover .social-arrow { transform: translate(2px, -2px); color: var(--text); }
-
-  
-
-
-  /* ── Topmate Section ── */
-  .topmate-section {
-    margin: 0 auto;
-    max-width: 860px;
-    padding: 0 24px 80px;
-    position: relative;
-    z-index: 1;
-  }
-
-  .topmate-wrap {
-    background: #f5f3ef;
-    border-radius: 20px;
-    padding: 40px 36px 44px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .topmate-wrap::before {
-    content: '';
-    position: absolute;
-    top: -60px; right: -60px;
-    width: 220px; height: 220px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(200,168,75,0.12), transparent 70%);
-    pointer-events: none;
-  }
-
-  .topmate-wrap::after {
-    content: '';
-    position: absolute;
-    bottom: -40px; left: -40px;
-    width: 160px; height: 160px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(26,122,110,0.08), transparent 70%);
-    pointer-events: none;
-  }
-
-  .topmate-header {
-    text-align: center;
-    margin-bottom: 32px;
-  }
-
-  .topmate-eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: rgba(200,168,75,0.12);
-    border: 1px solid rgba(200,168,75,0.3);
-    color: #a07c1e;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 5px 14px;
-    border-radius: 100px;
-    margin-bottom: 14px;
-  }
-
-  .topmate-title {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(22px, 4vw, 30px);
-    font-weight: 800;
-    color: #0e0e0e;
-    letter-spacing: -0.02em;
-    margin-bottom: 8px;
-  }
-
-  .topmate-sub {
-    font-size: 14px;
-    color: #6b6b6b;
-    max-width: 380px;
-    margin: 0 auto;
-    font-weight: 300;
-  }
-
-  .topmate-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
-    position: relative;
-    z-index: 1;
-  }
-
-  @media (max-width: 560px) {
-    .topmate-grid { grid-template-columns: 1fr; }
-    .topmate-wrap { padding: 28px 20px 32px; }
-  }
-
-  .tm-card {
-    background: #fff;
-    border: 1px solid rgba(0,0,0,0.07);
-    border-radius: 14px;
-    padding: 20px 20px 18px;
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .tm-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 32px rgba(0,0,0,0.10);
-    border-color: rgba(200,168,75,0.4);
-  }
-
-  .tm-card-top {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 10px;
-  }
-
-  .tm-icon {
-    width: 40px; height: 40px;
-    border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 18px;
-    flex-shrink: 0;
-  }
-
-  .tm-arrow {
-    font-size: 14px;
-    color: #bbb;
-    transition: color 0.2s, transform 0.2s;
-    margin-top: 2px;
-  }
-
-  .tm-card:hover .tm-arrow { color: #C8A84B; transform: translate(2px, -2px); }
-
-  .tm-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 14px;
-    font-weight: 700;
-    color: #0e0e0e;
-    line-height: 1.3;
-    flex: 1;
-  }
-
-  .tm-desc {
-    font-size: 12.5px;
-    color: #6b6b6b;
-    line-height: 1.5;
-  }
-
-  .tm-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 12px;
-    font-weight: 600;
-    color: #1A7A6E;
-    margin-top: 2px;
-    font-family: 'Syne', sans-serif;
-    letter-spacing: 0.02em;
-  }
-
-  .tm-card:hover .tm-cta { color: #C8A84B; }
-
-  /* ── Guided Tour ── */
-
-  /* Tour Launch Button */
-  .tour-launch-btn {
-    position: fixed;
-    bottom: 28px;
-    left: 28px;
-    z-index: 900;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: linear-gradient(135deg, #4f8ef7, #7b5cf0);
-    color: #fff;
-    border: none;
-    border-radius: 100px;
-    padding: 11px 20px;
-    font-family: 'Syne', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    cursor: pointer;
-    box-shadow: 0 4px 20px rgba(79,142,247,0.4);
-    transition: all 0.25s;
-    letter-spacing: 0.02em;
-    animation: fadeUp 0.6s 0.8s ease both;
-  }
-
-  .tour-launch-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 28px rgba(79,142,247,0.5);
-  }
-
-  .tour-launch-btn .tour-btn-icon {
-    font-size: 15px;
-  }
-
-  /* Overlay backdrop */
-  .tour-backdrop {
-    position: fixed;
-    inset: 0;
-    background: rgba(10, 20, 50, 0.55);
-    z-index: 1000;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-  }
-
-  .tour-backdrop.active {
-    opacity: 1;
-    pointer-events: all;
-  }
-
-  /* Spotlight cut-out effect — bright ring around focused element */
-  .tour-spotlight {
-    position: fixed;
-    z-index: 1001;
-    border-radius: 12px;
-    box-shadow:
-      0 0 0 9999px rgba(5, 10, 30, 0.72),
-      0 0 0 3px rgba(79, 142, 247, 0.95),
-      0 0 28px 8px rgba(79, 142, 247, 0.4);
-    transition: all 0.45s cubic-bezier(0.4, 0, 0.2, 1);
-    pointer-events: none;
-    background: transparent;
-  }
-
-  /* Tour Tooltip */
-  .tour-tooltip {
-    position: fixed;
-    z-index: 1002;
-    background: #0f1219;
-    border: 1px solid rgba(79,142,247,0.35);
-    border-radius: 16px;
-    padding: 24px 26px;
-    max-width: 340px;
-    width: calc(100vw - 48px);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(79,142,247,0.1);
-    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  .tour-tooltip.visible {
-    opacity: 1;
-    pointer-events: all;
-  }
-
-  .tour-tooltip-arrow {
-    position: absolute;
-    width: 12px;
-    height: 12px;
-    background: #0f1219;
-    border: 1px solid rgba(79,142,247,0.35);
-    transform: rotate(45deg);
-  }
-
-  .tour-step-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: rgba(79,142,247,0.1);
-    border: 1px solid rgba(79,142,247,0.2);
-    color: var(--accent);
-    font-family: 'Syne', sans-serif;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 4px 10px;
-    border-radius: 100px;
-    margin-bottom: 12px;
-  }
-
-  .tour-tooltip-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 16px;
-    font-weight: 800;
-    color: var(--text);
-    margin-bottom: 8px;
-    letter-spacing: -0.01em;
-    line-height: 1.3;
-  }
-
-  .tour-tooltip-body {
-    font-size: 13.5px;
-    color: var(--muted2);
-    line-height: 1.65;
-    margin-bottom: 20px;
-  }
-
-  .tour-tooltip-body strong {
-    color: var(--text);
-    font-weight: 500;
-  }
-
-  .tour-tooltip-body .tour-tip {
-    display: flex;
-    align-items: flex-start;
-    gap: 7px;
-    background: rgba(56,232,181,0.06);
-    border: 1px solid rgba(56,232,181,0.15);
-    border-radius: 8px;
-    padding: 9px 11px;
-    margin-top: 10px;
-    font-size: 12.5px;
-    color: #7ee8c8;
-  }
-
-  .tour-tooltip-body .tour-tip .tip-icon {
-    flex-shrink: 0;
-    font-size: 13px;
-    margin-top: 1px;
-  }
-
-  .tour-actions {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-  }
-
-  .tour-dots {
-    display: flex;
-    gap: 5px;
-    align-items: center;
-  }
-
-  .tour-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.15);
-    transition: all 0.25s;
-  }
-
-  .tour-dot.active {
-    background: var(--accent);
-    width: 18px;
-    border-radius: 100px;
-  }
-
-  .tour-dot.done {
-    background: rgba(79,142,247,0.4);
-  }
-
-  .tour-btn-group {
-    display: flex;
-    gap: 8px;
-  }
-
-  .tour-btn {
-    padding: 9px 18px;
-    border-radius: 100px;
-    font-family: 'Syne', sans-serif;
-    font-size: 12px;
-    font-weight: 700;
-    cursor: pointer;
-    border: none;
-    transition: all 0.2s;
-    letter-spacing: 0.03em;
-  }
-
-  .tour-btn-next {
-    background: linear-gradient(135deg, #4f8ef7, #7b5cf0);
-    color: #fff;
-  }
-
-  .tour-btn-next:hover {
-    filter: brightness(1.12);
-    transform: translateY(-1px);
-  }
-
-  .tour-btn-skip {
-    background: transparent;
-    color: var(--muted);
-    border: 1px solid var(--border2);
-  }
-
-  .tour-btn-skip:hover {
-    color: var(--text);
-    border-color: var(--muted);
-  }
-
-  .tour-btn-finish {
-    background: linear-gradient(135deg, #38e8b5, #2fb89a);
-    color: #0a1a14;
-  }
-
-  .tour-btn-finish:hover {
-    filter: brightness(1.1);
-    transform: translateY(-1px);
-  }
-
-  /* Welcome modal */
-  .tour-welcome {
-    position: fixed;
-    inset: 0;
-    z-index: 1100;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
-    background: rgba(0,0,0,0.8);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-  }
-
-  .tour-welcome.active {
-    opacity: 1;
-    pointer-events: all;
-  }
-
-  .tour-welcome-card {
-    background: var(--surface);
-    border: 1px solid rgba(79,142,247,0.3);
-    border-radius: 20px;
-    padding: 40px 36px;
-    max-width: 420px;
-    width: 100%;
-    text-align: center;
-    box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(79,142,247,0.08);
-    animation: welcomePop 0.4s cubic-bezier(0.34,1.56,0.64,1) both;
-  }
-
-  @keyframes welcomePop {
-    from { transform: scale(0.88) translateY(20px); opacity: 0; }
-    to   { transform: scale(1)    translateY(0);    opacity: 1; }
-  }
-
-  .tour-welcome-icon {
-    width: 64px;
-    height: 64px;
-    border-radius: 18px;
-    background: linear-gradient(135deg, rgba(79,142,247,0.15), rgba(123,92,240,0.15));
-    border: 1px solid rgba(79,142,247,0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 28px;
-    margin: 0 auto 20px;
-  }
-
-  .tour-welcome-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 22px;
-    font-weight: 800;
-    color: var(--text);
-    margin-bottom: 10px;
-    letter-spacing: -0.02em;
-  }
-
-  .tour-welcome-sub {
-    font-size: 14px;
-    color: var(--muted2);
-    line-height: 1.6;
-    margin-bottom: 28px;
-  }
-
-  .tour-welcome-bullets {
-    text-align: left;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 14px 16px;
-    margin-bottom: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .tour-welcome-bullet {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 13px;
-    color: var(--muted2);
-  }
-
-  .tour-welcome-bullet .bullet-num {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Syne', sans-serif;
-    font-size: 10px;
-    font-weight: 700;
-    flex-shrink: 0;
-  }
-
-  .tour-welcome-btns {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .tour-start-btn {
-    width: 100%;
-    padding: 14px;
-    background: linear-gradient(135deg, #4f8ef7, #7b5cf0);
-    color: #fff;
-    border: none;
-    border-radius: 100px;
-    font-family: 'Syne', sans-serif;
-    font-size: 14px;
-    font-weight: 800;
-    cursor: pointer;
-    letter-spacing: 0.02em;
-    transition: all 0.25s;
-    box-shadow: 0 4px 20px rgba(79,142,247,0.35);
-  }
-
-  .tour-start-btn:hover {
-    filter: brightness(1.1);
-    transform: translateY(-1px);
-  }
-
-  .tour-skip-link {
-    background: none;
-    border: none;
-    color: var(--muted);
-    font-size: 13px;
-    cursor: pointer;
-    text-decoration: underline;
-    font-family: 'DM Sans', sans-serif;
-  }
-
-  .tour-skip-link:hover { color: var(--muted2); }
-
-  /* Lifted highlight — element glows and stands out against the dimmed page */
-  .tour-highlight-ring {
-    transition: filter 0.3s ease !important;
-    filter: brightness(1.45) saturate(1.25) !important;
-    position: relative;
-  }
-
-  /* Tour complete toast */
-  .tour-complete-badge {
-    position: fixed;
-    top: 24px;
-    left: 50%;
-    transform: translateX(-50%) translateY(-80px);
-    z-index: 1200;
-    background: linear-gradient(135deg, #38e8b5, #2fb89a);
-    color: #0a1a14;
-    font-family: 'Syne', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    padding: 11px 22px;
-    border-radius: 100px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    box-shadow: 0 8px 28px rgba(56,232,181,0.4);
-    transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
-    pointer-events: none;
-  }
-
-  .tour-complete-badge.show {
-    transform: translateX(-50%) translateY(0);
-  }
-
-  /* Ensure elements can be seen through spotlight */
-  .tour-active-target {
-    position: relative;
-    z-index: 1002;
-  }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #07090f;
+  --surface: #0f1219;
+  --surface2: #161b26;
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.12);
+  --accent: #4f8ef7;
+  --accent2: #7b5cf0;
+  --accent3: #38e8b5;
+  --text: #e8ecf4;
+  --muted: #6b7794;
+  --muted2: #9aa3b8;
+  --li-blue: #0a66c2;
+  --tag-bg: rgba(79,142,247,0.10);
+  --tag-border: rgba(79,142,247,0.25);
+  --radius: 14px;
+  --radius-sm: 8px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: -30vh; left: 50%;
+  transform: translateX(-50%);
+  width: 80vw; height: 60vh;
+  background: radial-gradient(ellipse at center, rgba(79,142,247,0.08) 0%, rgba(123,92,240,0.05) 50%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.wrapper {
+  position: relative; z-index: 1;
+  max-width: 860px; margin: 0 auto;
+  padding: 48px 24px 80px;
+}
+
+/* ── Header ── */
+.header { text-align: center; margin-bottom: 52px; animation: fadeUp 0.6s ease both; }
+
+.badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(79,142,247,0.08); border: 1px solid var(--tag-border);
+  color: var(--accent); font-size: 11px; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 5px 14px; border-radius: 100px; margin-bottom: 20px;
+}
+.badge::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent3); animation: pulse 2s infinite;
+}
+
+h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(30px, 5vw, 46px); font-weight: 800;
+  line-height: 1.1; letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #e8ecf4 30%, #6b9cf7 70%, #a387f5 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  margin-bottom: 14px;
+}
+
+.subtitle { color: var(--muted2); font-size: 15px; font-weight: 300; max-width: 480px; margin: 0 auto; }
+
+/* ── Card ── */
+.card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 32px; margin-bottom: 20px;
+  animation: fadeUp 0.6s ease both; transition: border-color 0.2s;
+}
+.card:hover { border-color: var(--border2); }
+.card:nth-child(2) { animation-delay: 0.1s; }
+.card:nth-child(3) { animation-delay: 0.2s; }
+.card:nth-child(4) { animation-delay: 0.3s; }
+
+.card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; }
+
+.step-dot {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 700; flex-shrink: 0;
+}
+
+.card-title { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; letter-spacing: -0.01em; }
+.card-desc { font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+/* ── Form Elements ── */
+label {
+  display: block; font-size: 12px; font-weight: 500;
+  letter-spacing: 0.05em; text-transform: uppercase;
+  color: var(--muted2); margin-bottom: 8px;
+}
+
+input[type="text"], input[type="email"] {
+  width: 100%; background: var(--surface2); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); color: var(--text);
+  font-family: 'DM Sans', sans-serif; font-size: 15px;
+  padding: 12px 16px; outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+input[type="text"]:focus, input[type="email"]:focus {
+  border-color: var(--accent); box-shadow: 0 0 0 3px rgba(79,142,247,0.12);
+}
+input[type="text"]::placeholder, input[type="email"]::placeholder { color: var(--muted); }
+
+.operator-row { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
+.operator-label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 0; }
+
+.toggle-group {
+  display: flex; background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 100px; padding: 3px; gap: 2px;
+}
+.toggle-btn {
+  padding: 5px 14px; border-radius: 100px; border: none;
+  background: transparent; color: var(--muted2);
+  font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700;
+  letter-spacing: 0.05em; cursor: pointer; transition: all 0.2s;
+}
+.toggle-btn.active { background: var(--accent); color: #fff; }
+
+.tag-input-wrap {
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 10px 12px;
+  display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
+  min-height: 50px; transition: border-color 0.2s, box-shadow 0.2s; cursor: text;
+}
+.tag-input-wrap:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(79,142,247,0.12); }
+
+.tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--tag-bg); border: 1px solid var(--tag-border);
+  color: #a0bffa; font-size: 13px; padding: 4px 10px 4px 12px;
+  border-radius: 100px; white-space: nowrap; animation: tagPop 0.18s ease both;
+}
+.tag-x {
+  background: none; border: none; color: var(--muted); cursor: pointer;
+  font-size: 14px; line-height: 1; padding: 0; display: flex; transition: color 0.15s;
+}
+.tag-x:hover { color: #ff6b6b; }
+
+.tag-inline-input {
+  background: none; border: none; color: var(--text);
+  font-family: 'DM Sans', sans-serif; font-size: 14px;
+  outline: none; min-width: 140px; flex: 1;
+}
+.tag-inline-input::placeholder { color: var(--muted); }
+
+.chip-group { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.chip {
+  padding: 7px 16px; border-radius: 100px; border: 1px solid var(--border2);
+  background: var(--surface2); color: var(--muted2); font-size: 13px;
+  cursor: pointer; transition: all 0.18s; user-select: none;
+}
+.chip:hover { border-color: var(--accent); color: var(--text); }
+.chip.selected { background: rgba(79,142,247,0.12); border-color: var(--accent); color: #a0bffa; }
+
+/* ── Output ── */
+.output-section { margin-top: 28px; display: none; animation: fadeUp 0.4s ease both; }
+.output-section.visible { display: block; }
+
+.output-tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--border); }
+.output-tab {
+  padding: 10px 20px; border: none; background: none; color: var(--muted);
+  font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 600;
+  cursor: pointer; position: relative; transition: color 0.2s;
+  display: flex; align-items: center; gap: 7px;
+}
+.output-tab.active { color: var(--text); }
+.output-tab.active::after {
+  content: ''; position: absolute; bottom: -1px; left: 0; right: 0;
+  height: 2px; background: var(--accent);
+}
+.tab-icon { width: 14px; height: 14px; border-radius: 3px; }
+.tab-icon.li { background: var(--li-blue); }
+.tab-pane { display: none; padding: 24px 0 0; }
+.tab-pane.active { display: block; }
+
+.string-box {
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 18px 20px;
+  font-family: 'DM Mono', 'Fira Code', monospace; font-size: 13.5px;
+  line-height: 1.7; color: #c8d8ff; word-break: break-word; min-height: 80px;
+}
+.string-box .kw-and { color: #f6a84f; font-weight: 600; }
+.string-box .kw-or  { color: #7ee787; font-weight: 600; }
+.string-box .kw-not { color: #ff7b7b; font-weight: 600; }
+.string-box .kw-phrase { color: #c792ea; }
+.string-box .kw-site { color: var(--accent3); }
+
+.action-row { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 20px; border-radius: var(--radius-sm);
+  font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700;
+  cursor: pointer; transition: all 0.2s; border: none; letter-spacing: 0.02em;
+}
+.btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; }
+.btn-primary:hover { filter: brightness(1.1); transform: translateY(-1px); }
+.btn-ghost { background: var(--surface2); border: 1px solid var(--border2); color: var(--text); }
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+.gen-wrap { text-align: center; margin-top: 36px; animation: fadeUp 0.6s 0.35s ease both; }
+.btn-generate {
+  background: linear-gradient(135deg, #4f8ef7, #7b5cf0); color: #fff;
+  font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 800;
+  padding: 16px 48px; border-radius: 100px; border: none; cursor: pointer;
+  letter-spacing: 0.02em; transition: all 0.25s;
+  box-shadow: 0 4px 24px rgba(79,142,247,0.3); position: relative; overflow: hidden;
+}
+.btn-generate::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
+  opacity: 0; transition: opacity 0.2s;
+}
+.btn-generate:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(79,142,247,0.4); }
+.btn-generate:hover::before { opacity: 1; }
+.btn-generate:active { transform: translateY(0); }
+
+/* ── Footer ── */
+.footer { text-align: center; margin-top: 60px; color: var(--muted); font-size: 13px; }
+.footer a { color: var(--accent); text-decoration: none; }
+.footer a:hover { text-decoration: underline; }
+
+/* ── Toast ── */
+.toast {
+  position: fixed; bottom: 28px; right: 28px;
+  background: var(--surface2); border: 1px solid var(--border2);
+  border-left: 3px solid var(--accent3); color: var(--text);
+  padding: 12px 20px; border-radius: var(--radius-sm); font-size: 14px;
+  display: flex; align-items: center; gap: 8px;
+  z-index: 9000; transform: translateY(80px); opacity: 0;
+  transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1); pointer-events: none;
+}
+.toast.show { transform: translateY(0); opacity: 1; }
+
+/* ── Animations ── */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes tagPop { from { transform: scale(0.75); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+.divider { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+.row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+@media (max-width: 560px) {
+  .row-2 { grid-template-columns: 1fr; }
+  .btn-generate { font-size: 14px; padding: 14px 36px; }
+  .card { padding: 22px 18px; }
+}
+
+/* ── Social Section ── */
+.social-section { margin: 48px 0 0; animation: fadeUp 0.6s 0.45s ease both; }
+.social-divider { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; }
+.social-divider::before, .social-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.social-divider-label {
+  font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); white-space: nowrap;
+}
+.social-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 480px) { .social-cards { grid-template-columns: 1fr; } }
+
+.social-card {
+  display: flex; align-items: center; gap: 16px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 18px 20px; text-decoration: none;
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  position: relative; overflow: hidden;
+}
+.social-card::before { content: ''; position: absolute; inset: 0; opacity: 0; transition: opacity 0.2s; }
+.social-card.li-card::before { background: linear-gradient(135deg, rgba(10,102,194,0.08), transparent); }
+.social-card.ig-card::before { background: linear-gradient(135deg, rgba(225,48,108,0.08), transparent); }
+.social-card:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.3); }
+.social-card.li-card:hover { border-color: rgba(10,102,194,0.5); }
+.social-card.ig-card:hover { border-color: rgba(225,48,108,0.4); }
+.social-card:hover::before { opacity: 1; }
+.social-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.social-icon.li { background: #0a66c2; }
+.social-icon.ig { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+.social-icon svg { width: 22px; height: 22px; fill: #fff; }
+.social-info { flex: 1; min-width: 0; position: relative; z-index: 1; }
+.social-platform { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+.social-handle { font-size: 12px; color: var(--muted2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.social-arrow { color: var(--muted); font-size: 16px; position: relative; z-index: 1; transition: transform 0.2s, color 0.2s; }
+.social-card:hover .social-arrow { transform: translate(2px, -2px); color: var(--text); }
+
+/* ── Topmate ── */
+.topmate-section { margin: 0 auto; max-width: 860px; padding: 0 24px 80px; position: relative; z-index: 1; }
+.topmate-wrap { background: #f5f3ef; border-radius: 20px; padding: 40px 36px 44px; position: relative; overflow: hidden; }
+.topmate-wrap::before {
+  content: ''; position: absolute; top: -60px; right: -60px; width: 220px; height: 220px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,168,75,0.12), transparent 70%); pointer-events: none;
+}
+.topmate-wrap::after {
+  content: ''; position: absolute; bottom: -40px; left: -40px; width: 160px; height: 160px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(26,122,110,0.08), transparent 70%); pointer-events: none;
+}
+.topmate-header { text-align: center; margin-bottom: 32px; }
+.topmate-eyebrow {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(200,168,75,0.12); border: 1px solid rgba(200,168,75,0.3);
+  color: #a07c1e; font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; padding: 5px 14px; border-radius: 100px; margin-bottom: 14px;
+}
+.topmate-title { font-family: 'Syne', sans-serif; font-size: clamp(22px,4vw,30px); font-weight: 800; color: #0e0e0e; letter-spacing: -0.02em; margin-bottom: 8px; }
+.topmate-sub { font-size: 14px; color: #6b6b6b; max-width: 380px; margin: 0 auto; font-weight: 300; }
+.topmate-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; position: relative; z-index: 1; }
+@media (max-width: 560px) { .topmate-grid { grid-template-columns: 1fr; } .topmate-wrap { padding: 28px 20px 32px; } }
+.tm-card {
+  background: #fff; border: 1px solid rgba(0,0,0,0.07); border-radius: 14px;
+  padding: 20px 20px 18px; text-decoration: none; display: flex; flex-direction: column;
+  gap: 10px; transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+.tm-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.10); border-color: rgba(200,168,75,0.4); }
+.tm-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+.tm-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.tm-arrow { font-size: 14px; color: #bbb; transition: color 0.2s, transform 0.2s; margin-top: 2px; }
+.tm-card:hover .tm-arrow { color: #C8A84B; transform: translate(2px, -2px); }
+.tm-title { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; color: #0e0e0e; line-height: 1.3; flex: 1; }
+.tm-desc { font-size: 12.5px; color: #6b6b6b; line-height: 1.5; }
+.tm-cta { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 600; color: #1A7A6E; margin-top: 2px; font-family: 'Syne', sans-serif; letter-spacing: 0.02em; }
+.tm-card:hover .tm-cta { color: #C8A84B; }
+
+/* ════════════════════════════════
+   GUIDED TOUR
+════════════════════════════════ */
+
+/* Floating tour button — subtle, never mandatory */
+.tour-fab {
+  position: fixed;
+  bottom: 24px; left: 24px;
+  z-index: 800;
+  display: flex; align-items: center; gap: 8px;
+  background: var(--surface2);
+  border: 1px solid var(--border2);
+  color: var(--muted2);
+  border-radius: 100px;
+  padding: 10px 18px;
+  font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 700;
+  cursor: pointer; letter-spacing: 0.04em;
+  transition: all 0.2s;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  animation: fadeUp 1s 1.2s ease both;
+  opacity: 0; /* starts hidden, animation fills it */
+}
+.tour-fab:hover {
+  background: var(--surface); border-color: var(--accent);
+  color: var(--accent); box-shadow: 0 4px 20px rgba(79,142,247,0.25);
+  transform: translateY(-1px);
+}
+.tour-fab-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--accent3); animation: pulse 2s infinite; flex-shrink: 0;
+}
+
+/* Dark overlay — covers page during tour */
+.tour-overlay {
+  position: fixed; inset: 0;
+  background: rgba(4, 8, 20, 0.82);
+  z-index: 1000;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+.tour-overlay.on { opacity: 1; pointer-events: all; }
+
+/* Spotlight — punches a hole in the overlay using clip-path trick via box-shadow on a transparent div */
+.tour-spot {
+  position: fixed;
+  z-index: 1001;
+  border-radius: 10px;
+  pointer-events: none;
+  /* The actual "hole" — transparent bg, glow ring */
+  background: transparent;
+  box-shadow:
+    0 0 0 4px rgba(79,142,247,0.85),
+    0 0 32px 8px rgba(79,142,247,0.3),
+    0 0 0 9999px rgba(4,8,20,0.82);
+  transition: top 0.4s cubic-bezier(0.4,0,0.2,1),
+              left 0.4s cubic-bezier(0.4,0,0.2,1),
+              width 0.4s cubic-bezier(0.4,0,0.2,1),
+              height 0.4s cubic-bezier(0.4,0,0.2,1);
+  display: none;
+}
+.tour-spot.on { display: block; }
+
+/* Tooltip card */
+.tour-tip-card {
+  position: fixed;
+  z-index: 1002;
+  width: 320px;
+  max-width: calc(100vw - 32px);
+  background: #111827;
+  border: 1px solid rgba(79,142,247,0.3);
+  border-radius: 14px;
+  padding: 20px 22px;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.7);
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.25s ease;
+  display: none;
+}
+.tour-tip-card.on { opacity: 1; pointer-events: all; display: block; }
+
+.tour-pill {
+  display: inline-block;
+  background: rgba(79,142,247,0.12); border: 1px solid rgba(79,142,247,0.22);
+  color: #7eaaff; font-family: 'Syne', sans-serif;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 3px 10px; border-radius: 100px; margin-bottom: 10px;
+}
+.tour-tip-title {
+  font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 800;
+  color: var(--text); line-height: 1.3; margin-bottom: 8px;
+}
+.tour-tip-body {
+  font-size: 13px; color: var(--muted2); line-height: 1.65; margin-bottom: 16px;
+}
+.tour-tip-body strong { color: var(--text); font-weight: 500; }
+.tour-tip-body em { color: #a0bffa; font-style: normal; }
+
+.tour-hint {
+  display: flex; align-items: flex-start; gap: 7px;
+  background: rgba(56,232,181,0.06); border: 1px solid rgba(56,232,181,0.14);
+  border-radius: 7px; padding: 8px 10px; margin-top: 10px;
+  font-size: 12px; color: #7ee8c8; line-height: 1.5;
+}
+.tour-hint-icon { flex-shrink: 0; margin-top: 1px; }
+
+.tour-foot {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+}
+.tour-progress {
+  display: flex; gap: 4px; align-items: center; flex-shrink: 0;
+}
+.tour-pip {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: rgba(255,255,255,0.12); transition: all 0.25s;
+}
+.tour-pip.done { background: rgba(79,142,247,0.45); }
+.tour-pip.cur { background: var(--accent); width: 16px; border-radius: 100px; }
+
+.tour-btns { display: flex; gap: 6px; }
+.tour-btn {
+  padding: 8px 16px; border-radius: 100px;
+  font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700;
+  cursor: pointer; border: none; transition: all 0.2s; letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+.tour-btn-end { background: transparent; color: var(--muted); border: 1px solid rgba(255,255,255,0.1); }
+.tour-btn-end:hover { color: var(--text); border-color: rgba(255,255,255,0.25); }
+.tour-btn-fwd { background: linear-gradient(135deg, #4f8ef7, #7b5cf0); color: #fff; }
+.tour-btn-fwd:hover { filter: brightness(1.12); transform: translateY(-1px); }
+.tour-btn-done { background: linear-gradient(135deg, #38e8b5, #2fb89a); color: #0a1a14; }
+.tour-btn-done:hover { filter: brightness(1.08); transform: translateY(-1px); }
+
+/* Completion toast — slides down from top, then away */
+.tour-done-toast {
+  position: fixed; top: 20px; left: 50%;
+  transform: translateX(-50%) translateY(-90px);
+  z-index: 9999;
+  background: linear-gradient(135deg, #38e8b5, #2fb89a);
+  color: #05150f; font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700;
+  padding: 11px 24px; border-radius: 100px;
+  display: flex; align-items: center; gap: 8px;
+  box-shadow: 0 8px 28px rgba(56,232,181,0.35);
+  transition: transform 0.45s cubic-bezier(0.34,1.56,0.64,1);
+  pointer-events: none; white-space: nowrap;
+}
+.tour-done-toast.show { transform: translateX(-50%) translateY(0); }
+
+/* ════════════════════════════════
+   EMAIL CAPTURE MODAL
+════════════════════════════════ */
+.modal-backdrop {
+  position: fixed; inset: 0;
+  background: rgba(4,8,20,0.88);
+  z-index: 2000;
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.modal-backdrop.open { opacity: 1; pointer-events: all; }
+
+.modal-card {
+  background: var(--surface);
+  border: 1px solid rgba(79,142,247,0.25);
+  border-radius: 20px;
+  padding: 36px 32px;
+  max-width: 400px; width: 100%;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.6);
+  transform: scale(0.92) translateY(16px);
+  transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+  position: relative;
+}
+.modal-backdrop.open .modal-card { transform: scale(1) translateY(0); }
+
+.modal-close {
+  position: absolute; top: 16px; right: 16px;
+  background: var(--surface2); border: 1px solid var(--border);
+  color: var(--muted); width: 28px; height: 28px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 14px; transition: all 0.2s;
+}
+.modal-close:hover { color: var(--text); border-color: var(--border2); }
+
+.modal-icon {
+  width: 52px; height: 52px; border-radius: 14px;
+  background: linear-gradient(135deg, rgba(79,142,247,0.15), rgba(123,92,240,0.15));
+  border: 1px solid rgba(79,142,247,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; margin-bottom: 18px;
+}
+.modal-title {
+  font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800;
+  color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2;
+}
+.modal-sub { font-size: 13.5px; color: var(--muted2); line-height: 1.6; margin-bottom: 22px; }
+
+.modal-value-list {
+  display: flex; flex-direction: column; gap: 7px; margin-bottom: 22px;
+}
+.modal-value-item {
+  display: flex; align-items: center; gap: 9px;
+  font-size: 13px; color: var(--muted2);
+}
+.modal-value-item::before {
+  content: '✓'; color: var(--accent3);
+  font-weight: 700; font-size: 12px; flex-shrink: 0;
+}
+
+.modal-field { margin-bottom: 12px; }
+.modal-field label { margin-bottom: 6px; font-size: 11px; }
+
+.modal-submit {
+  width: 100%; padding: 14px;
+  background: linear-gradient(135deg, #4f8ef7, #7b5cf0);
+  color: #fff; border: none; border-radius: 100px;
+  font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 800;
+  cursor: pointer; letter-spacing: 0.02em;
+  box-shadow: 0 4px 20px rgba(79,142,247,0.35);
+  transition: all 0.25s; margin-top: 4px;
+}
+.modal-submit:hover { filter: brightness(1.1); transform: translateY(-1px); }
+.modal-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+.modal-privacy {
+  text-align: center; font-size: 11px; color: var(--muted);
+  margin-top: 12px; line-height: 1.5;
+}
+
+.modal-success {
+  text-align: center; padding: 12px 0 4px;
+  display: none;
+}
+.modal-success.show { display: block; }
+.modal-success-icon { font-size: 40px; margin-bottom: 12px; }
+.modal-success-title {
+  font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800;
+  color: var(--text); margin-bottom: 8px;
+}
+.modal-success-sub { font-size: 13.5px; color: var(--muted2); line-height: 1.6; }
+.modal-form-wrap { }
 
 </style>
 </head>
@@ -1239,12 +590,12 @@
   <!-- Header -->
   <div class="header">
     <div class="badge">Boolean String Builder</div>
-    <h1>Build Smarter<br/>Search Strings</h1>
-    <p class="subtitle">Fill in your preferences below and instantly generate ready-to-use Boolean strings for LinkedIn and Google X-Ray search.</p>
+    <h1>Find Your Next Job<br/>Like a Pro Recruiter</h1>
+    <p class="subtitle">Build powerful Boolean search strings in seconds — find roles on LinkedIn and Google that most job seekers never see.</p>
   </div>
 
   <!-- Step 1: Job Titles -->
-  <div class="card">
+  <div class="card" id="card-titles">
     <div class="card-header">
       <div class="step-dot">1</div>
       <div>
@@ -1252,7 +603,6 @@
         <div class="card-desc">Type a title and press Enter or comma to add</div>
       </div>
     </div>
-
     <div class="operator-row" style="margin-bottom:14px;">
       <span class="operator-label" style="white-space:nowrap;">Combine titles with</span>
       <div class="toggle-group" id="title-op-group">
@@ -1260,14 +610,13 @@
         <button class="toggle-btn" data-op="AND">AND</button>
       </div>
     </div>
-
     <div class="tag-input-wrap" id="titles-wrap">
-      <input type="text" class="tag-inline-input" id="titles-input" placeholder="e.g. Talent Acquisition Manager, Recruiter…" />
+      <input type="text" class="tag-inline-input" id="titles-input" placeholder="e.g. Data Analyst, Business Analyst…" />
     </div>
   </div>
 
   <!-- Step 2: Region -->
-  <div class="card">
+  <div class="card" id="card-region">
     <div class="card-header">
       <div class="step-dot">2</div>
       <div>
@@ -1275,7 +624,6 @@
         <div class="card-desc">Select a region or type a custom one</div>
       </div>
     </div>
-
     <div class="chip-group" id="region-chips">
       <div class="chip" data-region="MENA">MENA</div>
       <div class="chip" data-region="GCC">GCC</div>
@@ -1288,14 +636,13 @@
       <div class="chip" data-region="Asia Pacific">Asia Pacific</div>
       <div class="chip" data-region="Global">Global</div>
     </div>
-
     <hr class="divider"/>
     <label>Or type a custom region</label>
-    <input type="text" id="region-custom" placeholder="e.g. Southeast Asia, North Africa…" />
+    <input type="text" id="region-custom" placeholder="e.g. Riyadh, North Africa, Southeast Asia…" />
   </div>
 
   <!-- Step 3: Skills -->
-  <div class="card">
+  <div class="card" id="card-skills">
     <div class="card-header">
       <div class="step-dot">3</div>
       <div>
@@ -1303,22 +650,20 @@
         <div class="card-desc">Add must-have and nice-to-have skills</div>
       </div>
     </div>
-
     <div class="row-2">
       <div>
         <label>Must-have skills (AND)</label>
         <div class="tag-input-wrap" id="must-wrap">
-          <input type="text" class="tag-inline-input" id="must-input" placeholder="e.g. Power BI…" />
+          <input type="text" class="tag-inline-input" id="must-input" placeholder="e.g. SQL…" />
         </div>
       </div>
       <div>
         <label>Nice-to-have skills (OR)</label>
         <div class="tag-input-wrap" id="nice-wrap">
-          <input type="text" class="tag-inline-input" id="nice-input" placeholder="e.g. Tableau…" />
+          <input type="text" class="tag-inline-input" id="nice-input" placeholder="e.g. Power BI…" />
         </div>
       </div>
     </div>
-
     <hr class="divider"/>
     <label style="margin-bottom:10px;">Quick-add popular skills</label>
     <div class="chip-group" id="skill-chips">
@@ -1349,18 +694,15 @@
         <div class="card-desc">Ready to paste into LinkedIn or Google</div>
       </div>
     </div>
-
     <hr class="divider" />
-
     <div class="output-tabs">
-      <button class="output-tab active" data-tab="li" onclick="switchTab('li', this)">
+      <button class="output-tab active" onclick="switchTab('li',this)">
         <span class="tab-icon li"></span> LinkedIn Search
       </button>
-      <button class="output-tab" data-tab="gx" onclick="switchTab('gx', this)">
+      <button class="output-tab" onclick="switchTab('gx',this)">
         <span style="font-size:13px;">🔍</span> Google X-Ray
       </button>
     </div>
-
     <div class="tab-pane active" id="tab-li">
       <div class="string-box" id="li-output"></div>
       <div class="action-row">
@@ -1368,7 +710,6 @@
         <button class="btn btn-ghost" onclick="openLinkedIn()">↗ Open LinkedIn Search</button>
       </div>
     </div>
-
     <div class="tab-pane" id="tab-gx">
       <div class="string-box" id="gx-output"></div>
       <div class="action-row">
@@ -1378,23 +719,16 @@
     </div>
   </div>
 
-</div>
+</div><!-- /wrapper -->
 
-<!-- Social Connect + Analytics -->
+<!-- Social Connect -->
 <div class="wrapper" style="padding-top:0; padding-bottom:0;">
   <div class="social-section">
-
-    <div class="social-divider">
-      <span class="social-divider-label">Connect with Ameer</span>
-    </div>
-      <!-- Social Cards -->
+    <div class="social-divider"><span class="social-divider-label">Connect with Ameer</span></div>
     <div class="social-cards" style="margin-top:14px;">
-
       <a href="https://www.linkedin.com/in/ameer-khan-88b67ba0" target="_blank" rel="noopener" class="social-card li-card">
         <div class="social-icon li">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-          </svg>
+          <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
         </div>
         <div class="social-info">
           <div class="social-platform">LinkedIn</div>
@@ -1402,12 +736,9 @@
         </div>
         <span class="social-arrow">↗</span>
       </a>
-
       <a href="https://www.instagram.com/_talentmentor/" target="_blank" rel="noopener" class="social-card ig-card">
         <div class="social-icon ig">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
-          </svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
         </div>
         <div class="social-info">
           <div class="social-platform">Instagram</div>
@@ -1415,64 +746,43 @@
         </div>
         <span class="social-arrow">↗</span>
       </a>
-
     </div>
   </div>
 </div>
 
-
-<!-- Topmate Services -->
+<!-- Topmate -->
 <div class="topmate-section">
   <div class="topmate-wrap">
-
     <div class="topmate-header">
       <div class="topmate-eyebrow">✦ Work with me</div>
       <h2 class="topmate-title">Book a Session with Ameer</h2>
       <p class="topmate-sub">Hands-on coaching, profile reviews, and skills workshops for serious professionals.</p>
     </div>
-
     <div class="topmate-grid">
-
       <a href="https://topmate.io/ameer_khan_talent/617228" target="_blank" rel="noopener" class="tm-card">
-        <div class="tm-card-top">
-          <div class="tm-icon" style="background:#FEF3C7;">💼</div>
-          <span class="tm-arrow">↗</span>
-        </div>
+        <div class="tm-card-top"><div class="tm-icon" style="background:#FEF3C7;">💼</div><span class="tm-arrow">↗</span></div>
         <div class="tm-title">Job Insights</div>
         <div class="tm-desc">Get expert guidance on navigating the job market and identifying your next best opportunity.</div>
         <span class="tm-cta">Book now →</span>
       </a>
-
       <a href="https://topmate.io/ameer_khan_talent/1327811" target="_blank" rel="noopener" class="tm-card">
-        <div class="tm-card-top">
-          <div class="tm-icon" style="background:#DBEAFE;">🔵</div>
-          <span class="tm-arrow">↗</span>
-        </div>
+        <div class="tm-card-top"><div class="tm-icon" style="background:#DBEAFE;">🔵</div><span class="tm-arrow">↗</span></div>
         <div class="tm-title">LinkedIn: Build a Profile That Gets Noticed</div>
         <div class="tm-desc">Transform your LinkedIn into a talent magnet that attracts the right recruiters and opportunities.</div>
         <span class="tm-cta">Book now →</span>
       </a>
-
       <a href="https://topmate.io/ameer_khan_talent/1328395" target="_blank" rel="noopener" class="tm-card">
-        <div class="tm-card-top">
-          <div class="tm-icon" style="background:#FCE7F3;">📄</div>
-          <span class="tm-arrow">↗</span>
-        </div>
-        <div class="tm-title">Review & Rewrite Resume</div>
+        <div class="tm-card-top"><div class="tm-icon" style="background:#FCE7F3;">📄</div><span class="tm-arrow">↗</span></div>
+        <div class="tm-title">Review &amp; Rewrite Resume</div>
         <div class="tm-desc">A thorough review and professional rewrite of your resume to stand out in competitive markets.</div>
         <span class="tm-cta">Book now →</span>
       </a>
-
       <a href="https://topmate.io/ameer_khan_talent/1250721" target="_blank" rel="noopener" class="tm-card">
-        <div class="tm-card-top">
-          <div class="tm-icon" style="background:#D1FAE5;">📊</div>
-          <span class="tm-arrow">↗</span>
-        </div>
+        <div class="tm-card-top"><div class="tm-icon" style="background:#D1FAE5;">📊</div><span class="tm-arrow">↗</span></div>
         <div class="tm-title">Learn to Create Power BI Dashboards</div>
         <div class="tm-desc">Hands-on session to build recruitment analytics dashboards from scratch using Power BI.</div>
         <span class="tm-cta">Book now →</span>
       </a>
-
     </div>
   </div>
 </div>
@@ -1482,406 +792,133 @@
   Built with ❤️ by Ameer · Talent Acquisition Intelligence
 </div>
 
-<!-- ── GUIDED TOUR HTML ── -->
+<!-- ═══════════════════════════════
+     TOUR ELEMENTS
+═══════════════════════════════ -->
+<div class="tour-overlay" id="tourOverlay"></div>
+<div class="tour-spot" id="tourSpot"></div>
 
-<!-- Welcome Modal -->
-<div class="tour-welcome" id="tourWelcome">
-  <div class="tour-welcome-card">
-    <div class="tour-welcome-icon">🎯</div>
-    <div class="tour-welcome-title">Quick Tour</div>
-    <p class="tour-welcome-sub">New to Boolean Search? Let me walk you through this tool in under 2 minutes.</p>
-    <div class="tour-welcome-bullets">
-      <div class="tour-welcome-bullet">
-        <div class="bullet-num">1</div>
-        <span>Add job titles you're sourcing for</span>
-      </div>
-      <div class="tour-welcome-bullet">
-        <div class="bullet-num">2</div>
-        <span>Pick your target region or market</span>
-      </div>
-      <div class="tour-welcome-bullet">
-        <div class="bullet-num">3</div>
-        <span>Select must-have & nice-to-have skills</span>
-      </div>
-      <div class="tour-welcome-bullet">
-        <div class="bullet-num">4</div>
-        <span>Generate your Boolean string instantly</span>
-      </div>
-    </div>
-    <div class="tour-welcome-btns">
-      <button class="tour-start-btn" onclick="startTour()">▶ Start Tour</button>
-      <button class="tour-skip-link" onclick="closeTourWelcome()">Skip, I'll explore myself</button>
+<div class="tour-tip-card" id="tourCard">
+  <div class="tour-pill" id="tourPill">Step 1 of 9</div>
+  <div class="tour-tip-title" id="tourTitle"></div>
+  <div class="tour-tip-body" id="tourBody"></div>
+  <div class="tour-foot">
+    <div class="tour-progress" id="tourProgress"></div>
+    <div class="tour-btns">
+      <button class="tour-btn tour-btn-end" onclick="tourEnd(false)">End Tour</button>
+      <button class="tour-btn tour-btn-fwd" id="tourFwd" onclick="tourNext()">Next →</button>
     </div>
   </div>
 </div>
 
-<!-- Backdrop -->
-<div class="tour-backdrop" id="tourBackdrop" onclick="skipTour()"></div>
-
-<!-- Spotlight -->
-<div class="tour-spotlight" id="tourSpotlight"></div>
-
-<!-- Tooltip -->
-<div class="tour-tooltip" id="tourTooltip">
-  <div class="tour-step-pill" id="tourStepPill">Step 1 of 7</div>
-  <div class="tour-tooltip-title" id="tourTitle"></div>
-  <div class="tour-tooltip-body" id="tourBody"></div>
-  <div class="tour-actions">
-    <div class="tour-dots" id="tourDots"></div>
-    <div class="tour-btn-group">
-      <button class="tour-btn tour-btn-skip" id="tourSkipBtn" onclick="skipTour()">End Tour</button>
-      <button class="tour-btn tour-btn-next" id="tourNextBtn" onclick="nextStep()">Next →</button>
-    </div>
-  </div>
-</div>
-
-<!-- Launch Button -->
-<button class="tour-launch-btn" id="tourLaunchBtn" onclick="openTourWelcome()" title="Take a guided tour">
-  <span class="tour-btn-icon">🎓</span> Take a Tour
+<button class="tour-fab" id="tourFab" onclick="tourStart()">
+  <span class="tour-fab-dot"></span> Take a Tour
 </button>
 
-<!-- Completion Badge -->
-<div class="tour-complete-badge" id="tourCompleteBadge">
-  🎉 Tour complete — you're ready to source!
+<div class="tour-done-toast" id="tourDoneToast">🎉 You're ready — start searching!</div>
+
+<!-- ═══════════════════════════════
+     EMAIL CAPTURE MODAL
+═══════════════════════════════ -->
+<div class="modal-backdrop" id="emailModal">
+  <div class="modal-card">
+    <button class="modal-close" onclick="closeModal()" aria-label="Close">✕</button>
+
+    <div class="modal-form-wrap" id="modalFormWrap">
+      <div class="modal-icon">🎁</div>
+      <div class="modal-title">Get 50 Free Boolean Templates</div>
+      <p class="modal-sub">You just built your first search string. Want 50 ready-made ones for the most in-demand roles across MENA?</p>
+      <div class="modal-value-list">
+        <div class="modal-value-item">Templates for Tech, Finance, HR, Marketing & more</div>
+        <div class="modal-value-item">Pre-built for LinkedIn and Google X-Ray</div>
+        <div class="modal-value-item">Delivered free — no catch</div>
+      </div>
+      <div class="modal-field">
+        <label for="modalName">Your name</label>
+        <input type="text" id="modalName" placeholder="e.g. Sara" autocomplete="given-name" />
+      </div>
+      <div class="modal-field">
+        <label for="modalEmail">Your email address</label>
+        <input type="email" id="modalEmail" placeholder="sara@email.com" autocomplete="email" />
+      </div>
+      <button class="modal-submit" id="modalSubmit" onclick="submitEmail()">Send Me the Templates →</button>
+      <p class="modal-privacy">No spam. Unsubscribe anytime. Your email stays private.</p>
+    </div>
+
+    <div class="modal-success" id="modalSuccess">
+      <div class="modal-success-icon">✅</div>
+      <div class="modal-success-title">You're on the list!</div>
+      <p class="modal-success-sub">Check your inbox shortly for the 50 Boolean templates. In the meantime — go use your string!</p>
+    </div>
+  </div>
 </div>
 
-<script>
-// ── Tour Steps Definition ──
-const TOUR_STEPS = [
-  {
-    targetId: null, // Welcome step, centred
-    title: 'Welcome to the Boolean String Builder',
-    body: 'This tool helps you build <strong>professional Boolean search strings</strong> in seconds — no memorising syntax needed. Follow along to see how each section works.',
-    position: 'center',
-  },
-  {
-    targetId: 'titles-wrap',
-    scrollTo: 'titles-wrap',
-    title: 'Step 1 — Job Titles',
-    body: 'Type the job title you\'re searching for, then press <strong>Enter</strong> or <strong>comma</strong> to add it as a tag. You can add multiple titles.<div class="tour-tip"><span class="tip-icon">💡</span><span>Try: <em>Recruiter</em> → Enter → <em>Talent Acquisition Manager</em> → Enter</span></div>',
-    position: 'below',
-  },
-  {
-    targetId: 'title-op-group',
-    scrollTo: 'title-op-group',
-    title: 'OR vs AND — Combining Titles',
-    body: '<strong>OR</strong> means the string will match <em>any</em> of your titles — great for casting a wide net.<br/><br/><strong>AND</strong> means profiles must mention <em>all</em> titles — rarely used for titles but useful for niche hybrid roles.<div class="tour-tip"><span class="tip-icon">💡</span><span>For most sourcing, keep this set to <strong>OR</strong>.</span></div>',
-    position: 'below',
-  },
-  {
-    targetId: 'region-chips',
-    scrollTo: 'region-chips',
-    title: 'Step 2 — Pick Your Region',
-    body: 'Click any chip to select a region. You can pick <strong>multiple regions</strong> — they\'ll all be combined with OR in your final string.<div class="tour-tip"><span class="tip-icon">💡</span><span>Click "Qatar" or "GCC" to try it out — notice it highlights blue.</span></div>',
-    position: 'below',
-  },
-  {
-    targetId: 'region-custom',
-    scrollTo: 'region-custom',
-    title: 'Custom Region',
-    body: 'Don\'t see your region in the chips? Type any custom location here — city, country, or sub-region. It will be added directly into your Boolean string.<div class="tour-tip"><span class="tip-icon">💡</span><span>Example: <em>Riyadh</em>, <em>North Africa</em>, or <em>Southeast Asia</em></span></div>',
-    position: 'above',
-  },
-  {
-    targetId: 'must-wrap',
-    scrollTo: 'must-wrap',
-    title: 'Step 3 — Must-Have Skills',
-    body: 'Skills you type here are joined with <strong>AND</strong> — meaning the candidate must have <em>all</em> of these. Be selective — too many will narrow results heavily.<div class="tour-tip"><span class="tip-icon">💡</span><span>Example: add <em>Power BI</em> as a must-have if it\'s non-negotiable for the role.</span></div>',
-    position: 'below',
-  },
-  {
-    targetId: 'nice-wrap',
-    scrollTo: 'nice-wrap',
-    title: 'Nice-to-Have Skills',
-    body: 'Skills here are joined with <strong>OR</strong> — the candidate only needs <em>one</em> of these. Perfect for listing alternative tools or related expertise.<div class="tour-tip"><span class="tip-icon">💡</span><span>Example: <em>Tableau</em>, <em>Excel</em>, <em>Looker</em> — any one is fine.</span></div>',
-    position: 'below',
-  },
-  {
-    targetId: 'skill-chips',
-    scrollTo: 'skill-chips',
-    title: 'Quick-Add Skill Chips',
-    body: 'Click any chip here to instantly add a popular skill to your nice-to-have list. No typing needed. Click again to remove it.<div class="tour-tip"><span class="tip-icon">💡</span><span>Try clicking <em>ATS</em> or <em>HR Analytics</em> to see it pop into the skills box.</span></div>',
-    position: 'above',
-  },
-  {
-    targetId: 'gen-wrap-anchor',
-    scrollTo: 'gen-wrap-anchor',
-    title: 'Generate Your Strings ⚡',
-    body: 'Once you\'ve filled in at least one section, hit this button. Your Boolean strings are built <strong>instantly</strong> — one for LinkedIn search, one for Google X-Ray.<div class="tour-tip"><span class="tip-icon">💡</span><span>Scroll down after generating to see the output panel with copy & launch buttons.</span></div>',
-    position: 'above',
-    isLast: true,
-  },
-];
-
-let currentStep = -1;
-let prevHighlightEl = null;
-
-function openTourWelcome() {
-  document.getElementById('tourWelcome').classList.add('active');
-  document.getElementById('tourLaunchBtn').style.display = 'none';
-}
-
-function closeTourWelcome() {
-  document.getElementById('tourWelcome').classList.remove('active');
-  document.getElementById('tourLaunchBtn').style.display = '';
-}
-
-function startTour() {
-  document.getElementById('tourWelcome').classList.remove('active');
-  document.getElementById('tourLaunchBtn').style.display = 'none';
-  currentStep = 0;
-  buildDots();
-  showStep(0);
-}
-
-function buildDots() {
-  const dotsEl = document.getElementById('tourDots');
-  dotsEl.innerHTML = '';
-  TOUR_STEPS.forEach((_, i) => {
-    const d = document.createElement('div');
-    d.className = 'tour-dot';
-    d.id = `tourDot${i}`;
-    dotsEl.appendChild(d);
-  });
-}
-
-function updateDots(idx) {
-  TOUR_STEPS.forEach((_, i) => {
-    const d = document.getElementById(`tourDot${i}`);
-    if (!d) return;
-    d.className = 'tour-dot' + (i < idx ? ' done' : i === idx ? ' active' : '');
-  });
-}
-
-function showStep(idx) {
-  const step = TOUR_STEPS[idx];
-  const backdrop = document.getElementById('tourBackdrop');
-  const spotlight = document.getElementById('tourSpotlight');
-  const tooltip = document.getElementById('tourTooltip');
-
-  // Remove previous highlight
-  if (prevHighlightEl) {
-    prevHighlightEl.classList.remove('tour-highlight-ring', 'tour-active-target');
-    prevHighlightEl = null;
-  }
-
-  // Update text
-  document.getElementById('tourStepPill').textContent = `Step ${idx + 1} of ${TOUR_STEPS.length}`;
-  document.getElementById('tourTitle').textContent = step.title;
-  document.getElementById('tourBody').innerHTML = step.body;
-
-  // Last step button
-  const nextBtn = document.getElementById('tourNextBtn');
-  if (step.isLast) {
-    nextBtn.textContent = '🎉 Finish';
-    nextBtn.className = 'tour-btn tour-btn-finish';
-  } else {
-    nextBtn.textContent = 'Next →';
-    nextBtn.className = 'tour-btn tour-btn-next';
-  }
-
-  updateDots(idx);
-  backdrop.classList.add('active');
-
-  if (!step.targetId) {
-    // Centre the tooltip, hide spotlight
-    spotlight.style.display = 'none';
-    positionTooltipCenter(tooltip);
-  } else {
-    // Scroll to element
-    if (step.scrollTo) {
-      const scrollEl = document.getElementById(step.scrollTo);
-      if (scrollEl) {
-        scrollEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-    }
-
-    setTimeout(() => {
-      const el = document.getElementById(step.targetId);
-      if (!el) { positionTooltipCenter(tooltip); return; }
-
-      el.classList.add('tour-highlight-ring', 'tour-active-target');
-      prevHighlightEl = el;
-
-      spotlight.style.display = 'block';
-      positionSpotlight(spotlight, el);
-      positionTooltip(tooltip, el, step.position || 'below');
-    }, step.scrollTo ? 350 : 0);
-  }
-
-  tooltip.classList.add('visible');
-}
-
-function positionSpotlight(spotlight, el) {
-  const rect = el.getBoundingClientRect();
-  const pad = 8;
-  spotlight.style.top    = (rect.top    - pad) + 'px';
-  spotlight.style.left   = (rect.left   - pad) + 'px';
-  spotlight.style.width  = (rect.width  + pad * 2) + 'px';
-  spotlight.style.height = (rect.height + pad * 2) + 'px';
-}
-
-function positionTooltip(tooltip, el, position) {
-  // Make visible briefly to measure
-  tooltip.style.visibility = 'hidden';
-  tooltip.style.top = '-9999px';
-  tooltip.style.left = '-9999px';
-
-  requestAnimationFrame(() => {
-    const rect = el.getBoundingClientRect();
-    const tw = tooltip.offsetWidth || 340;
-    const th = tooltip.offsetHeight || 200;
-    const vw = window.innerWidth;
-    const vh = window.innerHeight;
-    const gap = 16;
-
-    let top, left;
-
-    if (position === 'below') {
-      top = rect.bottom + gap;
-      if (top + th > vh - 20) top = rect.top - th - gap; // flip up
-    } else {
-      top = rect.top - th - gap;
-      if (top < 20) top = rect.bottom + gap; // flip down
-    }
-
-    // Horizontal: centre on element but clamp to viewport
-    left = rect.left + rect.width / 2 - tw / 2;
-    left = Math.max(16, Math.min(vw - tw - 16, left));
-
-    tooltip.style.top = top + 'px';
-    tooltip.style.left = left + 'px';
-    tooltip.style.visibility = 'visible';
-  });
-}
-
-function positionTooltipCenter(tooltip) {
-  tooltip.style.visibility = 'hidden';
-  requestAnimationFrame(() => {
-    const tw = tooltip.offsetWidth || 340;
-    const th = tooltip.offsetHeight || 200;
-    tooltip.style.top  = ((window.innerHeight - th) / 2) + 'px';
-    tooltip.style.left = ((window.innerWidth  - tw) / 2) + 'px';
-    tooltip.style.visibility = 'visible';
-  });
-}
-
-function nextStep() {
-  const step = TOUR_STEPS[currentStep];
-  if (step.isLast) {
-    endTour(true);
-    return;
-  }
-  currentStep++;
-  showStep(currentStep);
-}
-
-function skipTour() {
-  endTour(false);
-}
-
-function endTour(completed) {
-  // Clean up
-  if (prevHighlightEl) {
-    prevHighlightEl.classList.remove('tour-highlight-ring', 'tour-active-target');
-    prevHighlightEl = null;
-  }
-  document.getElementById('tourBackdrop').classList.remove('active');
-  document.getElementById('tourSpotlight').style.display = 'none';
-  document.getElementById('tourTooltip').classList.remove('visible');
-  document.getElementById('tourLaunchBtn').style.display = '';
-  currentStep = -1;
-
-  if (completed) {
-    const badge = document.getElementById('tourCompleteBadge');
-    badge.classList.add('show');
-    setTimeout(() => badge.classList.remove('show'), 3500);
-  }
-}
-
-// Auto-launch welcome on first visit (sessionStorage flag)
-window.addEventListener('DOMContentLoaded', () => {
-  if (!sessionStorage.getItem('boolTourSeen')) {
-    sessionStorage.setItem('boolTourSeen', '1');
-    setTimeout(() => openTourWelcome(), 900);
-  }
-});
-</script>
+<!-- Toast -->
+<div class="toast" id="toast"></div>
 
 <script>
-// ── State ──
-const state = {
-  titles: [],
-  titleOp: 'OR',
-  regions: [],
-  mustSkills: [],
-  niceSkills: [],
-};
+// ══════════════════════════════════════
+// SUPABASE CONFIG — replace these two values
+// ══════════════════════════════════════
+const SUPABASE_URL  = https://uewyupjaptelyuxtcibv.supabase.co;       // e.g. https://xxxx.supabase.co
+const SUPABASE_KEY  = sb_publishable_ytI5QtnIt3qnBL_JxMSQyg_sQsPPw7C;   // starts with eyJ...
 
-// ── Tag Input Setup ──
+// ══════════════════════════════════════
+// TOOL STATE
+// ══════════════════════════════════════
+const state = { titles: [], titleOp: 'OR', regions: [], mustSkills: [], niceSkills: [] };
+const plain = { li: '', gx: '' };
+let generateCount = 0;
+
+// ══════════════════════════════════════
+// TAG INPUT
+// ══════════════════════════════════════
 function setupTagInput(wrapId, inputId, arr) {
   const wrap = document.getElementById(wrapId);
-  const inp = document.getElementById(inputId);
-
+  const inp  = document.getElementById(inputId);
   wrap.addEventListener('click', () => inp.focus());
-
-  inp.addEventListener('keydown', (e) => {
+  inp.addEventListener('keydown', e => {
     if ((e.key === 'Enter' || e.key === ',') && inp.value.trim()) {
       e.preventDefault();
       addTag(inp.value.trim().replace(/,$/, ''), arr, wrapId, inputId);
     }
-    if (e.key === 'Backspace' && !inp.value && arr.length) {
-      removeTag(arr.length - 1, arr, wrapId, inputId);
-    }
+    if (e.key === 'Backspace' && !inp.value && arr.length) removeTag(arr.length - 1, arr, wrapId, inputId);
   });
-
-  inp.addEventListener('blur', () => {
-    if (inp.value.trim()) addTag(inp.value.trim(), arr, wrapId, inputId);
-  });
+  inp.addEventListener('blur', () => { if (inp.value.trim()) addTag(inp.value.trim(), arr, wrapId, inputId); });
 }
 
 function addTag(val, arr, wrapId, inputId) {
-  const clean = val.trim();
-  if (!clean || arr.includes(clean)) return;
-  arr.push(clean);
+  const c = val.trim();
+  if (!c || arr.includes(c)) return;
+  arr.push(c);
   renderTags(arr, wrapId, inputId);
 }
-
-function removeTag(idx, arr, wrapId, inputId) {
-  arr.splice(idx, 1);
-  renderTags(arr, wrapId, inputId);
-}
-
+function removeTag(idx, arr, wrapId, inputId) { arr.splice(idx, 1); renderTags(arr, wrapId, inputId); }
 function renderTags(arr, wrapId, inputId) {
   const wrap = document.getElementById(wrapId);
-  const inp = document.getElementById(inputId);
+  const inp  = document.getElementById(inputId);
   wrap.innerHTML = '';
   arr.forEach((t, i) => {
     const tag = document.createElement('span');
     tag.className = 'tag';
-    tag.innerHTML = `${escHtml(t)}<button class="tag-x" title="Remove">×</button>`;
+    tag.innerHTML = `${esc(t)}<button class="tag-x" title="Remove">×</button>`;
     tag.querySelector('.tag-x').onclick = () => removeTag(i, arr, wrapId, inputId);
     wrap.appendChild(tag);
   });
   wrap.appendChild(inp);
-  inp.value = '';
-  inp.focus();
+  inp.value = ''; inp.focus();
 }
+function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
-function escHtml(s) {
-  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-}
-
-// ── Operator Toggles ──
+// ══════════════════════════════════════
+// OPERATOR + CHIPS
+// ══════════════════════════════════════
 document.querySelectorAll('#title-op-group .toggle-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('#title-op-group .toggle-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    state.titleOp = btn.dataset.op;
+    btn.classList.add('active'); state.titleOp = btn.dataset.op;
   });
 });
-
-// ── Region Chips ──
 document.querySelectorAll('#region-chips .chip').forEach(chip => {
   chip.addEventListener('click', () => {
     chip.classList.toggle('selected');
@@ -1890,8 +927,6 @@ document.querySelectorAll('#region-chips .chip').forEach(chip => {
     else state.regions = state.regions.filter(x => x !== r);
   });
 });
-
-// ── Skill Quick-Add Chips ──
 document.querySelectorAll('#skill-chips .chip').forEach(chip => {
   chip.addEventListener('click', () => {
     if (chip.classList.contains('selected')) {
@@ -1908,18 +943,15 @@ document.querySelectorAll('#skill-chips .chip').forEach(chip => {
   });
 });
 
-// ── Build String Logic ──
-function quoted(s) {
-  return s.includes(' ') ? `"${s}"` : s;
-}
-
+// ══════════════════════════════════════
+// BUILD STRING
+// ══════════════════════════════════════
+function quoted(s) { return s.includes(' ') ? `"${s}"` : s; }
 function buildTitleClause() {
   if (!state.titles.length) return '';
-  const op = ` ${state.titleOp} `;
   const parts = state.titles.map(quoted);
-  return parts.length > 1 ? `(${parts.join(op)})` : parts[0];
+  return parts.length > 1 ? `(${parts.join(` ${state.titleOp} `)})` : parts[0];
 }
-
 function buildRegionClause() {
   const regs = [...state.regions];
   const custom = document.getElementById('region-custom').value.trim();
@@ -1928,7 +960,6 @@ function buildRegionClause() {
   const parts = regs.map(quoted);
   return parts.length > 1 ? `(${parts.join(' OR ')})` : parts[0];
 }
-
 function buildSkillsClause() {
   const must = state.mustSkills.map(quoted);
   const nice = state.niceSkills.map(quoted);
@@ -1937,108 +968,341 @@ function buildSkillsClause() {
   if (nice.length) parts.push(`(${nice.join(' OR ')})`);
   return parts.join(' AND ');
 }
-
 function buildLinkedIn() {
-  const parts = [buildTitleClause(), buildRegionClause(), buildSkillsClause()].filter(Boolean);
-  return parts.join(' AND ');
+  return [buildTitleClause(), buildRegionClause(), buildSkillsClause()].filter(Boolean).join(' AND ');
 }
-
 function buildGoogleXRay() {
   const inner = buildLinkedIn();
-  if (!inner) return '';
-  return `site:linkedin.com/in/ ${inner}`;
+  return inner ? `site:linkedin.com/in/ ${inner}` : '';
 }
-
-// ── Highlight syntax ──
 function highlight(str) {
-  // Escape HTML first so the plain string never injects stray tags
-  const esc = str
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
-  // Now colour the operators and phrases on the safe escaped string
-  return esc
-    .replace(/\b(AND)\b/g, '<span class="kw-and">AND</span>')
-    .replace(/\b(OR)\b/g,  '<span class="kw-or">OR</span>')
-    .replace(/\b(NOT)\b/g, '<span class="kw-not">NOT</span>')
-    .replace(/&quot;([^&]*)&quot;/g, '<span class="kw-phrase">&quot;$1&quot;</span>')
-    .replace(/(site:[^\s<]+)/g, '<span class="kw-site">$1</span>');
+  const e = str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  return e
+    .replace(/\b(AND)\b/g,'<span class="kw-and">AND</span>')
+    .replace(/\b(OR)\b/g,'<span class="kw-or">OR</span>')
+    .replace(/\b(NOT)\b/g,'<span class="kw-not">NOT</span>')
+    .replace(/&quot;([^&]*)&quot;/g,'<span class="kw-phrase">&quot;$1&quot;</span>')
+    .replace(/(site:[^\s<]+)/g,'<span class="kw-site">$1</span>');
 }
 
-// ── Plain string store (never read from DOM) ──
-const plainStrings = { li: '', gx: '' };
-
-// ── Generate ──
 function generateStrings() {
   const li = buildLinkedIn();
   const gx = buildGoogleXRay();
-
-  if (!li) {
-    showToast('⚠️ Please fill in at least one field first');
-    return;
-  }
-
-  plainStrings.li = li;
-  plainStrings.gx = gx;
-
+  if (!li) { showToast('⚠️ Fill in at least one field first'); return; }
+  plain.li = li; plain.gx = gx;
   document.getElementById('li-output').innerHTML = highlight(li);
   document.getElementById('gx-output').innerHTML = highlight(gx);
-
   const sec = document.getElementById('output-section');
   sec.classList.add('visible');
   setTimeout(() => sec.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+
+  // Show email modal after first generation (once per session)
+  generateCount++;
+  if (generateCount === 1 && !sessionStorage.getItem('emailCaptured')) {
+    setTimeout(() => openModal(), 1800);
+  }
 }
 
-// ── Tabs ──
 function switchTab(id, btn) {
   document.querySelectorAll('.output-tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
   btn.classList.add('active');
   document.getElementById(`tab-${id}`).classList.add('active');
 }
-
-// ── Actions ──
-function getRawString(tabId) {
-  return plainStrings[tabId] || '';
+function copyString(id) {
+  navigator.clipboard.writeText(plain[id] || '').then(() => showToast('✓ Copied to clipboard!'));
 }
-
-function copyString(tabId) {
-  const txt = getRawString(tabId);
-  navigator.clipboard.writeText(txt).then(() => showToast('✓ Copied to clipboard!'));
-}
-
-function downloadString(tabId) {
-  const txt = getRawString(tabId);
-  const label = tabId === 'li' ? 'LinkedIn' : 'GoogleXRay';
-  const blob = new Blob([txt], { type: 'text/plain' });
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = `BooleanString_${label}.txt`;
-  a.click();
-}
-
 function openLinkedIn() {
-  const q = getRawString('li');
-  window.open(`https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(q)}`, '_blank');
+  window.open(`https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(plain.li)}`, '_blank');
 }
-
 function openGoogle() {
-  const q = getRawString('gx');
-  window.open(`https://www.google.com/search?q=${encodeURIComponent(q)}`, '_blank');
+  window.open(`https://www.google.com/search?q=${encodeURIComponent(plain.gx)}`, '_blank');
 }
-
-// ── Toast ──
 function showToast(msg) {
   const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
+  t.textContent = msg; t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 2500);
 }
 
+// ══════════════════════════════════════
+// EMAIL MODAL
+// ══════════════════════════════════════
+function openModal() {
+  document.getElementById('emailModal').classList.add('open');
+}
+function closeModal() {
+  document.getElementById('emailModal').classList.remove('open');
+}
+// Close on backdrop click
+document.getElementById('emailModal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
 
+async function submitEmail() {
+  const name  = document.getElementById('modalName').value.trim();
+  const email = document.getElementById('modalEmail').value.trim();
+  if (!email || !email.includes('@')) { showToast('⚠️ Please enter a valid email'); return; }
 
-// ── Init ──
+  const btn = document.getElementById('modalSubmit');
+  btn.disabled = true; btn.textContent = 'Sending…';
+
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/email_captures`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`,
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({ name, email, source: 'boolean-tool' })
+    });
+
+    if (res.ok || res.status === 201) {
+      sessionStorage.setItem('emailCaptured', '1');
+      document.getElementById('modalFormWrap').style.display = 'none';
+      document.getElementById('modalSuccess').classList.add('show');
+      setTimeout(() => closeModal(), 4000);
+    } else {
+      throw new Error('Server error');
+    }
+  } catch (err) {
+    btn.disabled = false; btn.textContent = 'Send Me the Templates →';
+    showToast('⚠️ Something went wrong — please try again');
+  }
+}
+
+// ══════════════════════════════════════
+// GUIDED TOUR
+// ══════════════════════════════════════
+const STEPS = [
+  {
+    id: null,
+    title: 'Welcome to the Boolean String Builder',
+    body: 'This tool helps you find jobs the way recruiters search for candidates — using powerful Boolean logic. No technical knowledge needed. Follow along and I\'ll show you exactly how it works.',
+    hint: null
+  },
+  {
+    id: 'card-titles',
+    title: 'Step 1 — Your Job Titles',
+    body: 'Type the job title you\'re looking for and press <strong>Enter</strong> to add it as a tag. Add multiple titles to cast a wider net — the more the better.',
+    hint: 'Try typing <em>Data Analyst</em> then pressing Enter, then <em>Business Analyst</em>',
+    pos: 'below'
+  },
+  {
+    id: 'title-op-group',
+    title: 'OR vs AND',
+    body: '<strong>OR</strong> finds roles matching any of your titles. <strong>AND</strong> requires all titles to appear together. As a job seeker, always use <strong>OR</strong> — it gives you the most results.',
+    hint: null,
+    pos: 'below'
+  },
+  {
+    id: 'region-chips',
+    title: 'Step 2 — Your Target Region',
+    body: 'Click a region chip to include it in your search. You can select multiple regions — great if you\'re open to opportunities across the GCC or beyond.',
+    hint: 'Click <em>Qatar</em> or <em>UAE</em> to see how it highlights',
+    pos: 'below'
+  },
+  {
+    id: 'region-custom',
+    title: 'Custom Location',
+    body: 'Not seeing your specific city or country? Type it here — <strong>Riyadh</strong>, <strong>London</strong>, <strong>Singapore</strong>. It flows directly into your search string.',
+    hint: null,
+    pos: 'above'
+  },
+  {
+    id: 'must-wrap',
+    title: 'Step 3 — Must-Have Skills',
+    body: 'Add skills here that are <strong>core to your target role</strong> — skills you have and that employers always require. Keep it to 1–2 maximum or your results will become too narrow.',
+    hint: 'Example: add <em>SQL</em> if you\'re targeting data roles',
+    pos: 'below'
+  },
+  {
+    id: 'nice-wrap',
+    title: 'Nice-to-Have Skills',
+    body: 'These are joined with OR — so a job only needs to mention <strong>one</strong> of them. Add all the tools and technologies you know. More here = more results.',
+    hint: 'Example: <em>Power BI</em>, <em>Tableau</em>, <em>Excel</em> — any one counts',
+    pos: 'below'
+  },
+  {
+    id: 'skill-chips',
+    title: 'Quick-Add Chips',
+    body: 'Click any chip to instantly add it to your nice-to-have skills — no typing needed. Click again to remove. A huge time saver.',
+    hint: 'Try clicking <em>HR Analytics</em> or <em>Power BI</em>',
+    pos: 'above'
+  },
+  {
+    id: 'gen-wrap-anchor',
+    title: 'Generate Your Strings ⚡',
+    body: 'Once you\'ve filled in at least one section, hit this button. You\'ll get two ready-to-use strings instantly — one for LinkedIn, one for Google X-Ray — each colour-coded so you can read the logic at a glance.',
+    hint: 'After generating, use Copy or the launch buttons to search immediately',
+    pos: 'above',
+    last: true
+  }
+];
+
+let tourStep = -1;
+
+function tourStart() {
+  tourStep = 0;
+  buildPips();
+  renderStep(0);
+  document.getElementById('tourFab').style.opacity = '0';
+  document.getElementById('tourFab').style.pointerEvents = 'none';
+}
+
+function tourEnd(completed) {
+  // Hide all tour elements
+  document.getElementById('tourOverlay').classList.remove('on');
+  document.getElementById('tourSpot').classList.remove('on');
+  document.getElementById('tourCard').classList.remove('on');
+
+  // Restore FAB
+  document.getElementById('tourFab').style.opacity = '1';
+  document.getElementById('tourFab').style.pointerEvents = 'auto';
+
+  tourStep = -1;
+
+  if (completed) {
+    const toast = document.getElementById('tourDoneToast');
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3500);
+  }
+}
+
+function tourNext() {
+  const step = STEPS[tourStep];
+  if (step.last) { tourEnd(true); return; }
+  tourStep++;
+  renderStep(tourStep);
+}
+
+function buildPips() {
+  const el = document.getElementById('tourProgress');
+  el.innerHTML = '';
+  STEPS.forEach((_, i) => {
+    const p = document.createElement('div');
+    p.className = 'tour-pip'; p.id = `pip${i}`;
+    el.appendChild(p);
+  });
+}
+
+function updatePips(idx) {
+  STEPS.forEach((_, i) => {
+    const p = document.getElementById(`pip${i}`);
+    if (!p) return;
+    p.className = 'tour-pip' + (i < idx ? ' done' : i === idx ? ' cur' : '');
+  });
+}
+
+function renderStep(idx) {
+  const step = STEPS[idx];
+  const overlay = document.getElementById('tourOverlay');
+  const spot    = document.getElementById('tourSpot');
+  const card    = document.getElementById('tourCard');
+
+  // Update text
+  document.getElementById('tourPill').textContent  = `Step ${idx + 1} of ${STEPS.length}`;
+  document.getElementById('tourTitle').textContent = step.title;
+  document.getElementById('tourBody').innerHTML    = step.body +
+    (step.hint ? `<div class="tour-hint"><span class="tour-hint-icon">💡</span><span>${step.hint}</span></div>` : '');
+
+  // Button label
+  const fwd = document.getElementById('tourFwd');
+  if (step.last) { fwd.textContent = '🎉 Finish'; fwd.className = 'tour-btn tour-btn-done'; }
+  else           { fwd.textContent = 'Next →';    fwd.className = 'tour-btn tour-btn-fwd'; }
+
+  updatePips(idx);
+  overlay.classList.add('on');
+
+  if (!step.id) {
+    // Centre card, no spotlight
+    spot.classList.remove('on');
+    card.classList.add('on');
+    posCenter(card);
+    return;
+  }
+
+  // Scroll target into view, then position everything
+  const el = document.getElementById(step.id);
+  if (!el) { spot.classList.remove('on'); posCenter(card); card.classList.add('on'); return; }
+
+  el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+  setTimeout(() => {
+    placeSpot(el);
+    placeCard(el, step.pos || 'below', card);
+    card.classList.add('on');
+  }, 380);
+}
+
+function placeSpot(el) {
+  const r = el.getBoundingClientRect();
+  const pad = 10;
+  const spot = document.getElementById('tourSpot');
+  spot.style.top    = (r.top  - pad) + 'px';
+  spot.style.left   = (r.left - pad) + 'px';
+  spot.style.width  = (r.width  + pad * 2) + 'px';
+  spot.style.height = (r.height + pad * 2) + 'px';
+  spot.classList.add('on');
+}
+
+function placeCard(el, pref, card) {
+  // Temporarily render offscreen to measure height
+  card.style.visibility = 'hidden';
+  card.style.top  = '-9999px';
+  card.style.left = '-9999px';
+
+  // Use double rAF to ensure layout is complete
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    const r   = el.getBoundingClientRect();
+    const cw  = card.offsetWidth  || 320;
+    const ch  = card.offsetHeight || 220;
+    const vw  = window.innerWidth;
+    const vh  = window.innerHeight;
+    const gap = 14;
+    const pad = 12;
+
+    let top, left;
+
+    // Vertical placement — try preferred side, flip if no room
+    if (pref === 'below') {
+      top = r.bottom + gap;
+      if (top + ch > vh - pad) top = r.top - ch - gap; // flip up
+    } else {
+      top = r.top - ch - gap;
+      if (top < pad) top = r.bottom + gap; // flip down
+    }
+
+    // Clamp top to viewport
+    top = Math.max(pad, Math.min(vh - ch - pad, top));
+
+    // Horizontal — centre on element, clamp to viewport
+    left = r.left + r.width / 2 - cw / 2;
+    left = Math.max(pad, Math.min(vw - cw - pad, left));
+
+    card.style.top  = top  + 'px';
+    card.style.left = left + 'px';
+    card.style.visibility = 'visible';
+  }));
+}
+
+function posCenter(card) {
+  card.style.visibility = 'hidden';
+  card.style.top  = '-9999px';
+  card.style.left = '-9999px';
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    const cw = card.offsetWidth  || 320;
+    const ch = card.offsetHeight || 220;
+    card.style.top  = Math.max(16, (window.innerHeight - ch) / 2) + 'px';
+    card.style.left = Math.max(16, (window.innerWidth  - cw) / 2) + 'px';
+    card.style.visibility = 'visible';
+  }));
+}
+
+// ══════════════════════════════════════
+// INIT
+// ══════════════════════════════════════
 setupTagInput('titles-wrap', 'titles-input', state.titles);
 setupTagInput('must-wrap',   'must-input',   state.mustSkills);
 setupTagInput('nice-wrap',   'nice-input',   state.niceSkills);
