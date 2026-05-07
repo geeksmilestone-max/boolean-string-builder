@@ -582,7 +582,6 @@ input[type="text"]::placeholder, input[type="email"]::placeholder { color: var(-
 .modal-form-wrap { }
 
 </style>
-  <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
 
@@ -870,10 +869,37 @@ const SUPABASE_KEY = "sb_publishable_ytI5QtnIt3qnBL_JxMSQyg_sQsPPw7C";
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 // ══════════════════════════════════════
+// SESSION ID — anonymous identifier per visit
+// ══════════════════════════════════════
+const SESSION_ID = Math.random().toString(36).slice(2,10) + Date.now().toString(36);
+
+// ══════════════════════════════════════
+// EVENT TRACKER — silent, fire and forget
+// ══════════════════════════════════════
+function trackEvent(event, detail) {
+  detail = detail || "";
+  if (SUPABASE_URL.indexOf("REPLACE") !== -1 || SUPABASE_KEY.indexOf("REPLACE") !== -1) return;
+  fetch(SUPABASE_URL + "/rest/v1/tool_events", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "apikey": SUPABASE_KEY,
+      "Authorization": "Bearer " + SUPABASE_KEY,
+      "Prefer": "return=minimal"
+    },
+    body: JSON.stringify({ event: event, detail: detail, session_id: SESSION_ID })
+  }).catch(function() {});
+}
+
+window.addEventListener("DOMContentLoaded", function() {
+  trackEvent("page_view", document.referrer || "direct");
+});
+
+// ══════════════════════════════════════
 // TOOL STATE
 // ══════════════════════════════════════
-const state = { titles: [], titleOp: 'OR', regions: [], mustSkills: [], niceSkills: [] };
-const plain = { li: '', gx: '' };
+const state = { titles: [], titleOp: "OR", regions: [], mustSkills: [], niceSkills: [] };
+const plain = { li: "", gx: "" };
 let generateCount = 0;
 
 // ══════════════════════════════════════
@@ -992,6 +1018,7 @@ function highlight(str) {
 }
 
 function generateStrings() {
+  trackEvent("generate_strings", state.titles.join("|") || "no_titles");
   const li = buildLinkedIn();
   const gx = buildGoogleXRay();
   if (!li) { showToast('⚠️ Fill in at least one field first'); return; }
@@ -1010,18 +1037,21 @@ function generateStrings() {
 }
 
 function switchTab(id, btn) {
+  trackEvent("tab_switch", id);
   document.querySelectorAll('.output-tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
   btn.classList.add('active');
   document.getElementById(`tab-${id}`).classList.add('active');
 }
 function copyString(id) {
-  navigator.clipboard.writeText(plain[id] || '').then(() => showToast('✓ Copied to clipboard!'));
+  navigator.clipboard.writeText(plain[id] || '').then(() => { showToast('✓ Copied to clipboard!'); trackEvent('copy_string', id); });
 }
 function openLinkedIn() {
+  trackEvent('open_linkedin_search', plain.li.slice(0,80));
   window.open(`https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(plain.li)}`, '_blank');
 }
 function openGoogle() {
+  trackEvent('open_google_xray', plain.gx.slice(0,80));
   window.open(`https://www.google.com/search?q=${encodeURIComponent(plain.gx)}`, '_blank');
 }
 function showToast(msg) {
@@ -1034,6 +1064,7 @@ function showToast(msg) {
 // EMAIL MODAL
 // ══════════════════════════════════════
 function openModal() {
+  trackEvent('email_modal_shown');
   document.getElementById('emailModal').classList.add('open');
 }
 function closeModal() {
@@ -1066,6 +1097,7 @@ async function submitEmail() {
 
     if (res.ok || res.status === 201) {
       sessionStorage.setItem('emailCaptured', '1');
+      trackEvent('email_submitted', 'boolean-tool');
       document.getElementById('modalFormWrap').style.display = 'none';
       document.getElementById('modalSuccess').classList.add('show');
       setTimeout(() => closeModal(), 4000);
@@ -1150,6 +1182,7 @@ const STEPS = [
 let tourStep = -1;
 
 function tourStart() {
+  trackEvent("tour_started");
   tourStep = 0;
   buildPips();
   renderStep(0);
@@ -1158,6 +1191,7 @@ function tourStart() {
 }
 
 function tourEnd(completed) {
+  trackEvent("tour_ended", completed ? "completed" : "skipped");
   // Hide all tour elements
   document.getElementById('tourOverlay').classList.remove('on');
   document.getElementById('tourSpot').classList.remove('on');
