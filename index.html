@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Boolean String Builder · by Ameer</title>
+<title>Boolean String Builder · The Daily Talent</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -634,11 +634,17 @@ input[type="text"]::placeholder, input[type="email"]::placeholder { color: var(-
       <div class="chip" data-region="Europe">Europe</div>
       <div class="chip" data-region="USA">USA</div>
       <div class="chip" data-region="Asia Pacific">Asia Pacific</div>
+      <div class="chip" data-region="India">India</div>
+      <div class="chip" data-region="Pakistan">Pakistan</div>
+      <div class="chip" data-region="Sri Lanka">Sri Lanka</div>
+      <div class="chip" data-region="Nepal">Nepal</div>
       <div class="chip" data-region="Global">Global</div>
     </div>
     <hr class="divider"/>
     <label>Or type a custom region</label>
-    <input type="text" id="region-custom" placeholder="e.g. Riyadh, North Africa, Southeast Asia…" />
+    <div class="tag-input-wrap" id="region-custom-wrap">
+      <input type="text" class="tag-inline-input" id="region-custom-input" placeholder="e.g. Riyadh, North Africa… press Enter to add" />
+    </div>
   </div>
 
   <!-- Step 3: Skills -->
@@ -667,16 +673,33 @@ input[type="text"]::placeholder, input[type="email"]::placeholder { color: var(-
     <hr class="divider"/>
     <label style="margin-bottom:10px;">Quick-add popular skills</label>
     <div class="chip-group" id="skill-chips">
-      <div class="chip" data-skill="ATS">ATS</div>
       <div class="chip" data-skill="Power BI">Power BI</div>
       <div class="chip" data-skill="Excel">Excel</div>
-      <div class="chip" data-skill="LinkedIn Recruiter">LinkedIn Recruiter</div>
-      <div class="chip" data-skill="HR Analytics">HR Analytics</div>
-      <div class="chip" data-skill="Sourcing">Sourcing</div>
-      <div class="chip" data-skill="Interviewing">Interviewing</div>
-      <div class="chip" data-skill="SAP SuccessFactors">SAP SuccessFactors</div>
-      <div class="chip" data-skill="Workday">Workday</div>
-      <div class="chip" data-skill="Boolean Search">Boolean Search</div>
+      <div class="chip" data-skill="SQL">SQL</div>
+      <div class="chip" data-skill="Python">Python</div>
+      <div class="chip" data-skill="Tableau">Tableau</div>
+      <div class="chip" data-skill="Data Analysis">Data Analysis</div>
+      <div class="chip" data-skill="Financial Analysis">Financial Analysis</div>
+      <div class="chip" data-skill="Accounting">Accounting</div>
+      <div class="chip" data-skill="Budgeting">Budgeting</div>
+      <div class="chip" data-skill="Forecasting">Forecasting</div>
+      <div class="chip" data-skill="Sales">Sales</div>
+      <div class="chip" data-skill="Business Development">Business Development</div>
+      <div class="chip" data-skill="CRM">CRM</div>
+      <div class="chip" data-skill="Marketing">Marketing</div>
+      <div class="chip" data-skill="Digital Marketing">Digital Marketing</div>
+      <div class="chip" data-skill="SEO">SEO</div>
+      <div class="chip" data-skill="Project Management">Project Management</div>
+      <div class="chip" data-skill="Admin">Admin</div>
+      <div class="chip" data-skill="Operations">Operations</div>
+      <div class="chip" data-skill="Civil Engineering">Civil Engineering</div>
+      <div class="chip" data-skill="AutoCAD">AutoCAD</div>
+      <div class="chip" data-skill="Software Engineer">Software Engineer</div>
+      <div class="chip" data-skill="JavaScript">JavaScript</div>
+      <div class="chip" data-skill="React">React</div>
+      <div class="chip" data-skill="Java">Java</div>
+      <div class="chip" data-skill="Customer Service">Customer Service</div>
+      <div class="chip" data-skill="Communication">Communication</div>
     </div>
   </div>
 
@@ -789,7 +812,7 @@ input[type="text"]::placeholder, input[type="email"]::placeholder { color: var(-
 
 <!-- Footer -->
 <div class="footer wrapper" style="padding-top:24px;">
-  Built with ❤️ by Ameer · Talent Acquisition Intelligence
+  © The Daily Talent. All rights reserved.
 </div>
 
 <!-- ═══════════════════════════════
@@ -864,8 +887,8 @@ input[type="text"]::placeholder, input[type="email"]::placeholder { color: var(-
 // REPLACE THE TWO VALUES BELOW WITH YOUR SUPABASE DETAILS
 // Do not remove the quotes. Only change what is inside them.
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-const SUPABASE_URL = "https://uewyupjaptelyuxtcibv.supabase.co";
-const SUPABASE_KEY = "sb_publishable_ytI5QtnIt3qnBL_JxMSQyg_sQsPPw7C";
+const SUPABASE_URL = "REPLACE_WITH_YOUR_PROJECT_URL";
+const SUPABASE_KEY = "REPLACE_WITH_YOUR_PUBLISHABLE_KEY";
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 // ══════════════════════════════════════
@@ -898,7 +921,7 @@ window.addEventListener("DOMContentLoaded", function() {
 // ══════════════════════════════════════
 // TOOL STATE
 // ══════════════════════════════════════
-const state = { titles: [], titleOp: "OR", regions: [], mustSkills: [], niceSkills: [] };
+const state = { titles: [], titleOp: "OR", regions: [], customRegions: [], mustSkills: [], niceSkills: [] };
 const plain = { li: "", gx: "" };
 let generateCount = 0;
 
@@ -985,9 +1008,7 @@ function buildTitleClause() {
   return parts.length > 1 ? `(${parts.join(` ${state.titleOp} `)})` : parts[0];
 }
 function buildRegionClause() {
-  const regs = [...state.regions];
-  const custom = document.getElementById('region-custom').value.trim();
-  if (custom) regs.push(custom);
+  const regs = [...state.regions, ...state.customRegions];
   if (!regs.length) return '';
   const parts = regs.map(quoted);
   return parts.length > 1 ? `(${parts.join(' OR ')})` : parts[0];
@@ -1142,7 +1163,7 @@ const STEPS = [
     pos: 'below'
   },
   {
-    id: 'region-custom',
+    id: 'region-custom-wrap',
     title: 'Custom Location',
     body: 'Not seeing your specific city or country? Type it here — <strong>Riyadh</strong>, <strong>London</strong>, <strong>Singapore</strong>. It flows directly into your search string.',
     hint: null,
@@ -1343,9 +1364,10 @@ function posCenter(card) {
 // ══════════════════════════════════════
 // INIT
 // ══════════════════════════════════════
-setupTagInput('titles-wrap', 'titles-input', state.titles);
-setupTagInput('must-wrap',   'must-input',   state.mustSkills);
-setupTagInput('nice-wrap',   'nice-input',   state.niceSkills);
+setupTagInput('titles-wrap',       'titles-input',       state.titles);
+setupTagInput('must-wrap',         'must-input',         state.mustSkills);
+setupTagInput('nice-wrap',         'nice-input',         state.niceSkills);
+setupTagInput('region-custom-wrap','region-custom-input', state.customRegions);
 </script>
 </body>
 </html>
