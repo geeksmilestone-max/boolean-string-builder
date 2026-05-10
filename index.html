@@ -766,7 +766,7 @@ async function naviCallGroq(userMessage,isModification){
   const systemPrompt='You are Navi, a friendly Boolean search assistant for job seekers. Extract structured data from the user\'s description and reply EXACTLY in this format:\nNAVI_EXTRACT:{"job_titles":["..."],"regions":["..."],"must_skills":["..."],"nice_skills":["..."]}\nNAVI_CONFIRM:Your warm confirmation message addressing the user as '+naviUserName+', summarising what you understood and asking if they want to proceed.\n\nIf you need more info, ask one focused question instead. Keep must_skills to 1-2 maximum. If it\'s a modification, update accordingly and re-confirm.';
   try{
     const messages=[{role:'system',content:systemPrompt},...naviHistory.slice(-8)];
-    const res=await fetch('/api/navi',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'llama3-8b-8192',messages:messages,max_tokens:500,temperature:0.4})});
+    const res=await fetch('/api/navi',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:messages,max_tokens:500,temperature:0.4})});
     if(res.status===429){trackEvent('navi_rate_limit');naviRemoveTyping();naviAddMsg('bot','I\'ve hit my limit for now, '+naviUserName+'. Give me a few minutes and I\'ll be back! The form above works perfectly in the meantime. 😊');return;}
     if(!res.ok)throw new Error('API '+res.status);
     const data=await res.json(),reply=data.choices[0].message.content;
