@@ -589,10 +589,22 @@ function trackEvent(event,detail){
   fetch(SUPABASE_URL+"/rest/v1/tool_events",{method:"POST",headers:{"Content-Type":"application/json","apikey":SUPABASE_KEY,"Authorization":"Bearer "+SUPABASE_KEY,"Prefer":"return=minimal"},body:JSON.stringify({event:event,detail:String(detail).slice(0,200),session_id:SESSION_ID})}).catch(function(){});
 }
 
+const SESSION_START_TS = Date.now();
+
 window.addEventListener("DOMContentLoaded",function(){
   trackEvent("page_view",document.referrer||"direct");
+  trackEvent("session_start", new Date(SESSION_START_TS).toISOString());
   initRecentSearches();
 });
+
+function trackSessionEnd(){
+  const duration = Math.round((Date.now() - SESSION_START_TS) / 1000);
+  trackEvent("session_end", "duration_seconds:" + duration);
+}
+window.addEventListener("visibilitychange", function(){
+  if(document.visibilityState === "hidden") trackSessionEnd();
+});
+window.addEventListener("pagehide", trackSessionEnd);
 
 // STATE
 const state={titles:[],titleOp:"OR",regions:[],customRegions:[],mustSkills:[],niceSkills:[]};
