@@ -262,9 +262,102 @@ input::placeholder { color: var(--muted); }
 .modal-success-icon{font-size:40px;margin-bottom:12px}
 .modal-success-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:var(--text);margin-bottom:8px}
 .modal-success-sub{font-size:13.5px;color:var(--muted2);line-height:1.6}
+
+/* ── STICKY BAR ── */
+#sticky-bar{
+  position:fixed;top:-64px;left:0;right:0;z-index:1500;
+  background:linear-gradient(90deg,rgba(10,25,55,0.97),rgba(10,35,28,0.97));
+  border-bottom:1px solid rgba(79,142,247,0.25);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  padding:10px 48px 10px 20px;
+  display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;
+  transition:top 0.45s cubic-bezier(0.34,1.3,0.64,1);
+  box-shadow:0 4px 24px rgba(0,0,0,0.45);
+}
+#sticky-bar.visible{top:0}
+#sticky-bar-text{
+  font-size:13px;color:var(--text);
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center;
+  text-align:center;
+}
+#sticky-bar-text strong{color:#4ade80;font-weight:600}
+#sticky-bar-cta{
+  background:var(--accent);color:#fff;border:none;
+  padding:7px 18px;border-radius:100px;
+  font-family:'Syne',sans-serif;font-size:12px;font-weight:700;
+  cursor:pointer;white-space:nowrap;
+  transition:all 0.2s;letter-spacing:0.03em;flex-shrink:0;
+}
+#sticky-bar-cta:hover{background:#6aa3f9;transform:scale(1.04)}
+#sticky-bar-close{
+  position:absolute;right:14px;top:50%;transform:translateY(-50%);
+  background:none;border:none;color:var(--muted);
+  font-size:18px;line-height:1;cursor:pointer;
+  padding:4px 6px;transition:color 0.2s;
+}
+#sticky-bar-close:hover{color:var(--text)}
+@media(max-width:520px){
+  #sticky-bar{padding:10px 44px 10px 16px;gap:8px}
+  #sticky-bar-text{font-size:12px}
+  #sticky-bar-cta{font-size:11px;padding:6px 14px}
+}
+
+/* ── FAQ ── */
+.faq-section{margin-top:32px;animation:fadeUp 0.5s ease both}
+.faq-title-row{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.faq-heading{font-family:'Syne',sans-serif;font-size:15px;font-weight:800;color:var(--text);letter-spacing:-0.01em}
+.faq-badge{font-size:11px;color:var(--muted);background:var(--surface2);border:1px solid var(--border);padding:3px 10px;border-radius:100px}
+.faq-item{border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:8px;overflow:hidden;transition:border-color 0.2s,box-shadow 0.2s;background:var(--surface)}
+.faq-item.open{border-color:rgba(79,142,247,0.3);box-shadow:0 2px 12px rgba(79,142,247,0.08)}
+.faq-q{
+  width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:15px 18px;background:none;border:none;
+  font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;color:var(--text);
+  cursor:pointer;text-align:left;transition:color 0.2s;
+  -webkit-tap-highlight-color:transparent;
+}
+.faq-q:hover{color:var(--accent)}
+.faq-item.open .faq-q{color:var(--accent)}
+.faq-icon{
+  width:22px;height:22px;border-radius:50%;
+  border:1px solid var(--border2);color:var(--muted);
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;flex-shrink:0;transition:all 0.25s;
+  line-height:1;
+}
+.faq-item.open .faq-icon{
+  border-color:var(--accent);color:var(--accent);
+  background:rgba(79,142,247,0.1);transform:rotate(45deg);
+}
+.faq-body{
+  max-height:0;overflow:hidden;
+  transition:max-height 0.32s cubic-bezier(0.4,0,0.2,1),padding 0.25s ease;
+  padding:0 18px;
+}
+.faq-body-inner{
+  font-size:13.5px;color:var(--muted2);line-height:1.7;
+  padding-bottom:16px;border-top:1px solid var(--border);padding-top:12px;
+}
+.faq-body-inner strong{color:var(--text);font-weight:500}
+.faq-body-inner a{color:var(--accent);text-decoration:none}
+.faq-body-inner a:hover{text-decoration:underline}
+@media(max-width:560px){
+  .faq-q{font-size:13.5px;padding:13px 14px}
+  .faq-body{padding:0 14px}
+  .faq-body-inner{font-size:13px}
+}
 </style>
 </head>
 <body>
+
+<!-- STICKY BAR -->
+<div id="sticky-bar">
+  <div id="sticky-bar-text">
+    <strong>🎁 Free resource:</strong> Get 10 ready-made Boolean templates for top MENA roles → drop your email
+  </div>
+  <button id="sticky-bar-cta" onclick="openStickyModal()">Get Free Templates</button>
+  <button id="sticky-bar-close" onclick="closeStickyBar()" aria-label="Close">×</button>
+</div>
 
 <div class="wrapper">
 
@@ -286,8 +379,8 @@ input::placeholder { color: var(--muted); }
   <!-- Header -->
   <div class="header">
     <div class="badge">Boolean String Builder</div>
-    <h1>Find Your Next Job<br/>Like a Pro Recruiter</h1>
-    <p class="subtitle">Build powerful Boolean search strings in seconds — find roles on LinkedIn and Google that most job seekers never see.</p>
+    <h1>The Search Trick Every<br/>Recruiter Uses. Now It's Yours.</h1>
+    <p class="subtitle">Build a Boolean search string in 60 seconds — no experience needed. Find jobs on LinkedIn and Google that most job seekers never see.</p>
   </div>
 
   <!-- Step 1: Job Titles -->
@@ -407,6 +500,110 @@ input::placeholder { color: var(--muted); }
   <!-- Generate -->
   <div class="gen-wrap" id="gen-wrap-anchor">
     <button class="btn-generate" onclick="generateStrings()">⚡ Generate Boolean Strings</button>
+  </div>
+
+  <!-- FAQ Section -->
+  <div class="faq-section" id="faq-section">
+    <div class="faq-title-row">
+      <span class="faq-heading">Frequently Asked Questions</span>
+      <span class="faq-badge">8 answers</span>
+    </div>
+
+    <div class="faq-item" id="faq-0">
+      <button class="faq-q" onclick="toggleFaq(0)">
+        <span>What is a Boolean search string?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-body" id="faq-body-0">
+        <div class="faq-body-inner">
+          A Boolean search string is a structured query that uses logic operators — <strong>AND</strong>, <strong>OR</strong>, and <strong>NOT</strong> — to narrow or broaden search results. Recruiters have used them for years to find candidates precisely. This tool lets you use the same technique to find jobs and opportunities that standard search filters miss entirely.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item" id="faq-1">
+      <button class="faq-q" onclick="toggleFaq(1)">
+        <span>Does this work on LinkedIn's free version?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-body" id="faq-body-1">
+        <div class="faq-body-inner">
+          Yes — Boolean search works on LinkedIn's free version. Simply paste the generated string into LinkedIn's main search bar and press Enter. You don't need LinkedIn Premium or Recruiter to benefit from this. The Google X-Ray string goes even further by bypassing LinkedIn's search engine entirely and surfacing profiles directly through Google.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item" id="faq-2">
+      <button class="faq-q" onclick="toggleFaq(2)">
+        <span>How is this different from LinkedIn's built-in filters?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-body" id="faq-body-2">
+        <div class="faq-body-inner">
+          LinkedIn's filters are broad and limited — they match on a small set of predefined fields. Boolean search scans the full text of profiles and job listings, including headlines, summaries, and experience sections. This means you find results that LinkedIn's algorithm would never surface through normal filtering. It also gives you full control over the logic rather than relying on LinkedIn's often opaque relevance ranking.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item" id="faq-3">
+      <button class="faq-q" onclick="toggleFaq(3)">
+        <span>Can I use this for Google search too?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-body" id="faq-body-3">
+        <div class="faq-body-inner">
+          Absolutely. The <strong>Google X-Ray</strong> tab generates a string specifically formatted for Google, using <strong>site:linkedin.com/in/</strong> to search inside LinkedIn's profile pages directly. This is one of the most powerful sourcing techniques used by professional recruiters — it surfaces profiles that LinkedIn's own search hides or deprioritises, especially for free account users.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item" id="faq-4">
+      <button class="faq-q" onclick="toggleFaq(4)">
+        <span>Do I need to create an account?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-body" id="faq-body-4">
+        <div class="faq-body-inner">
+          No account, no login, no sign-up required. This tool is completely free to use as many times as you need. Your recent searches are saved locally in your browser so you can revisit them, but nothing is stored on any server without your consent.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item" id="faq-5">
+      <button class="faq-q" onclick="toggleFaq(5)">
+        <span>How many searches can I do?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-body" id="faq-body-5">
+        <div class="faq-body-inner">
+          Unlimited. There are no search caps, no daily limits, and no paywalls. Generate as many Boolean strings as you need — for different roles, different regions, or different skill combinations. Each string is unique and ready to use immediately.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item" id="faq-6">
+      <button class="faq-q" onclick="toggleFaq(6)">
+        <span>What is Google X-Ray search?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-body" id="faq-body-6">
+        <div class="faq-body-inner">
+          Google X-Ray is a technique that uses Google to search within a specific website — in this case, LinkedIn. By adding <strong>site:linkedin.com/in/</strong> to your search query, you instruct Google to only return results from LinkedIn profile pages. Because Google indexes LinkedIn more deeply than LinkedIn's own search allows free users to access, this method often surfaces profiles that are otherwise invisible. It's free and requires no LinkedIn account at all.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item" id="faq-7">
+      <button class="faq-q" onclick="toggleFaq(7)">
+        <span>Who is this tool built for?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-body" id="faq-body-7">
+        <div class="faq-body-inner">
+          Primarily built for <strong>job seekers</strong> who want to search smarter — finding roles and companies that standard search misses. It's equally useful for <strong>recruiters</strong> sourcing candidates and <strong>freelancers</strong> finding clients in specific markets. If you're in the MENA, GCC, or international job market and want to cut through the noise, this tool was made for you.
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Output -->
@@ -867,6 +1064,56 @@ setupTagInput('titles-wrap','titles-input',state.titles);
 setupTagInput('must-wrap','must-input',state.mustSkills);
 setupTagInput('nice-wrap','nice-input',state.niceSkills);
 setupTagInput('region-custom-wrap','region-custom-input',state.customRegions);
+
+// ── STICKY BAR ──
+(function(){
+  // Only show once per session; respect user dismissal
+  if(sessionStorage.getItem('stickyBarDismissed')) return;
+  setTimeout(function(){
+    const bar=document.getElementById('sticky-bar');
+    if(bar) bar.classList.add('visible');
+  }, 3000);
+})();
+
+function closeStickyBar(){
+  const bar=document.getElementById('sticky-bar');
+  if(bar){bar.classList.remove('visible');setTimeout(()=>bar.style.display='none',500);}
+  sessionStorage.setItem('stickyBarDismissed','1');
+}
+
+function openStickyModal(){
+  closeStickyBar();
+  openModal();
+}
+
+// ── FAQ ACCORDION ──
+function toggleFaq(idx){
+  const item=document.getElementById('faq-'+idx);
+  const body=document.getElementById('faq-body-'+idx);
+  if(!item||!body) return;
+  const isOpen=item.classList.contains('open');
+  if(isOpen){
+    // Close
+    body.style.maxHeight=body.scrollHeight+'px';
+    requestAnimationFrame(()=>{body.style.maxHeight='0';body.style.paddingTop='0';body.style.paddingBottom='0';});
+    item.classList.remove('open');
+  } else {
+    // Open
+    item.classList.add('open');
+    body.style.maxHeight='0';
+    body.style.paddingTop='';
+    body.style.paddingBottom='';
+    requestAnimationFrame(()=>{
+      body.style.maxHeight=body.scrollHeight+40+'px';
+    });
+    // After transition, set to auto so content reflow works
+    body.addEventListener('transitionend',function handler(){
+      if(item.classList.contains('open')) body.style.maxHeight='none';
+      body.removeEventListener('transitionend',handler);
+    });
+  }
+  trackEvent('faq_toggle','faq_'+idx+'_'+(isOpen?'close':'open'));
+}
 </script>
 </body>
 </html>
