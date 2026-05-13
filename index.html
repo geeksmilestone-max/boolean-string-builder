@@ -3,7 +3,106 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Boolean String Builder · The Daily Talent</title>
+
+<!-- ═══════════════════════════════════════════════════════
+     PRIMARY SEO — Title & Description
+     ═══════════════════════════════════════════════════════ -->
+<title>Free Boolean String Builder for Job Seekers | The Daily Talent</title>
+<meta name="description" content="Build a powerful Boolean search string in 60 seconds — free. Find jobs on LinkedIn and Google that most job seekers never see. No experience needed. Built for MENA, GCC & global job seekers." />
+<meta name="keywords" content="boolean string builder, boolean search tool, linkedin boolean search, google xray search, job search tool, boolean string generator, free job search tool, MENA jobs, GCC jobs, recruiter search string" />
+<meta name="author" content="Ameer Khan – The Daily Talent" />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://tools.thedailytalent.com/" />
+
+<!-- ═══════════════════════════════════════════════════════
+     OPEN GRAPH — How it looks when shared on LinkedIn,
+     WhatsApp, Facebook etc.
+     ═══════════════════════════════════════════════════════ -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://tools.thedailytalent.com/" />
+<meta property="og:title" content="Free Boolean String Builder for Job Seekers | The Daily Talent" />
+<meta property="og:description" content="Build a Boolean search string in 60 seconds and find jobs on LinkedIn & Google that most job seekers never see. Free, no sign-up, unlimited searches." />
+<meta property="og:image" content="https://tools.thedailytalent.com/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:site_name" content="The Daily Talent" />
+<meta property="og:locale" content="en_US" />
+
+<!-- ═══════════════════════════════════════════════════════
+     TWITTER CARD — How it looks when shared on X / Twitter
+     ═══════════════════════════════════════════════════════ -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content="https://tools.thedailytalent.com/" />
+<meta name="twitter:title" content="Free Boolean String Builder for Job Seekers | The Daily Talent" />
+<meta name="twitter:description" content="Build a Boolean search string in 60 seconds and find jobs on LinkedIn & Google that most job seekers never see. Free, no sign-up, unlimited searches." />
+<meta name="twitter:image" content="https://tools.thedailytalent.com/og-image.png" />
+<meta name="twitter:creator" content="@thedailytalent" />
+
+<!-- ═══════════════════════════════════════════════════════
+     GOOGLE SEARCH CONSOLE VERIFICATION
+     → Replace the content value with the code Google gives
+       you during the verification step in Search Console.
+       Leave everything else exactly as-is.
+     ═══════════════════════════════════════════════════════ -->
+<meta name="google-site-verification" content="nd5g3foGOvpSC9FVPQFTB_l-RjxK_TPmrVA_O8sNdcU" />
+
+<!-- ═══════════════════════════════════════════════════════
+     SCHEMA MARKUP — Tells Google this is a Web Application.
+     Enables rich results in search listings.
+     ═══════════════════════════════════════════════════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Boolean String Builder",
+  "url": "https://tools.thedailytalent.com/",
+  "description": "A free Boolean search string generator for job seekers. Build powerful LinkedIn and Google X-Ray search strings in 60 seconds — no experience needed.",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Ameer Khan",
+    "url": "https://www.linkedin.com/in/ameer-khan-88b67ba0"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "The Daily Talent",
+    "url": "https://thedailytalent.com"
+  },
+  "featureList": [
+    "LinkedIn Boolean search string generator",
+    "Google X-Ray search string builder",
+    "MENA and GCC job market targeting",
+    "No sign-up required",
+    "Unlimited free searches"
+  ],
+  "screenshot": "https://tools.thedailytalent.com/og-image.png",
+  "browserRequirements": "Requires JavaScript. Compatible with all modern browsers.",
+  "inLanguage": "en"
+}
+</script>
+
+<!-- ═══════════════════════════════════════════════════════
+     GOOGLE ANALYTICS 4
+     → Step 1: Go to analytics.google.com
+     → Step 2: Create a property for tools.thedailytalent.com
+     → Step 3: Copy your Measurement ID (looks like G-XXXXXXXXXX)
+     → Step 4: Replace BOTH instances of G-XXXXXXXXXX below
+       with your actual ID, then save and deploy.
+     ═══════════════════════════════════════════════════════ -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
 <script defer src="/_vercel/insights/script.js"></script>
 <style>
@@ -1067,7 +1166,6 @@ setupTagInput('region-custom-wrap','region-custom-input',state.customRegions);
 
 // ── STICKY BAR ──
 (function(){
-  // Only show once per session; respect user dismissal
   if(sessionStorage.getItem('stickyBarDismissed')) return;
   setTimeout(function(){
     const bar=document.getElementById('sticky-bar');
@@ -1093,12 +1191,10 @@ function toggleFaq(idx){
   if(!item||!body) return;
   const isOpen=item.classList.contains('open');
   if(isOpen){
-    // Close
     body.style.maxHeight=body.scrollHeight+'px';
     requestAnimationFrame(()=>{body.style.maxHeight='0';body.style.paddingTop='0';body.style.paddingBottom='0';});
     item.classList.remove('open');
   } else {
-    // Open
     item.classList.add('open');
     body.style.maxHeight='0';
     body.style.paddingTop='';
@@ -1106,7 +1202,6 @@ function toggleFaq(idx){
     requestAnimationFrame(()=>{
       body.style.maxHeight=body.scrollHeight+40+'px';
     });
-    // After transition, set to auto so content reflow works
     body.addEventListener('transitionend',function handler(){
       if(item.classList.contains('open')) body.style.maxHeight='none';
       body.removeEventListener('transitionend',handler);
