@@ -458,6 +458,29 @@ input::placeholder { color: var(--muted); }
   <button id="sticky-bar-close" onclick="closeStickyBar()" aria-label="Close">×</button>
 </div>
 
+<style>
+/* ── POPULAR SEARCHES ── */
+.popular-section{margin-bottom:28px;animation:fadeUp 0.5s 0.05s ease both}
+.popular-header{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.popular-heading{font-family:'Syne',sans-serif;font-size:13px;font-weight:800;color:var(--muted2);letter-spacing:0.08em;text-transform:uppercase}
+.popular-dot{width:6px;height:6px;border-radius:50%;background:var(--accent3);animation:pulse 2s infinite;flex-shrink:0}
+.popular-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media(max-width:600px){.popular-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:380px){.popular-grid{grid-template-columns:1fr}}
+.popular-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;cursor:pointer;transition:border-color 0.2s,transform 0.2s,box-shadow 0.2s;position:relative;overflow:hidden}
+.popular-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(79,142,247,0.05),transparent);opacity:0;transition:opacity 0.2s}
+.popular-card:hover{border-color:rgba(79,142,247,0.4);transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.25)}
+.popular-card:hover::before{opacity:1}
+.popular-card-role{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--text);margin-bottom:3px}
+.popular-card-region{font-size:11px;color:var(--accent);margin-bottom:8px;display:flex;align-items:center;gap:4px}
+.popular-card-region::before{content:'📍';font-size:10px}
+.popular-card-skills{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px}
+.popular-card-skill{font-size:10px;color:var(--muted2);background:var(--surface2);border:1px solid var(--border);padding:2px 7px;border-radius:100px}
+.popular-card-skill.must{color:#a0bffa;border-color:rgba(79,142,247,0.3);background:rgba(79,142,247,0.06)}
+.popular-card-cta{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;color:var(--muted);display:flex;align-items:center;gap:4px;transition:color 0.2s}
+.popular-card:hover .popular-card-cta{color:var(--accent3)}
+</style>
+
 <div class="wrapper">
 
   <!-- RECENT SEARCHES — only shown to returning visitors via JS -->
@@ -480,6 +503,95 @@ input::placeholder { color: var(--muted); }
     <div class="badge">Boolean String Builder</div>
     <h1>The Search Trick Every<br/>Recruiter Uses. Now It's Yours.</h1>
     <p class="subtitle">Build a Boolean search string in 60 seconds — no experience needed. Find jobs on LinkedIn and Google that most job seekers never see.</p>
+  </div>
+
+  <!-- POPULAR SEARCHES -->
+  <div class="popular-section">
+    <div class="popular-header">
+      <span class="popular-dot"></span>
+      <span class="popular-heading">Popular Searches</span>
+    </div>
+    <div class="popular-grid" id="popularGrid">
+
+      <div class="popular-card" onclick="runPopular({titles:['Data Analyst'],region:'UAE',must:['SQL'],nice:['Power BI','Tableau','Excel','Python']})">
+        <div class="popular-card-role">Data Analyst</div>
+        <div class="popular-card-region">UAE</div>
+        <div class="popular-card-skills">
+          <span class="popular-card-skill must">SQL</span>
+          <span class="popular-card-skill">Power BI</span>
+          <span class="popular-card-skill">Tableau</span>
+          <span class="popular-card-skill">Excel</span>
+          <span class="popular-card-skill">Python</span>
+        </div>
+        <div class="popular-card-cta">Try this search →</div>
+      </div>
+
+      <div class="popular-card" onclick="runPopular({titles:['HR Manager'],region:'Saudi Arabia',must:['SAP'],nice:['SuccessFactors','Oracle HCM','Workday','HRMS']})">
+        <div class="popular-card-role">HR Manager</div>
+        <div class="popular-card-region">Saudi Arabia</div>
+        <div class="popular-card-skills">
+          <span class="popular-card-skill must">SAP</span>
+          <span class="popular-card-skill">SuccessFactors</span>
+          <span class="popular-card-skill">Oracle HCM</span>
+          <span class="popular-card-skill">Workday</span>
+          <span class="popular-card-skill">HRMS</span>
+        </div>
+        <div class="popular-card-cta">Try this search →</div>
+      </div>
+
+      <div class="popular-card" onclick="runPopular({titles:['Software Engineer'],region:'GCC',must:['JavaScript'],nice:['React','Node.js','Python','Java']})">
+        <div class="popular-card-role">Software Engineer</div>
+        <div class="popular-card-region">GCC</div>
+        <div class="popular-card-skills">
+          <span class="popular-card-skill must">JavaScript</span>
+          <span class="popular-card-skill">React</span>
+          <span class="popular-card-skill">Node.js</span>
+          <span class="popular-card-skill">Python</span>
+          <span class="popular-card-skill">Java</span>
+        </div>
+        <div class="popular-card-cta">Try this search →</div>
+      </div>
+
+      <div class="popular-card" onclick="runPopular({titles:['Finance Manager'],region:'Qatar',must:['Excel'],nice:['Financial Analysis','Budgeting','Forecasting','ERP']})">
+        <div class="popular-card-role">Finance Manager</div>
+        <div class="popular-card-region">Qatar</div>
+        <div class="popular-card-skills">
+          <span class="popular-card-skill must">Excel</span>
+          <span class="popular-card-skill">Financial Analysis</span>
+          <span class="popular-card-skill">Budgeting</span>
+          <span class="popular-card-skill">Forecasting</span>
+          <span class="popular-card-skill">ERP</span>
+        </div>
+        <div class="popular-card-cta">Try this search →</div>
+      </div>
+
+      <div class="popular-card" onclick="runPopular({titles:['Marketing Manager'],region:'MENA',must:['Digital Marketing'],nice:['SEO','Social Media','Google Ads','Content Marketing']})">
+        <div class="popular-card-role">Marketing Manager</div>
+        <div class="popular-card-region">MENA</div>
+        <div class="popular-card-skills">
+          <span class="popular-card-skill must">Digital Marketing</span>
+          <span class="popular-card-skill">SEO</span>
+          <span class="popular-card-skill">Social Media</span>
+          <span class="popular-card-skill">Google Ads</span>
+          <span class="popular-card-skill">Content Marketing</span>
+        </div>
+        <div class="popular-card-cta">Try this search →</div>
+      </div>
+
+      <div class="popular-card" onclick="runPopular({titles:['Project Manager'],region:'GCC',must:['PMP'],nice:['Agile','Scrum','MS Project','Risk Management']})">
+        <div class="popular-card-role">Project Manager</div>
+        <div class="popular-card-region">GCC</div>
+        <div class="popular-card-skills">
+          <span class="popular-card-skill must">PMP</span>
+          <span class="popular-card-skill">Agile</span>
+          <span class="popular-card-skill">Scrum</span>
+          <span class="popular-card-skill">MS Project</span>
+          <span class="popular-card-skill">Risk Management</span>
+        </div>
+        <div class="popular-card-cta">Try this search →</div>
+      </div>
+
+    </div>
   </div>
 
   <!-- Step 1: Job Titles -->
