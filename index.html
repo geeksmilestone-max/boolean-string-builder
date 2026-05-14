@@ -1276,6 +1276,25 @@ setupTagInput('must-wrap','must-input',state.mustSkills);
 setupTagInput('nice-wrap','nice-input',state.niceSkills);
 setupTagInput('region-custom-wrap','region-custom-input',state.customRegions);
 
+// ── POPULAR SEARCHES ──
+function runPopular(p){
+  const knownRegions=['MENA','GCC','Saudi Arabia','UAE','Qatar','UK','Europe','USA','Asia Pacific','India','Pakistan','Sri Lanka','Nepal','Global'];
+  state.titles=[];state.regions=[];state.customRegions=[];state.mustSkills=[];state.niceSkills=[];
+  state.titles=[...p.titles];
+  if(knownRegions.includes(p.region))state.regions=[p.region];
+  else state.customRegions=[p.region];
+  state.mustSkills=[...p.must];
+  state.niceSkills=[...p.nice];
+  renderTags(state.titles,'titles-wrap','titles-input');
+  renderTags(state.mustSkills,'must-wrap','must-input');
+  renderTags(state.niceSkills,'nice-wrap','nice-input');
+  renderTags(state.customRegions,'region-custom-wrap','region-custom-input');
+  document.querySelectorAll('#region-chips .chip').forEach(chip=>chip.classList.toggle('selected',state.regions.includes(chip.dataset.region)));
+  document.querySelectorAll('#skill-chips .chip').forEach(chip=>chip.classList.toggle('selected',[...state.mustSkills,...state.niceSkills].includes(chip.dataset.skill)));
+  trackEvent('popular_search_used',p.titles[0]+'_'+p.region);
+  setTimeout(()=>{generateStrings();document.getElementById('card-titles').scrollIntoView({behavior:'smooth',block:'start'});},150);
+}
+
 // ── STICKY BAR ──
 (function(){
   if(sessionStorage.getItem('stickyBarDismissed')) return;
