@@ -736,8 +736,9 @@ function generateStrings(){
   saveRecentSearch();
   generateCount++;
   // Show modal on first generate — only if user hasn't submitted (localStorage) or dismissed this session (sessionStorage)
-  const alreadySubmitted=localStorage.getItem('popupSubmitted')==='1';
-  const dismissedThisSession=sessionStorage.getItem('popupDismissed')==='1';
+  if(localStorage.getItem('emailCaptured')==='1')localStorage.setItem('popupSubmitted','1');
+const alreadySubmitted=localStorage.getItem('popupSubmitted')==='1';
+const dismissedThisSession=sessionStorage.getItem('popupDismissed')==='1';
   if(generateCount===1&&!alreadySubmitted&&!dismissedThisSession){
     const ctx={
       titles:[...state.titles],
