@@ -15,8 +15,7 @@
 <link rel="canonical" href="https://tools.thedailytalent.com/" />
 
 <!-- ═══════════════════════════════════════════════════════
-     OPEN GRAPH — How it looks when shared on LinkedIn,
-     WhatsApp, Facebook etc.
+     OPEN GRAPH
      ═══════════════════════════════════════════════════════ -->
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://tools.thedailytalent.com/" />
@@ -29,7 +28,7 @@
 <meta property="og:locale" content="en_US" />
 
 <!-- ═══════════════════════════════════════════════════════
-     TWITTER CARD — How it looks when shared on X / Twitter
+     TWITTER CARD
      ═══════════════════════════════════════════════════════ -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:url" content="https://tools.thedailytalent.com/" />
@@ -55,28 +54,10 @@
   "description": "A free Boolean search string generator for job seekers. Build powerful LinkedIn and Google X-Ray search strings in 60 seconds — no experience needed.",
   "applicationCategory": "BusinessApplication",
   "operatingSystem": "Any",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  },
-  "author": {
-    "@type": "Person",
-    "name": "Ameer Khan",
-    "url": "https://www.linkedin.com/in/ameer-khan-88b67ba0"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "The Daily Talent",
-    "url": "https://thedailytalent.com"
-  },
-  "featureList": [
-    "LinkedIn Boolean search string generator",
-    "Google X-Ray search string builder",
-    "MENA and GCC job market targeting",
-    "No sign-up required",
-    "Unlimited free searches"
-  ],
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Person", "name": "Ameer Khan", "url": "https://www.linkedin.com/in/ameer-khan-88b67ba0" },
+  "publisher": { "@type": "Organization", "name": "The Daily Talent", "url": "https://thedailytalent.com" },
+  "featureList": ["LinkedIn Boolean search string generator","Google X-Ray search string builder","MENA and GCC job market targeting","No sign-up required","Unlimited free searches"],
   "screenshot": "https://tools.thedailytalent.com/og-image.png",
   "browserRequirements": "Requires JavaScript. Compatible with all modern browsers.",
   "inLanguage": "en"
@@ -284,14 +265,25 @@ input::placeholder { color: var(--muted); }
 /* ── EMAIL MODAL ── */
 .modal-backdrop{position:fixed;inset:0;background:rgba(4,8,20,0.88);z-index:2000;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity 0.3s ease}
 .modal-backdrop.open{opacity:1;pointer-events:all}
-.modal-card{background:var(--surface);border:1px solid rgba(79,142,247,0.25);border-radius:20px;padding:36px 32px;max-width:400px;width:100%;box-shadow:0 32px 80px rgba(0,0,0,0.6);transform:scale(0.92) translateY(16px);transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1);position:relative}
+.modal-card{background:var(--surface);border:1px solid rgba(79,142,247,0.25);border-radius:20px;padding:36px 32px;max-width:420px;width:100%;box-shadow:0 32px 80px rgba(0,0,0,0.6);transform:scale(0.92) translateY(16px);transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1);position:relative}
 .modal-backdrop.open .modal-card{transform:scale(1) translateY(0)}
-.modal-close{position:absolute;top:16px;right:16px;background:var(--surface2);border:1px solid var(--border);color:var(--muted);width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;transition:all 0.2s}
+/* Close button fades in after 2.5s — anti rage-click */
+.modal-close{position:absolute;top:16px;right:16px;background:var(--surface2);border:1px solid var(--border);color:var(--muted);width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;transition:all 0.2s;opacity:0;pointer-events:none}
+.modal-close.visible{opacity:1;pointer-events:all;transition:opacity 0.4s ease}
 .modal-close:hover{color:var(--text);border-color:var(--border2)}
+/* Dynamic context banner */
+.modal-context-banner{background:linear-gradient(135deg,rgba(56,232,181,0.08),rgba(79,142,247,0.08));border:1px solid rgba(56,232,181,0.2);border-radius:10px;padding:11px 14px;margin-bottom:18px;display:flex;align-items:flex-start;gap:9px}
+.modal-context-dot{width:8px;height:8px;border-radius:50%;background:var(--accent3);flex-shrink:0;margin-top:4px;animation:pulse 2s infinite}
+.modal-context-text{font-size:12.5px;color:#7ee8c8;line-height:1.55}
+.modal-context-text strong{color:#b6f5e0;font-weight:600}
+/* Urgency micro-copy */
+.modal-urgency{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--muted);margin-bottom:14px}
+.modal-urgency-dot{width:6px;height:6px;border-radius:50%;background:#f6a84f;animation:pulse 2s infinite;flex-shrink:0}
 .modal-icon{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,rgba(79,142,247,0.15),rgba(123,92,240,0.15));border:1px solid rgba(79,142,247,0.2);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:18px}
 .modal-title{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--text);letter-spacing:-0.02em;margin-bottom:8px;line-height:1.2}
-.modal-sub{font-size:13.5px;color:var(--muted2);line-height:1.6;margin-bottom:22px}
-.modal-value-list{display:flex;flex-direction:column;gap:7px;margin-bottom:22px}
+.modal-title .modal-highlight{background:linear-gradient(135deg,#38e8b5,#4f8ef7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.modal-sub{font-size:13.5px;color:var(--muted2);line-height:1.6;margin-bottom:16px}
+.modal-value-list{display:flex;flex-direction:column;gap:7px;margin-bottom:20px}
 .modal-value-item{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--muted2)}
 .modal-value-item::before{content:'✓';color:var(--accent3);font-weight:700;font-size:12px;flex-shrink:0}
 .modal-field{margin-bottom:12px}
@@ -299,7 +291,9 @@ input::placeholder { color: var(--muted); }
 .modal-submit{width:100%;padding:14px;background:linear-gradient(135deg,#4f8ef7,#7b5cf0);color:#fff;border:none;border-radius:100px;font-family:'Syne',sans-serif;font-size:14px;font-weight:800;cursor:pointer;letter-spacing:0.02em;box-shadow:0 4px 20px rgba(79,142,247,0.35);transition:all 0.25s;margin-top:4px}
 .modal-submit:hover{filter:brightness(1.1);transform:translateY(-1px)}
 .modal-submit:disabled{opacity:0.6;cursor:not-allowed;transform:none}
-.modal-privacy{text-align:center;font-size:11px;color:var(--muted);margin-top:12px;line-height:1.5}
+.modal-skip{display:block;text-align:center;font-size:11px;color:var(--muted);margin-top:10px;cursor:pointer;background:none;border:none;width:100%;padding:4px;transition:color 0.2s;letter-spacing:0.01em}
+.modal-skip:hover{color:var(--muted2)}
+.modal-privacy{text-align:center;font-size:11px;color:var(--muted);margin-top:6px;line-height:1.5}
 .modal-success{text-align:center;padding:12px 0 4px;display:none}
 .modal-success.show{display:block}
 .modal-success-icon{font-size:40px;margin-bottom:12px}
@@ -307,43 +301,15 @@ input::placeholder { color: var(--muted); }
 .modal-success-sub{font-size:13.5px;color:var(--muted2);line-height:1.6}
 
 /* ── STICKY BAR ── */
-#sticky-bar{
-  position:fixed;top:-64px;left:0;right:0;z-index:1500;
-  background:linear-gradient(90deg,rgba(10,25,55,0.97),rgba(10,35,28,0.97));
-  border-bottom:1px solid rgba(79,142,247,0.25);
-  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-  padding:10px 48px 10px 20px;
-  display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;
-  transition:top 0.45s cubic-bezier(0.34,1.3,0.64,1);
-  box-shadow:0 4px 24px rgba(0,0,0,0.45);
-}
+#sticky-bar{position:fixed;top:-64px;left:0;right:0;z-index:1500;background:linear-gradient(90deg,rgba(10,25,55,0.97),rgba(10,35,28,0.97));border-bottom:1px solid rgba(79,142,247,0.25);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);padding:10px 48px 10px 20px;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;transition:top 0.45s cubic-bezier(0.34,1.3,0.64,1);box-shadow:0 4px 24px rgba(0,0,0,0.45);}
 #sticky-bar.visible{top:0}
-#sticky-bar-text{
-  font-size:13px;color:var(--text);
-  display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center;
-  text-align:center;
-}
+#sticky-bar-text{font-size:13px;color:var(--text);display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center;text-align:center;}
 #sticky-bar-text strong{color:#4ade80;font-weight:600}
-#sticky-bar-cta{
-  background:var(--accent);color:#fff;border:none;
-  padding:7px 18px;border-radius:100px;
-  font-family:'Syne',sans-serif;font-size:12px;font-weight:700;
-  cursor:pointer;white-space:nowrap;
-  transition:all 0.2s;letter-spacing:0.03em;flex-shrink:0;
-}
+#sticky-bar-cta{background:var(--accent);color:#fff;border:none;padding:7px 18px;border-radius:100px;font-family:'Syne',sans-serif;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all 0.2s;letter-spacing:0.03em;flex-shrink:0;}
 #sticky-bar-cta:hover{background:#6aa3f9;transform:scale(1.04)}
-#sticky-bar-close{
-  position:absolute;right:14px;top:50%;transform:translateY(-50%);
-  background:none;border:none;color:var(--muted);
-  font-size:18px;line-height:1;cursor:pointer;
-  padding:4px 6px;transition:color 0.2s;
-}
+#sticky-bar-close{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--muted);font-size:18px;line-height:1;cursor:pointer;padding:4px 6px;transition:color 0.2s;}
 #sticky-bar-close:hover{color:var(--text)}
-@media(max-width:520px){
-  #sticky-bar{padding:10px 44px 10px 16px;gap:8px}
-  #sticky-bar-text{font-size:12px}
-  #sticky-bar-cta{font-size:11px;padding:6px 14px}
-}
+@media(max-width:520px){#sticky-bar{padding:10px 44px 10px 16px;gap:8px}#sticky-bar-text{font-size:12px}#sticky-bar-cta{font-size:11px;padding:6px 14px}}
 
 /* ── FAQ ── */
 .faq-section{margin-top:32px;animation:fadeUp 0.5s ease both}
@@ -352,64 +318,18 @@ input::placeholder { color: var(--muted); }
 .faq-badge{font-size:11px;color:var(--muted);background:var(--surface2);border:1px solid var(--border);padding:3px 10px;border-radius:100px}
 .faq-item{border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:8px;overflow:hidden;transition:border-color 0.2s,box-shadow 0.2s;background:var(--surface)}
 .faq-item.open{border-color:rgba(79,142,247,0.3);box-shadow:0 2px 12px rgba(79,142,247,0.08)}
-.faq-q{
-  width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;
-  padding:15px 18px;background:none;border:none;
-  font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;color:var(--text);
-  cursor:pointer;text-align:left;transition:color 0.2s;
-  -webkit-tap-highlight-color:transparent;
-}
+.faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 18px;background:none;border:none;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;color:var(--text);cursor:pointer;text-align:left;transition:color 0.2s;-webkit-tap-highlight-color:transparent;}
 .faq-q:hover{color:var(--accent)}
 .faq-item.open .faq-q{color:var(--accent)}
-.faq-icon{
-  width:22px;height:22px;border-radius:50%;
-  border:1px solid var(--border2);color:var(--muted);
-  display:flex;align-items:center;justify-content:center;
-  font-size:14px;flex-shrink:0;transition:all 0.25s;
-  line-height:1;
-}
-.faq-item.open .faq-icon{
-  border-color:var(--accent);color:var(--accent);
-  background:rgba(79,142,247,0.1);transform:rotate(45deg);
-}
-.faq-body{
-  max-height:0;overflow:hidden;
-  transition:max-height 0.32s cubic-bezier(0.4,0,0.2,1),padding 0.25s ease;
-  padding:0 18px;
-}
-.faq-body-inner{
-  font-size:13.5px;color:var(--muted2);line-height:1.7;
-  padding-bottom:16px;border-top:1px solid var(--border);padding-top:12px;
-}
+.faq-icon{width:22px;height:22px;border-radius:50%;border:1px solid var(--border2);color:var(--muted);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;transition:all 0.25s;line-height:1;}
+.faq-item.open .faq-icon{border-color:var(--accent);color:var(--accent);background:rgba(79,142,247,0.1);transform:rotate(45deg);}
+.faq-body{max-height:0;overflow:hidden;transition:max-height 0.32s cubic-bezier(0.4,0,0.2,1),padding 0.25s ease;padding:0 18px;}
+.faq-body-inner{font-size:13.5px;color:var(--muted2);line-height:1.7;padding-bottom:16px;border-top:1px solid var(--border);padding-top:12px;}
 .faq-body-inner strong{color:var(--text);font-weight:500}
 .faq-body-inner a{color:var(--accent);text-decoration:none}
 .faq-body-inner a:hover{text-decoration:underline}
-@media(max-width:560px){
-  .faq-q{font-size:13.5px;padding:13px 14px}
-  .faq-body{padding:0 14px}
-  .faq-body-inner{font-size:13px}
-}
-</style>
-<script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "wsdla8xels");
-</script>
-</head>
-<body>
+@media(max-width:560px){.faq-q{font-size:13.5px;padding:13px 14px}.faq-body{padding:0 14px}.faq-body-inner{font-size:13px}}
 
-<!-- STICKY BAR -->
-<div id="sticky-bar">
-  <div id="sticky-bar-text">
-    <strong>🎁 Free resource:</strong> Get 10 ready-made Boolean templates for top MENA roles → drop your email
-  </div>
-  <button id="sticky-bar-cta" onclick="openStickyModal()">Get Free Templates</button>
-  <button id="sticky-bar-close" onclick="closeStickyBar()" aria-label="Close">×</button>
-</div>
-
-<style>
 /* ── POPULAR SEARCHES ── */
 .popular-section{margin-bottom:28px;animation:fadeUp 0.5s 0.05s ease both}
 .popular-header{display:flex;align-items:center;gap:10px;margin-bottom:14px}
@@ -431,10 +351,28 @@ input::placeholder { color: var(--muted); }
 .popular-card-cta{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;color:var(--muted);display:flex;align-items:center;gap:4px;transition:color 0.2s}
 .popular-card:hover .popular-card-cta{color:var(--accent3)}
 </style>
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wsdla8xels");
+</script>
+</head>
+<body>
+
+<!-- STICKY BAR -->
+<div id="sticky-bar">
+  <div id="sticky-bar-text">
+    <strong>🎁 Free resource:</strong> Get 10 ready-made Boolean templates for top MENA roles → drop your email
+  </div>
+  <button id="sticky-bar-cta" onclick="openStickyModal()">Get Free Templates</button>
+  <button id="sticky-bar-close" onclick="closeStickyBar()" aria-label="Close">×</button>
+</div>
 
 <div class="wrapper">
 
-  <!-- RECENT SEARCHES — only shown to returning visitors via JS -->
+  <!-- RECENT SEARCHES -->
   <div class="recent-searches-bar" id="recentSearchesBar" style="display:none;">
     <div class="recent-searches-header" onclick="toggleRecentSearches()">
       <div class="recent-searches-left">
@@ -454,7 +392,7 @@ input::placeholder { color: var(--muted); }
     <div class="badge">Boolean String Builder</div>
     <h1>The Search Trick Every<br/>Recruiter Uses. Now It's Yours.</h1>
     <p class="subtitle">Build a Boolean search string in 60 seconds — no experience needed. Find jobs on LinkedIn and Google that most job seekers never see.</p>
-     <p style="font-size:14px;color:#6b7794;max-width:600px;margin:20px auto 0;line-height:1.8;text-align:center;">Most job seekers search LinkedIn the basic way — and miss hundreds of relevant roles. This free Boolean string builder generates advanced LinkedIn Boolean search strings and Google X-Ray queries in seconds, no experience needed. Built for job seekers and recruiters across the MENA region, GCC, and globally — just enter your job title, target location, and skills, and the tool does the rest.</p>
+    <p style="font-size:14px;color:#6b7794;max-width:600px;margin:20px auto 0;line-height:1.8;text-align:center;">Most job seekers search LinkedIn the basic way — and miss hundreds of relevant roles. This free Boolean string builder generates advanced LinkedIn Boolean search strings and Google X-Ray queries in seconds, no experience needed. Built for job seekers and recruiters across the MENA region, GCC, and globally — just enter your job title, target location, and skills, and the tool does the rest.</p>
   </div>
 
   <!-- POPULAR SEARCHES -->
@@ -464,85 +402,42 @@ input::placeholder { color: var(--muted); }
       <span class="popular-heading">Popular Searches</span>
     </div>
     <div class="popular-grid" id="popularGrid">
-
       <div class="popular-card" onclick="runPopular({titles:['Data Analyst'],region:'UAE',must:['SQL'],nice:['Power BI','Tableau','Excel','Python']})">
         <div class="popular-card-role">Data Analyst</div>
         <div class="popular-card-region">UAE</div>
-        <div class="popular-card-skills">
-          <span class="popular-card-skill must">SQL</span>
-          <span class="popular-card-skill">Power BI</span>
-          <span class="popular-card-skill">Tableau</span>
-          <span class="popular-card-skill">Excel</span>
-          <span class="popular-card-skill">Python</span>
-        </div>
+        <div class="popular-card-skills"><span class="popular-card-skill must">SQL</span><span class="popular-card-skill">Power BI</span><span class="popular-card-skill">Tableau</span><span class="popular-card-skill">Excel</span><span class="popular-card-skill">Python</span></div>
         <div class="popular-card-cta">Try this search →</div>
       </div>
-
       <div class="popular-card" onclick="runPopular({titles:['HR Manager'],region:'Saudi Arabia',must:['SAP'],nice:['SuccessFactors','Oracle HCM','Workday','HRMS']})">
         <div class="popular-card-role">HR Manager</div>
         <div class="popular-card-region">Saudi Arabia</div>
-        <div class="popular-card-skills">
-          <span class="popular-card-skill must">SAP</span>
-          <span class="popular-card-skill">SuccessFactors</span>
-          <span class="popular-card-skill">Oracle HCM</span>
-          <span class="popular-card-skill">Workday</span>
-          <span class="popular-card-skill">HRMS</span>
-        </div>
+        <div class="popular-card-skills"><span class="popular-card-skill must">SAP</span><span class="popular-card-skill">SuccessFactors</span><span class="popular-card-skill">Oracle HCM</span><span class="popular-card-skill">Workday</span><span class="popular-card-skill">HRMS</span></div>
         <div class="popular-card-cta">Try this search →</div>
       </div>
-
       <div class="popular-card" onclick="runPopular({titles:['Software Engineer'],region:'GCC',must:['JavaScript'],nice:['React','Node.js','Python','Java']})">
         <div class="popular-card-role">Software Engineer</div>
         <div class="popular-card-region">GCC</div>
-        <div class="popular-card-skills">
-          <span class="popular-card-skill must">JavaScript</span>
-          <span class="popular-card-skill">React</span>
-          <span class="popular-card-skill">Node.js</span>
-          <span class="popular-card-skill">Python</span>
-          <span class="popular-card-skill">Java</span>
-        </div>
+        <div class="popular-card-skills"><span class="popular-card-skill must">JavaScript</span><span class="popular-card-skill">React</span><span class="popular-card-skill">Node.js</span><span class="popular-card-skill">Python</span><span class="popular-card-skill">Java</span></div>
         <div class="popular-card-cta">Try this search →</div>
       </div>
-
       <div class="popular-card" onclick="runPopular({titles:['Finance Manager'],region:'Qatar',must:['Excel'],nice:['Financial Analysis','Budgeting','Forecasting','ERP']})">
         <div class="popular-card-role">Finance Manager</div>
         <div class="popular-card-region">Qatar</div>
-        <div class="popular-card-skills">
-          <span class="popular-card-skill must">Excel</span>
-          <span class="popular-card-skill">Financial Analysis</span>
-          <span class="popular-card-skill">Budgeting</span>
-          <span class="popular-card-skill">Forecasting</span>
-          <span class="popular-card-skill">ERP</span>
-        </div>
+        <div class="popular-card-skills"><span class="popular-card-skill must">Excel</span><span class="popular-card-skill">Financial Analysis</span><span class="popular-card-skill">Budgeting</span><span class="popular-card-skill">Forecasting</span><span class="popular-card-skill">ERP</span></div>
         <div class="popular-card-cta">Try this search →</div>
       </div>
-
       <div class="popular-card" onclick="runPopular({titles:['Marketing Manager'],region:'MENA',must:['Digital Marketing'],nice:['SEO','Social Media','Google Ads','Content Marketing']})">
         <div class="popular-card-role">Marketing Manager</div>
         <div class="popular-card-region">MENA</div>
-        <div class="popular-card-skills">
-          <span class="popular-card-skill must">Digital Marketing</span>
-          <span class="popular-card-skill">SEO</span>
-          <span class="popular-card-skill">Social Media</span>
-          <span class="popular-card-skill">Google Ads</span>
-          <span class="popular-card-skill">Content Marketing</span>
-        </div>
+        <div class="popular-card-skills"><span class="popular-card-skill must">Digital Marketing</span><span class="popular-card-skill">SEO</span><span class="popular-card-skill">Social Media</span><span class="popular-card-skill">Google Ads</span><span class="popular-card-skill">Content Marketing</span></div>
         <div class="popular-card-cta">Try this search →</div>
       </div>
-
       <div class="popular-card" onclick="runPopular({titles:['Project Manager'],region:'GCC',must:['PMP'],nice:['Agile','Scrum','MS Project','Risk Management']})">
         <div class="popular-card-role">Project Manager</div>
         <div class="popular-card-region">GCC</div>
-        <div class="popular-card-skills">
-          <span class="popular-card-skill must">PMP</span>
-          <span class="popular-card-skill">Agile</span>
-          <span class="popular-card-skill">Scrum</span>
-          <span class="popular-card-skill">MS Project</span>
-          <span class="popular-card-skill">Risk Management</span>
-        </div>
+        <div class="popular-card-skills"><span class="popular-card-skill must">PMP</span><span class="popular-card-skill">Agile</span><span class="popular-card-skill">Scrum</span><span class="popular-card-skill">MS Project</span><span class="popular-card-skill">Risk Management</span></div>
         <div class="popular-card-cta">Try this search →</div>
       </div>
-
     </div>
   </div>
 
@@ -550,10 +445,7 @@ input::placeholder { color: var(--muted); }
   <div class="card" id="card-titles">
     <div class="card-header">
       <div class="step-dot">1</div>
-      <div>
-        <div class="card-title">Job Title Preferences</div>
-        <div class="card-desc">Type a title and press Enter or comma to add</div>
-      </div>
+      <div><div class="card-title">Job Title Preferences</div><div class="card-desc">Type a title and press Enter or comma to add</div></div>
     </div>
     <div class="operator-row" style="margin-bottom:14px;">
       <span class="operator-label" style="white-space:nowrap;">Combine titles with</span>
@@ -575,10 +467,7 @@ input::placeholder { color: var(--muted); }
   <div class="card" id="card-region">
     <div class="card-header">
       <div class="step-dot">2</div>
-      <div>
-        <div class="card-title">Target Market Region</div>
-        <div class="card-desc">Select a region or type a custom one</div>
-      </div>
+      <div><div class="card-title">Target Market Region</div><div class="card-desc">Select a region or type a custom one</div></div>
     </div>
     <div class="chip-group" id="region-chips">
       <div class="chip" data-region="MENA">MENA</div>
@@ -607,55 +496,22 @@ input::placeholder { color: var(--muted); }
   <div class="card" id="card-skills">
     <div class="card-header">
       <div class="step-dot">3</div>
-      <div>
-        <div class="card-title">Key Skills</div>
-        <div class="card-desc">Add must-have and nice-to-have skills</div>
-      </div>
+      <div><div class="card-title">Key Skills</div><div class="card-desc">Add must-have and nice-to-have skills</div></div>
     </div>
     <div class="row-2">
       <div>
         <label>Must-have skills (AND)</label>
-        <div class="tag-input-wrap" id="must-wrap">
-          <input type="text" class="tag-inline-input" id="must-input" placeholder="e.g. SQL…" />
-        </div>
+        <div class="tag-input-wrap" id="must-wrap"><input type="text" class="tag-inline-input" id="must-input" placeholder="e.g. SQL…" /></div>
       </div>
       <div>
         <label>Nice-to-have skills (OR)</label>
-        <div class="tag-input-wrap" id="nice-wrap">
-          <input type="text" class="tag-inline-input" id="nice-input" placeholder="e.g. Power BI…" />
-        </div>
+        <div class="tag-input-wrap" id="nice-wrap"><input type="text" class="tag-inline-input" id="nice-input" placeholder="e.g. Power BI…" /></div>
       </div>
     </div>
     <hr class="divider"/>
     <label style="margin-bottom:10px;">Quick-add popular skills</label>
     <div class="chip-group" id="skill-chips">
-      <div class="chip" data-skill="Power BI">Power BI</div>
-      <div class="chip" data-skill="Excel">Excel</div>
-      <div class="chip" data-skill="SQL">SQL</div>
-      <div class="chip" data-skill="Python">Python</div>
-      <div class="chip" data-skill="Tableau">Tableau</div>
-      <div class="chip" data-skill="Data Analysis">Data Analysis</div>
-      <div class="chip" data-skill="Financial Analysis">Financial Analysis</div>
-      <div class="chip" data-skill="Accounting">Accounting</div>
-      <div class="chip" data-skill="Budgeting">Budgeting</div>
-      <div class="chip" data-skill="Forecasting">Forecasting</div>
-      <div class="chip" data-skill="Sales">Sales</div>
-      <div class="chip" data-skill="Business Development">Business Development</div>
-      <div class="chip" data-skill="CRM">CRM</div>
-      <div class="chip" data-skill="Marketing">Marketing</div>
-      <div class="chip" data-skill="Digital Marketing">Digital Marketing</div>
-      <div class="chip" data-skill="SEO">SEO</div>
-      <div class="chip" data-skill="Project Management">Project Management</div>
-      <div class="chip" data-skill="Admin">Admin</div>
-      <div class="chip" data-skill="Operations">Operations</div>
-      <div class="chip" data-skill="Civil Engineering">Civil Engineering</div>
-      <div class="chip" data-skill="AutoCAD">AutoCAD</div>
-      <div class="chip" data-skill="Software Engineer">Software Engineer</div>
-      <div class="chip" data-skill="JavaScript">JavaScript</div>
-      <div class="chip" data-skill="React">React</div>
-      <div class="chip" data-skill="Java">Java</div>
-      <div class="chip" data-skill="Customer Service">Customer Service</div>
-      <div class="chip" data-skill="Communication">Communication</div>
+      <div class="chip" data-skill="Power BI">Power BI</div><div class="chip" data-skill="Excel">Excel</div><div class="chip" data-skill="SQL">SQL</div><div class="chip" data-skill="Python">Python</div><div class="chip" data-skill="Tableau">Tableau</div><div class="chip" data-skill="Data Analysis">Data Analysis</div><div class="chip" data-skill="Financial Analysis">Financial Analysis</div><div class="chip" data-skill="Accounting">Accounting</div><div class="chip" data-skill="Budgeting">Budgeting</div><div class="chip" data-skill="Forecasting">Forecasting</div><div class="chip" data-skill="Sales">Sales</div><div class="chip" data-skill="Business Development">Business Development</div><div class="chip" data-skill="CRM">CRM</div><div class="chip" data-skill="Marketing">Marketing</div><div class="chip" data-skill="Digital Marketing">Digital Marketing</div><div class="chip" data-skill="SEO">SEO</div><div class="chip" data-skill="Project Management">Project Management</div><div class="chip" data-skill="Admin">Admin</div><div class="chip" data-skill="Operations">Operations</div><div class="chip" data-skill="Civil Engineering">Civil Engineering</div><div class="chip" data-skill="AutoCAD">AutoCAD</div><div class="chip" data-skill="Software Engineer">Software Engineer</div><div class="chip" data-skill="JavaScript">JavaScript</div><div class="chip" data-skill="React">React</div><div class="chip" data-skill="Java">Java</div><div class="chip" data-skill="Customer Service">Customer Service</div><div class="chip" data-skill="Communication">Communication</div>
     </div>
   </div>
 
@@ -664,118 +520,24 @@ input::placeholder { color: var(--muted); }
     <button class="btn-generate" onclick="generateStrings()">⚡ Generate Boolean Strings</button>
   </div>
 
-  <!-- FAQ Section -->
+  <!-- FAQ -->
   <div class="faq-section" id="faq-section">
-    <div class="faq-title-row">
-      <span class="faq-heading">Frequently Asked Questions</span>
-      <span class="faq-badge">8 answers</span>
-    </div>
-
-    <div class="faq-item" id="faq-0">
-      <button class="faq-q" onclick="toggleFaq(0)">
-        <span>What is a Boolean search string?</span>
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-body" id="faq-body-0">
-        <div class="faq-body-inner">
-          A Boolean search string is a structured query that uses logic operators — <strong>AND</strong>, <strong>OR</strong>, and <strong>NOT</strong> — to narrow or broaden search results. Recruiters have used them for years to find candidates precisely. This tool lets you use the same technique to find jobs and opportunities that standard search filters miss entirely.
-        </div>
-      </div>
-    </div>
-
-    <div class="faq-item" id="faq-1">
-      <button class="faq-q" onclick="toggleFaq(1)">
-        <span>Does this work on LinkedIn's free version?</span>
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-body" id="faq-body-1">
-        <div class="faq-body-inner">
-          Yes — Boolean search works on LinkedIn's free version. Simply paste the generated string into LinkedIn's main search bar and press Enter. You don't need LinkedIn Premium or Recruiter to benefit from this. The Google X-Ray string goes even further by bypassing LinkedIn's search engine entirely and surfacing profiles directly through Google.
-        </div>
-      </div>
-    </div>
-
-    <div class="faq-item" id="faq-2">
-      <button class="faq-q" onclick="toggleFaq(2)">
-        <span>How is this different from LinkedIn's built-in filters?</span>
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-body" id="faq-body-2">
-        <div class="faq-body-inner">
-          LinkedIn's filters are broad and limited — they match on a small set of predefined fields. Boolean search scans the full text of profiles and job listings, including headlines, summaries, and experience sections. This means you find results that LinkedIn's algorithm would never surface through normal filtering. It also gives you full control over the logic rather than relying on LinkedIn's often opaque relevance ranking.
-        </div>
-      </div>
-    </div>
-
-    <div class="faq-item" id="faq-3">
-      <button class="faq-q" onclick="toggleFaq(3)">
-        <span>Can I use this for Google search too?</span>
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-body" id="faq-body-3">
-        <div class="faq-body-inner">
-          Absolutely. The <strong>Google X-Ray</strong> tab generates a string specifically formatted for Google, using <strong>site:linkedin.com/in/</strong> to search inside LinkedIn's profile pages directly. This is one of the most powerful sourcing techniques used by professional recruiters — it surfaces profiles that LinkedIn's own search hides or deprioritises, especially for free account users.
-        </div>
-      </div>
-    </div>
-
-    <div class="faq-item" id="faq-4">
-      <button class="faq-q" onclick="toggleFaq(4)">
-        <span>Do I need to create an account?</span>
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-body" id="faq-body-4">
-        <div class="faq-body-inner">
-          No account, no login, no sign-up required. This tool is completely free to use as many times as you need. Your recent searches are saved locally in your browser so you can revisit them, but nothing is stored on any server without your consent.
-        </div>
-      </div>
-    </div>
-
-    <div class="faq-item" id="faq-5">
-      <button class="faq-q" onclick="toggleFaq(5)">
-        <span>How many searches can I do?</span>
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-body" id="faq-body-5">
-        <div class="faq-body-inner">
-          Unlimited. There are no search caps, no daily limits, and no paywalls. Generate as many Boolean strings as you need — for different roles, different regions, or different skill combinations. Each string is unique and ready to use immediately.
-        </div>
-      </div>
-    </div>
-
-    <div class="faq-item" id="faq-6">
-      <button class="faq-q" onclick="toggleFaq(6)">
-        <span>What is Google X-Ray search?</span>
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-body" id="faq-body-6">
-        <div class="faq-body-inner">
-          Google X-Ray is a technique that uses Google to search within a specific website — in this case, LinkedIn. By adding <strong>site:linkedin.com/in/</strong> to your search query, you instruct Google to only return results from LinkedIn profile pages. Because Google indexes LinkedIn more deeply than LinkedIn's own search allows free users to access, this method often surfaces profiles that are otherwise invisible. It's free and requires no LinkedIn account at all.
-        </div>
-      </div>
-    </div>
-
-    <div class="faq-item" id="faq-7">
-      <button class="faq-q" onclick="toggleFaq(7)">
-        <span>Who is this tool built for?</span>
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-body" id="faq-body-7">
-        <div class="faq-body-inner">
-          Primarily built for <strong>job seekers</strong> who want to search smarter — finding roles and companies that standard search misses. It's equally useful for <strong>recruiters</strong> sourcing candidates and <strong>freelancers</strong> finding clients in specific markets. If you're in the MENA, GCC, or international job market and want to cut through the noise, this tool was made for you.
-        </div>
-      </div>
-    </div>
+    <div class="faq-title-row"><span class="faq-heading">Frequently Asked Questions</span><span class="faq-badge">8 answers</span></div>
+    <div class="faq-item" id="faq-0"><button class="faq-q" onclick="toggleFaq(0)"><span>What is a Boolean search string?</span><span class="faq-icon">+</span></button><div class="faq-body" id="faq-body-0"><div class="faq-body-inner">A Boolean search string is a structured query that uses logic operators — <strong>AND</strong>, <strong>OR</strong>, and <strong>NOT</strong> — to narrow or broaden search results. Recruiters have used them for years to find candidates precisely. This tool lets you use the same technique to find jobs and opportunities that standard search filters miss entirely.</div></div></div>
+    <div class="faq-item" id="faq-1"><button class="faq-q" onclick="toggleFaq(1)"><span>Does this work on LinkedIn's free version?</span><span class="faq-icon">+</span></button><div class="faq-body" id="faq-body-1"><div class="faq-body-inner">Yes — Boolean search works on LinkedIn's free version. Simply paste the generated string into LinkedIn's main search bar and press Enter. You don't need LinkedIn Premium or Recruiter to benefit from this. The Google X-Ray string goes even further by bypassing LinkedIn's search engine entirely and surfacing profiles directly through Google.</div></div></div>
+    <div class="faq-item" id="faq-2"><button class="faq-q" onclick="toggleFaq(2)"><span>How is this different from LinkedIn's built-in filters?</span><span class="faq-icon">+</span></button><div class="faq-body" id="faq-body-2"><div class="faq-body-inner">LinkedIn's filters are broad and limited — they match on a small set of predefined fields. Boolean search scans the full text of profiles and job listings, including headlines, summaries, and experience sections. This means you find results that LinkedIn's algorithm would never surface through normal filtering.</div></div></div>
+    <div class="faq-item" id="faq-3"><button class="faq-q" onclick="toggleFaq(3)"><span>Can I use this for Google search too?</span><span class="faq-icon">+</span></button><div class="faq-body" id="faq-body-3"><div class="faq-body-inner">Absolutely. The <strong>Google X-Ray</strong> tab generates a string specifically formatted for Google, using <strong>site:linkedin.com/in/</strong> to search inside LinkedIn's profile pages directly. This is one of the most powerful sourcing techniques used by professional recruiters.</div></div></div>
+    <div class="faq-item" id="faq-4"><button class="faq-q" onclick="toggleFaq(4)"><span>Do I need to create an account?</span><span class="faq-icon">+</span></button><div class="faq-body" id="faq-body-4"><div class="faq-body-inner">No account, no login, no sign-up required. This tool is completely free to use as many times as you need. Your recent searches are saved locally in your browser so you can revisit them, but nothing is stored on any server without your consent.</div></div></div>
+    <div class="faq-item" id="faq-5"><button class="faq-q" onclick="toggleFaq(5)"><span>How many searches can I do?</span><span class="faq-icon">+</span></button><div class="faq-body" id="faq-body-5"><div class="faq-body-inner">Unlimited. There are no search caps, no daily limits, and no paywalls. Generate as many Boolean strings as you need — for different roles, different regions, or different skill combinations.</div></div></div>
+    <div class="faq-item" id="faq-6"><button class="faq-q" onclick="toggleFaq(6)"><span>What is Google X-Ray search?</span><span class="faq-icon">+</span></button><div class="faq-body" id="faq-body-6"><div class="faq-body-inner">Google X-Ray is a technique that uses Google to search within a specific website — in this case, LinkedIn. By adding <strong>site:linkedin.com/in/</strong> to your search query, you instruct Google to only return results from LinkedIn profile pages.</div></div></div>
+    <div class="faq-item" id="faq-7"><button class="faq-q" onclick="toggleFaq(7)"><span>Who is this tool built for?</span><span class="faq-icon">+</span></button><div class="faq-body" id="faq-body-7"><div class="faq-body-inner">Primarily built for <strong>job seekers</strong> who want to search smarter — finding roles and companies that standard search misses. It's equally useful for <strong>recruiters</strong> sourcing candidates and <strong>freelancers</strong> finding clients in specific markets.</div></div></div>
   </div>
 
   <!-- Output -->
   <div class="output-section card" id="output-section">
     <div class="card-header" style="margin-bottom:0;">
       <div class="step-dot" style="background:linear-gradient(135deg,var(--accent3),#2fb89a);">✓</div>
-      <div>
-        <div class="card-title">Your Boolean Strings</div>
-        <div class="card-desc">Ready to paste into LinkedIn or Google</div>
-      </div>
+      <div><div class="card-title">Your Boolean Strings</div><div class="card-desc">Ready to paste into LinkedIn or Google</div></div>
     </div>
     <hr class="divider" />
     <div class="output-tabs">
@@ -803,31 +565,18 @@ input::placeholder { color: var(--muted); }
 <div style="text-align:center;margin:40px 0 0;">
   <p style="font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#6b7794;margin-bottom:14px;">Found this useful? Share it</p>
   <div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap;">
-
-    <!-- LinkedIn -->
-    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Ftools.thedailytalent.com" target="_blank" rel="noopener"
-      style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:100px;background:rgba(10,102,194,0.12);border:1px solid rgba(10,102,194,0.3);color:#4f8ef7;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;text-decoration:none;transition:all 0.2s;"
-      onmouseover="this.style.background='rgba(10,102,194,0.22)'" onmouseout="this.style.background='rgba(10,102,194,0.12)'">
+    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Ftools.thedailytalent.com" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:100px;background:rgba(10,102,194,0.12);border:1px solid rgba(10,102,194,0.3);color:#4f8ef7;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;text-decoration:none;transition:all 0.2s;" onmouseover="this.style.background='rgba(10,102,194,0.22)'" onmouseout="this.style.background='rgba(10,102,194,0.12)'">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="#0a66c2"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
       Share on LinkedIn
     </a>
-
-    <!-- X / Twitter -->
-    <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Ftools.thedailytalent.com&text=This%20free%20tool%20builds%20Boolean%20search%20strings%20for%20LinkedIn%20%26%20Google%20in%2060%20seconds%20%F0%9F%94%8D" target="_blank" rel="noopener"
-      style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:100px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:#e8ecf4;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;text-decoration:none;transition:all 0.2s;"
-      onmouseover="this.style.background='rgba(255,255,255,0.10)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">
+    <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Ftools.thedailytalent.com&text=This%20free%20tool%20builds%20Boolean%20search%20strings%20for%20LinkedIn%20%26%20Google%20in%2060%20seconds%20%F0%9F%94%8D" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:100px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:#e8ecf4;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;text-decoration:none;transition:all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.10)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
       Share on X
     </a>
-
-    <!-- Copy link -->
-    <button onclick="navigator.clipboard.writeText('https://tools.thedailytalent.com').then(()=>{this.textContent='✓ Copied!';setTimeout(()=>{this.innerHTML='<svg width=\'16\' height=\'16\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'2\'><rect x=\'9\' y=\'9\' width=\'13\' height=\'13\' rx=\'2\'/><path d=\'M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1\'/></svg> Copy link'},2000)})"
-      style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:100px;background:rgba(56,232,181,0.08);border:1px solid rgba(56,232,181,0.2);color:#38e8b5;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all 0.2s;"
-      onmouseover="this.style.background='rgba(56,232,181,0.15)'" onmouseout="this.style.background='rgba(56,232,181,0.08)'">
+    <button onclick="navigator.clipboard.writeText('https://tools.thedailytalent.com').then(()=>{this.textContent='✓ Copied!';setTimeout(()=>{this.innerHTML='<svg width=\'16\' height=\'16\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'2\'><rect x=\'9\' y=\'9\' width=\'13\' height=\'13\' rx=\'2\'/><path d=\'M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1\'/></svg> Copy link'},2000)})" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:100px;background:rgba(56,232,181,0.08);border:1px solid rgba(56,232,181,0.2);color:#38e8b5;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.background='rgba(56,232,181,0.15)'" onmouseout="this.style.background='rgba(56,232,181,0.08)'">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
       Copy link
     </button>
-
   </div>
 </div>
 
@@ -839,20 +588,14 @@ input::placeholder { color: var(--muted); }
   <div class="navi-header">
     <div class="navi-header-left">
       <div class="navi-avatar">🧭</div>
-      <div class="navi-name-tag">
-        <div class="name">Navi</div>
-        <div class="status">Online · AI Search Assistant</div>
-      </div>
+      <div class="navi-name-tag"><div class="name">Navi</div><div class="status">Online · AI Search Assistant</div></div>
     </div>
     <button class="navi-close" onclick="closeNavi()">✕</button>
   </div>
   <div class="navi-messages" id="naviMessages"></div>
   <div class="navi-input-area">
-    <textarea class="navi-input" id="naviInput" placeholder="Tell Navi what you're looking for…" rows="1"
-      onkeydown="naviHandleKey(event)" oninput="autoResizeInput(this)"></textarea>
-    <button class="navi-send" onclick="naviSend()">
-      <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
-    </button>
+    <textarea class="navi-input" id="naviInput" placeholder="Tell Navi what you're looking for…" rows="1" onkeydown="naviHandleKey(event)" oninput="autoResizeInput(this)"></textarea>
+    <button class="navi-send" onclick="naviSend()"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></button>
   </div>
 </div>
 <button class="navi-fab" id="naviFab" onclick="openNavi()">
@@ -878,28 +621,37 @@ input::placeholder { color: var(--muted); }
 <button class="tour-fab" id="tourFab" onclick="tourStart()"><span class="tour-fab-dot"></span> Take a Tour</button>
 <div class="tour-done-toast" id="tourDoneToast">🎉 You're ready — start searching!</div>
 
-<!-- EMAIL MODAL -->
+<!-- EMAIL MODAL — Dynamic context-matching upgrade -->
 <div class="modal-backdrop" id="emailModal">
   <div class="modal-card">
-    <button class="modal-close" onclick="closeModal()">✕</button>
+    <button class="modal-close" id="modalCloseBtn" onclick="closeModal()">✕</button>
     <div class="modal-form-wrap" id="modalFormWrap">
-      <div class="modal-icon">🎁</div>
-      <div class="modal-title">Get 50 Free Boolean Templates</div>
-      <p class="modal-sub">You just built your first search string. Want 50 ready-made ones for the most in-demand roles across MENA?</p>
+      <div class="modal-icon" id="modalIcon">🎯</div>
+      <div class="modal-context-banner" id="modalContextBanner" style="display:none">
+        <span class="modal-context-dot"></span>
+        <span class="modal-context-text" id="modalContextText"></span>
+      </div>
+      <div class="modal-title" id="modalTitle">Your Search String Is Ready</div>
+      <p class="modal-sub" id="modalSub">Want 50 pre-built strings for roles just like this — ready to paste into LinkedIn?</p>
+      <div class="modal-urgency" id="modalUrgency" style="display:none">
+        <span class="modal-urgency-dot"></span>
+        <span id="modalUrgencyText"></span>
+      </div>
       <div class="modal-value-list">
-        <div class="modal-value-item">Templates for Tech, Finance, HR, Marketing &amp; more</div>
+        <div class="modal-value-item" id="modalValue1">Strings for Tech, Finance, HR, Marketing &amp; more</div>
         <div class="modal-value-item">Pre-built for LinkedIn and Google X-Ray</div>
         <div class="modal-value-item">Delivered free — no catch</div>
       </div>
       <div class="modal-field"><label for="modalName">Your name</label><input type="text" id="modalName" placeholder="e.g. Sara" autocomplete="given-name" /></div>
       <div class="modal-field"><label for="modalEmail">Your email address</label><input type="email" id="modalEmail" placeholder="sara@email.com" autocomplete="email" /></div>
       <button class="modal-submit" id="modalSubmit" onclick="submitEmail()">Send Me the Templates →</button>
+      <button class="modal-skip" onclick="forceCloseModal()">I'll find jobs the slow way</button>
       <p class="modal-privacy">No spam. Unsubscribe anytime. Your email stays private.</p>
     </div>
     <div class="modal-success" id="modalSuccess">
       <div class="modal-success-icon">✅</div>
-      <div class="modal-success-title">You're on the list!</div>
-      <p class="modal-success-sub">Check your inbox shortly for the 50 Boolean templates.</p>
+      <div class="modal-success-title" id="modalSuccessTitle">You're in!</div>
+      <p class="modal-success-sub" id="modalSuccessSub">Check your inbox shortly for the 50 Boolean templates.</p>
     </div>
   </div>
 </div>
@@ -919,20 +671,16 @@ function trackEvent(event,detail){
 }
 
 const SESSION_START_TS = Date.now();
-
 window.addEventListener("DOMContentLoaded",function(){
   trackEvent("page_view",document.referrer||"direct");
   trackEvent("session_start", new Date(SESSION_START_TS).toISOString());
   initRecentSearches();
 });
-
 function trackSessionEnd(){
   const duration = Math.round((Date.now() - SESSION_START_TS) / 1000);
   trackEvent("session_end", "duration_seconds:" + duration);
 }
-window.addEventListener("visibilitychange", function(){
-  if(document.visibilityState === "hidden") trackSessionEnd();
-});
+window.addEventListener("visibilitychange", function(){ if(document.visibilityState === "hidden") trackSessionEnd(); });
 window.addEventListener("pagehide", trackSessionEnd);
 
 // STATE
@@ -975,6 +723,7 @@ function highlight(str){
   return e.replace(/\b(AND)\b/g,'<span class="kw-and">AND</span>').replace(/\b(OR)\b/g,'<span class="kw-or">OR</span>').replace(/\b(NOT)\b/g,'<span class="kw-not">NOT</span>').replace(/&quot;([^&]*)&quot;/g,'<span class="kw-phrase">&quot;$1&quot;</span>').replace(/(site:[^\s<]+)/g,'<span class="kw-site">$1</span>');
 }
 
+// ── GENERATE — captures context snapshot for dynamic modal ──
 function generateStrings(){
   trackEvent("generate_strings",state.titles.join("|")||"no_titles");
   const li=buildLinkedIn(),gx=buildGoogleXRay();
@@ -986,7 +735,18 @@ function generateStrings(){
   setTimeout(()=>sec.scrollIntoView({behavior:'smooth',block:'start'}),100);
   saveRecentSearch();
   generateCount++;
-  if(generateCount===1&&!sessionStorage.getItem('emailCaptured'))setTimeout(()=>openModal(),1800);
+  // Show modal on first generate — only if user hasn't submitted (localStorage) or dismissed this session (sessionStorage)
+  const alreadySubmitted=localStorage.getItem('popupSubmitted')==='1';
+  const dismissedThisSession=sessionStorage.getItem('popupDismissed')==='1';
+  if(generateCount===1&&!alreadySubmitted&&!dismissedThisSession){
+    const ctx={
+      titles:[...state.titles],
+      regions:[...state.regions,...state.customRegions],
+      mustSkills:[...state.mustSkills],
+      niceSkills:[...state.niceSkills]
+    };
+    setTimeout(()=>openModal(ctx),1800);
+  }
 }
 function switchTab(id,btn){trackEvent("tab_switch",id);document.querySelectorAll('.output-tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));btn.classList.add('active');document.getElementById('tab-'+id).classList.add('active');}
 function copyString(id){navigator.clipboard.writeText(plain[id]||'').then(()=>{showToast('✓ Copied to clipboard!');trackEvent('copy_string',id);});}
@@ -1034,18 +794,105 @@ function restoreSearch(s){
   document.getElementById('card-titles').scrollIntoView({behavior:'smooth',block:'start'});
 }
 
-// ── EMAIL MODAL ──
-function openModal(){trackEvent('email_modal_shown');document.getElementById('emailModal').classList.add('open');}
-function closeModal(){document.getElementById('emailModal').classList.remove('open');}
+// ── EMAIL MODAL — Dynamic context matching ──
+function buildModalContext(ctx){
+  const t=ctx.titles,r=ctx.regions,m=ctx.mustSkills;
+  const primaryRole=t.length?t[0]:'';
+  const primaryRegion=r.length?r[0]:'';
+  // Safe display labels — never blank or undefined
+  const displayRole=primaryRole||'your target role';
+  const displayRegion=primaryRegion||'your target region';
+  let icon,title,sub,contextLine,urgencyText,value1;
+  if(primaryRole&&primaryRegion){
+    icon='🎯';
+    title=`Your <span class="modal-highlight">${esc(primaryRole)}</span> search in <span class="modal-highlight">${esc(primaryRegion)}</span> is live.`;
+    sub=`Recruiters in ${esc(primaryRegion)} are using Boolean every day. Get 50 pre-built strings for roles like ${esc(primaryRole)} — and start finding hidden jobs they haven't posted yet.`;
+    contextLine=`String built for <strong>${t.map(esc).join(', ')}</strong> · ${r.map(esc).join(', ')}.`;
+    urgencyText=`Most ${esc(primaryRole)} jobs in ${esc(primaryRegion)} are never publicly posted.`;
+    value1=`Pre-built strings for ${esc(primaryRole)} roles in ${esc(primaryRegion)}`;
+  } else if(primaryRole){
+    icon='🎯';
+    title=`Your <span class="modal-highlight">${esc(primaryRole)}</span> search string is ready.`;
+    sub=`Hiring managers search for ${esc(primaryRole)} profiles every day using Boolean. Get 50 ready-made strings for similar roles and find the jobs that never make it to job boards.`;
+    contextLine=`String built around <strong>${t.map(esc).join(' / ')}</strong>${m.length?` with ${m.map(esc).join(', ')}`:''}.`;
+    urgencyText=`Up to 70% of ${esc(primaryRole)} roles are filled before they go live.`;
+    value1=`50 strings including ${esc(primaryRole)} and related titles`;
+  } else if(primaryRegion){
+    icon='📍';
+    title=`Your <span class="modal-highlight">${esc(primaryRegion)}</span> job search is ready.`;
+    sub=`The ${esc(primaryRegion)} job market moves fast. Get 50 Boolean templates for the most in-demand roles in the region — so you never miss an opportunity.`;
+    contextLine=`Search targeting <strong>${r.map(esc).join(', ')}</strong>.`;
+    urgencyText=`${esc(primaryRegion)} has one of the highest LinkedIn recruiter densities globally.`;
+    value1=`Templates focused on ${esc(primaryRegion)} job markets`;
+  } else {
+    icon='🎁';
+    title='Your Boolean string is ready.';
+    sub='Want 50 pre-built strings for the most in-demand roles — ready to paste into LinkedIn?';
+    contextLine=null;urgencyText=null;
+    value1='Strings for Tech, Finance, HR, Marketing &amp; more';
+  }
+  return{icon,title,sub,contextLine,urgencyText,value1,primaryRole,primaryRegion,displayRole,displayRegion};
+}
+
+function openModal(ctx){
+  ctx=ctx||{titles:[],regions:[],mustSkills:[],niceSkills:[]};
+  const c=buildModalContext(ctx);
+  // Inject dynamic content
+  document.getElementById('modalIcon').textContent=c.icon;
+  document.getElementById('modalTitle').innerHTML=c.title;
+  document.getElementById('modalSub').innerHTML=c.sub;
+  document.getElementById('modalValue1').textContent=c.value1;
+  // Context banner
+  const banner=document.getElementById('modalContextBanner'),bannerText=document.getElementById('modalContextText');
+  if(c.contextLine){banner.style.display='flex';bannerText.innerHTML=c.contextLine;}else{banner.style.display='none';}
+  // Urgency line
+  const urg=document.getElementById('modalUrgency'),urgText=document.getElementById('modalUrgencyText');
+  if(c.urgencyText){urg.style.display='flex';urgText.textContent=c.urgencyText;}else{urg.style.display='none';}
+  // Success state
+  document.getElementById('modalSuccessTitle').textContent="You're in!";
+  document.getElementById('modalSuccessSub').innerHTML=`Your 50 Boolean templates are on their way.<br>Keep searching for <strong>${esc(c.primaryRole||'your target role')}</strong> roles while you wait.`;
+  // Reset form
+  document.getElementById('modalFormWrap').style.display='block';
+  document.getElementById('modalSuccess').classList.remove('show');
+  const btn=document.getElementById('modalSubmit');btn.disabled=false;btn.textContent='Send Me the Templates →';
+  // Anti-rage: close button appears after 2.5s
+  const closeBtn=document.getElementById('modalCloseBtn');
+  closeBtn.classList.remove('visible');
+  setTimeout(()=>closeBtn.classList.add('visible'),2500);
+  // Block backdrop-click for first 1.5s
+  const backdrop=document.getElementById('emailModal');
+  backdrop.dataset.dismissable='0';
+  setTimeout(()=>{backdrop.dataset.dismissable='1';},1500);
+  trackEvent('email_modal_shown',(c.primaryRole||'no-role')+'|'+(c.primaryRegion||'no-region'));
+  backdrop.classList.add('open');
+}
+function closeModal(){
+  const backdrop=document.getElementById('emailModal');
+  if(backdrop.dataset.dismissable==='0')return;
+  backdrop.classList.remove('open');
+}
+function forceCloseModal(){
+  // User explicitly dismissed — remember for this session only
+  sessionStorage.setItem('popupDismissed','1');
+  document.getElementById('emailModal').classList.remove('open');
+}
 document.getElementById('emailModal').addEventListener('click',function(e){if(e.target===this)closeModal();});
+
 async function submitEmail(){
   const name=document.getElementById('modalName').value.trim(),email=document.getElementById('modalEmail').value.trim();
   if(!email||!email.includes('@')){showToast('⚠️ Please enter a valid email');return;}
   const btn=document.getElementById('modalSubmit');btn.disabled=true;btn.textContent='Sending…';
   try{
     const res=await fetch(SUPABASE_URL+'/rest/v1/email_captures',{method:'POST',headers:{'Content-Type':'application/json','apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY,'Prefer':'return=minimal'},body:JSON.stringify({name,email,source:'boolean-tool'})});
-    if(res.ok||res.status===201){sessionStorage.setItem('emailCaptured','1');trackEvent('email_submitted','boolean-tool');document.getElementById('modalFormWrap').style.display='none';document.getElementById('modalSuccess').classList.add('show');setTimeout(()=>closeModal(),4000);}
-    else throw new Error('err');
+    if(res.ok||res.status===201){
+      // Submitted — never show popup again on any device/visit
+      localStorage.setItem('popupSubmitted','1');
+      sessionStorage.removeItem('popupDismissed');
+      trackEvent('email_submitted','boolean-tool');
+      document.getElementById('modalFormWrap').style.display='none';
+      document.getElementById('modalSuccess').classList.add('show');
+      setTimeout(()=>forceCloseModal(),4000);
+    } else throw new Error('err');
   }catch(err){btn.disabled=false;btn.textContent='Send Me the Templates →';showToast('⚠️ Something went wrong — please try again');}
 }
 
@@ -1055,7 +902,6 @@ let naviOpen=false,naviHistory=[],naviState='idle',naviPendingExtraction=null,na
 function loadNaviUser(){try{const raw=localStorage.getItem(NAVI_LS_KEY);if(!raw)return;const d=JSON.parse(raw);if(d.name){naviUserName=d.name;naviFirstTime=false;}}catch(e){}}
 function saveNaviUser(name){try{localStorage.setItem(NAVI_LS_KEY,JSON.stringify({name,ts:Date.now()}));}catch(e){}}
 loadNaviUser();
-
 function openNavi(){
   if(naviOpen)return;naviOpen=true;
   document.getElementById('naviPanel').classList.add('open');document.getElementById('naviBackdrop').classList.add('open');
@@ -1070,7 +916,6 @@ function openNaviFromNudge(){window.scrollTo({top:document.body.scrollHeight,beh
 function closeNavi(){if(!naviOpen)return;naviOpen=false;document.getElementById('naviPanel').classList.remove('open');document.getElementById('naviBackdrop').classList.remove('open');trackEvent('navi_dismissed');}
 function naviHandleKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();naviSend();}}
 function autoResizeInput(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,100)+'px';}
-
 function naviSend(){
   const inp=document.getElementById('naviInput'),text=inp.value.trim();if(!text)return;
   inp.value='';inp.style.height='42px';naviAddMsg('user',text);
@@ -1091,7 +936,6 @@ function naviSend(){
     naviShowTyping();naviCallGroq(text,false);naviState='chatting';return;
   }
 }
-
 function naviAddMsg(role,text){
   const msgs=document.getElementById('naviMessages'),div=document.createElement('div');
   div.className='navi-msg'+(role==='user'?' user':'');
@@ -1102,7 +946,6 @@ function naviAddMsg(role,text){
 }
 function naviShowTyping(){const msgs=document.getElementById('naviMessages'),div=document.createElement('div');div.className='navi-msg';div.id='naviTyping';const av=document.createElement('div');av.className='navi-msg-avatar';av.textContent='🧭';const bubble=document.createElement('div');bubble.className='navi-bubble navi-typing';bubble.innerHTML='<span></span><span></span><span></span>';div.appendChild(av);div.appendChild(bubble);msgs.appendChild(div);msgs.scrollTop=msgs.scrollHeight;}
 function naviRemoveTyping(){const el=document.getElementById('naviTyping');if(el)el.remove();}
-
 async function naviCallGroq(userMessage,isModification){
   const systemPrompt='You are Navi, a friendly Boolean search assistant for job seekers. Extract structured data from the user\'s description and reply EXACTLY in this format:\nNAVI_EXTRACT:{"job_titles":["..."],"regions":["..."],"must_skills":["..."],"nice_skills":["..."]}\nNAVI_CONFIRM:Your warm confirmation message addressing the user as '+naviUserName+', summarising what you understood and asking if they want to proceed.\n\nIf you need more info, ask one focused question instead. Keep must_skills to 1-2 maximum. If it\'s a modification, update accordingly and re-confirm.';
   try{
@@ -1119,7 +962,6 @@ async function naviCallGroq(userMessage,isModification){
     }else{naviAddMsg('bot',reply.replace(/NAVI_EXTRACT:.*$/s,'').replace(/NAVI_CONFIRM:/,'').trim()||'Could you tell me a bit more about the role, '+naviUserName+'?');}
   }catch(err){trackEvent('navi_error',err.message||'unknown');naviRemoveTyping();naviAddMsg('bot','I ran into a small hiccup, '+naviUserName+'. Try again in a moment, or use the form above — it works perfectly! 🙏');}
 }
-
 function naviAddMsgWithButtons(text,extracted){
   const msgs=document.getElementById('naviMessages'),div=document.createElement('div');div.className='navi-msg';
   const av=document.createElement('div');av.className='navi-msg-avatar';av.textContent='🧭';
@@ -1131,7 +973,6 @@ function naviAddMsgWithButtons(text,extracted){
   btns.appendChild(yes);btns.appendChild(adj);wrap.appendChild(bubble);wrap.appendChild(btns);div.appendChild(av);div.appendChild(wrap);msgs.appendChild(div);msgs.scrollTop=msgs.scrollHeight;
   naviHistory.push({role:'assistant',content:text});
 }
-
 function applyNaviExtraction(extracted){
   state.titles=[];state.regions=[];state.customRegions=[];state.mustSkills=[];state.niceSkills=[];
   const knownRegions=['MENA','GCC','Saudi Arabia','UAE','Qatar','UK','Europe','USA','Asia Pacific','India','Pakistan','Sri Lanka','Nepal','Global'];
@@ -1202,14 +1043,9 @@ function runPopular(p){
   const knownRegions=['MENA','GCC','Saudi Arabia','UAE','Qatar','UK','Europe','USA','Asia Pacific','India','Pakistan','Sri Lanka','Nepal','Global'];
   state.titles=[];state.regions=[];state.customRegions=[];state.mustSkills=[];state.niceSkills=[];
   state.titles=[...p.titles];
-  if(knownRegions.includes(p.region))state.regions=[p.region];
-  else state.customRegions=[p.region];
-  state.mustSkills=[...p.must];
-  state.niceSkills=[...p.nice];
-  renderTags(state.titles,'titles-wrap','titles-input');
-  renderTags(state.mustSkills,'must-wrap','must-input');
-  renderTags(state.niceSkills,'nice-wrap','nice-input');
-  renderTags(state.customRegions,'region-custom-wrap','region-custom-input');
+  if(knownRegions.includes(p.region))state.regions=[p.region];else state.customRegions=[p.region];
+  state.mustSkills=[...p.must];state.niceSkills=[...p.nice];
+  renderTags(state.titles,'titles-wrap','titles-input');renderTags(state.mustSkills,'must-wrap','must-input');renderTags(state.niceSkills,'nice-wrap','nice-input');renderTags(state.customRegions,'region-custom-wrap','region-custom-input');
   document.querySelectorAll('#region-chips .chip').forEach(chip=>chip.classList.toggle('selected',state.regions.includes(chip.dataset.region)));
   document.querySelectorAll('#skill-chips .chip').forEach(chip=>chip.classList.toggle('selected',[...state.mustSkills,...state.niceSkills].includes(chip.dataset.skill)));
   trackEvent('popular_search_used',p.titles[0]+'_'+p.region);
@@ -1219,46 +1055,26 @@ function runPopular(p){
 // ── STICKY BAR ──
 (function(){
   if(sessionStorage.getItem('stickyBarDismissed')) return;
-  setTimeout(function(){
-    const bar=document.getElementById('sticky-bar');
-    if(bar) bar.classList.add('visible');
-  }, 3000);
+  setTimeout(function(){const bar=document.getElementById('sticky-bar');if(bar)bar.classList.add('visible');},3000);
 })();
-
 function closeStickyBar(){
   const bar=document.getElementById('sticky-bar');
   if(bar){bar.classList.remove('visible');setTimeout(()=>bar.style.display='none',500);}
   sessionStorage.setItem('stickyBarDismissed','1');
 }
-
 function openStickyModal(){
   closeStickyBar();
-  openModal();
+  // Open modal with empty context since no generate has happened yet
+  openModal({titles:[],regions:[],mustSkills:[],niceSkills:[]});
 }
 
 // ── FAQ ACCORDION ──
 function toggleFaq(idx){
-  const item=document.getElementById('faq-'+idx);
-  const body=document.getElementById('faq-body-'+idx);
-  if(!item||!body) return;
+  const item=document.getElementById('faq-'+idx);const body=document.getElementById('faq-body-'+idx);
+  if(!item||!body)return;
   const isOpen=item.classList.contains('open');
-  if(isOpen){
-    body.style.maxHeight=body.scrollHeight+'px';
-    requestAnimationFrame(()=>{body.style.maxHeight='0';body.style.paddingTop='0';body.style.paddingBottom='0';});
-    item.classList.remove('open');
-  } else {
-    item.classList.add('open');
-    body.style.maxHeight='0';
-    body.style.paddingTop='';
-    body.style.paddingBottom='';
-    requestAnimationFrame(()=>{
-      body.style.maxHeight=body.scrollHeight+40+'px';
-    });
-    body.addEventListener('transitionend',function handler(){
-      if(item.classList.contains('open')) body.style.maxHeight='none';
-      body.removeEventListener('transitionend',handler);
-    });
-  }
+  if(isOpen){body.style.maxHeight=body.scrollHeight+'px';requestAnimationFrame(()=>{body.style.maxHeight='0';body.style.paddingTop='0';body.style.paddingBottom='0';});item.classList.remove('open');}
+  else{item.classList.add('open');body.style.maxHeight='0';body.style.paddingTop='';body.style.paddingBottom='';requestAnimationFrame(()=>{body.style.maxHeight=body.scrollHeight+40+'px';});body.addEventListener('transitionend',function handler(){if(item.classList.contains('open'))body.style.maxHeight='none';body.removeEventListener('transitionend',handler);});}
   trackEvent('faq_toggle','faq_'+idx+'_'+(isOpen?'close':'open'));
 }
 </script>
