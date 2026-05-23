@@ -823,8 +823,8 @@ function logToSourcingVault(){
 
 function switchTab(id,btn){trackEvent("tab_switch",id);document.querySelectorAll('.output-tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));btn.classList.add('active');document.getElementById('tab-'+id).classList.add('active');}
 function copyString(id){navigator.clipboard.writeText(plain[id]||'').then(()=>{showToast('✓ Copied to clipboard!');trackEvent('copy_string',id);});}
-function openLinkedIn(){trackEvent('open_linkedin_search',plain.li.slice(0,80));window.open('https://www.linkedin.com/search/results/people/?keywords='+encodeURIComponent(plain.li),'_blank');}
-function openGoogle(){trackEvent('open_google_xray',plain.gx.slice(0,80));window.open('https://www.google.com/search?q='+encodeURIComponent(plain.gx),'_blank');}
+function openLinkedIn(){trackEvent('open_linkedin_search',plain.li.slice(0,80));window.open('https://www.linkedin.com/search/results/jobs/?keywords='+encodeURIComponent(plain.li),'_blank');}
+function openGoogle(){trackEvent('open_google_xray',plain.gx.slice(0,80));window.open('https://www.google.com/search?q='+encodeURIComponent(plain.li+' jobs'),'_blank');}
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
 // ── ALGORITHM STRENGTH METER ──
 // Scoring rewards specificity — targeted > voluminous
