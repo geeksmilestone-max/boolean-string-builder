@@ -674,7 +674,7 @@ input::placeholder { color: var(--muted); }
         <span class="modal-context-text" id="modalContextText"></span>
       </div>
       <div class="modal-title" id="modalTitle">Your Search String Is Ready</div>
-      <p class="modal-sub" id="modalSub">Want 50 pre-built strings for roles just like this — ready to paste into LinkedIn?</p>
+      <p class="modal-sub" id="modalSub">Want 10 pre-built strings for roles just like this — ready to paste into LinkedIn?</p>
       <div class="modal-urgency" id="modalUrgency" style="display:none">
         <span class="modal-urgency-dot"></span>
         <span id="modalUrgencyText"></span>
@@ -783,9 +783,9 @@ function generateStrings(){
 
   generateCount++;
   // Show modal on first generate — only if user hasn't submitted (localStorage) or dismissed this session (sessionStorage)
-  if(localStorage.getItem('emailCaptured')==='1')localStorage.setItem('popupSubmitted','1'); // migrate old key
-  const alreadySubmitted=localStorage.getItem('popupSubmitted')==='1';
-  const dismissedThisSession=sessionStorage.getItem('popupDismissed')==='1';
+  if(localStorage.getItem('emailCaptured')==='1')localStorage.setItem('popupSubmitted','1');
+const alreadySubmitted=localStorage.getItem('popupSubmitted')==='1';
+const dismissedThisSession=sessionStorage.getItem('popupDismissed')==='1';
   if(generateCount===1&&!alreadySubmitted&&!dismissedThisSession){
     const ctx={
       titles:[...state.titles],
@@ -938,28 +938,28 @@ function buildModalContext(ctx){
   if(primaryRole&&primaryRegion){
     icon='🎯';
     title=`Your <span class="modal-highlight">${esc(primaryRole)}</span> search in <span class="modal-highlight">${esc(primaryRegion)}</span> is live.`;
-    sub=`Recruiters in ${esc(primaryRegion)} are using Boolean every day. Get 50 pre-built strings for roles like ${esc(primaryRole)} — and start finding hidden jobs they haven't posted yet.`;
+    sub=`Recruiters in ${esc(primaryRegion)} are using Boolean every day. Get 10 pre-built strings for roles like ${esc(primaryRole)} — and start finding hidden jobs they haven't posted yet.`;
     contextLine=`String built for <strong>${t.map(esc).join(', ')}</strong> · ${r.map(esc).join(', ')}.`;
     urgencyText=`Most ${esc(primaryRole)} jobs in ${esc(primaryRegion)} are never publicly posted.`;
     value1=`Pre-built strings for ${esc(primaryRole)} roles in ${esc(primaryRegion)}`;
   } else if(primaryRole){
     icon='🎯';
     title=`Your <span class="modal-highlight">${esc(primaryRole)}</span> search string is ready.`;
-    sub=`Hiring managers search for ${esc(primaryRole)} profiles every day using Boolean. Get 50 ready-made strings for similar roles and find the jobs that never make it to job boards.`;
+    sub=`Hiring managers search for ${esc(primaryRole)} profiles every day using Boolean. Get 10 ready-made strings for similar roles and find the jobs that never make it to job boards.`;
     contextLine=`String built around <strong>${t.map(esc).join(' / ')}</strong>${m.length?` with ${m.map(esc).join(', ')}`:''}.`;
     urgencyText=`Up to 70% of ${esc(primaryRole)} roles are filled before they go live.`;
     value1=`50 strings including ${esc(primaryRole)} and related titles`;
   } else if(primaryRegion){
     icon='📍';
     title=`Your <span class="modal-highlight">${esc(primaryRegion)}</span> job search is ready.`;
-    sub=`The ${esc(primaryRegion)} job market moves fast. Get 50 Boolean templates for the most in-demand roles in the region — so you never miss an opportunity.`;
+    sub=`The ${esc(primaryRegion)} job market moves fast. Get 10 Boolean templates for the most in-demand roles in the region — so you never miss an opportunity.`;
     contextLine=`Search targeting <strong>${r.map(esc).join(', ')}</strong>.`;
     urgencyText=`${esc(primaryRegion)} has one of the highest LinkedIn recruiter densities globally.`;
     value1=`Templates focused on ${esc(primaryRegion)} job markets`;
   } else {
     icon='🎁';
     title='Your Boolean string is ready.';
-    sub='Want 50 pre-built strings for the most in-demand roles — ready to paste into LinkedIn?';
+    sub='Want 10 pre-built strings for the most in-demand roles — ready to paste into LinkedIn?';
     contextLine=null;urgencyText=null;
     value1='Strings for Tech, Finance, HR, Marketing &amp; more';
   }
