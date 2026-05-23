@@ -350,6 +350,29 @@ input::placeholder { color: var(--muted); }
 .popular-card-skill.must{color:#a0bffa;border-color:rgba(79,142,247,0.3);background:rgba(79,142,247,0.06)}
 .popular-card-cta{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;color:var(--muted);display:flex;align-items:center;gap:4px;transition:color 0.2s}
 .popular-card:hover .popular-card-cta{color:var(--accent3)}
+/* ── ALGORITHM STRENGTH METER ── */
+.meter-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;margin-bottom:20px;animation:fadeUp 0.5s ease both;transition:border-color 0.3s}
+.meter-wrap.score-high{border-color:rgba(56,232,181,0.3)}
+.meter-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.meter-label{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted2)}
+.meter-score-wrap{display:flex;align-items:center;gap:8px}
+.meter-score{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--text);line-height:1;transition:color 0.4s}
+.meter-score.amber{color:#f6a84f}
+.meter-score.blue{color:#4f8ef7}
+.meter-score.teal{color:#38e8b5}
+.meter-pct{font-family:'Syne',sans-serif;font-size:13px;font-weight:600;color:var(--muted);margin-top:3px}
+.meter-track{width:100%;height:6px;background:var(--surface2);border-radius:100px;overflow:hidden;margin-bottom:10px}
+.meter-fill{height:100%;border-radius:100px;width:0%;transition:width 0.5s cubic-bezier(0.4,0,0.2,1),background 0.5s ease}
+.meter-fill.amber{background:linear-gradient(90deg,#f6a84f,#f6c44f)}
+.meter-fill.blue{background:linear-gradient(90deg,#4f8ef7,#6b9cf7)}
+.meter-fill.teal{background:linear-gradient(90deg,#4f8ef7,#38e8b5)}
+.meter-status-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.meter-status-label{font-size:12.5px;font-weight:600;transition:color 0.4s;flex-shrink:0}
+.meter-status-label.amber{color:#f6a84f}
+.meter-status-label.blue{color:#6b9cf7}
+.meter-status-label.teal{color:#38e8b5}
+.meter-nudge{font-size:12px;color:var(--muted);text-align:right;line-height:1.4;flex:1}
+
 </style>
 <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -512,6 +535,25 @@ input::placeholder { color: var(--muted); }
     <label style="margin-bottom:10px;">Quick-add popular skills</label>
     <div class="chip-group" id="skill-chips">
       <div class="chip" data-skill="Power BI">Power BI</div><div class="chip" data-skill="Excel">Excel</div><div class="chip" data-skill="SQL">SQL</div><div class="chip" data-skill="Python">Python</div><div class="chip" data-skill="Tableau">Tableau</div><div class="chip" data-skill="Data Analysis">Data Analysis</div><div class="chip" data-skill="Financial Analysis">Financial Analysis</div><div class="chip" data-skill="Accounting">Accounting</div><div class="chip" data-skill="Budgeting">Budgeting</div><div class="chip" data-skill="Forecasting">Forecasting</div><div class="chip" data-skill="Sales">Sales</div><div class="chip" data-skill="Business Development">Business Development</div><div class="chip" data-skill="CRM">CRM</div><div class="chip" data-skill="Marketing">Marketing</div><div class="chip" data-skill="Digital Marketing">Digital Marketing</div><div class="chip" data-skill="SEO">SEO</div><div class="chip" data-skill="Project Management">Project Management</div><div class="chip" data-skill="Admin">Admin</div><div class="chip" data-skill="Operations">Operations</div><div class="chip" data-skill="Civil Engineering">Civil Engineering</div><div class="chip" data-skill="AutoCAD">AutoCAD</div><div class="chip" data-skill="Software Engineer">Software Engineer</div><div class="chip" data-skill="JavaScript">JavaScript</div><div class="chip" data-skill="React">React</div><div class="chip" data-skill="Java">Java</div><div class="chip" data-skill="Customer Service">Customer Service</div><div class="chip" data-skill="Communication">Communication</div>
+    </div>
+  </div>
+
+
+  <!-- ALGORITHM STRENGTH METER -->
+  <div class="meter-wrap" id="meterWrap">
+    <div class="meter-header">
+      <span class="meter-label">Algorithm Strength</span>
+      <div class="meter-score-wrap">
+        <span class="meter-score amber" id="meterScore">0</span>
+        <span class="meter-pct">/ 100</span>
+      </div>
+    </div>
+    <div class="meter-track">
+      <div class="meter-fill amber" id="meterFill"></div>
+    </div>
+    <div class="meter-status-row">
+      <span class="meter-status-label amber" id="meterStatus">&#x26A0;&#xFE0F; Add a job title to get started</span>
+      <span class="meter-nudge" id="meterNudge"></span>
     </div>
   </div>
 
@@ -687,6 +729,7 @@ window.addEventListener("pagehide", trackSessionEnd);
 const state={titles:[],titleOp:"OR",regions:[],customRegions:[],mustSkills:[],niceSkills:[]};
 const plain={li:"",gx:""};
 let generateCount=0;
+let currentScore=0; // tracks live meter score for submitEmail to read
 
 // TAG INPUT
 function setupTagInput(wrapId,inputId,arr){
@@ -698,8 +741,8 @@ function setupTagInput(wrapId,inputId,arr){
   });
   inp.addEventListener('blur',()=>{if(inp.value.trim())addTag(inp.value.trim(),arr,wrapId,inputId);});
 }
-function addTag(val,arr,wrapId,inputId){const c=val.trim();if(!c||arr.includes(c))return;arr.push(c);renderTags(arr,wrapId,inputId);}
-function removeTag(idx,arr,wrapId,inputId){arr.splice(idx,1);renderTags(arr,wrapId,inputId);}
+function addTag(val,arr,wrapId,inputId){const c=val.trim();if(!c||arr.includes(c))return;arr.push(c);renderTags(arr,wrapId,inputId);updateMeter();}
+function removeTag(idx,arr,wrapId,inputId){arr.splice(idx,1);renderTags(arr,wrapId,inputId);updateMeter();}
 function renderTags(arr,wrapId,inputId){
   const wrap=document.getElementById(wrapId),inp=document.getElementById(inputId);
   wrap.innerHTML='';
@@ -708,9 +751,9 @@ function renderTags(arr,wrapId,inputId){
 }
 function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 
-document.querySelectorAll('#title-op-group .toggle-btn').forEach(btn=>{btn.addEventListener('click',()=>{document.querySelectorAll('#title-op-group .toggle-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');state.titleOp=btn.dataset.op;});});
-document.querySelectorAll('#region-chips .chip').forEach(chip=>{chip.addEventListener('click',()=>{chip.classList.toggle('selected');const r=chip.dataset.region;if(chip.classList.contains('selected'))state.regions.push(r);else state.regions=state.regions.filter(x=>x!==r);});});
-document.querySelectorAll('#skill-chips .chip').forEach(chip=>{chip.addEventListener('click',()=>{if(chip.classList.contains('selected')){chip.classList.remove('selected');const sk=chip.dataset.skill;state.mustSkills=state.mustSkills.filter(x=>x!==sk);state.niceSkills=state.niceSkills.filter(x=>x!==sk);renderTags(state.mustSkills,'must-wrap','must-input');renderTags(state.niceSkills,'nice-wrap','nice-input');}else{chip.classList.add('selected');addTag(chip.dataset.skill,state.niceSkills,'nice-wrap','nice-input');}});});
+document.querySelectorAll('#title-op-group .toggle-btn').forEach(btn=>{btn.addEventListener('click',()=>{document.querySelectorAll('#title-op-group .toggle-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');state.titleOp=btn.dataset.op;updateMeter();});});
+document.querySelectorAll('#region-chips .chip').forEach(chip=>{chip.addEventListener('click',()=>{chip.classList.toggle('selected');const r=chip.dataset.region;if(chip.classList.contains('selected'))state.regions.push(r);else state.regions=state.regions.filter(x=>x!==r);updateMeter();});});
+document.querySelectorAll('#skill-chips .chip').forEach(chip=>{chip.addEventListener('click',()=>{if(chip.classList.contains('selected')){chip.classList.remove('selected');const sk=chip.dataset.skill;state.mustSkills=state.mustSkills.filter(x=>x!==sk);state.niceSkills=state.niceSkills.filter(x=>x!==sk);renderTags(state.mustSkills,'must-wrap','must-input');renderTags(state.niceSkills,'nice-wrap','nice-input');updateMeter();}else{chip.classList.add('selected');addTag(chip.dataset.skill,state.niceSkills,'nice-wrap','nice-input');}});});
 
 function quoted(s){return s.includes(' ')?`"${s}"`:s;}
 function buildTitleClause(){if(!state.titles.length)return'';const p=state.titles.map(quoted);return p.length>1?`(${p.join(` ${state.titleOp} `)})`:p[0];}
@@ -734,6 +777,10 @@ function generateStrings(){
   const sec=document.getElementById('output-section');sec.classList.add('visible');
   setTimeout(()=>sec.scrollIntoView({behavior:'smooth',block:'start'}),100);
   saveRecentSearch();
+
+  // Write to sourcing_vault — fire and forget, silent background write
+  logToSourcingVault();
+
   generateCount++;
   // Show modal on first generate — only if user hasn't submitted (localStorage) or dismissed this session (sessionStorage)
   if(localStorage.getItem('emailCaptured')==='1')localStorage.setItem('popupSubmitted','1');
@@ -749,11 +796,94 @@ const dismissedThisSession=sessionStorage.getItem('popupDismissed')==='1';
     setTimeout(()=>openModal(ctx),1800);
   }
 }
+
+// ── SOURCING VAULT — upsert on every generate click ──
+// Uses Supabase merge-duplicates to increment generation_count on existing title+region
+function logToSourcingVault(){
+  const jobTitle=state.titles[0]||null;
+  const region=[...state.regions,...state.customRegions][0]||null;
+  if(!jobTitle||!region)return; // only log when both present — keeps data clean
+  fetch(SUPABASE_URL+'/rest/v1/sourcing_vault',{
+    method:'POST',
+    headers:{
+      'Content-Type':'application/json',
+      'apikey':SUPABASE_KEY,
+      'Authorization':'Bearer '+SUPABASE_KEY,
+      'Prefer':'resolution=merge-duplicates,return=minimal'
+    },
+    body:JSON.stringify({
+      job_title:jobTitle,
+      region:region,
+      must_skills:state.mustSkills,
+      generation_count:1,
+      last_generated_at:new Date().toISOString()
+    })
+  }).catch(()=>{}); // silent fail — never interrupts the user
+}
+
 function switchTab(id,btn){trackEvent("tab_switch",id);document.querySelectorAll('.output-tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));btn.classList.add('active');document.getElementById('tab-'+id).classList.add('active');}
 function copyString(id){navigator.clipboard.writeText(plain[id]||'').then(()=>{showToast('✓ Copied to clipboard!');trackEvent('copy_string',id);});}
-function openLinkedIn(){trackEvent('open_linkedin_search',plain.li.slice(0,80));window.open('https://www.linkedin.com/search/results/people/?keywords='+encodeURIComponent(plain.li),'_blank');}
-function openGoogle(){trackEvent('open_google_xray',plain.gx.slice(0,80));window.open('https://www.google.com/search?q='+encodeURIComponent(plain.gx),'_blank');}
+function openLinkedIn(){trackEvent('open_linkedin_search',plain.li.slice(0,80));window.open('https://www.linkedin.com/search/results/jobs/?keywords='+encodeURIComponent(plain.li),'_blank');}
+function openGoogle(){trackEvent('open_google_xray',plain.gx.slice(0,80));window.open('https://www.google.com/search?q='+encodeURIComponent(plain.li+' jobs'),'_blank');}
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
+// ── ALGORITHM STRENGTH METER ──
+// Scoring rewards specificity — targeted > voluminous
+function calcScore(){
+  let s=0;
+  const t=state.titles,r=[...state.regions,...state.customRegions],m=state.mustSkills,n=state.niceSkills;
+  if(t.length>=1) s+=15;           // has at least one title
+  if(t.length>=2) s+=10;           // second title variant — good OR array
+  if(r.length>=1) s+=15;           // region selected
+  if(state.customRegions.length>=1) s+=5; // custom region = extra specificity
+  if(m.length>=1) s+=10;           // at least one must-have
+  if(m.length>=3) s-=5;            // penalty: over-constraining hurts quality
+  if(n.length>=3) s+=20;           // rich nice-to-have array
+  if(n.length>=5) s+=10;           // power user bonus
+  if(state.titleOp==='OR') s+=5;   // correct Boolean practice
+  if(m.length<=2) s+=10;           // restraint reward
+  return Math.min(100,Math.max(0,s));
+}
+
+function updateMeter(){
+  const score=calcScore();
+  currentScore=score;
+  const fill=document.getElementById('meterFill');
+  const scoreEl=document.getElementById('meterScore');
+  const statusEl=document.getElementById('meterStatus');
+  const nudgeEl=document.getElementById('meterNudge');
+  const wrap=document.getElementById('meterWrap');
+  if(!fill||!scoreEl||!statusEl||!nudgeEl||!wrap)return;
+
+  // Colour tier
+  let tier;
+  if(score<=30)tier='amber';
+  else if(score<=79)tier='blue';
+  else tier='teal';
+
+  fill.style.width=score+'%';
+  fill.className='meter-fill '+tier;
+  scoreEl.textContent=score;
+  scoreEl.className='meter-score '+tier;
+
+  // Dynamic status label and actionable nudge
+  let statusText,nudgeText='';
+  const r=[...state.regions,...state.customRegions];
+  const n=state.niceSkills;
+  if(score===0){statusText='\u26A0\uFE0F Add a job title to get started';}
+  else if(score<=30){statusText='\u26A0\uFE0F Too broad — add more detail';nudgeText=!r.length?'Add a region to jump to 40%+':n.length<3?'Add 3+ nice-to-have skills to reach 55%+':'';}
+  else if(score<=55){statusText='\uD83D\uDD0D Getting there — keep going';nudgeText=state.titles.length<2?'Add a second title variant to reach 70%+':n.length<3?'Add 3 nice-to-have skills to reach 65%+':'';}
+  else if(score<=79){statusText='\uD83D\uDCA1 Good string — a few tweaks will sharpen it';nudgeText=n.length<5?'Add more nice-to-have skills for a power score':state.titles.length<2?'Add a second title variant to hit 85%+':'';}
+  else if(score<=94){statusText='\u2705 Strong search — you\'ll surface hidden roles';nudgeText=score<95?'Almost there — one more skill or title variant hits 95+':'';}
+  else{statusText='\uD83C\uDFAF Precision target — ready for LinkedIn & Google';nudgeText='';}
+
+  statusEl.textContent=statusText;
+  statusEl.className='meter-status-label '+tier;
+  nudgeEl.textContent=nudgeText;
+  if(tier==='teal')wrap.classList.add('score-high');
+  else wrap.classList.remove('score-high');
+}
+
+
 
 // ── RECENT SEARCHES ──
 const RS_KEY='tdt_recent_searches',RS_MAX=3,RS_TTL=7*24*60*60*1000;
@@ -791,6 +921,7 @@ function restoreSearch(s){
   document.querySelectorAll('#title-op-group .toggle-btn').forEach(btn=>btn.classList.toggle('active',btn.dataset.op===state.titleOp));
   document.querySelectorAll('#region-chips .chip').forEach(chip=>chip.classList.toggle('selected',state.regions.includes(chip.dataset.region)));
   document.getElementById('recentSearchesBody').classList.remove('open');document.getElementById('recentChevron').classList.remove('open');
+  updateMeter();
   showToast('✓ Search restored — hit Generate when ready');
   document.getElementById('card-titles').scrollIntoView({behavior:'smooth',block:'start'});
 }
@@ -886,7 +1017,23 @@ async function submitEmail(){
   try{
     const res=await fetch(SUPABASE_URL+'/rest/v1/email_captures',{method:'POST',headers:{'Content-Type':'application/json','apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY,'Prefer':'return=minimal'},body:JSON.stringify({name,email,source:'boolean-tool'})});
     if(res.ok||res.status===201){
-      // Submitted — never show popup again on any device/visit
+      // Write 2: boolean_requests — full context snapshot for personalised curation
+      fetch(SUPABASE_URL+'/rest/v1/boolean_requests',{
+        method:'POST',
+        headers:{'Content-Type':'application/json','apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY,'Prefer':'return=minimal'},
+        body:JSON.stringify({
+          name:name||null,
+          email:email,
+          titles:state.titles,
+          regions:[...state.regions,...state.customRegions],
+          must_skills:state.mustSkills,
+          nice_skills:state.niceSkills,
+          score_at_submit:currentScore,
+          trigger_source:'generate_button',
+          boolean_string:plain.li||null,
+          source:'boolean-tool'
+        })
+      }).catch(()=>{}); // silent fail — never blocks user experience
       localStorage.setItem('popupSubmitted','1');
       sessionStorage.removeItem('popupDismissed');
       trackEvent('email_submitted','boolean-tool');
@@ -984,6 +1131,7 @@ function applyNaviExtraction(extracted){
   renderTags(state.titles,'titles-wrap','titles-input');renderTags(state.customRegions,'region-custom-wrap','region-custom-input');renderTags(state.mustSkills,'must-wrap','must-input');renderTags(state.niceSkills,'nice-wrap','nice-input');
   document.querySelectorAll('#region-chips .chip').forEach(chip=>chip.classList.toggle('selected',state.regions.includes(chip.dataset.region)));
   naviState='chatting';
+  updateMeter();
   trackEvent('bot_interaction',[...state.titles,...state.regions,...state.customRegions,...state.mustSkills,...state.niceSkills].join('|').slice(0,200));
   naviAddMsg('bot','Done, '+naviUserName+'! 🎉 I\'ve filled in all your details. Hit ⚡ Generate Boolean Strings whenever you\'re ready!');
   setTimeout(()=>{closeNavi();document.getElementById('card-titles').scrollIntoView({behavior:'smooth',block:'start'});showToast('✓ Navi filled in your search — hit Generate!');},1800);
@@ -999,6 +1147,7 @@ const STEPS=[
   {id:'must-wrap',title:'Step 3 — Must-Have Skills',body:'Skills here must appear in every result. Keep it to <strong>1–2 maximum</strong> or your results become too narrow.',hint:'Example: add <em>SQL</em> for data roles',pos:'below'},
   {id:'nice-wrap',title:'Nice-to-Have Skills',body:'Joined with OR — a job only needs to mention <strong>one</strong> of them. Add all the tools and technologies you know.',hint:'Example: <em>Power BI</em>, <em>Tableau</em>, <em>Excel</em> — any one counts',pos:'below'},
   {id:'skill-chips',title:'Quick-Add Chips',body:'Click any chip to instantly add it to your nice-to-have skills. Click again to remove.',hint:'Try clicking <em>Power BI</em>',pos:'above'},
+  {id:'meterWrap',title:'Algorithm Strength Meter',body:'This meter scores your search from 0–100 in real time. The higher the score, the more targeted your Boolean string — and the better your chances of surfacing hidden roles.',hint:'Try adding a second job title or 3+ skills to push the score up',pos:'above'},
   {id:'gen-wrap-anchor',title:'Generate Your Strings ⚡',body:'Hit this button for two ready-to-use strings instantly — LinkedIn and Google X-Ray, colour-coded so you can read the logic at a glance.',hint:'After generating, use Copy or the launch buttons to search immediately',pos:'above',last:true}
 ];
 let tourStep=-1;
@@ -1038,6 +1187,7 @@ setupTagInput('titles-wrap','titles-input',state.titles);
 setupTagInput('must-wrap','must-input',state.mustSkills);
 setupTagInput('nice-wrap','nice-input',state.niceSkills);
 setupTagInput('region-custom-wrap','region-custom-input',state.customRegions);
+updateMeter(); // initialise meter at zero on page load
 
 // ── POPULAR SEARCHES ──
 function runPopular(p){
@@ -1049,6 +1199,7 @@ function runPopular(p){
   renderTags(state.titles,'titles-wrap','titles-input');renderTags(state.mustSkills,'must-wrap','must-input');renderTags(state.niceSkills,'nice-wrap','nice-input');renderTags(state.customRegions,'region-custom-wrap','region-custom-input');
   document.querySelectorAll('#region-chips .chip').forEach(chip=>chip.classList.toggle('selected',state.regions.includes(chip.dataset.region)));
   document.querySelectorAll('#skill-chips .chip').forEach(chip=>chip.classList.toggle('selected',[...state.mustSkills,...state.niceSkills].includes(chip.dataset.skill)));
+  updateMeter();
   trackEvent('popular_search_used',p.titles[0]+'_'+p.region);
   setTimeout(()=>{generateStrings();document.getElementById('card-titles').scrollIntoView({behavior:'smooth',block:'start'});},150);
 }
