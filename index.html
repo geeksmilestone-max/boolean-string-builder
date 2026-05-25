@@ -281,6 +281,9 @@ input::placeholder { color: var(--muted); }
 .modal-success-icon{font-size:40px;margin-bottom:12px}
 .modal-success-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:var(--text);margin-bottom:8px}
 .modal-success-sub{font-size:13.5px;color:var(--muted2);line-height:1.6}
+.modal-skip{display:block;text-align:center;font-size:11px;color:var(--muted);margin-top:10px;cursor:pointer;background:none;border:none;width:100%;padding:4px;transition:color 0.2s;letter-spacing:0.01em}
+.modal-skip:hover{color:var(--muted2)}
+.modal-close.visible{opacity:1;pointer-events:all;transition:opacity 0.4s ease}
 
 /* ── STICKY BAR ── */
 #sticky-bar{
@@ -917,7 +920,7 @@ function logToSourcingVault(){
 function switchTab(id,btn){trackEvent("tab_switch",id);document.querySelectorAll(".output-tab").forEach(function(t){t.classList.remove("active");});document.querySelectorAll(".tab-pane").forEach(function(p){p.classList.remove("active");});btn.classList.add("active");document.getElementById("tab-"+id).classList.add("active");}
 function copyString(id){navigator.clipboard.writeText(plain[id]||"").then(function(){showToast("\u2713 Copied to clipboard!");trackEvent("copy_string",id);});}
 function openLinkedIn(){var q=plain.li||state.titles.join(" OR ");trackEvent("open_linkedin_search",q.slice(0,80));window.open("https://www.linkedin.com/search/results/jobs/?keywords="+encodeURIComponent(q),"_blank");}
-function openGoogle(){var q=plain.li||state.titles.join(" OR ");trackEvent("open_google_xray",plain.gx.slice(0,80));window.open("https://www.google.com/search?q="+encodeURIComponent(q+" jobs"),"_blank");}
+function openGoogle(){var q=plain.gx||plain.li||state.titles.join(" OR ");trackEvent("open_google_xray",q.slice(0,80));window.open("https://www.google.com/search?q="+encodeURIComponent(q),"_blank");}
 function showToast(msg){var t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");setTimeout(function(){t.classList.remove("show");},2500);}
 
 // ── STRENGTH METER ──
