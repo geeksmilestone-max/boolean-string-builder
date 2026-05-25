@@ -414,56 +414,6 @@ input::placeholder { color: var(--muted); }
 .modal-urgency-dot{width:6px;height:6px;border-radius:50%;background:#f6a84f;animation:pulse 2s infinite;flex-shrink:0}
 .modal-title .modal-highlight{background:linear-gradient(135deg,#38e8b5,#4f8ef7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 
-/* ── LIVE JOBS CARD ── */
-.live-jobs-section{display:none;margin-top:20px;animation:fadeUp 0.4s ease both}
-.live-jobs-section.visible{display:block}
-.live-jobs-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px}
-.live-jobs-title-row{display:flex;align-items:center;gap:10px}
-.live-jobs-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(56,232,181,0.08);border:1px solid rgba(56,232,181,0.2);color:var(--accent3);font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:4px 12px;border-radius:100px}
-.live-jobs-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent3);animation:pulse 2s infinite;flex-shrink:0}
-.live-jobs-count{font-family:'Syne',sans-serif;font-size:12px;font-weight:600;color:var(--muted);white-space:nowrap}
-/* Job rows */
-.job-rows{display:flex;flex-direction:column;gap:10px;margin-bottom:12px}
-.job-row{display:flex;align-items:center;gap:14px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;transition:border-color 0.2s,transform 0.15s}
-.job-row:hover{border-color:rgba(56,232,181,0.3);transform:translateX(2px)}
-.job-logo{width:36px;height:36px;border-radius:8px;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;overflow:hidden}
-.job-logo img{width:100%;height:100%;object-fit:contain;border-radius:6px}
-.job-info{flex:1;min-width:0}
-.job-title{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:3px}
-.job-meta{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-.job-meta-dot{width:3px;height:3px;border-radius:50%;background:var(--muted);flex-shrink:0}
-.job-apply{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;color:var(--accent3);white-space:nowrap;flex-shrink:0;text-decoration:none;opacity:0.7;transition:opacity 0.2s}
-.job-row:hover .job-apply{opacity:1}
-/* Gate — blurred rows */
-.job-gate{position:relative;border-radius:var(--radius-sm);overflow:hidden;margin-bottom:12px}
-.job-gate-blur{display:flex;flex-direction:column;gap:10px;filter:blur(4px);pointer-events:none;user-select:none;opacity:0.55}
-.job-gate-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:linear-gradient(to bottom,rgba(7,9,15,0.1),rgba(7,9,15,0.85));backdrop-filter:blur(1px)}
-.job-gate-label{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--text);text-align:center;line-height:1.4}
-.job-gate-label span{color:var(--accent3)}
-.job-gate-cta{background:linear-gradient(135deg,var(--accent3),#2fb89a);color:#05150f;font-family:'Syne',sans-serif;font-size:12px;font-weight:800;padding:9px 22px;border-radius:100px;border:none;cursor:pointer;letter-spacing:0.02em;transition:all 0.2s;box-shadow:0 4px 16px rgba(56,232,181,0.3)}
-.job-gate-cta:hover{filter:brightness(1.08);transform:translateY(-1px)}
-/* Skeleton loader */
-.job-skeleton{display:flex;flex-direction:column;gap:10px}
-.job-skeleton-row{display:flex;align-items:center;gap:14px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px}
-.skeleton-logo{width:36px;height:36px;border-radius:8px;background:var(--border2);animation:skeletonPulse 1.4s ease infinite}
-.skeleton-lines{flex:1;display:flex;flex-direction:column;gap:7px}
-.skeleton-line{height:10px;border-radius:100px;background:var(--border2);animation:skeletonPulse 1.4s ease infinite}
-.skeleton-line.short{width:55%}
-.skeleton-line:nth-child(2){animation-delay:0.15s}
-@keyframes skeletonPulse{0%,100%{opacity:0.4}50%{opacity:0.9}}
-/* Empty / error state */
-.jobs-empty{text-align:center;padding:20px 16px;color:var(--muted);font-size:13px;line-height:1.6}
-.jobs-empty strong{color:var(--muted2)}
-/* Trigger button */
-.btn-find-jobs{background:linear-gradient(135deg,rgba(56,232,181,0.12),rgba(79,142,247,0.12));border:1px solid rgba(56,232,181,0.3);color:var(--accent3);font-family:'Syne',sans-serif;font-size:13px;font-weight:700;padding:10px 20px;border-radius:var(--radius-sm);cursor:pointer;transition:all 0.2s;display:inline-flex;align-items:center;gap:7px;letter-spacing:0.01em}
-.btn-find-jobs:hover{background:linear-gradient(135deg,rgba(56,232,181,0.2),rgba(79,142,247,0.18));border-color:rgba(56,232,181,0.5);transform:translateY(-1px)}
-.btn-find-jobs:disabled{opacity:0.5;cursor:not-allowed;transform:none}
-.btn-find-jobs-spinner{width:13px;height:13px;border:2px solid rgba(56,232,181,0.3);border-top-color:var(--accent3);border-radius:50%;animation:spin 0.7s linear infinite;display:none}
-.btn-find-jobs.loading .btn-find-jobs-spinner{display:block}
-.btn-find-jobs.loading .btn-find-jobs-icon{display:none}
-@keyframes spin{to{transform:rotate(360deg)}}
-@media(max-width:560px){.job-title{font-size:12px}.job-meta{font-size:10px}.job-apply{display:none}}
-
 </style>
 <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -673,11 +623,6 @@ input::placeholder { color: var(--muted); }
       <div class="action-row">
         <button class="btn btn-primary" onclick="copyString('li')">📋 Copy String</button>
         <button class="btn btn-ghost" onclick="openLinkedIn()">↗ Open LinkedIn Search</button>
-        <button class="btn btn-find-jobs" id="btnFindJobs" onclick="findLiveJobs()" disabled>
-          <span class="btn-find-jobs-icon">🔍</span>
-          <span class="btn-find-jobs-spinner"></span>
-          <span id="btnFindJobsLabel">Find Live Jobs</span>
-        </button>
       </div>
     </div>
     <div class="tab-pane" id="tab-gx">
@@ -686,33 +631,6 @@ input::placeholder { color: var(--muted); }
         <button class="btn btn-primary" onclick="copyString('gx')">📋 Copy String</button>
         <button class="btn btn-ghost" onclick="openGoogle()">↗ Open Google Search</button>
       </div>
-    </div>
-  </div>
-
-  <!-- ── LIVE JOBS CARD ── -->
-  <div class="live-jobs-section card" id="liveJobsSection">
-    <div class="live-jobs-header">
-      <div class="live-jobs-title-row">
-        <div class="live-jobs-badge">Live Matches</div>
-        <span class="live-jobs-count" id="liveJobsCount"></span>
-      </div>
-    </div>
-    <div class="job-skeleton" id="jobSkeleton">
-      <div class="job-skeleton-row"><div class="skeleton-logo"></div><div class="skeleton-lines"><div class="skeleton-line"></div><div class="skeleton-line short"></div></div></div>
-      <div class="job-skeleton-row"><div class="skeleton-logo"></div><div class="skeleton-lines"><div class="skeleton-line"></div><div class="skeleton-line short"></div></div></div>
-      <div class="job-skeleton-row"><div class="skeleton-logo"></div><div class="skeleton-lines"><div class="skeleton-line"></div><div class="skeleton-line short"></div></div></div>
-    </div>
-    <div class="job-rows" id="jobRows" style="display:none"></div>
-    <div class="job-gate" id="jobGate" style="display:none">
-      <div class="job-gate-blur" id="jobGateBlur"></div>
-      <div class="job-gate-overlay">
-        <div class="job-gate-label">+ <span id="jobGateCount">3</span> more <span>live roles</span> found<br><small style="font-weight:400;color:var(--muted);font-size:12px">Drop your email to unlock them</small></div>
-        <button class="job-gate-cta" onclick="openModal(liveJobsModalCtx)">🔓 Unlock All Roles</button>
-      </div>
-    </div>
-    <div class="jobs-empty" id="jobsEmpty" style="display:none">
-      <strong>No live roles found right now</strong><br>
-      Try searching directly on <a href="javascript:void(0)" onclick="openLinkedIn()" style="color:var(--accent)">LinkedIn</a> or <a href="javascript:void(0)" onclick="openGoogle()" style="color:var(--accent)">Google</a> with your string above.
     </div>
   </div>
 
@@ -889,16 +807,6 @@ function generateStrings(){
   saveRecentSearch();
   logToSourcingVault();
 
-  // Enable Find Live Jobs button; reset cache if context changed
-  var btn=document.getElementById("btnFindJobs");
-  if(btn){btn.disabled=false;}
-  var newCtxKey=getLiveJobsContext().key;
-  if(liveJobsLastContext!==null&&newCtxKey!==liveJobsLastContext){
-    liveJobsCache=null;
-    var ljs=document.getElementById("liveJobsSection");
-    if(ljs)ljs.classList.remove("visible");
-  }
-
   generateCount++;
   if(localStorage.getItem("emailCaptured")==="1")localStorage.setItem("popupSubmitted","1");
   var alreadySubmitted=localStorage.getItem("popupSubmitted")==="1";
@@ -951,99 +859,6 @@ function updateMeter(){
   nudgeEl.textContent=nudgeText;
   if(tier==="teal")wrap.classList.add("score-high");else wrap.classList.remove("score-high");
 }
-
-// ── LIVE JOBS ──
-var liveJobsLastContext=null;
-var liveJobsCache=null;
-var liveJobsFetching=false;
-var liveJobsModalCtx={};
-
-function getLiveJobsContext(){
-  var title=state.titles[0]||"";
-  var region=state.regions.concat(state.customRegions)[0]||"";
-  return{title:title,region:region,key:(title+"|"+region).toLowerCase()};
-}
-
-function findLiveJobs(){
-  var ctx=getLiveJobsContext();
-  if(!ctx.title){showToast("\u26a0\ufe0f Add a job title first");return;}
-  var section=document.getElementById("liveJobsSection");
-  section.classList.add("visible");
-  setTimeout(function(){section.scrollIntoView({behavior:"smooth",block:"start"});},100);
-  if(liveJobsCache&&ctx.key===liveJobsLastContext){renderJobResults(liveJobsCache,ctx);return;}
-  if(liveJobsFetching)return;
-  liveJobsFetching=true;
-  var btn=document.getElementById("btnFindJobs"),lbl=document.getElementById("btnFindJobsLabel");
-  btn.classList.add("loading");btn.disabled=true;lbl.textContent="Searching\u2026";
-  document.getElementById("jobSkeleton").style.display="flex";
-  document.getElementById("jobRows").style.display="none";
-  document.getElementById("jobGate").style.display="none";
-  document.getElementById("jobsEmpty").style.display="none";
-  document.getElementById("liveJobsCount").textContent="";
-  trackEvent("live_jobs_fetch",ctx.title+"|"+(ctx.region||"no-region"));
-  fetch("/api/jobs?title="+encodeURIComponent(ctx.title)+"&region="+encodeURIComponent(ctx.region||""))
-    .then(function(r){if(!r.ok)throw new Error("API "+r.status);return r.json();})
-    .then(function(data){
-      liveJobsFetching=false;liveJobsLastContext=ctx.key;liveJobsCache=data;
-      renderJobResults(data,ctx);
-      btn.classList.remove("loading");btn.disabled=false;lbl.textContent="Refresh Jobs";
-    })
-    .catch(function(err){
-      liveJobsFetching=false;
-      btn.classList.remove("loading");btn.disabled=false;lbl.textContent="Find Live Jobs";
-      document.getElementById("jobSkeleton").style.display="none";
-      document.getElementById("jobsEmpty").style.display="block";
-      trackEvent("live_jobs_error",err.message||"unknown");
-    });
-}
-
-function renderJobResults(data,ctx){
-  document.getElementById("jobSkeleton").style.display="none";
-  var jobs=data.jobs||[];
-  if(!jobs.length){
-    document.getElementById("jobsEmpty").style.display="block";
-    document.getElementById("liveJobsCount").textContent="No matches found";
-    return;
-  }
-  var total=data.total_results||jobs.length;
-  document.getElementById("liveJobsCount").textContent=total+" role"+(total!==1?"s":"")+" found";
-  trackEvent("live_jobs_shown",ctx.title+"|"+jobs.length);
-  var visible=jobs.slice(0,3),gated=jobs.slice(3);
-  var rowsEl=document.getElementById("jobRows");
-  rowsEl.innerHTML="";rowsEl.style.display="flex";
-  visible.forEach(function(job){
-    var row=document.createElement("div");row.className="job-row";
-    var logo=job.company_logo?'<img src="'+escHtml(job.company_logo)+'" alt="'+escHtml(job.company||"")+'" loading="lazy" onerror="this.parentNode.textContent=\'🏢\'">':'🏢';
-    var posted=job.created?formatJobDate(job.created):"";
-    row.innerHTML='<div class="job-logo">'+logo+'</div>'
-      +'<div class="job-info"><div class="job-title">'+escHtml(job.title||"")+'</div>'
-      +'<div class="job-meta">'+(job.company?'<span>'+escHtml(job.company)+'</span><span class="job-meta-dot"></span>':'')+(job.location?'<span>'+escHtml(job.location)+'</span>':'')+(posted?'<span class="job-meta-dot"></span><span>'+posted+'</span>':'')+'</div></div>'
-      +(job.redirect_url?'<a class="job-apply" href="'+escHtml(job.redirect_url)+'" target="_blank" rel="noopener noreferrer">Apply \u2197</a>':'');
-    rowsEl.appendChild(row);
-  });
-  if(gated.length>0){
-    var gateEl=document.getElementById("jobGate"),blurEl=document.getElementById("jobGateBlur");
-    blurEl.innerHTML="";
-    gated.slice(0,3).forEach(function(job){
-      var row=document.createElement("div");row.className="job-row";
-      row.innerHTML='<div class="job-logo">🏢</div><div class="job-info"><div class="job-title">'+escHtml(job.title||"")+'</div><div class="job-meta"><span>'+escHtml(job.company||"")+'</span></div></div>';
-      blurEl.appendChild(row);
-    });
-    document.getElementById("jobGateCount").textContent=gated.length;
-    gateEl.style.display="block";
-    liveJobsModalCtx={titles:state.titles.slice(),regions:state.regions.concat(state.customRegions),mustSkills:state.mustSkills.slice(),niceSkills:state.niceSkills.slice()};
-    trackEvent("live_jobs_gate_shown",ctx.title+"|"+gated.length);
-  }
-}
-
-function formatJobDate(dateStr){
-  try{var d=new Date(dateStr),now=new Date(),days=Math.floor((now-d)/86400000);
-    if(days===0)return"Today";if(days===1)return"1d ago";if(days<7)return days+"d ago";
-    if(days<30)return Math.floor(days/7)+"w ago";return Math.floor(days/30)+"mo ago";
-  }catch(e){return"";}
-}
-function escHtml(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
-
 // ── RECENT SEARCHES ──
 var RS_KEY="tdt_recent_searches",RS_MAX=3,RS_TTL=7*24*60*60*1000;
 function getRecentSearches(){try{var raw=localStorage.getItem(RS_KEY);if(!raw)return[];var arr=JSON.parse(raw),now=Date.now();return arr.filter(function(s){return now-s.ts<RS_TTL;});}catch(e){return[];}}
