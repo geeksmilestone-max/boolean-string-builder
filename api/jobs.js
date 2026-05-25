@@ -90,7 +90,6 @@ export default async function handler(req, res) {
     app_key: ADZUNA_APP_KEY,
     results_per_page: "6",
     what: cleanTitle,
-    content_type: "application/json",
   });
   if (cleanRegion && !["MENA","GCC","Global"].includes(cleanRegion)) {
     params.set("where", cleanRegion);
