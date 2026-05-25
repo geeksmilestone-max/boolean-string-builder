@@ -838,14 +838,14 @@ var generateCount=0;
 var currentScore=0;
 
 // ── TAG INPUT ──
-function setupTagInput(wrapId,inputId,arr){
+function setupTagInput(wrapId,inputId,stateKey){
   var wrap=document.getElementById(wrapId),inp=document.getElementById(inputId);
   wrap.addEventListener("click",function(){inp.focus();});
   inp.addEventListener("keydown",function(e){
-    if((e.key==="Enter"||e.key===",")&&inp.value.trim()){e.preventDefault();addTag(inp.value.trim().replace(/,$/,""),arr,wrapId,inputId);}
-    if(e.key==="Backspace"&&!inp.value&&arr.length)removeTag(arr.length-1,arr,wrapId,inputId);
+    if((e.key==="Enter"||e.key===",")&&inp.value.trim()){e.preventDefault();addTag(inp.value.trim().replace(/,$/,""),state[stateKey],wrapId,inputId);}
+    if(e.key==="Backspace"&&!inp.value&&state[stateKey].length)removeTag(state[stateKey].length-1,state[stateKey],wrapId,inputId);
   });
-  inp.addEventListener("blur",function(){if(inp.value.trim())addTag(inp.value.trim(),arr,wrapId,inputId);});
+  inp.addEventListener("blur",function(){if(inp.value.trim())addTag(inp.value.trim(),state[stateKey],wrapId,inputId);});
 }
 function addTag(val,arr,wrapId,inputId){var c=val.trim();if(!c||arr.includes(c))return;arr.push(c);renderTags(arr,wrapId,inputId);updateMeter();}
 function removeTag(idx,arr,wrapId,inputId){arr.splice(idx,1);renderTags(arr,wrapId,inputId);updateMeter();}
@@ -1289,10 +1289,10 @@ function placeCard(el,pref,card){
 function posCenter(card){card.style.visibility="hidden";card.style.top="-9999px";card.style.left="-9999px";requestAnimationFrame(function(){requestAnimationFrame(function(){var cw=card.offsetWidth||320,ch=card.offsetHeight||220;card.style.top=Math.max(16,(window.innerHeight-ch)/2)+"px";card.style.left=Math.max(16,(window.innerWidth-cw)/2)+"px";card.style.visibility="visible";});});}
 
 // ── INIT ──
-setupTagInput("titles-wrap","titles-input",state.titles);
-setupTagInput("must-wrap","must-input",state.mustSkills);
-setupTagInput("nice-wrap","nice-input",state.niceSkills);
-setupTagInput("region-custom-wrap","region-custom-input",state.customRegions);
+setupTagInput("titles-wrap","titles-input","titles");
+setupTagInput("must-wrap","must-input","mustSkills");
+setupTagInput("nice-wrap","nice-input","niceSkills");
+setupTagInput("region-custom-wrap","region-custom-input","customRegions");
 updateMeter();
 
 // ── POPULAR SEARCHES ──
