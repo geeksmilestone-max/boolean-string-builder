@@ -414,6 +414,20 @@ input::placeholder { color: var(--muted); }
 .modal-urgency-dot{width:6px;height:6px;border-radius:50%;background:#f6a84f;animation:pulse 2s infinite;flex-shrink:0}
 .modal-title .modal-highlight{background:linear-gradient(135deg,#38e8b5,#4f8ef7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 
+
+/* ── LINKEDIN POSTS TOGGLE ── */
+.li-posts-toggle{display:flex;align-items:flex-start;gap:10px;margin-top:16px;padding:12px 14px;background:rgba(79,142,247,0.05);border:1px solid rgba(79,142,247,0.15);border-radius:var(--radius-sm);cursor:pointer;transition:border-color 0.2s,background 0.2s;}
+.li-posts-toggle:hover{border-color:rgba(79,142,247,0.3);background:rgba(79,142,247,0.08);}
+.li-posts-toggle input[type="checkbox"]{accent-color:var(--accent);width:15px;height:15px;flex-shrink:0;margin-top:2px;cursor:pointer;}
+.li-posts-toggle-text{flex:1;}
+.li-posts-toggle-label{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--text);display:block;margin-bottom:2px;}
+.li-posts-toggle-desc{font-size:11.5px;color:var(--muted2);line-height:1.5;}
+/* ── XRAY MULTI-SITE ── */
+.xray-sites{display:flex;flex-direction:column;gap:20px;}
+.xray-site-block{}
+.xray-site-label{display:flex;align-items:center;gap:7px;margin-bottom:8px;}
+.xray-site-name{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:var(--muted2);}
+.xray-site-badge{font-size:10px;color:var(--accent3);background:rgba(56,232,181,0.08);border:1px solid rgba(56,232,181,0.2);padding:2px 8px;border-radius:100px;}
 </style>
 <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -618,18 +632,64 @@ input::placeholder { color: var(--muted); }
       <button class="output-tab active" onclick="switchTab('li',this)"><span class="tab-icon li"></span> LinkedIn Search</button>
       <button class="output-tab" onclick="switchTab('gx',this)"><span style="font-size:13px;">🔍</span> Google X-Ray</button>
     </div>
+    <!-- LinkedIn Tab -->
     <div class="tab-pane active" id="tab-li">
       <div class="string-box" id="li-output"></div>
+      <label class="li-posts-toggle" id="liPostsToggleWrap">
+        <input type="checkbox" id="liPostsToggle" onchange="toggleLinkedInPosts(this.checked)" />
+        <div class="li-posts-toggle-text">
+          <span class="li-posts-toggle-label">Searching LinkedIn Posts? (not the Jobs tab)</span>
+          <span class="li-posts-toggle-desc">Switch LinkedIn's filter from <strong>Jobs</strong> to <strong>Posts</strong>, then check this box — it appends <code>(jobs OR vacancy OR hiring)</code> to surface hiring posts from managers and department heads.</span>
+        </div>
+      </label>
       <div class="action-row">
         <button class="btn btn-primary" onclick="copyString('li')">📋 Copy String</button>
         <button class="btn btn-ghost" onclick="openLinkedIn()">↗ Open LinkedIn Search</button>
       </div>
     </div>
+    <!-- Google X-Ray Tab -->
     <div class="tab-pane" id="tab-gx">
-      <div class="string-box" id="gx-output"></div>
-      <div class="action-row">
-        <button class="btn btn-primary" onclick="copyString('gx')">📋 Copy String</button>
-        <button class="btn btn-ghost" onclick="openGoogle()">↗ Open Google Search</button>
+      <div class="xray-sites" id="xray-sites-wrap">
+        <div class="xray-site-block">
+          <div class="xray-site-label"><span class="xray-site-name">LinkedIn</span><span class="xray-site-badge">Profiles</span></div>
+          <div class="string-box" id="gx-li-output"></div>
+          <div class="action-row">
+            <button class="btn btn-primary" onclick="copyXray('li')">📋 Copy</button>
+            <button class="btn btn-ghost" onclick="openXray('li')">↗ Search Google</button>
+          </div>
+        </div>
+        <div class="xray-site-block">
+          <div class="xray-site-label"><span class="xray-site-name">Bayt</span><span class="xray-site-badge">MENA Jobs</span></div>
+          <div class="string-box" id="gx-bayt-output"></div>
+          <div class="action-row">
+            <button class="btn btn-primary" onclick="copyXray('bayt')">📋 Copy</button>
+            <button class="btn btn-ghost" onclick="openXray('bayt')">↗ Search Google</button>
+          </div>
+        </div>
+        <div class="xray-site-block">
+          <div class="xray-site-label"><span class="xray-site-name">Naukri Gulf</span><span class="xray-site-badge">GCC Jobs</span></div>
+          <div class="string-box" id="gx-naukri-output"></div>
+          <div class="action-row">
+            <button class="btn btn-primary" onclick="copyXray('naukri')">📋 Copy</button>
+            <button class="btn btn-ghost" onclick="openXray('naukri')">↗ Search Google</button>
+          </div>
+        </div>
+        <div class="xray-site-block">
+          <div class="xray-site-label"><span class="xray-site-name">Indeed</span><span class="xray-site-badge">Global</span></div>
+          <div class="string-box" id="gx-indeed-output"></div>
+          <div class="action-row">
+            <button class="btn btn-primary" onclick="copyXray('indeed')">📋 Copy</button>
+            <button class="btn btn-ghost" onclick="openXray('indeed')">↗ Search Google</button>
+          </div>
+        </div>
+        <div class="xray-site-block">
+          <div class="xray-site-label"><span class="xray-site-name">Glassdoor</span><span class="xray-site-badge">Global</span></div>
+          <div class="string-box" id="gx-glassdoor-output"></div>
+          <div class="action-row">
+            <button class="btn btn-primary" onclick="copyXray('glassdoor')">📋 Copy</button>
+            <button class="btn btn-ghost" onclick="openXray('glassdoor')">↗ Search Google</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -755,6 +815,15 @@ window.addEventListener("pagehide",trackSessionEnd);
 // ── STATE ──
 var state={titles:[],titleOp:"OR",regions:[],customRegions:[],mustSkills:[],niceSkills:[]};
 var plain={li:"",gx:""};
+var xrayPlain={li:"",bayt:"",naukri:"",indeed:"",glassdoor:""};
+var liPostsMode=false;
+var XRAY_SITES=[
+  {key:"li",        prefix:"site:linkedin.com/in/"},
+  {key:"bayt",      prefix:"site:bayt.com/en/jobs/"},
+  {key:"naukri",    prefix:"site:naukrigulf.com/jobs-in-"},
+  {key:"indeed",    prefix:"site:indeed.com/jobs"},
+  {key:"glassdoor", prefix:"site:glassdoor.com/Job/"}
+];
 var generateCount=0;
 var currentScore=0;
 
@@ -788,25 +857,37 @@ function buildTitleClause(){if(!state.titles.length)return"";var p=state.titles.
 function buildRegionClause(){var r=state.regions.concat(state.customRegions);if(!r.length)return"";var p=r.map(quoted);return p.length>1?"("+p.join(" OR ")+")":p[0];}
 function buildSkillsClause(){var m=state.mustSkills.map(quoted),n=state.niceSkills.map(quoted),p=[];if(m.length)p.push(m.join(" AND "));if(n.length)p.push("("+n.join(" OR ")+")");return p.join(" AND ");}
 function buildLinkedIn(){return[buildTitleClause(),buildRegionClause(),buildSkillsClause()].filter(Boolean).join(" AND ");}
-function buildGoogleXRay(){var i=buildLinkedIn();return i?"site:linkedin.com/in/ "+i:"";}
 function highlight(str){
   var e=str.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
   return e.replace(/\b(AND)\b/g,'<span class="kw-and">AND</span>').replace(/\b(OR)\b/g,'<span class="kw-or">OR</span>').replace(/\b(NOT)\b/g,'<span class="kw-not">NOT</span>').replace(/&quot;([^&]*)&quot;/g,'<span class="kw-phrase">&quot;$1&quot;</span>').replace(/(site:[^\s<]+)/g,'<span class="kw-site">$1</span>');
 }
 
 // ── GENERATE ──
+// ── LINKEDIN POSTS TOGGLE ──
+function toggleLinkedInPosts(checked){
+  liPostsMode=checked;
+  if(!plain.li)return;
+  var displayed=checked?plain.li+' AND (jobs OR vacancy OR hiring)':plain.li;
+  document.getElementById('li-output').innerHTML=highlight(displayed);
+  trackEvent('li_posts_toggle',checked?'on':'off');
+}
+
 function generateStrings(){
   trackEvent("generate_strings",state.titles.join("|")||"no_titles");
-  var li=buildLinkedIn(),gx=buildGoogleXRay();
-  if(!li){showToast("\u26a0\ufe0f Fill in at least one field first");return;}
-  plain.li=li;plain.gx=gx;
-  document.getElementById("li-output").innerHTML=highlight(li);
-  document.getElementById("gx-output").innerHTML=highlight(gx);
+  var li=buildLinkedIn();
+  if(!li){showToast("⚠️ Fill in at least one field first");return;}
+  plain.li=li;
+  document.getElementById("li-output").innerHTML=highlight(liPostsMode?li+" AND (jobs OR vacancy OR hiring)":li);
+  XRAY_SITES.forEach(function(site){
+    var str=site.prefix+" "+li;
+    xrayPlain[site.key]=str;
+    document.getElementById("gx-"+site.key+"-output").innerHTML=highlight(str);
+  });
+  plain.gx=xrayPlain.li;
   var sec=document.getElementById("output-section");sec.classList.add("visible");
   setTimeout(function(){sec.scrollIntoView({behavior:"smooth",block:"start"});},100);
   saveRecentSearch();
   logToSourcingVault();
-
   generateCount++;
   if(localStorage.getItem("emailCaptured")==="1")localStorage.setItem("popupSubmitted","1");
   var alreadySubmitted=localStorage.getItem("popupSubmitted")==="1";
@@ -826,8 +907,14 @@ function logToSourcingVault(){
 }
 
 function switchTab(id,btn){trackEvent("tab_switch",id);document.querySelectorAll(".output-tab").forEach(function(t){t.classList.remove("active");});document.querySelectorAll(".tab-pane").forEach(function(p){p.classList.remove("active");});btn.classList.add("active");document.getElementById("tab-"+id).classList.add("active");}
-function copyString(id){navigator.clipboard.writeText(plain[id]||"").then(function(){showToast("\u2713 Copied to clipboard!");trackEvent("copy_string",id);});}
-function openLinkedIn(){var q=plain.li||state.titles.join(" OR ");trackEvent("open_linkedin_search",q.slice(0,80));window.open("https://www.linkedin.com/search/results/jobs/?keywords="+encodeURIComponent(q),"_blank");}
+function copyString(id){
+  var str=plain[id]||"";
+  if(id==="li"&&liPostsMode)str+=' AND (jobs OR vacancy OR hiring)';
+  navigator.clipboard.writeText(str).then(function(){showToast('✓ Copied to clipboard!');trackEvent('copy_string',id);});
+}
+function copyXray(k){navigator.clipboard.writeText(xrayPlain[k]||"").then(function(){showToast('✓ Copied to clipboard!');trackEvent('copy_xray',k);});}
+function openXray(k){var q=xrayPlain[k]||"";if(!q)return;trackEvent('open_xray_search',k);window.open('https://www.google.com/search?q='+encodeURIComponent(q),'_blank');}
+function openLinkedIn(){var q=plain.li||state.titles.join(' OR ');if(liPostsMode)q+=' AND (jobs OR vacancy OR hiring)';trackEvent('open_linkedin_search',q.slice(0,80));window.open('https://www.linkedin.com/search/results/jobs/?keywords='+encodeURIComponent(q),'_blank');}
 function openGoogle(){var q=plain.gx||plain.li||state.titles.join(" OR ");trackEvent("open_google_xray",q.slice(0,80));window.open("https://www.google.com/search?q="+encodeURIComponent(q),"_blank");}
 function showToast(msg){var t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");setTimeout(function(){t.classList.remove("show");},2500);}
 
