@@ -875,15 +875,19 @@ function toggleLinkedInPosts(checked){
 function generateStrings(){
   trackEvent("generate_strings",state.titles.join("|")||"no_titles");
   var li=buildLinkedIn();
-  if(!li){showToast('⚠️ Fill in at least one field first');return;}
+  if(!li){showToast("⚠️ Fill in at least one field first");return;}
   plain.li=li;
-  document.getElementById('li-output').innerHTML=highlight(liPostsMode?li+' (jobs OR vacancy OR hiring)':li);
+  document.getElementById("li-output").innerHTML=highlight(liPostsMode?li+" (jobs OR vacancy OR hiring)":li);
   XRAY_SITES.forEach(function(site){
-    var str=site.prefix+' '+li;
+    var str=site.prefix+" "+li;
     xrayPlain[site.key]=str;
-    document.getElementById('gx-'+site.key+'-output').innerHTML=highlight(str);
+    document.getElementById("gx-"+site.key+"-output").innerHTML=highlight(str);
   });
   plain.gx=xrayPlain.li;
+  var sec=document.getElementById("output-section");sec.classList.add("visible");
+  setTimeout(function(){sec.scrollIntoView({behavior:"smooth",block:"start"});},100);
+  saveRecentSearch();
+  logToSourcingVault();
   generateCount++;
   if(localStorage.getItem("emailCaptured")==="1")localStorage.setItem("popupSubmitted","1");
   var alreadySubmitted=localStorage.getItem("popupSubmitted")==="1";
