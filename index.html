@@ -38,6 +38,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
 <script defer src="/_vercel/insights/script.js"></script>
 <style>
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
   --bg: #07090f; --surface: #0f1219; --surface2: #161b26;
@@ -124,16 +125,16 @@ input::placeholder { color: var(--muted); }
 .social-divider{display:flex;align-items:center;gap:16px;margin-bottom:28px}
 .social-divider::before,.social-divider::after{content:'';flex:1;height:1px;background:var(--border)}
 .social-divider-label{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
-.social-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-@media(max-width:480px){.social-cards{grid-template-columns:1fr}}
-.social-card{display:flex;align-items:center;gap:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;text-decoration:none;transition:border-color 0.2s,transform 0.2s,box-shadow 0.2s;position:relative;overflow:hidden}
-.social-card::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity 0.2s}
-.social-card.li-card::before{background:linear-gradient(135deg,rgba(10,102,194,0.08),transparent)}
-.social-card.ig-card::before{background:linear-gradient(135deg,rgba(225,48,108,0.08),transparent)}
-.social-card:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,0.3)}
-.social-card.li-card:hover{border-color:rgba(10,102,194,0.5)}
-.social-card.ig-card:hover{border-color:rgba(225,48,108,0.4)}
-.social-card:hover::before{opacity:1}
+
+@media(max-width:480px){}
+
+
+
+
+
+
+
+
 .social-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .social-icon.li{background:#0a66c2}
 .social-icon.ig{background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)}
@@ -142,22 +143,9 @@ input::placeholder { color: var(--muted); }
 .social-platform{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--text);margin-bottom:2px}
 .social-handle{font-size:12px;color:var(--muted2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .social-arrow{color:var(--muted);font-size:16px;position:relative;z-index:1;transition:transform 0.2s,color 0.2s}
-.social-card:hover .social-arrow{transform:translate(2px,-2px);color:var(--text)}
 
-/* Topmate */
-.topmate-section{margin:0 auto;max-width:860px;padding:0 24px 80px;position:relative;z-index:1}
-.topmate-wrap{background:#f5f3ef;border-radius:20px;padding:40px 36px 44px;position:relative;overflow:hidden}
-.topmate-wrap::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(200,168,75,0.12),transparent 70%);pointer-events:none}
-.topmate-wrap::after{content:'';position:absolute;bottom:-40px;left:-40px;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(26,122,110,0.08),transparent 70%);pointer-events:none}
-.topmate-header{text-align:center;margin-bottom:32px}
-.topmate-eyebrow{display:inline-flex;align-items:center;gap:6px;background:rgba(200,168,75,0.12);border:1px solid rgba(200,168,75,0.3);color:#a07c1e;font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:5px 14px;border-radius:100px;margin-bottom:14px}
-.topmate-title{font-family:'Syne',sans-serif;font-size:clamp(22px,4vw,30px);font-weight:800;color:#0e0e0e;letter-spacing:-0.02em;margin-bottom:8px}
-.topmate-sub{font-size:14px;color:#6b6b6b;max-width:380px;margin:0 auto;font-weight:300}
-.topmate-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;position:relative;z-index:1}
-@media(max-width:560px){.topmate-grid{grid-template-columns:1fr}.topmate-wrap{padding:28px 20px 32px}}
-.tm-card{background:#fff;border:1px solid rgba(0,0,0,0.07);border-radius:14px;padding:20px 20px 18px;text-decoration:none;display:flex;flex-direction:column;gap:10px;transition:transform 0.2s,box-shadow 0.2s,border-color 0.2s}
-.tm-card:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,0.10);border-color:rgba(200,168,75,0.4)}
-.tm-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+
+
 .tm-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
 .tm-arrow{font-size:14px;color:#bbb;transition:color 0.2s,transform 0.2s;margin-top:2px}
 .tm-card:hover .tm-arrow{color:#C8A84B;transform:translate(2px,-2px)}
@@ -293,6 +281,9 @@ input::placeholder { color: var(--muted); }
 .modal-success-icon{font-size:40px;margin-bottom:12px}
 .modal-success-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:var(--text);margin-bottom:8px}
 .modal-success-sub{font-size:13.5px;color:var(--muted2);line-height:1.6}
+.modal-skip{display:block;text-align:center;font-size:11px;color:var(--muted);margin-top:10px;cursor:pointer;background:none;border:none;width:100%;padding:4px;transition:color 0.2s;letter-spacing:0.01em}
+.modal-skip:hover{color:var(--muted2)}
+.modal-close.visible{opacity:1;pointer-events:all;transition:opacity 0.4s ease}
 
 /* ── STICKY BAR ── */
 #sticky-bar{
@@ -378,6 +369,52 @@ input::placeholder { color: var(--muted); }
   .faq-body-inner{font-size:13px}
 }
 
+/* ── POPULAR SEARCHES ── */
+.popular-section{margin-bottom:28px;animation:fadeUp 0.5s 0.05s ease both}
+.popular-header{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.popular-heading{font-family:'Syne',sans-serif;font-size:13px;font-weight:800;color:var(--muted2);letter-spacing:0.08em;text-transform:uppercase}
+.popular-dot{width:6px;height:6px;border-radius:50%;background:var(--accent3);animation:pulse 2s infinite;flex-shrink:0}
+.popular-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media(max-width:600px){.popular-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:380px){.popular-grid{grid-template-columns:1fr}}
+.popular-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;cursor:pointer;transition:border-color 0.2s,transform 0.2s,box-shadow 0.2s;position:relative;overflow:hidden}
+.popular-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(79,142,247,0.05),transparent);opacity:0;transition:opacity 0.2s}
+.popular-card:hover{border-color:rgba(79,142,247,0.4);transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.25)}
+.popular-card:hover::before{opacity:1}
+.popular-card-role{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--text);margin-bottom:3px}
+.popular-card-region{font-size:11px;color:var(--accent);margin-bottom:8px;display:flex;align-items:center;gap:4px}
+.popular-card-region::before{content:'📍';font-size:10px}
+.popular-card-skills{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px}
+.popular-card-skill{font-size:10px;color:var(--muted2);background:var(--surface2);border:1px solid var(--border);padding:2px 7px;border-radius:100px}
+.popular-card-skill.must{color:#a0bffa;border-color:rgba(79,142,247,0.3);background:rgba(79,142,247,0.06)}
+.popular-card-cta{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;color:var(--muted);display:flex;align-items:center;gap:4px;transition:color 0.2s}
+.popular-card:hover .popular-card-cta{color:var(--accent3)}
+/* ── ALGORITHM STRENGTH METER ── */
+.meter-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;margin-bottom:20px;animation:fadeUp 0.5s ease both;transition:border-color 0.3s}
+.meter-wrap.score-high{border-color:rgba(56,232,181,0.3)}
+.meter-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.meter-label{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted2)}
+.meter-score-wrap{display:flex;align-items:center;gap:8px}
+.meter-score{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--text);line-height:1;transition:color 0.4s}
+.meter-score.amber{color:#f6a84f}.meter-score.blue{color:#4f8ef7}.meter-score.teal{color:#38e8b5}
+.meter-pct{font-family:'Syne',sans-serif;font-size:13px;font-weight:600;color:var(--muted);margin-top:3px}
+.meter-track{width:100%;height:6px;background:var(--surface2);border-radius:100px;overflow:hidden;margin-bottom:10px}
+.meter-fill{height:100%;border-radius:100px;width:0%;transition:width 0.5s cubic-bezier(0.4,0,0.2,1),background 0.5s ease}
+.meter-fill.amber{background:linear-gradient(90deg,#f6a84f,#f6c44f)}.meter-fill.blue{background:linear-gradient(90deg,#4f8ef7,#6b9cf7)}.meter-fill.teal{background:linear-gradient(90deg,#4f8ef7,#38e8b5)}
+.meter-status-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.meter-status-label{font-size:12.5px;font-weight:600;transition:color 0.4s;flex-shrink:0}
+.meter-status-label.amber{color:#f6a84f}.meter-status-label.blue{color:#6b9cf7}.meter-status-label.teal{color:#38e8b5}
+.meter-nudge{font-size:12px;color:var(--muted);text-align:right;line-height:1.4;flex:1}
+/* ── EMAIL MODAL dynamic ── */
+.modal-context-banner{background:linear-gradient(135deg,rgba(56,232,181,0.08),rgba(79,142,247,0.08));border:1px solid rgba(56,232,181,0.2);border-radius:10px;padding:11px 14px;margin-bottom:18px;display:flex;align-items:flex-start;gap:9px}
+.modal-context-dot{width:8px;height:8px;border-radius:50%;background:var(--accent3);flex-shrink:0;margin-top:4px;animation:pulse 2s infinite}
+.modal-context-text{font-size:12.5px;color:#7ee8c8;line-height:1.55}
+.modal-context-text strong{color:#b6f5e0;font-weight:600}
+.modal-urgency{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--muted);margin-bottom:14px}
+.modal-urgency-dot{width:6px;height:6px;border-radius:50%;background:#f6a84f;animation:pulse 2s infinite;flex-shrink:0}
+.modal-title .modal-highlight{background:linear-gradient(135deg,#38e8b5,#4f8ef7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+
 /* ── LINKEDIN POSTS TOGGLE ── */
 .li-posts-toggle{display:flex;align-items:flex-start;gap:10px;margin-top:16px;padding:12px 14px;background:rgba(79,142,247,0.05);border:1px solid rgba(79,142,247,0.15);border-radius:var(--radius-sm);cursor:pointer;transition:border-color 0.2s,background 0.2s;}
 .li-posts-toggle:hover{border-color:rgba(79,142,247,0.3);background:rgba(79,142,247,0.08);}
@@ -413,7 +450,7 @@ input::placeholder { color: var(--muted); }
 
 <div class="wrapper">
 
-  <!-- RECENT SEARCHES — only shown to returning visitors via JS -->
+  <!-- RECENT SEARCHES -->
   <div class="recent-searches-bar" id="recentSearchesBar" style="display:none;">
     <div class="recent-searches-header" onclick="toggleRecentSearches()">
       <div class="recent-searches-left">
@@ -433,16 +470,54 @@ input::placeholder { color: var(--muted); }
     <div class="badge">Boolean String Builder</div>
     <h1>The Search Trick Every<br/>Recruiter Uses. Now It's Yours.</h1>
     <p class="subtitle">Build a Boolean search string in 60 seconds — no experience needed. Find jobs on LinkedIn and Google that most job seekers never see.</p>
+    <p style="font-size:14px;color:#6b7794;max-width:600px;margin:20px auto 0;line-height:1.8;text-align:center;">Most job seekers search LinkedIn the basic way — and miss hundreds of relevant roles. This free Boolean string builder generates advanced LinkedIn Boolean search strings and Google X-Ray queries in seconds, no experience needed. Built for job seekers and recruiters across the MENA region, GCC, and globally — just enter your job title, target location, and skills, and the tool does the rest.</p>
+  </div>
+
+  <!-- POPULAR SEARCHES -->
+  <div class="popular-section">
+    <div class="popular-header">
+      <span class="popular-dot"></span>
+      <span class="popular-heading">Popular Searches</span>
+    </div>
+    <div class="popular-grid" id="popularGrid">
+      <div class="popular-card" onclick="runPopular({titles:['Data Analyst'],region:'UAE',must:['SQL'],nice:['Power BI','Tableau','Excel','Python']})">
+        <div class="popular-card-role">Data Analyst</div><div class="popular-card-region">UAE</div>
+        <div class="popular-card-skills"><span class="popular-card-skill must">SQL</span><span class="popular-card-skill">Power BI</span><span class="popular-card-skill">Tableau</span><span class="popular-card-skill">Excel</span><span class="popular-card-skill">Python</span></div>
+        <div class="popular-card-cta">Try this search →</div>
+      </div>
+      <div class="popular-card" onclick="runPopular({titles:['HR Manager'],region:'Saudi Arabia',must:['SAP'],nice:['SuccessFactors','Oracle HCM','Workday','HRMS']})">
+        <div class="popular-card-role">HR Manager</div><div class="popular-card-region">Saudi Arabia</div>
+        <div class="popular-card-skills"><span class="popular-card-skill must">SAP</span><span class="popular-card-skill">SuccessFactors</span><span class="popular-card-skill">Oracle HCM</span><span class="popular-card-skill">Workday</span><span class="popular-card-skill">HRMS</span></div>
+        <div class="popular-card-cta">Try this search →</div>
+      </div>
+      <div class="popular-card" onclick="runPopular({titles:['Software Engineer'],region:'GCC',must:['JavaScript'],nice:['React','Node.js','Python','Java']})">
+        <div class="popular-card-role">Software Engineer</div><div class="popular-card-region">GCC</div>
+        <div class="popular-card-skills"><span class="popular-card-skill must">JavaScript</span><span class="popular-card-skill">React</span><span class="popular-card-skill">Node.js</span><span class="popular-card-skill">Python</span><span class="popular-card-skill">Java</span></div>
+        <div class="popular-card-cta">Try this search →</div>
+      </div>
+      <div class="popular-card" onclick="runPopular({titles:['Finance Manager'],region:'Qatar',must:['Excel'],nice:['Financial Analysis','Budgeting','Forecasting','ERP']})">
+        <div class="popular-card-role">Finance Manager</div><div class="popular-card-region">Qatar</div>
+        <div class="popular-card-skills"><span class="popular-card-skill must">Excel</span><span class="popular-card-skill">Financial Analysis</span><span class="popular-card-skill">Budgeting</span><span class="popular-card-skill">Forecasting</span><span class="popular-card-skill">ERP</span></div>
+        <div class="popular-card-cta">Try this search →</div>
+      </div>
+      <div class="popular-card" onclick="runPopular({titles:['Marketing Manager'],region:'MENA',must:['Digital Marketing'],nice:['SEO','Social Media','Google Ads','Content Marketing']})">
+        <div class="popular-card-role">Marketing Manager</div><div class="popular-card-region">MENA</div>
+        <div class="popular-card-skills"><span class="popular-card-skill must">Digital Marketing</span><span class="popular-card-skill">SEO</span><span class="popular-card-skill">Social Media</span><span class="popular-card-skill">Google Ads</span><span class="popular-card-skill">Content Marketing</span></div>
+        <div class="popular-card-cta">Try this search →</div>
+      </div>
+      <div class="popular-card" onclick="runPopular({titles:['Project Manager'],region:'GCC',must:['PMP'],nice:['Agile','Scrum','MS Project','Risk Management']})">
+        <div class="popular-card-role">Project Manager</div><div class="popular-card-region">GCC</div>
+        <div class="popular-card-skills"><span class="popular-card-skill must">PMP</span><span class="popular-card-skill">Agile</span><span class="popular-card-skill">Scrum</span><span class="popular-card-skill">MS Project</span><span class="popular-card-skill">Risk Management</span></div>
+        <div class="popular-card-cta">Try this search →</div>
+      </div>
+    </div>
   </div>
 
   <!-- Step 1: Job Titles -->
   <div class="card" id="card-titles">
     <div class="card-header">
       <div class="step-dot">1</div>
-      <div>
-        <div class="card-title">Job Title Preferences</div>
-        <div class="card-desc">Type a title and press Enter or comma to add</div>
-      </div>
+      <div><div class="card-title">Job Title Preferences</div><div class="card-desc">Type a title and press Enter or comma to add</div></div>
     </div>
     <div class="operator-row" style="margin-bottom:14px;">
       <span class="operator-label" style="white-space:nowrap;">Combine titles with</span>
@@ -454,7 +529,6 @@ input::placeholder { color: var(--muted); }
     <div class="tag-input-wrap" id="titles-wrap">
       <input type="text" class="tag-inline-input" id="titles-input" placeholder="e.g. Data Analyst, Business Analyst…" />
     </div>
-    <!-- Navi nudge -->
     <div class="navi-nudge" id="naviNudge" onclick="openNaviFromNudge()">
       <span class="navi-nudge-dot"></span>
       Not sure what to type? Let Navi guide you →
@@ -465,10 +539,7 @@ input::placeholder { color: var(--muted); }
   <div class="card" id="card-region">
     <div class="card-header">
       <div class="step-dot">2</div>
-      <div>
-        <div class="card-title">Target Market Region</div>
-        <div class="card-desc">Select a region or type a custom one</div>
-      </div>
+      <div><div class="card-title">Target Market Region</div><div class="card-desc">Select a region or type a custom one</div></div>
     </div>
     <div class="chip-group" id="region-chips">
       <div class="chip" data-region="MENA">MENA</div>
@@ -497,55 +568,38 @@ input::placeholder { color: var(--muted); }
   <div class="card" id="card-skills">
     <div class="card-header">
       <div class="step-dot">3</div>
-      <div>
-        <div class="card-title">Key Skills</div>
-        <div class="card-desc">Add must-have and nice-to-have skills</div>
-      </div>
+      <div><div class="card-title">Key Skills</div><div class="card-desc">Add must-have and nice-to-have skills</div></div>
     </div>
     <div class="row-2">
       <div>
         <label>Must-have skills (AND)</label>
-        <div class="tag-input-wrap" id="must-wrap">
-          <input type="text" class="tag-inline-input" id="must-input" placeholder="e.g. SQL…" />
-        </div>
+        <div class="tag-input-wrap" id="must-wrap"><input type="text" class="tag-inline-input" id="must-input" placeholder="e.g. SQL…" /></div>
       </div>
       <div>
         <label>Nice-to-have skills (OR)</label>
-        <div class="tag-input-wrap" id="nice-wrap">
-          <input type="text" class="tag-inline-input" id="nice-input" placeholder="e.g. Power BI…" />
-        </div>
+        <div class="tag-input-wrap" id="nice-wrap"><input type="text" class="tag-inline-input" id="nice-input" placeholder="e.g. Power BI…" /></div>
       </div>
     </div>
     <hr class="divider"/>
     <label style="margin-bottom:10px;">Quick-add popular skills</label>
     <div class="chip-group" id="skill-chips">
-      <div class="chip" data-skill="Power BI">Power BI</div>
-      <div class="chip" data-skill="Excel">Excel</div>
-      <div class="chip" data-skill="SQL">SQL</div>
-      <div class="chip" data-skill="Python">Python</div>
-      <div class="chip" data-skill="Tableau">Tableau</div>
-      <div class="chip" data-skill="Data Analysis">Data Analysis</div>
-      <div class="chip" data-skill="Financial Analysis">Financial Analysis</div>
-      <div class="chip" data-skill="Accounting">Accounting</div>
-      <div class="chip" data-skill="Budgeting">Budgeting</div>
-      <div class="chip" data-skill="Forecasting">Forecasting</div>
-      <div class="chip" data-skill="Sales">Sales</div>
-      <div class="chip" data-skill="Business Development">Business Development</div>
-      <div class="chip" data-skill="CRM">CRM</div>
-      <div class="chip" data-skill="Marketing">Marketing</div>
-      <div class="chip" data-skill="Digital Marketing">Digital Marketing</div>
-      <div class="chip" data-skill="SEO">SEO</div>
-      <div class="chip" data-skill="Project Management">Project Management</div>
-      <div class="chip" data-skill="Admin">Admin</div>
-      <div class="chip" data-skill="Operations">Operations</div>
-      <div class="chip" data-skill="Civil Engineering">Civil Engineering</div>
-      <div class="chip" data-skill="AutoCAD">AutoCAD</div>
-      <div class="chip" data-skill="Software Engineer">Software Engineer</div>
-      <div class="chip" data-skill="JavaScript">JavaScript</div>
-      <div class="chip" data-skill="React">React</div>
-      <div class="chip" data-skill="Java">Java</div>
-      <div class="chip" data-skill="Customer Service">Customer Service</div>
-      <div class="chip" data-skill="Communication">Communication</div>
+      <div class="chip" data-skill="Power BI">Power BI</div><div class="chip" data-skill="Excel">Excel</div><div class="chip" data-skill="SQL">SQL</div><div class="chip" data-skill="Python">Python</div><div class="chip" data-skill="Tableau">Tableau</div><div class="chip" data-skill="Data Analysis">Data Analysis</div><div class="chip" data-skill="Financial Analysis">Financial Analysis</div><div class="chip" data-skill="Accounting">Accounting</div><div class="chip" data-skill="Budgeting">Budgeting</div><div class="chip" data-skill="Forecasting">Forecasting</div><div class="chip" data-skill="Sales">Sales</div><div class="chip" data-skill="Business Development">Business Development</div><div class="chip" data-skill="CRM">CRM</div><div class="chip" data-skill="Marketing">Marketing</div><div class="chip" data-skill="Digital Marketing">Digital Marketing</div><div class="chip" data-skill="SEO">SEO</div><div class="chip" data-skill="Project Management">Project Management</div><div class="chip" data-skill="Admin">Admin</div><div class="chip" data-skill="Operations">Operations</div><div class="chip" data-skill="Civil Engineering">Civil Engineering</div><div class="chip" data-skill="AutoCAD">AutoCAD</div><div class="chip" data-skill="Software Engineer">Software Engineer</div><div class="chip" data-skill="JavaScript">JavaScript</div><div class="chip" data-skill="React">React</div><div class="chip" data-skill="Java">Java</div><div class="chip" data-skill="Customer Service">Customer Service</div><div class="chip" data-skill="Communication">Communication</div>
+    </div>
+  </div>
+
+  <!-- ALGORITHM STRENGTH METER -->
+  <div class="meter-wrap" id="meterWrap">
+    <div class="meter-header">
+      <span class="meter-label">Algorithm Strength</span>
+      <div class="meter-score-wrap">
+        <span class="meter-score amber" id="meterScore">0</span>
+        <span class="meter-pct">/ 100</span>
+      </div>
+    </div>
+    <div class="meter-track"><div class="meter-fill amber" id="meterFill"></div></div>
+    <div class="meter-status-row">
+      <span class="meter-status-label amber" id="meterStatus">&#x26A0;&#xFE0F; Add a job title to get started</span>
+      <span class="meter-nudge" id="meterNudge"></span>
     </div>
   </div>
 
@@ -554,118 +608,24 @@ input::placeholder { color: var(--muted); }
     <button class="btn-generate" onclick="generateStrings()">⚡ Generate Boolean Strings</button>
   </div>
 
-  <!-- FAQ Section -->
+  <!-- FAQ -->
   <div class="faq-section" id="faq-section">
-    <div class="faq-title-row">
-      <span class="faq-heading">Frequently Asked Questions</span>
-      <span class="faq-badge">8 answers</span>
-    </div>
-
-    <div class="faq-item" id="faq-0">
-      <button class="faq-q" onclick="toggleFaq(0)">
-        <span>What is a Boolean search string?</span>
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-body" id="faq-body-0">
-        <div class="faq-body-inner">
-          A Boolean search string is a structured query that uses logic operators — <strong>AND</strong>, <strong>OR</strong>, and <strong>NOT</strong> — to narrow or broaden search results. Recruiters have used them for years to find candidates precisely. This tool lets you use the same technique to find jobs and opportunities that standard search filters miss entirely.
-        </div>
-      </div>
-    </div>
-
-    <div class="faq-item" id="faq-1">
-      <button class="faq-q" onclick="toggleFaq(1)">
-        <span>Does this work on LinkedIn's free version?</span>
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-body" id="faq-body-1">
-        <div class="faq-body-inner">
-          Yes — Boolean search works on LinkedIn's free version. Simply paste the generated string into LinkedIn's main search bar and press Enter. You don't need LinkedIn Premium or Recruiter to benefit from this. The Google X-Ray string goes even further by bypassing LinkedIn's search engine entirely and surfacing profiles directly through Google.
-        </div>
-      </div>
-    </div>
-
-    <div class="faq-item" id="faq-2">
-      <button class="faq-q" onclick="toggleFaq(2)">
-        <span>How is this different from LinkedIn's built-in filters?</span>
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-body" id="faq-body-2">
-        <div class="faq-body-inner">
-          LinkedIn's filters are broad and limited — they match on a small set of predefined fields. Boolean search scans the full text of profiles and job listings, including headlines, summaries, and experience sections. This means you find results that LinkedIn's algorithm would never surface through normal filtering. It also gives you full control over the logic rather than relying on LinkedIn's often opaque relevance ranking.
-        </div>
-      </div>
-    </div>
-
-    <div class="faq-item" id="faq-3">
-      <button class="faq-q" onclick="toggleFaq(3)">
-        <span>Can I use this for Google search too?</span>
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-body" id="faq-body-3">
-        <div class="faq-body-inner">
-          Absolutely. The <strong>Google X-Ray</strong> tab generates a string specifically formatted for Google, using <strong>site:linkedin.com/in/</strong> to search inside LinkedIn's profile pages directly. This is one of the most powerful sourcing techniques used by professional recruiters — it surfaces profiles that LinkedIn's own search hides or deprioritises, especially for free account users.
-        </div>
-      </div>
-    </div>
-
-    <div class="faq-item" id="faq-4">
-      <button class="faq-q" onclick="toggleFaq(4)">
-        <span>Do I need to create an account?</span>
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-body" id="faq-body-4">
-        <div class="faq-body-inner">
-          No account, no login, no sign-up required. This tool is completely free to use as many times as you need. Your recent searches are saved locally in your browser so you can revisit them, but nothing is stored on any server without your consent.
-        </div>
-      </div>
-    </div>
-
-    <div class="faq-item" id="faq-5">
-      <button class="faq-q" onclick="toggleFaq(5)">
-        <span>How many searches can I do?</span>
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-body" id="faq-body-5">
-        <div class="faq-body-inner">
-          Unlimited. There are no search caps, no daily limits, and no paywalls. Generate as many Boolean strings as you need — for different roles, different regions, or different skill combinations. Each string is unique and ready to use immediately.
-        </div>
-      </div>
-    </div>
-
-    <div class="faq-item" id="faq-6">
-      <button class="faq-q" onclick="toggleFaq(6)">
-        <span>What is Google X-Ray search?</span>
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-body" id="faq-body-6">
-        <div class="faq-body-inner">
-          Google X-Ray is a technique that uses Google to search within a specific website — in this case, LinkedIn. By adding <strong>site:linkedin.com/in/</strong> to your search query, you instruct Google to only return results from LinkedIn profile pages. Because Google indexes LinkedIn more deeply than LinkedIn's own search allows free users to access, this method often surfaces profiles that are otherwise invisible. It's free and requires no LinkedIn account at all.
-        </div>
-      </div>
-    </div>
-
-    <div class="faq-item" id="faq-7">
-      <button class="faq-q" onclick="toggleFaq(7)">
-        <span>Who is this tool built for?</span>
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-body" id="faq-body-7">
-        <div class="faq-body-inner">
-          Primarily built for <strong>job seekers</strong> who want to search smarter — finding roles and companies that standard search misses. It's equally useful for <strong>recruiters</strong> sourcing candidates and <strong>freelancers</strong> finding clients in specific markets. If you're in the MENA, GCC, or international job market and want to cut through the noise, this tool was made for you.
-        </div>
-      </div>
-    </div>
+    <div class="faq-title-row"><span class="faq-heading">Frequently Asked Questions</span><span class="faq-badge">8 answers</span></div>
+    <div class="faq-item" id="faq-0"><button class="faq-q" onclick="toggleFaq(0)"><span>What is a Boolean search string?</span><span class="faq-icon">+</span></button><div class="faq-body" id="faq-body-0"><div class="faq-body-inner">A Boolean search string is a structured query that uses logic operators — <strong>AND</strong>, <strong>OR</strong>, and <strong>NOT</strong> — to narrow or broaden search results. Recruiters have used them for years to find candidates precisely. This tool lets you use the same technique to find jobs and opportunities that standard search filters miss entirely.</div></div></div>
+    <div class="faq-item" id="faq-1"><button class="faq-q" onclick="toggleFaq(1)"><span>Does this work on LinkedIn's free version?</span><span class="faq-icon">+</span></button><div class="faq-body" id="faq-body-1"><div class="faq-body-inner">Yes — Boolean search works on LinkedIn's free version. Simply paste the generated string into LinkedIn's main search bar and press Enter. You don't need LinkedIn Premium or Recruiter to benefit from this.</div></div></div>
+    <div class="faq-item" id="faq-2"><button class="faq-q" onclick="toggleFaq(2)"><span>How is this different from LinkedIn's built-in filters?</span><span class="faq-icon">+</span></button><div class="faq-body" id="faq-body-2"><div class="faq-body-inner">LinkedIn's filters are broad and limited — they match on a small set of predefined fields. Boolean search scans the full text of profiles and job listings, including headlines, summaries, and experience sections.</div></div></div>
+    <div class="faq-item" id="faq-3"><button class="faq-q" onclick="toggleFaq(3)"><span>Can I use this for Google search too?</span><span class="faq-icon">+</span></button><div class="faq-body" id="faq-body-3"><div class="faq-body-inner">Absolutely. The <strong>Google X-Ray</strong> tab generates a string specifically formatted for Google, using <strong>site:linkedin.com/in/</strong> to search inside LinkedIn's profile pages directly.</div></div></div>
+    <div class="faq-item" id="faq-4"><button class="faq-q" onclick="toggleFaq(4)"><span>Do I need to create an account?</span><span class="faq-icon">+</span></button><div class="faq-body" id="faq-body-4"><div class="faq-body-inner">No account, no login, no sign-up required. This tool is completely free to use as many times as you need.</div></div></div>
+    <div class="faq-item" id="faq-5"><button class="faq-q" onclick="toggleFaq(5)"><span>How many searches can I do?</span><span class="faq-icon">+</span></button><div class="faq-body" id="faq-body-5"><div class="faq-body-inner">Unlimited. There are no search caps, no daily limits, and no paywalls.</div></div></div>
+    <div class="faq-item" id="faq-6"><button class="faq-q" onclick="toggleFaq(6)"><span>What is Google X-Ray search?</span><span class="faq-icon">+</span></button><div class="faq-body" id="faq-body-6"><div class="faq-body-inner">Google X-Ray is a technique that uses Google to search within a specific website — in this case, LinkedIn. By adding <strong>site:linkedin.com/in/</strong> to your search query, you instruct Google to only return results from LinkedIn profile pages.</div></div></div>
+    <div class="faq-item" id="faq-7"><button class="faq-q" onclick="toggleFaq(7)"><span>Who is this tool built for?</span><span class="faq-icon">+</span></button><div class="faq-body" id="faq-body-7"><div class="faq-body-inner">Primarily built for <strong>job seekers</strong> who want to search smarter — finding roles and companies that standard search misses. Equally useful for <strong>recruiters</strong> and <strong>freelancers</strong>.</div></div></div>
   </div>
 
   <!-- Output -->
   <div class="output-section card" id="output-section">
     <div class="card-header" style="margin-bottom:0;">
       <div class="step-dot" style="background:linear-gradient(135deg,var(--accent3),#2fb89a);">✓</div>
-      <div>
-        <div class="card-title">Your Boolean Strings</div>
-        <div class="card-desc">Ready to paste into LinkedIn or Google</div>
-      </div>
+      <div><div class="card-title">Your Boolean Strings</div><div class="card-desc">Ready to paste into LinkedIn or Google</div></div>
     </div>
     <hr class="divider" />
     <div class="output-tabs">
@@ -733,86 +693,43 @@ input::placeholder { color: var(--muted); }
       </div>
     </div>
   </div>
+
 </div>
 
-<!-- Social -->
-<div class="wrapper" style="padding-top:0;padding-bottom:0;">
-  <div class="social-section">
-    <div class="social-divider"><span class="social-divider-label">Connect with Ameer</span></div>
-    <div class="social-cards" style="margin-top:14px;">
-      <a href="https://www.linkedin.com/in/ameer-khan-88b67ba0" target="_blank" rel="noopener" class="social-card li-card">
-        <div class="social-icon li"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></div>
-        <div class="social-info"><div class="social-platform">LinkedIn</div><div class="social-handle">Ameer Khan · Talent Acquisition</div></div>
-        <span class="social-arrow">↗</span>
-      </a>
-      <a href="https://www.instagram.com/_talentmentor/" target="_blank" rel="noopener" class="social-card ig-card">
-        <div class="social-icon ig"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></div>
-        <div class="social-info"><div class="social-platform">Instagram</div><div class="social-handle">@_talentmentor</div></div>
-        <span class="social-arrow">↗</span>
-      </a>
-    </div>
-  </div>
-</div>
-
-<!-- Topmate -->
-<div class="topmate-section">
-  <div class="topmate-wrap">
-    <div class="topmate-header">
-      <div class="topmate-eyebrow">✦ Work with me</div>
-      <h2 class="topmate-title">Book a Session with Ameer</h2>
-      <p class="topmate-sub">Hands-on coaching, profile reviews, and skills workshops for serious professionals.</p>
-    </div>
-    <div class="topmate-grid">
-      <a href="https://topmate.io/ameer_khan_talent/617228" target="_blank" rel="noopener" class="tm-card">
-        <div class="tm-card-top"><div class="tm-icon" style="background:#FEF3C7;">💼</div><span class="tm-arrow">↗</span></div>
-        <div class="tm-title">Job Insights</div>
-        <div class="tm-desc">Get expert guidance on navigating the job market and identifying your next best opportunity.</div>
-        <span class="tm-cta">Book now →</span>
-      </a>
-      <a href="https://topmate.io/ameer_khan_talent/1327811" target="_blank" rel="noopener" class="tm-card">
-        <div class="tm-card-top"><div class="tm-icon" style="background:#DBEAFE;">🔵</div><span class="tm-arrow">↗</span></div>
-        <div class="tm-title">LinkedIn: Build a Profile That Gets Noticed</div>
-        <div class="tm-desc">Transform your LinkedIn into a talent magnet that attracts the right recruiters and opportunities.</div>
-        <span class="tm-cta">Book now →</span>
-      </a>
-      <a href="https://topmate.io/ameer_khan_talent/1328395" target="_blank" rel="noopener" class="tm-card">
-        <div class="tm-card-top"><div class="tm-icon" style="background:#FCE7F3;">📄</div><span class="tm-arrow">↗</span></div>
-        <div class="tm-title">Review &amp; Rewrite Resume</div>
-        <div class="tm-desc">A thorough review and professional rewrite of your resume to stand out in competitive markets.</div>
-        <span class="tm-cta">Book now →</span>
-      </a>
-      <a href="https://topmate.io/ameer_khan_talent/1250721" target="_blank" rel="noopener" class="tm-card">
-        <div class="tm-card-top"><div class="tm-icon" style="background:#D1FAE5;">📊</div><span class="tm-arrow">↗</span></div>
-        <div class="tm-title">Learn to Create Power BI Dashboards</div>
-        <div class="tm-desc">Hands-on session to build recruitment analytics dashboards from scratch using Power BI.</div>
-        <span class="tm-cta">Book now →</span>
-      </a>
-    </div>
+<!-- SHARE ROW -->
+<div style="text-align:center;margin:40px 0 0;">
+  <p style="font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#6b7794;margin-bottom:14px;">Found this useful? Share it</p>
+  <div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap;">
+    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Ftools.thedailytalent.com" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:100px;background:rgba(10,102,194,0.12);border:1px solid rgba(10,102,194,0.3);color:#4f8ef7;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;text-decoration:none;transition:all 0.2s;" onmouseover="this.style.background='rgba(10,102,194,0.22)'" onmouseout="this.style.background='rgba(10,102,194,0.12)'">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="#0a66c2"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      Share on LinkedIn
+    </a>
+    <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Ftools.thedailytalent.com&text=This%20free%20tool%20builds%20Boolean%20search%20strings%20for%20LinkedIn%20%26%20Google%20in%2060%20seconds%20%F0%9F%94%8D" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:100px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:#e8ecf4;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;text-decoration:none;transition:all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.10)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      Share on X
+    </a>
+    <button onclick="navigator.clipboard.writeText('https://tools.thedailytalent.com').then(()=>{this.textContent='✓ Copied!';setTimeout(()=>{this.innerHTML='<svg width=\'16\' height=\'16\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'2\'><rect x=\'9\' y=\'9\' width=\'13\' height=\'13\' rx=\'2\'/><path d=\'M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1\'/></svg> Copy link'},2000)})" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:100px;background:rgba(56,232,181,0.08);border:1px solid rgba(56,232,181,0.2);color:#38e8b5;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.background='rgba(56,232,181,0.15)'" onmouseout="this.style.background='rgba(56,232,181,0.08)'">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      Copy link
+    </button>
   </div>
 </div>
 
 <div class="footer wrapper" style="padding-top:24px;">© The Daily Talent. All rights reserved.</div>
-
 <!-- NAVI -->
 <div class="navi-backdrop" id="naviBackdrop" onclick="closeNavi()"></div>
 <div class="navi-panel" id="naviPanel">
   <div class="navi-header">
     <div class="navi-header-left">
       <div class="navi-avatar">🧭</div>
-      <div class="navi-name-tag">
-        <div class="name">Navi</div>
-        <div class="status">Online · AI Search Assistant</div>
-      </div>
+      <div class="navi-name-tag"><div class="name">Navi</div><div class="status">Online · AI Search Assistant</div></div>
     </div>
     <button class="navi-close" onclick="closeNavi()">✕</button>
   </div>
   <div class="navi-messages" id="naviMessages"></div>
   <div class="navi-input-area">
-    <textarea class="navi-input" id="naviInput" placeholder="Tell Navi what you're looking for…" rows="1"
-      onkeydown="naviHandleKey(event)" oninput="autoResizeInput(this)"></textarea>
-    <button class="navi-send" onclick="naviSend()">
-      <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
-    </button>
+    <textarea class="navi-input" id="naviInput" placeholder="Tell Navi what you're looking for…" rows="1" onkeydown="naviHandleKey(event)" oninput="autoResizeInput(this)"></textarea>
+    <button class="navi-send" onclick="naviSend()"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></button>
   </div>
 </div>
 <button class="navi-fab" id="naviFab" onclick="openNavi()">
@@ -824,7 +741,7 @@ input::placeholder { color: var(--muted); }
 <div class="tour-overlay" id="tourOverlay"></div>
 <div class="tour-spot" id="tourSpot"></div>
 <div class="tour-tip-card" id="tourCard">
-  <div class="tour-pill" id="tourPill">Step 1 of 9</div>
+  <div class="tour-pill" id="tourPill">Step 1 of 10</div>
   <div class="tour-tip-title" id="tourTitle"></div>
   <div class="tour-tip-body" id="tourBody"></div>
   <div class="tour-foot">
@@ -841,25 +758,34 @@ input::placeholder { color: var(--muted); }
 <!-- EMAIL MODAL -->
 <div class="modal-backdrop" id="emailModal">
   <div class="modal-card">
-    <button class="modal-close" onclick="closeModal()">✕</button>
+    <button class="modal-close" id="modalCloseBtn" onclick="closeModal()">✕</button>
     <div class="modal-form-wrap" id="modalFormWrap">
-      <div class="modal-icon">🎁</div>
-      <div class="modal-title">Get 50 Free Boolean Templates</div>
-      <p class="modal-sub">You just built your first search string. Want 50 ready-made ones for the most in-demand roles across MENA?</p>
+      <div class="modal-icon" id="modalIcon">🎯</div>
+      <div class="modal-context-banner" id="modalContextBanner" style="display:none">
+        <span class="modal-context-dot"></span>
+        <span class="modal-context-text" id="modalContextText"></span>
+      </div>
+      <div class="modal-title" id="modalTitle">Your Search String Is Ready</div>
+      <p class="modal-sub" id="modalSub">Want 10 pre-built strings for roles just like this — ready to paste into LinkedIn?</p>
+      <div class="modal-urgency" id="modalUrgency" style="display:none">
+        <span class="modal-urgency-dot"></span>
+        <span id="modalUrgencyText"></span>
+      </div>
       <div class="modal-value-list">
-        <div class="modal-value-item">Templates for Tech, Finance, HR, Marketing &amp; more</div>
+        <div class="modal-value-item" id="modalValue1">Strings for Tech, Finance, HR, Marketing &amp; more</div>
         <div class="modal-value-item">Pre-built for LinkedIn and Google X-Ray</div>
         <div class="modal-value-item">Delivered free — no catch</div>
       </div>
       <div class="modal-field"><label for="modalName">Your name</label><input type="text" id="modalName" placeholder="e.g. Sara" autocomplete="given-name" /></div>
       <div class="modal-field"><label for="modalEmail">Your email address</label><input type="email" id="modalEmail" placeholder="sara@email.com" autocomplete="email" /></div>
       <button class="modal-submit" id="modalSubmit" onclick="submitEmail()">Send Me the Templates →</button>
+      <button class="modal-skip" onclick="forceCloseModal()">I'll find jobs the slow way</button>
       <p class="modal-privacy">No spam. Unsubscribe anytime. Your email stays private.</p>
     </div>
     <div class="modal-success" id="modalSuccess">
       <div class="modal-success-icon">✅</div>
-      <div class="modal-success-title">You're on the list!</div>
-      <p class="modal-success-sub">Check your inbox shortly for the 50 Boolean templates.</p>
+      <div class="modal-success-title" id="modalSuccessTitle">You're in!</div>
+      <p class="modal-success-sub" id="modalSuccessSub">Check your inbox shortly for the 50 Boolean templates.</p>
     </div>
   </div>
 </div>
@@ -867,378 +793,441 @@ input::placeholder { color: var(--muted); }
 <div class="toast" id="toast"></div>
 
 <script>
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// REPLACE THESE TWO VALUES BEFORE UPLOADING
-// Keep the quotes. Only change what is inside them.
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 const SUPABASE_URL = "https://uewyupjaptelyuxtcibv.supabase.co";
 const SUPABASE_KEY = "sb_publishable_ytI5QtnIt3qnBL_JxMSQyg_sQsPPw7C";
-// Groq key is stored securely in Vercel environment variables — not here
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
 const SESSION_ID = Math.random().toString(36).slice(2,10)+Date.now().toString(36);
 
 function trackEvent(event,detail){
   detail=detail||"";
-  if(SUPABASE_URL.indexOf("REPLACE")!==-1||SUPABASE_KEY.indexOf("REPLACE")!==-1)return;
   fetch(SUPABASE_URL+"/rest/v1/tool_events",{method:"POST",headers:{"Content-Type":"application/json","apikey":SUPABASE_KEY,"Authorization":"Bearer "+SUPABASE_KEY,"Prefer":"return=minimal"},body:JSON.stringify({event:event,detail:String(detail).slice(0,200),session_id:SESSION_ID})}).catch(function(){});
 }
 
-const SESSION_START_TS = Date.now();
-
+const SESSION_START_TS=Date.now();
 window.addEventListener("DOMContentLoaded",function(){
   trackEvent("page_view",document.referrer||"direct");
-  trackEvent("session_start", new Date(SESSION_START_TS).toISOString());
+  trackEvent("session_start",new Date(SESSION_START_TS).toISOString());
   initRecentSearches();
 });
+function trackSessionEnd(){var duration=Math.round((Date.now()-SESSION_START_TS)/1000);trackEvent("session_end","duration_seconds:"+duration);}
+window.addEventListener("visibilitychange",function(){if(document.visibilityState==="hidden")trackSessionEnd();});
+window.addEventListener("pagehide",trackSessionEnd);
 
-function trackSessionEnd(){
-  const duration = Math.round((Date.now() - SESSION_START_TS) / 1000);
-  trackEvent("session_end", "duration_seconds:" + duration);
-}
-window.addEventListener("visibilitychange", function(){
-  if(document.visibilityState === "hidden") trackSessionEnd();
-});
-window.addEventListener("pagehide", trackSessionEnd);
-
-// STATE
-const state={titles:[],titleOp:"OR",regions:[],customRegions:[],mustSkills:[],niceSkills:[]};
-const plain={li:"",gx:""};
-const xrayPlain={li:"",bayt:"",naukri:"",indeed:"",glassdoor:""};
-let liPostsMode=false;
-const XRAY_SITES=[
-  {key:"li",     prefix:"site:linkedin.com/in/"},
-  {key:"bayt",   prefix:"site:bayt.com/en/jobs/"},
-  {key:"naukri", prefix:"site:naukrigulf.com/jobs-in-"},
-  {key:"indeed", prefix:"site:indeed.com/jobs"},
+// ── STATE ──
+var state={titles:[],titleOp:"OR",regions:[],customRegions:[],mustSkills:[],niceSkills:[]};
+var plain={li:"",gx:""};
+var xrayPlain={li:"",bayt:"",naukri:"",indeed:"",glassdoor:""};
+var liPostsMode=false;
+var XRAY_SITES=[
+  {key:"li",        prefix:"site:linkedin.com/in/"},
+  {key:"bayt",      prefix:"site:bayt.com/en/jobs/"},
+  {key:"naukri",    prefix:"site:naukrigulf.com/jobs-in-"},
+  {key:"indeed",    prefix:"site:indeed.com/jobs"},
   {key:"glassdoor", prefix:"site:glassdoor.com/Job/"}
 ];
-let generateCount=0;
+var generateCount=0;
+var currentScore=0;
 
-// TAG INPUT
-function setupTagInput(wrapId,inputId,arr){
-  const wrap=document.getElementById(wrapId),inp=document.getElementById(inputId);
-  wrap.addEventListener('click',()=>inp.focus());
-  inp.addEventListener('keydown',e=>{
-    if((e.key==='Enter'||e.key===',')&&inp.value.trim()){e.preventDefault();addTag(inp.value.trim().replace(/,$/,''),arr,wrapId,inputId);}
-    if(e.key==='Backspace'&&!inp.value&&arr.length)removeTag(arr.length-1,arr,wrapId,inputId);
+// ── TAG INPUT ──
+function setupTagInput(wrapId,inputId,stateKey){
+  var wrap=document.getElementById(wrapId),inp=document.getElementById(inputId);
+  wrap.addEventListener("click",function(){inp.focus();});
+  inp.addEventListener("keydown",function(e){
+    if((e.key==="Enter"||e.key===",")&&inp.value.trim()){e.preventDefault();addTag(inp.value.trim().replace(/,$/,""),state[stateKey],wrapId,inputId);}
+    if(e.key==="Backspace"&&!inp.value&&state[stateKey].length)removeTag(state[stateKey].length-1,state[stateKey],wrapId,inputId);
   });
-  inp.addEventListener('blur',()=>{if(inp.value.trim())addTag(inp.value.trim(),arr,wrapId,inputId);});
+  inp.addEventListener("blur",function(){if(inp.value.trim())addTag(inp.value.trim(),state[stateKey],wrapId,inputId);});
 }
-function addTag(val,arr,wrapId,inputId){const c=val.trim();if(!c||arr.includes(c))return;arr.push(c);renderTags(arr,wrapId,inputId);}
-function removeTag(idx,arr,wrapId,inputId){arr.splice(idx,1);renderTags(arr,wrapId,inputId);}
+function addTag(val,arr,wrapId,inputId){var c=val.trim();if(!c||arr.includes(c))return;arr.push(c);renderTags(arr,wrapId,inputId);updateMeter();}
+function removeTag(idx,arr,wrapId,inputId){arr.splice(idx,1);renderTags(arr,wrapId,inputId);updateMeter();}
 function renderTags(arr,wrapId,inputId){
-  const wrap=document.getElementById(wrapId),inp=document.getElementById(inputId);
-  wrap.innerHTML='';
-  arr.forEach((t,i)=>{const tag=document.createElement('span');tag.className='tag';tag.innerHTML=esc(t)+'<button class="tag-x" title="Remove">×</button>';tag.querySelector('.tag-x').onclick=()=>removeTag(i,arr,wrapId,inputId);wrap.appendChild(tag);});
-  wrap.appendChild(inp);inp.value='';inp.focus();
+  var wrap=document.getElementById(wrapId),inp=document.getElementById(inputId);
+  wrap.innerHTML="";
+  arr.forEach(function(t,i){var tag=document.createElement("span");tag.className="tag";tag.innerHTML=esc(t)+'<button class="tag-x" title="Remove">\xd7</button>';tag.querySelector(".tag-x").onclick=function(){removeTag(i,arr,wrapId,inputId);};wrap.appendChild(tag);});
+  wrap.appendChild(inp);inp.value="";inp.focus();
 }
-function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
 
-document.querySelectorAll('#title-op-group .toggle-btn').forEach(btn=>{btn.addEventListener('click',()=>{document.querySelectorAll('#title-op-group .toggle-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');state.titleOp=btn.dataset.op;});});
-document.querySelectorAll('#region-chips .chip').forEach(chip=>{chip.addEventListener('click',()=>{chip.classList.toggle('selected');const r=chip.dataset.region;if(chip.classList.contains('selected'))state.regions.push(r);else state.regions=state.regions.filter(x=>x!==r);});});
-document.querySelectorAll('#skill-chips .chip').forEach(chip=>{chip.addEventListener('click',()=>{if(chip.classList.contains('selected')){chip.classList.remove('selected');const sk=chip.dataset.skill;state.mustSkills=state.mustSkills.filter(x=>x!==sk);state.niceSkills=state.niceSkills.filter(x=>x!==sk);renderTags(state.mustSkills,'must-wrap','must-input');renderTags(state.niceSkills,'nice-wrap','nice-input');}else{chip.classList.add('selected');addTag(chip.dataset.skill,state.niceSkills,'nice-wrap','nice-input');}});});
+document.querySelectorAll("#title-op-group .toggle-btn").forEach(function(btn){btn.addEventListener("click",function(){document.querySelectorAll("#title-op-group .toggle-btn").forEach(function(b){b.classList.remove("active");});btn.classList.add("active");state.titleOp=btn.dataset.op;updateMeter();});});
+document.querySelectorAll("#region-chips .chip").forEach(function(chip){chip.addEventListener("click",function(){chip.classList.toggle("selected");var r=chip.dataset.region;if(chip.classList.contains("selected"))state.regions.push(r);else state.regions=state.regions.filter(function(x){return x!==r;});updateMeter();});});
+document.querySelectorAll("#skill-chips .chip").forEach(function(chip){chip.addEventListener("click",function(){if(chip.classList.contains("selected")){chip.classList.remove("selected");var sk=chip.dataset.skill;state.mustSkills=state.mustSkills.filter(function(x){return x!==sk;});state.niceSkills=state.niceSkills.filter(function(x){return x!==sk;});renderTags(state.mustSkills,"must-wrap","must-input");renderTags(state.niceSkills,"nice-wrap","nice-input");updateMeter();}else{chip.classList.add("selected");addTag(chip.dataset.skill,state.niceSkills,"nice-wrap","nice-input");}});});
 
-function quoted(s){return s.includes(' ')?`"${s}"`:s;}
-function buildTitleClause(){if(!state.titles.length)return'';const p=state.titles.map(quoted);return p.length>1?`(${p.join(` ${state.titleOp} `)})`:p[0];}
-function buildRegionClause(){const r=[...state.regions,...state.customRegions];if(!r.length)return'';const p=r.map(quoted);return p.length>1?`(${p.join(' OR ')})`:p[0];}
-function buildSkillsClause(){const m=state.mustSkills.map(quoted),n=state.niceSkills.map(quoted),p=[];if(m.length)p.push(m.join(' AND '));if(n.length)p.push(`(${n.join(' OR ')})`);return p.join(' AND ');}
-function buildLinkedIn(){return[buildTitleClause(),buildRegionClause(),buildSkillsClause()].filter(Boolean).join(' AND ');}
+// ── BOOLEAN BUILDER ──
+function quoted(s){return s.includes(" ")?'"'+s+'"':s;}
+function buildTitleClause(){if(!state.titles.length)return"";var p=state.titles.map(quoted);return p.length>1?"("+p.join(" "+state.titleOp+" ")+")":p[0];}
+function buildRegionClause(){var r=state.regions.concat(state.customRegions);if(!r.length)return"";var p=r.map(quoted);return p.length>1?"("+p.join(" OR ")+")":p[0];}
+function buildSkillsClause(){var m=state.mustSkills.map(quoted),n=state.niceSkills.map(quoted),p=[];if(m.length)p.push(m.join(" AND "));if(n.length)p.push("("+n.join(" OR ")+")");return p.join(" AND ");}
+function buildLinkedIn(){return[buildTitleClause(),buildRegionClause(),buildSkillsClause()].filter(Boolean).join(" AND ");}
 function highlight(str){
-  const e=str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  var e=str.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
   return e.replace(/\b(AND)\b/g,'<span class="kw-and">AND</span>').replace(/\b(OR)\b/g,'<span class="kw-or">OR</span>').replace(/\b(NOT)\b/g,'<span class="kw-not">NOT</span>').replace(/&quot;([^&]*)&quot;/g,'<span class="kw-phrase">&quot;$1&quot;</span>').replace(/(site:[^\s<]+)/g,'<span class="kw-site">$1</span>');
 }
 
-// LinkedIn Posts toggle handler
+// ── GENERATE ──
+// ── LINKEDIN POSTS TOGGLE ──
 function toggleLinkedInPosts(checked){
   liPostsMode=checked;
   if(!plain.li)return;
-  const displayed=checked?plain.li+' (jobs OR vacancy OR hiring)':plain.li;
+  var displayed=checked?plain.li+' (jobs OR vacancy OR hiring)':plain.li;
   document.getElementById('li-output').innerHTML=highlight(displayed);
   trackEvent('li_posts_toggle',checked?'on':'off');
 }
 
 function generateStrings(){
   trackEvent("generate_strings",state.titles.join("|")||"no_titles");
-  const li=buildLinkedIn();
+  var li=buildLinkedIn();
   if(!li){showToast('⚠️ Fill in at least one field first');return;}
   plain.li=li;
-  // LinkedIn display — respect Posts toggle
   document.getElementById('li-output').innerHTML=highlight(liPostsMode?li+' (jobs OR vacancy OR hiring)':li);
-  // Build all X-Ray strings
-  XRAY_SITES.forEach(site=>{
-    const str=site.prefix+' '+li;
+  XRAY_SITES.forEach(function(site){
+    var str=site.prefix+' '+li;
     xrayPlain[site.key]=str;
     document.getElementById('gx-'+site.key+'-output').innerHTML=highlight(str);
   });
   plain.gx=xrayPlain.li;
   generateCount++;
-  if(generateCount===1&&!sessionStorage.getItem('emailCaptured'))setTimeout(()=>openModal(),1800);
+  if(localStorage.getItem("emailCaptured")==="1")localStorage.setItem("popupSubmitted","1");
+  var alreadySubmitted=localStorage.getItem("popupSubmitted")==="1";
+  var dismissedThisSession=sessionStorage.getItem("popupDismissed")==="1";
+  if(generateCount===1&&!alreadySubmitted&&!dismissedThisSession){
+    var ctx={titles:state.titles.slice(),regions:state.regions.concat(state.customRegions),mustSkills:state.mustSkills.slice(),niceSkills:state.niceSkills.slice()};
+    setTimeout(function(){openModal(ctx);},1800);
+  }
 }
-function switchTab(id,btn){trackEvent("tab_switch",id);document.querySelectorAll('.output-tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));btn.classList.add('active');document.getElementById('tab-'+id).classList.add('active');}
-function copyString(id){
-  let str=plain[id]||"";
-  if(id==="li"&&liPostsMode)str+=' (jobs OR vacancy OR hiring)';
-  navigator.clipboard.writeText(str).then(()=>{showToast('✓ Copied to clipboard!');trackEvent('copy_string',id);});
-}
-function copyXray(k){navigator.clipboard.writeText(xrayPlain[k]||"").then(()=>{showToast('✓ Copied to clipboard!');trackEvent('copy_xray',k);});}
-function openXray(k){const q=xrayPlain[k]||"";if(!q)return;trackEvent('open_xray_search',k);window.open('https://www.google.com/search?q='+encodeURIComponent(q),'_blank');}
-function openLinkedIn(){let q=plain.li||state.titles.join(" OR ");if(liPostsMode)q+=" (jobs OR vacancy OR hiring)";trackEvent("open_linkedin_search",q.slice(0,80));window.open("https://www.linkedin.com/search/results/jobs/?keywords="+encodeURIComponent(q),"_blank");}
-function openGoogle(){trackEvent('open_google_xray',plain.gx.slice(0,80));window.open('https://www.google.com/search?q='+encodeURIComponent(plain.gx),'_blank');}
-function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
 
+// ── SOURCING VAULT ──
+function logToSourcingVault(){
+  var jobTitle=state.titles[0]||null;
+  var region=state.regions.concat(state.customRegions)[0]||null;
+  if(!jobTitle||!region)return;
+  fetch(SUPABASE_URL+"/rest/v1/sourcing_vault",{method:"POST",headers:{"Content-Type":"application/json","apikey":SUPABASE_KEY,"Authorization":"Bearer "+SUPABASE_KEY,"Prefer":"resolution=merge-duplicates,return=minimal"},body:JSON.stringify({job_title:jobTitle,region:region,must_skills:state.mustSkills,generation_count:1,last_generated_at:new Date().toISOString()})}).catch(function(){});
+}
+
+function switchTab(id,btn){trackEvent("tab_switch",id);document.querySelectorAll(".output-tab").forEach(function(t){t.classList.remove("active");});document.querySelectorAll(".tab-pane").forEach(function(p){p.classList.remove("active");});btn.classList.add("active");document.getElementById("tab-"+id).classList.add("active");}
+function copyString(id){
+  var str=plain[id]||"";
+  if(id==="li"&&liPostsMode)str+=' (jobs OR vacancy OR hiring)';
+  navigator.clipboard.writeText(str).then(function(){showToast('✓ Copied to clipboard!');trackEvent('copy_string',id);});
+}
+function copyXray(k){navigator.clipboard.writeText(xrayPlain[k]||"").then(function(){showToast('✓ Copied to clipboard!');trackEvent('copy_xray',k);});}
+function openXray(k){var q=xrayPlain[k]||"";if(!q)return;trackEvent('open_xray_search',k);window.open('https://www.google.com/search?q='+encodeURIComponent(q),'_blank');}
+function openLinkedIn(){var q=plain.li||state.titles.join(' OR ');if(liPostsMode)q+=' (jobs OR vacancy OR hiring)';trackEvent('open_linkedin_search',q.slice(0,80));window.open('https://www.linkedin.com/search/results/jobs/?keywords='+encodeURIComponent(q),'_blank');}
+function openGoogle(){var q=plain.gx||plain.li||state.titles.join(" OR ");trackEvent("open_google_xray",q.slice(0,80));window.open("https://www.google.com/search?q="+encodeURIComponent(q),"_blank");}
+function showToast(msg){var t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");setTimeout(function(){t.classList.remove("show");},2500);}
+
+// ── STRENGTH METER ──
+function calcScore(){
+  var s=0,t=state.titles,r=state.regions.concat(state.customRegions),m=state.mustSkills,n=state.niceSkills;
+  if(t.length>=1)s+=15;if(t.length>=2)s+=10;
+  if(r.length>=1)s+=15;if(state.customRegions.length>=1)s+=5;
+  if(m.length>=1)s+=10;if(m.length>=3)s-=5;
+  if(n.length>=3)s+=20;if(n.length>=5)s+=10;
+  if(state.titleOp==="OR")s+=5;if(m.length<=2)s+=10;
+  return Math.min(100,Math.max(0,s));
+}
+function updateMeter(){
+  var score=calcScore();currentScore=score;
+  var fill=document.getElementById("meterFill"),scoreEl=document.getElementById("meterScore"),statusEl=document.getElementById("meterStatus"),nudgeEl=document.getElementById("meterNudge"),wrap=document.getElementById("meterWrap");
+  if(!fill||!scoreEl||!statusEl||!nudgeEl||!wrap)return;
+  var tier=score<=30?"amber":score<=79?"blue":"teal";
+  fill.style.width=score+"%";fill.className="meter-fill "+tier;
+  scoreEl.textContent=score;scoreEl.className="meter-score "+tier;
+  var statusText,nudgeText="",r=state.regions.concat(state.customRegions),n=state.niceSkills;
+  if(score===0){statusText="\u26a0\ufe0f Add a job title to get started";}
+  else if(score<=30){statusText="\u26a0\ufe0f Too broad \u2014 add more detail";nudgeText=!r.length?"Add a region to jump to 40%+":n.length<3?"Add 3+ nice-to-have skills to reach 55%+":"";}
+  else if(score<=55){statusText="\uD83D\uDD0D Getting there \u2014 keep going";nudgeText=state.titles.length<2?"Add a second title variant to reach 70%+":n.length<3?"Add 3 nice-to-have skills to reach 65%+":"";}
+  else if(score<=79){statusText="\uD83D\uDCA1 Good string \u2014 a few tweaks will sharpen it";nudgeText=n.length<5?"Add more nice-to-have skills for a power score":state.titles.length<2?"Add a second title variant to hit 85%+":"";}
+  else if(score<=94){statusText="\u2705 Strong search \u2014 you'll surface hidden roles";nudgeText=score<95?"Almost there \u2014 one more skill or title variant hits 95+":"";}
+  else{statusText="\uD83C\uDFAF Precision target \u2014 ready for LinkedIn & Google";nudgeText="";}
+  statusEl.textContent=statusText;statusEl.className="meter-status-label "+tier;
+  nudgeEl.textContent=nudgeText;
+  if(tier==="teal")wrap.classList.add("score-high");else wrap.classList.remove("score-high");
+}
 // ── RECENT SEARCHES ──
-const RS_KEY='tdt_recent_searches',RS_MAX=3,RS_TTL=7*24*60*60*1000;
-function getRecentSearches(){try{const raw=localStorage.getItem(RS_KEY);if(!raw)return[];const arr=JSON.parse(raw),now=Date.now();return arr.filter(s=>now-s.ts<RS_TTL);}catch(e){return[];}}
+var RS_KEY="tdt_recent_searches",RS_MAX=3,RS_TTL=7*24*60*60*1000;
+function getRecentSearches(){try{var raw=localStorage.getItem(RS_KEY);if(!raw)return[];var arr=JSON.parse(raw),now=Date.now();return arr.filter(function(s){return now-s.ts<RS_TTL;});}catch(e){return[];}}
 function saveRecentSearch(){
   try{
-    const snap={ts:Date.now(),titles:[...state.titles],titleOp:state.titleOp,regions:[...state.regions],customRegions:[...state.customRegions],mustSkills:[...state.mustSkills],niceSkills:[...state.niceSkills],li:plain.li};
-    let arr=getRecentSearches().filter(s=>s.li!==plain.li);
-    arr.unshift(snap);arr=arr.slice(0,RS_MAX);
+    var snap={ts:Date.now(),titles:state.titles.slice(),titleOp:state.titleOp,regions:state.regions.slice(),customRegions:state.customRegions.slice(),mustSkills:state.mustSkills.slice(),niceSkills:state.niceSkills.slice(),li:plain.li};
+    var arr=getRecentSearches().filter(function(s){return s.li!==plain.li;});arr.unshift(snap);arr=arr.slice(0,RS_MAX);
     localStorage.setItem(RS_KEY,JSON.stringify(arr));
   }catch(e){}
 }
 function initRecentSearches(){
   try{
-    const arr=getRecentSearches();if(!arr.length)return;
-    const bar=document.getElementById('recentSearchesBar'),count=document.getElementById('recentSearchesCount'),cards=document.getElementById('recentCards');
-    count.textContent=arr.length;cards.innerHTML='';
-    arr.forEach((s)=>{
-      const date=new Date(s.ts),dateStr=date.toLocaleDateString('en-GB',{day:'numeric',month:'short'});
-      const titleStr=s.titles&&s.titles.length?s.titles.join(', '):'No titles';
-      const regionStr=[...(s.regions||[]),...(s.customRegions||[])].join(', ');
-      const card=document.createElement('div');card.className='recent-card';
-      card.innerHTML='<div class="recent-card-info"><div class="recent-card-titles">'+esc(titleStr)+'</div><div class="recent-card-meta">'+(regionStr?'<span>'+esc(regionStr)+'</span><span class="recent-card-dot"></span>':'')+'<span>'+dateStr+'</span></div></div><span class="recent-card-restore">Restore →</span>';
-      card.addEventListener('click',()=>restoreSearch(s));cards.appendChild(card);
+    var arr=getRecentSearches();if(!arr.length)return;
+    var bar=document.getElementById("recentSearchesBar"),count=document.getElementById("recentSearchesCount"),cards=document.getElementById("recentCards");
+    count.textContent=arr.length;cards.innerHTML="";
+    arr.forEach(function(s){
+      var date=new Date(s.ts),dateStr=date.toLocaleDateString("en-GB",{day:"numeric",month:"short"});
+      var titleStr=s.titles&&s.titles.length?s.titles.join(", "):"No titles";
+      var regionStr=(s.regions||[]).concat(s.customRegions||[]).join(", ");
+      var card=document.createElement("div");card.className="recent-card";
+      card.innerHTML='<div class="recent-card-info"><div class="recent-card-titles">'+esc(titleStr)+'</div><div class="recent-card-meta">'+(regionStr?"<span>"+esc(regionStr)+"</span>"+'<span class="recent-card-dot"></span>':"")+"<span>"+dateStr+"</span></div></div>"+'<span class="recent-card-restore">Restore \u2192</span>';
+      card.addEventListener("click",function(){restoreSearch(s);});cards.appendChild(card);
     });
-    bar.style.display='block';
-    document.getElementById('recentSearchesBody').classList.add('open');
-    document.getElementById('recentChevron').classList.add('open');
+    bar.style.display="block";
+    document.getElementById("recentSearchesBody").classList.add("open");
+    document.getElementById("recentChevron").classList.add("open");
   }catch(e){}
 }
-function toggleRecentSearches(){document.getElementById('recentSearchesBody').classList.toggle('open');document.getElementById('recentChevron').classList.toggle('open');}
+function toggleRecentSearches(){document.getElementById("recentSearchesBody").classList.toggle("open");document.getElementById("recentChevron").classList.toggle("open");}
 function restoreSearch(s){
-  state.titles=[...(s.titles||[])];state.titleOp=s.titleOp||'OR';state.regions=[...(s.regions||[])];state.customRegions=[...(s.customRegions||[])];state.mustSkills=[...(s.mustSkills||[])];state.niceSkills=[...(s.niceSkills||[])];
-  renderTags(state.titles,'titles-wrap','titles-input');renderTags(state.customRegions,'region-custom-wrap','region-custom-input');renderTags(state.mustSkills,'must-wrap','must-input');renderTags(state.niceSkills,'nice-wrap','nice-input');
-  document.querySelectorAll('#title-op-group .toggle-btn').forEach(btn=>btn.classList.toggle('active',btn.dataset.op===state.titleOp));
-  document.querySelectorAll('#region-chips .chip').forEach(chip=>chip.classList.toggle('selected',state.regions.includes(chip.dataset.region)));
-  document.getElementById('recentSearchesBody').classList.remove('open');document.getElementById('recentChevron').classList.remove('open');
-  showToast('✓ Search restored — hit Generate when ready');
-  document.getElementById('card-titles').scrollIntoView({behavior:'smooth',block:'start'});
+  state.titles=(s.titles||[]).slice();state.titleOp=s.titleOp||"OR";state.regions=(s.regions||[]).slice();state.customRegions=(s.customRegions||[]).slice();state.mustSkills=(s.mustSkills||[]).slice();state.niceSkills=(s.niceSkills||[]).slice();
+  renderTags(state.titles,"titles-wrap","titles-input");renderTags(state.customRegions,"region-custom-wrap","region-custom-input");renderTags(state.mustSkills,"must-wrap","must-input");renderTags(state.niceSkills,"nice-wrap","nice-input");
+  document.querySelectorAll("#title-op-group .toggle-btn").forEach(function(btn){btn.classList.toggle("active",btn.dataset.op===state.titleOp);});
+  document.querySelectorAll("#region-chips .chip").forEach(function(chip){chip.classList.toggle("selected",state.regions.indexOf(chip.dataset.region)!==-1);});
+  document.getElementById("recentSearchesBody").classList.remove("open");document.getElementById("recentChevron").classList.remove("open");
+  updateMeter();showToast("\u2713 Search restored \u2014 hit Generate when ready");
+  document.getElementById("card-titles").scrollIntoView({behavior:"smooth",block:"start"});
 }
 
 // ── EMAIL MODAL ──
-function openModal(){trackEvent('email_modal_shown');document.getElementById('emailModal').classList.add('open');}
-function closeModal(){document.getElementById('emailModal').classList.remove('open');}
-document.getElementById('emailModal').addEventListener('click',function(e){if(e.target===this)closeModal();});
+function buildModalContext(ctx){
+  var t=ctx.titles||[],r=ctx.regions||[],m=ctx.mustSkills||[];
+  var primaryRole=t.length?t[0]:"",primaryRegion=r.length?r[0]:"";
+  var icon,title,sub,contextLine,urgencyText,value1;
+  if(primaryRole&&primaryRegion){
+    icon="🎯";title='Your <span class="modal-highlight">'+esc(primaryRole)+'</span> search in <span class="modal-highlight">'+esc(primaryRegion)+'</span> is live.';
+    sub="Recruiters in "+esc(primaryRegion)+" are using Boolean every day. Get 10 pre-built strings for roles like "+esc(primaryRole)+" \u2014 and start finding hidden jobs they haven't posted yet.";
+    contextLine="String built for <strong>"+t.map(esc).join(", ")+"</strong> \u00b7 "+r.map(esc).join(", ")+".";
+    urgencyText="Most "+esc(primaryRole)+" jobs in "+esc(primaryRegion)+" are never publicly posted.";
+    value1="Pre-built strings for "+esc(primaryRole)+" roles in "+esc(primaryRegion);
+  }else if(primaryRole){
+    icon="🎯";title='Your <span class="modal-highlight">'+esc(primaryRole)+'</span> search string is ready.';
+    sub="Hiring managers search for "+esc(primaryRole)+" profiles every day using Boolean. Get 10 ready-made strings for similar roles.";
+    contextLine="String built around <strong>"+t.map(esc).join(" / ")+"</strong>"+(m.length?" with "+m.map(esc).join(", "):"")+".";
+    urgencyText="Up to 70% of "+esc(primaryRole)+" roles are filled before they go live.";
+    value1="50 strings including "+esc(primaryRole)+" and related titles";
+  }else if(primaryRegion){
+    icon="📍";title='Your <span class="modal-highlight">'+esc(primaryRegion)+'</span> job search is ready.';
+    sub="The "+esc(primaryRegion)+" job market moves fast. Get 10 Boolean templates for the most in-demand roles in the region.";
+    contextLine="Search targeting <strong>"+r.map(esc).join(", ")+"</strong>.";
+    urgencyText=esc(primaryRegion)+" has one of the highest LinkedIn recruiter densities globally.";
+    value1="Templates focused on "+esc(primaryRegion)+" job markets";
+  }else{
+    icon="🎁";title="Your Boolean string is ready.";
+    sub="Want 10 pre-built strings for the most in-demand roles \u2014 ready to paste into LinkedIn?";
+    contextLine=null;urgencyText=null;value1="Strings for Tech, Finance, HR, Marketing &amp; more";
+  }
+  return{icon:icon,title:title,sub:sub,contextLine:contextLine,urgencyText:urgencyText,value1:value1,primaryRole:primaryRole,primaryRegion:primaryRegion};
+}
+function openModal(ctx){
+  ctx=ctx||{titles:[],regions:[],mustSkills:[],niceSkills:[]};
+  var c=buildModalContext(ctx);
+  document.getElementById("modalIcon").textContent=c.icon;
+  document.getElementById("modalTitle").innerHTML=c.title;
+  document.getElementById("modalSub").innerHTML=c.sub;
+  document.getElementById("modalValue1").textContent=c.value1;
+  var banner=document.getElementById("modalContextBanner"),bannerText=document.getElementById("modalContextText");
+  if(c.contextLine){banner.style.display="flex";bannerText.innerHTML=c.contextLine;}else{banner.style.display="none";}
+  var urg=document.getElementById("modalUrgency"),urgText=document.getElementById("modalUrgencyText");
+  if(c.urgencyText){urg.style.display="flex";urgText.textContent=c.urgencyText;}else{urg.style.display="none";}
+  document.getElementById("modalSuccessTitle").textContent="You're in!";
+  document.getElementById("modalSuccessSub").innerHTML="Your 50 Boolean templates are on their way.<br>Keep searching for <strong>"+esc(c.primaryRole||"your target role")+"</strong> roles while you wait.";
+  document.getElementById("modalFormWrap").style.display="block";
+  document.getElementById("modalSuccess").classList.remove("show");
+  var submitBtn=document.getElementById("modalSubmit");submitBtn.disabled=false;submitBtn.textContent="Send Me the Templates \u2192";
+  var closeBtn=document.getElementById("modalCloseBtn");closeBtn.classList.remove("visible");setTimeout(function(){closeBtn.classList.add("visible");},2500);
+  var backdrop=document.getElementById("emailModal");backdrop.dataset.dismissable="0";setTimeout(function(){backdrop.dataset.dismissable="1";},1500);
+  trackEvent("email_modal_shown",(c.primaryRole||"no-role")+"|"+(c.primaryRegion||"no-region"));
+  backdrop.classList.add("open");
+}
+function closeModal(){var backdrop=document.getElementById("emailModal");if(backdrop.dataset.dismissable==="0")return;backdrop.classList.remove("open");}
+function forceCloseModal(){sessionStorage.setItem("popupDismissed","1");document.getElementById("emailModal").classList.remove("open");}
+document.getElementById("emailModal").addEventListener("click",function(e){if(e.target===this)closeModal();});
+
 async function submitEmail(){
-  const name=document.getElementById('modalName').value.trim(),email=document.getElementById('modalEmail').value.trim();
-  if(!email||!email.includes('@')){showToast('⚠️ Please enter a valid email');return;}
-  const btn=document.getElementById('modalSubmit');btn.disabled=true;btn.textContent='Sending…';
+  var name=document.getElementById("modalName").value.trim(),email=document.getElementById("modalEmail").value.trim();
+  if(!email||!email.includes("@")){showToast("\u26a0\ufe0f Please enter a valid email");return;}
+  var btn=document.getElementById("modalSubmit");btn.disabled=true;btn.textContent="Sending\u2026";
   try{
-    const res=await fetch(SUPABASE_URL+'/rest/v1/email_captures',{method:'POST',headers:{'Content-Type':'application/json','apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY,'Prefer':'return=minimal'},body:JSON.stringify({name,email,source:'boolean-tool'})});
-    if(res.ok||res.status===201){sessionStorage.setItem('emailCaptured','1');trackEvent('email_submitted','boolean-tool');document.getElementById('modalFormWrap').style.display='none';document.getElementById('modalSuccess').classList.add('show');setTimeout(()=>closeModal(),4000);}
-    else throw new Error('err');
-  }catch(err){btn.disabled=false;btn.textContent='Send Me the Templates →';showToast('⚠️ Something went wrong — please try again');}
+    var res=await fetch(SUPABASE_URL+"/rest/v1/email_captures",{method:"POST",headers:{"Content-Type":"application/json","apikey":SUPABASE_KEY,"Authorization":"Bearer "+SUPABASE_KEY,"Prefer":"return=minimal"},body:JSON.stringify({name:name,email:email,source:"boolean-tool"})});
+    if(res.ok||res.status===201){
+      fetch(SUPABASE_URL+"/rest/v1/boolean_requests",{method:"POST",headers:{"Content-Type":"application/json","apikey":SUPABASE_KEY,"Authorization":"Bearer "+SUPABASE_KEY,"Prefer":"return=minimal"},body:JSON.stringify({name:name||null,email:email,titles:state.titles,regions:state.regions.concat(state.customRegions),must_skills:state.mustSkills,nice_skills:state.niceSkills,score_at_submit:currentScore,trigger_source:"generate_button",boolean_string:plain.li||null,source:"boolean-tool"})}).catch(function(){});
+      localStorage.setItem("popupSubmitted","1");sessionStorage.removeItem("popupDismissed");
+      trackEvent("email_submitted","boolean-tool");
+      document.getElementById("modalFormWrap").style.display="none";document.getElementById("modalSuccess").classList.add("show");
+      setTimeout(function(){forceCloseModal();},4000);
+    }else throw new Error("err");
+  }catch(err){btn.disabled=false;btn.textContent="Send Me the Templates \u2192";showToast("\u26a0\ufe0f Something went wrong \u2014 please try again");}
 }
 
-// ── NAVI AI BOT ──
-const NAVI_LS_KEY='tdt_navi_user';
-let naviOpen=false,naviHistory=[],naviState='idle',naviPendingExtraction=null,naviUserName='',naviFirstTime=true;
-function loadNaviUser(){try{const raw=localStorage.getItem(NAVI_LS_KEY);if(!raw)return;const d=JSON.parse(raw);if(d.name){naviUserName=d.name;naviFirstTime=false;}}catch(e){}}
-function saveNaviUser(name){try{localStorage.setItem(NAVI_LS_KEY,JSON.stringify({name,ts:Date.now()}));}catch(e){}}
+// ── NAVI ──
+var NAVI_LS_KEY="tdt_navi_user";
+var naviOpen=false,naviHistory=[],naviState="idle",naviPendingExtraction=null,naviUserName="",naviFirstTime=true;
+function loadNaviUser(){try{var raw=localStorage.getItem(NAVI_LS_KEY);if(!raw)return;var d=JSON.parse(raw);if(d.name){naviUserName=d.name;naviFirstTime=false;}}catch(e){}}
+function saveNaviUser(name){try{localStorage.setItem(NAVI_LS_KEY,JSON.stringify({name:name,ts:Date.now()}));}catch(e){}}
 loadNaviUser();
-
 function openNavi(){
   if(naviOpen)return;naviOpen=true;
-  document.getElementById('naviPanel').classList.add('open');document.getElementById('naviBackdrop').classList.add('open');
-  trackEvent('navi_opened');
+  document.getElementById("naviPanel").classList.add("open");document.getElementById("naviBackdrop").classList.add("open");
+  trackEvent("navi_opened");
   if(naviHistory.length===0){
-    if(naviFirstTime){naviAddMsg('bot',"Hi there! I'm Navi 👋 I'm your Boolean search assistant — I'll help you build your perfect job search string in seconds.\n\nBefore we dive in, what's your name?");naviState='awaiting_name';}
-    else{naviAddMsg('bot',"Welcome back "+naviUserName+" — I remembered you from your last visit! 😊\n\nWhat kind of role are you searching for today? Tell me in plain English and I'll take care of the rest.");naviState='chatting';}
+    if(naviFirstTime){naviAddMsg("bot","Hi there! I'm Navi \uD83D\uDC4B I'm your Boolean search assistant \u2014 I'll help you build your perfect job search string in seconds.\n\nBefore we dive in, what's your name?");naviState="awaiting_name";}
+    else{naviAddMsg("bot","Welcome back "+naviUserName+" \u2014 I remembered you from your last visit! \uD83D\uDE0A\n\nWhat kind of role are you searching for today?");naviState="chatting";}
   }
-  setTimeout(()=>document.getElementById('naviInput').focus(),350);
+  setTimeout(function(){document.getElementById("naviInput").focus();},350);
 }
-function openNaviFromNudge(){window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});setTimeout(()=>openNavi(),400);}
-function closeNavi(){if(!naviOpen)return;naviOpen=false;document.getElementById('naviPanel').classList.remove('open');document.getElementById('naviBackdrop').classList.remove('open');trackEvent('navi_dismissed');}
-function naviHandleKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();naviSend();}}
-function autoResizeInput(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,100)+'px';}
-
+function openNaviFromNudge(){window.scrollTo({top:document.body.scrollHeight,behavior:"smooth"});setTimeout(function(){openNavi();},400);}
+function closeNavi(){if(!naviOpen)return;naviOpen=false;document.getElementById("naviPanel").classList.remove("open");document.getElementById("naviBackdrop").classList.remove("open");trackEvent("navi_dismissed");}
+function naviHandleKey(e){if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();naviSend();}}
+function autoResizeInput(el){el.style.height="auto";el.style.height=Math.min(el.scrollHeight,100)+"px";}
 function naviSend(){
-  const inp=document.getElementById('naviInput'),text=inp.value.trim();if(!text)return;
-  inp.value='';inp.style.height='42px';naviAddMsg('user',text);
-  if(naviState==='awaiting_name'){
-    const firstName=text.split(/\s+/)[0].replace(/[^a-zA-Z]/g,'')||text;
-    naviUserName=firstName;saveNaviUser(naviUserName);trackEvent('navi_name_captured',naviUserName);naviFirstTime=false;naviState='chatting';
-    setTimeout(()=>naviAddMsg('bot','Great to meet you, '+naviUserName+'! 🎉\n\nTell me about the role you\'re looking for — job title, region or country, and any key skills. You can be as casual as you like, I\'ll handle the rest.'),600);return;
+  var inp=document.getElementById("naviInput"),text=inp.value.trim();if(!text)return;
+  inp.value="";inp.style.height="42px";naviAddMsg("user",text);
+  if(naviState==="awaiting_name"){
+    var firstName=text.split(/\s+/)[0].replace(/[^a-zA-Z]/g,"")||text;
+    naviUserName=firstName;saveNaviUser(naviUserName);trackEvent("navi_name_captured",naviUserName);naviFirstTime=false;naviState="chatting";
+    setTimeout(function(){naviAddMsg("bot","Great to meet you, "+naviUserName+"! \uD83C\uDF89\n\nTell me about the role you're looking for \u2014 job title, region or country, and any key skills.");},600);return;
   }
-  if(naviState==='confirming'){
-    const lower=text.toLowerCase();
-    if(lower.includes('yes')||lower.includes('go')||lower.includes('ok')||lower.includes('sure')||lower.includes('correct')||lower.includes('perfect')){applyNaviExtraction(naviPendingExtraction);}
-    else{naviState='modifying';trackEvent('navi_modification',text.slice(0,80));naviShowTyping();naviCallGroq(text,true);}
+  if(naviState==="confirming"){
+    var lower=text.toLowerCase();
+    if(lower.includes("yes")||lower.includes("go")||lower.includes("ok")||lower.includes("sure")||lower.includes("correct")||lower.includes("perfect")){applyNaviExtraction(naviPendingExtraction);}
+    else{naviState="modifying";trackEvent("navi_modification",text.slice(0,80));naviShowTyping();naviCallGroq(text,true);}
     return;
   }
-  if(naviState==='modifying'||naviState==='chatting'){
-    if(naviState==='modifying')trackEvent('navi_modification',text.slice(0,80));
-    else trackEvent('navi_first_message',text.slice(0,80));
-    naviShowTyping();naviCallGroq(text,false);naviState='chatting';return;
+  if(naviState==="modifying"||naviState==="chatting"){
+    if(naviState==="modifying")trackEvent("navi_modification",text.slice(0,80));else trackEvent("navi_first_message",text.slice(0,80));
+    naviShowTyping();naviCallGroq(text,false);naviState="chatting";return;
   }
 }
-
 function naviAddMsg(role,text){
-  const msgs=document.getElementById('naviMessages'),div=document.createElement('div');
-  div.className='navi-msg'+(role==='user'?' user':'');
-  const bubble=document.createElement('div');bubble.className='navi-bubble';bubble.innerHTML=text.replace(/\n/g,'<br>');
-  if(role==='bot'){const av=document.createElement('div');av.className='navi-msg-avatar';av.textContent='🧭';div.appendChild(av);}
+  var msgs=document.getElementById("naviMessages"),div=document.createElement("div");
+  div.className="navi-msg"+(role==="user"?" user":"");
+  var bubble=document.createElement("div");bubble.className="navi-bubble";bubble.innerHTML=text.replace(/\n/g,"<br>");
+  if(role==="bot"){var av=document.createElement("div");av.className="navi-msg-avatar";av.textContent="\uD83E\uDDED";div.appendChild(av);}
   div.appendChild(bubble);msgs.appendChild(div);msgs.scrollTop=msgs.scrollHeight;
-  naviHistory.push({role:role==='user'?'user':'assistant',content:text});
+  naviHistory.push({role:role==="user"?"user":"assistant",content:text});
 }
-function naviShowTyping(){const msgs=document.getElementById('naviMessages'),div=document.createElement('div');div.className='navi-msg';div.id='naviTyping';const av=document.createElement('div');av.className='navi-msg-avatar';av.textContent='🧭';const bubble=document.createElement('div');bubble.className='navi-bubble navi-typing';bubble.innerHTML='<span></span><span></span><span></span>';div.appendChild(av);div.appendChild(bubble);msgs.appendChild(div);msgs.scrollTop=msgs.scrollHeight;}
-function naviRemoveTyping(){const el=document.getElementById('naviTyping');if(el)el.remove();}
-
+function naviShowTyping(){var msgs=document.getElementById("naviMessages"),div=document.createElement("div");div.className="navi-msg";div.id="naviTyping";var av=document.createElement("div");av.className="navi-msg-avatar";av.textContent="\uD83E\uDDED";var bubble=document.createElement("div");bubble.className="navi-bubble navi-typing";bubble.innerHTML="<span></span><span></span><span></span>";div.appendChild(av);div.appendChild(bubble);msgs.appendChild(div);msgs.scrollTop=msgs.scrollHeight;}
+function naviRemoveTyping(){var el=document.getElementById("naviTyping");if(el)el.remove();}
 async function naviCallGroq(userMessage,isModification){
-  const systemPrompt='You are Navi, a friendly Boolean search assistant for job seekers. Extract structured data from the user\'s description and reply EXACTLY in this format:\nNAVI_EXTRACT:{"job_titles":["..."],"regions":["..."],"must_skills":["..."],"nice_skills":["..."]}\nNAVI_CONFIRM:Your warm confirmation message addressing the user as '+naviUserName+', summarising what you understood and asking if they want to proceed.\n\nIf you need more info, ask one focused question instead. Keep must_skills to 1-2 maximum. If it\'s a modification, update accordingly and re-confirm.';
+  var systemPrompt='You are Navi, a friendly Boolean search assistant for job seekers. Extract structured data from the user\'s description and reply EXACTLY in this format:\nNAVI_EXTRACT:{"job_titles":["..."],"regions":["..."],"must_skills":["..."],"nice_skills":["..."]}\nNAVI_CONFIRM:Your warm confirmation message addressing the user as '+naviUserName+', summarising what you understood and asking if they want to proceed.\n\nIf you need more info, ask one focused question instead. Keep must_skills to 1-2 maximum.';
   try{
-    const messages=[{role:'system',content:systemPrompt},...naviHistory.slice(-8)];
-    const res=await fetch('/api/navi',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:messages,max_tokens:500,temperature:0.4})});
-    if(res.status===429){trackEvent('navi_rate_limit');naviRemoveTyping();naviAddMsg('bot','I\'ve hit my limit for now, '+naviUserName+'. Give me a few minutes and I\'ll be back! The form above works perfectly in the meantime. 😊');return;}
-    if(!res.ok)throw new Error('API '+res.status);
-    const data=await res.json(),reply=data.choices[0].message.content;
+    var messages=[{role:"system",content:systemPrompt}].concat(naviHistory.slice(-8));
+    var res=await fetch("/api/navi",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"llama-3.3-70b-versatile",messages:messages,max_tokens:500,temperature:0.4})});
+    if(res.status===429){trackEvent("navi_rate_limit");naviRemoveTyping();naviAddMsg("bot","I've hit my limit for now, "+naviUserName+". Give me a few minutes and I'll be back! The form above works perfectly in the meantime. \uD83D\uDE0A");return;}
+    if(!res.ok)throw new Error("API "+res.status);
+    var data=await res.json(),reply=data.choices[0].message.content;
     naviRemoveTyping();
-    const extractMatch=reply.match(/NAVI_EXTRACT:(\{.*?\})/s),confirmMatch=reply.match(/NAVI_CONFIRM:([\s\S]*?)$/);
+    var extractMatch=reply.match(/NAVI_EXTRACT:(\{.*?\})/s),confirmMatch=reply.match(/NAVI_CONFIRM:([\s\S]*?)$/);
     if(extractMatch&&confirmMatch){
-      try{const extracted=JSON.parse(extractMatch[1]),confirmMsg=confirmMatch[1].trim();naviPendingExtraction=extracted;naviState='confirming';naviAddMsgWithButtons(confirmMsg,extracted);}
-      catch(pe){naviAddMsg('bot',reply.replace(/NAVI_EXTRACT:.*$/s,'').replace(/NAVI_CONFIRM:/,'').trim());}
-    }else{naviAddMsg('bot',reply.replace(/NAVI_EXTRACT:.*$/s,'').replace(/NAVI_CONFIRM:/,'').trim()||'Could you tell me a bit more about the role, '+naviUserName+'?');}
-  }catch(err){trackEvent('navi_error',err.message||'unknown');naviRemoveTyping();naviAddMsg('bot','I ran into a small hiccup, '+naviUserName+'. Try again in a moment, or use the form above — it works perfectly! 🙏');}
+      try{var extracted=JSON.parse(extractMatch[1]),confirmMsg=confirmMatch[1].trim();naviPendingExtraction=extracted;naviState="confirming";naviAddMsgWithButtons(confirmMsg,extracted);}
+      catch(pe){naviAddMsg("bot",reply.replace(/NAVI_EXTRACT:.*$/s,"").replace(/NAVI_CONFIRM:/,"").trim());}
+    }else{naviAddMsg("bot",reply.replace(/NAVI_EXTRACT:.*$/s,"").replace(/NAVI_CONFIRM:/,"").trim()||"Could you tell me a bit more about the role, "+naviUserName+"?");}
+  }catch(err){trackEvent("navi_error",err.message||"unknown");naviRemoveTyping();naviAddMsg("bot","I ran into a small hiccup, "+naviUserName+". Try again in a moment, or use the form above \u2014 it works perfectly! \uD83D\uDE4F");}
 }
-
 function naviAddMsgWithButtons(text,extracted){
-  const msgs=document.getElementById('naviMessages'),div=document.createElement('div');div.className='navi-msg';
-  const av=document.createElement('div');av.className='navi-msg-avatar';av.textContent='🧭';
-  const wrap=document.createElement('div');wrap.style.cssText='display:flex;flex-direction:column;gap:8px;max-width:78%';
-  const bubble=document.createElement('div');bubble.className='navi-bubble';bubble.innerHTML=text.replace(/\n/g,'<br>');
-  const btns=document.createElement('div');btns.className='navi-confirm-btns';
-  const yes=document.createElement('button');yes.className='navi-confirm-btn navi-btn-yes';yes.textContent='✓ Yes, fill it in';yes.onclick=()=>{applyNaviExtraction(extracted);btns.remove();};
-  const adj=document.createElement('button');adj.className='navi-confirm-btn navi-btn-adjust';adj.textContent='✏️ Let me adjust';adj.onclick=()=>{btns.remove();naviState='modifying';naviAddMsg('bot','No problem, '+naviUserName+'! What would you like to change?');document.getElementById('naviInput').focus();};
+  var msgs=document.getElementById("naviMessages"),div=document.createElement("div");div.className="navi-msg";
+  var av=document.createElement("div");av.className="navi-msg-avatar";av.textContent="\uD83E\uDDED";
+  var wrap=document.createElement("div");wrap.style.cssText="display:flex;flex-direction:column;gap:8px;max-width:78%";
+  var bubble=document.createElement("div");bubble.className="navi-bubble";bubble.innerHTML=text.replace(/\n/g,"<br>");
+  var btns=document.createElement("div");btns.className="navi-confirm-btns";
+  var yes=document.createElement("button");yes.className="navi-confirm-btn navi-btn-yes";yes.textContent="\u2713 Yes, fill it in";
+  yes.onclick=function(){applyNaviExtraction(extracted);btns.remove();};
+  var adj=document.createElement("button");adj.className="navi-confirm-btn navi-btn-adjust";adj.textContent="\u270f\ufe0f Let me adjust";
+  adj.onclick=function(){btns.remove();naviState="modifying";naviAddMsg("bot","No problem, "+naviUserName+"! What would you like to change?");document.getElementById("naviInput").focus();};
   btns.appendChild(yes);btns.appendChild(adj);wrap.appendChild(bubble);wrap.appendChild(btns);div.appendChild(av);div.appendChild(wrap);msgs.appendChild(div);msgs.scrollTop=msgs.scrollHeight;
-  naviHistory.push({role:'assistant',content:text});
+  naviHistory.push({role:"assistant",content:text});
 }
-
 function applyNaviExtraction(extracted){
   state.titles=[];state.regions=[];state.customRegions=[];state.mustSkills=[];state.niceSkills=[];
-  const knownRegions=['MENA','GCC','Saudi Arabia','UAE','Qatar','UK','Europe','USA','Asia Pacific','India','Pakistan','Sri Lanka','Nepal','Global'];
-  (extracted.job_titles||[]).forEach(t=>{if(t.trim())state.titles.push(t.trim());});
-  (extracted.regions||[]).forEach(r=>{const t=r.trim();if(!t)return;if(knownRegions.includes(t))state.regions.push(t);else state.customRegions.push(t);});
-  (extracted.must_skills||[]).forEach(s=>{if(s.trim())state.mustSkills.push(s.trim());});
-  (extracted.nice_skills||[]).forEach(s=>{if(s.trim())state.niceSkills.push(s.trim());});
-  renderTags(state.titles,'titles-wrap','titles-input');renderTags(state.customRegions,'region-custom-wrap','region-custom-input');renderTags(state.mustSkills,'must-wrap','must-input');renderTags(state.niceSkills,'nice-wrap','nice-input');
-  document.querySelectorAll('#region-chips .chip').forEach(chip=>chip.classList.toggle('selected',state.regions.includes(chip.dataset.region)));
-  naviState='chatting';
-  trackEvent('bot_interaction',[...state.titles,...state.regions,...state.customRegions,...state.mustSkills,...state.niceSkills].join('|').slice(0,200));
-  naviAddMsg('bot','Done, '+naviUserName+'! 🎉 I\'ve filled in all your details. Hit ⚡ Generate Boolean Strings whenever you\'re ready!');
-  setTimeout(()=>{closeNavi();document.getElementById('card-titles').scrollIntoView({behavior:'smooth',block:'start'});showToast('✓ Navi filled in your search — hit Generate!');},1800);
+  var knownRegions=["MENA","GCC","Saudi Arabia","UAE","Qatar","UK","Europe","USA","Asia Pacific","India","Pakistan","Sri Lanka","Nepal","Global"];
+  (extracted.job_titles||[]).forEach(function(t){if(t.trim())state.titles.push(t.trim());});
+  (extracted.regions||[]).forEach(function(r){var t=r.trim();if(!t)return;if(knownRegions.indexOf(t)!==-1)state.regions.push(t);else state.customRegions.push(t);});
+  (extracted.must_skills||[]).forEach(function(s){if(s.trim())state.mustSkills.push(s.trim());});
+  (extracted.nice_skills||[]).forEach(function(s){if(s.trim())state.niceSkills.push(s.trim());});
+  renderTags(state.titles,"titles-wrap","titles-input");renderTags(state.customRegions,"region-custom-wrap","region-custom-input");renderTags(state.mustSkills,"must-wrap","must-input");renderTags(state.niceSkills,"nice-wrap","nice-input");
+  document.querySelectorAll("#region-chips .chip").forEach(function(chip){chip.classList.toggle("selected",state.regions.indexOf(chip.dataset.region)!==-1);});
+  naviState="chatting";updateMeter();
+  trackEvent("bot_interaction",state.titles.concat(state.regions,state.customRegions,state.mustSkills,state.niceSkills).join("|").slice(0,200));
+  naviAddMsg("bot","Done, "+naviUserName+"! \uD83C\uDF89 I've filled in all your details. Hit \u26a1 Generate Boolean Strings whenever you're ready!");
+  setTimeout(function(){closeNavi();document.getElementById("card-titles").scrollIntoView({behavior:"smooth",block:"start"});showToast("\u2713 Navi filled in your search \u2014 hit Generate!");},1800);
 }
 
 // ── TOUR ──
-const STEPS=[
-  {id:null,title:'Welcome to the Boolean String Builder',body:'This tool helps you find jobs the way recruiters search for candidates — using powerful Boolean logic. No technical knowledge needed.',hint:null},
-  {id:'card-titles',title:'Step 1 — Your Job Titles',body:'Type the job title you\'re looking for and press <strong>Enter</strong> to add it as a tag. Add multiple titles to cast a wider net.',hint:'Try typing <em>Data Analyst</em> then pressing Enter',pos:'below'},
-  {id:'title-op-group',title:'OR vs AND',body:'<strong>OR</strong> finds roles matching any of your titles. As a job seeker, always use <strong>OR</strong> — it gives you the most results.',hint:null,pos:'below'},
-  {id:'region-chips',title:'Step 2 — Your Target Region',body:'Click a region chip to include it. Select multiple regions if you\'re open to opportunities across the GCC or beyond.',hint:'Click <em>Qatar</em> or <em>UAE</em> to see how it highlights',pos:'below'},
-  {id:'region-custom-wrap',title:'Custom Location',body:'Not seeing your city? Type it here — <strong>Riyadh</strong>, <strong>London</strong>, <strong>Singapore</strong>. It flows directly into your search string.',hint:null,pos:'above'},
-  {id:'must-wrap',title:'Step 3 — Must-Have Skills',body:'Skills here must appear in every result. Keep it to <strong>1–2 maximum</strong> or your results become too narrow.',hint:'Example: add <em>SQL</em> for data roles',pos:'below'},
-  {id:'nice-wrap',title:'Nice-to-Have Skills',body:'Joined with OR — a job only needs to mention <strong>one</strong> of them. Add all the tools and technologies you know.',hint:'Example: <em>Power BI</em>, <em>Tableau</em>, <em>Excel</em> — any one counts',pos:'below'},
-  {id:'skill-chips',title:'Quick-Add Chips',body:'Click any chip to instantly add it to your nice-to-have skills. Click again to remove.',hint:'Try clicking <em>Power BI</em>',pos:'above'},
-  {id:'gen-wrap-anchor',title:'Generate Your Strings ⚡',body:'Hit this button for two ready-to-use strings instantly — LinkedIn and Google X-Ray, colour-coded so you can read the logic at a glance.',hint:'After generating, use Copy or the launch buttons to search immediately',pos:'above',last:true}
+var STEPS=[
+  {id:null,title:"Welcome to the Boolean String Builder",body:"This tool helps you find jobs the way recruiters search for candidates \u2014 using powerful Boolean logic. No technical knowledge needed.",hint:null},
+  {id:"card-titles",title:"Step 1 \u2014 Your Job Titles",body:"Type the job title you're looking for and press <strong>Enter</strong> to add it as a tag. Add multiple titles to cast a wider net.",hint:"Try typing <em>Data Analyst</em> then pressing Enter",pos:"below"},
+  {id:"title-op-group",title:"OR vs AND",body:"<strong>OR</strong> finds roles matching any of your titles. As a job seeker, always use <strong>OR</strong> \u2014 it gives you the most results.",hint:null,pos:"below"},
+  {id:"region-chips",title:"Step 2 \u2014 Your Target Region",body:"Click a region chip to include it. Select multiple regions if you're open to opportunities across the GCC or beyond.",hint:"Click <em>Qatar</em> or <em>UAE</em> to see how it highlights",pos:"below"},
+  {id:"region-custom-wrap",title:"Custom Location",body:"Not seeing your city? Type it here \u2014 <strong>Riyadh</strong>, <strong>London</strong>, <strong>Singapore</strong>. It flows directly into your search string.",hint:null,pos:"above"},
+  {id:"must-wrap",title:"Step 3 \u2014 Must-Have Skills",body:"Skills here must appear in every result. Keep it to <strong>1\u20132 maximum</strong> or your results become too narrow.",hint:"Example: add <em>SQL</em> for data roles",pos:"below"},
+  {id:"nice-wrap",title:"Nice-to-Have Skills",body:"Joined with OR \u2014 a job only needs to mention <strong>one</strong> of them. Add all the tools and technologies you know.",hint:"Example: <em>Power BI</em>, <em>Tableau</em>, <em>Excel</em> \u2014 any one counts",pos:"below"},
+  {id:"skill-chips",title:"Quick-Add Chips",body:"Click any chip to instantly add it to your nice-to-have skills. Click again to remove.",hint:"Try clicking <em>Power BI</em>",pos:"above"},
+  {id:"meterWrap",title:"Algorithm Strength Meter",body:"This meter scores your search from 0\u2013100 in real time. The higher the score, the more targeted your Boolean string \u2014 and the better your chances of surfacing hidden roles.",hint:"Try adding a second job title or 3+ skills to push the score up",pos:"above"},
+  {id:"gen-wrap-anchor",title:"Generate Your Strings \u26a1",body:"Hit this button for two ready-to-use strings instantly \u2014 LinkedIn and Google X-Ray, colour-coded so you can read the logic at a glance.",hint:"After generating, use Copy or the launch buttons to search immediately",pos:"above",last:true}
 ];
-let tourStep=-1;
-function tourStart(){trackEvent("tour_started");tourStep=0;buildPips();renderStep(0);document.getElementById('tourFab').style.opacity='0';document.getElementById('tourFab').style.pointerEvents='none';}
-function tourEnd(completed){trackEvent("tour_ended",completed?"completed":"skipped");document.getElementById('tourOverlay').classList.remove('on');document.getElementById('tourSpot').classList.remove('on');document.getElementById('tourCard').classList.remove('on');document.getElementById('tourFab').style.opacity='1';document.getElementById('tourFab').style.pointerEvents='auto';tourStep=-1;if(completed){const t=document.getElementById('tourDoneToast');t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3500);}}
-function tourNext(){const s=STEPS[tourStep];if(s.last){tourEnd(true);return;}tourStep++;renderStep(tourStep);}
-function buildPips(){const el=document.getElementById('tourProgress');el.innerHTML='';STEPS.forEach((_,i)=>{const p=document.createElement('div');p.className='tour-pip';p.id='pip'+i;el.appendChild(p);});}
-function updatePips(idx){STEPS.forEach((_,i)=>{const p=document.getElementById('pip'+i);if(!p)return;p.className='tour-pip'+(i<idx?' done':i===idx?' cur':'');});}
+var tourStep=-1;
+function tourStart(){trackEvent("tour_started");tourStep=0;buildPips();renderStep(0);document.getElementById("tourFab").style.opacity="0";document.getElementById("tourFab").style.pointerEvents="none";}
+function tourEnd(completed){trackEvent("tour_ended",completed?"completed":"skipped");["tourOverlay","tourSpot","tourCard"].forEach(function(id){document.getElementById(id).classList.remove("on");});var fab=document.getElementById("tourFab");fab.style.opacity="1";fab.style.pointerEvents="auto";tourStep=-1;if(completed){var t=document.getElementById("tourDoneToast");t.classList.add("show");setTimeout(function(){t.classList.remove("show");},3500);}}
+function tourNext(){if(STEPS[tourStep].last){tourEnd(true);return;}tourStep++;renderStep(tourStep);}
+function buildPips(){var el=document.getElementById("tourProgress");el.innerHTML="";STEPS.forEach(function(_,i){var p=document.createElement("div");p.className="tour-pip";p.id="pip"+i;el.appendChild(p);});}
+function updatePips(idx){STEPS.forEach(function(_,i){var p=document.getElementById("pip"+i);if(!p)return;p.className="tour-pip"+(i<idx?" done":i===idx?" cur":"");});}
 function renderStep(idx){
-  const step=STEPS[idx];
-  document.getElementById('tourPill').textContent='Step '+(idx+1)+' of '+STEPS.length;
-  document.getElementById('tourTitle').textContent=step.title;
-  document.getElementById('tourBody').innerHTML=step.body+(step.hint?'<div class="tour-hint"><span>💡</span><span>'+step.hint+'</span></div>':'');
-  const fwd=document.getElementById('tourFwd');
-  if(step.last){fwd.textContent='🎉 Finish';fwd.className='tour-btn tour-btn-done';}else{fwd.textContent='Next →';fwd.className='tour-btn tour-btn-fwd';}
-  updatePips(idx);document.getElementById('tourOverlay').classList.add('on');
-  if(!step.id){document.getElementById('tourSpot').classList.remove('on');posCenter(document.getElementById('tourCard'));document.getElementById('tourCard').classList.add('on');return;}
-  const el=document.getElementById(step.id);if(!el){document.getElementById('tourSpot').classList.remove('on');posCenter(document.getElementById('tourCard'));document.getElementById('tourCard').classList.add('on');return;}
-  el.scrollIntoView({behavior:'smooth',block:'center'});
-  setTimeout(()=>{placeSpot(el);placeCard(el,step.pos||'below',document.getElementById('tourCard'));document.getElementById('tourCard').classList.add('on');},380);
+  var step=STEPS[idx];
+  document.getElementById("tourPill").textContent="Step "+(idx+1)+" of "+STEPS.length;
+  document.getElementById("tourTitle").textContent=step.title;
+  document.getElementById("tourBody").innerHTML=step.body+(step.hint?'<div class="tour-hint"><span>\uD83D\uDCA1</span><span>'+step.hint+"</span></div>":"");
+  var fwd=document.getElementById("tourFwd");
+  if(step.last){fwd.textContent="\uD83C\uDF89 Finish";fwd.className="tour-btn tour-btn-done";}else{fwd.textContent="Next \u2192";fwd.className="tour-btn tour-btn-fwd";}
+  updatePips(idx);document.getElementById("tourOverlay").classList.add("on");
+  var el=step.id?document.getElementById(step.id):null;
+  if(!el){document.getElementById("tourSpot").classList.remove("on");posCenter(document.getElementById("tourCard"));document.getElementById("tourCard").classList.add("on");return;}
+  el.scrollIntoView({behavior:"smooth",block:"center"});
+  setTimeout(function(){placeSpot(el);placeCard(el,step.pos||"below",document.getElementById("tourCard"));document.getElementById("tourCard").classList.add("on");},380);
 }
-function placeSpot(el){const r=el.getBoundingClientRect(),pad=10,spot=document.getElementById('tourSpot');spot.style.top=(r.top-pad)+'px';spot.style.left=(r.left-pad)+'px';spot.style.width=(r.width+pad*2)+'px';spot.style.height=(r.height+pad*2)+'px';spot.classList.add('on');}
+function placeSpot(el){var r=el.getBoundingClientRect(),pad=10,spot=document.getElementById("tourSpot");spot.style.top=(r.top-pad)+"px";spot.style.left=(r.left-pad)+"px";spot.style.width=(r.width+pad*2)+"px";spot.style.height=(r.height+pad*2)+"px";spot.classList.add("on");}
 function placeCard(el,pref,card){
-  card.style.visibility='hidden';card.style.top='-9999px';card.style.left='-9999px';
-  requestAnimationFrame(()=>requestAnimationFrame(()=>{
-    const r=el.getBoundingClientRect(),cw=card.offsetWidth||320,ch=card.offsetHeight||220,vw=window.innerWidth,vh=window.innerHeight,gap=14,pad=12;
-    let top,left;
-    if(pref==='below'){top=r.bottom+gap;if(top+ch>vh-pad)top=r.top-ch-gap;}else{top=r.top-ch-gap;if(top<pad)top=r.bottom+gap;}
+  card.style.visibility="hidden";card.style.top="-9999px";card.style.left="-9999px";
+  requestAnimationFrame(function(){requestAnimationFrame(function(){
+    var r=el.getBoundingClientRect(),cw=card.offsetWidth||320,ch=card.offsetHeight||220,vw=window.innerWidth,vh=window.innerHeight,gap=14,pad=12,top,left;
+    if(pref==="below"){top=r.bottom+gap;if(top+ch>vh-pad)top=r.top-ch-gap;}else{top=r.top-ch-gap;if(top<pad)top=r.bottom+gap;}
     top=Math.max(pad,Math.min(vh-ch-pad,top));left=r.left+r.width/2-cw/2;left=Math.max(pad,Math.min(vw-cw-pad,left));
-    card.style.top=top+'px';card.style.left=left+'px';card.style.visibility='visible';
-  }));
+    card.style.top=top+"px";card.style.left=left+"px";card.style.visibility="visible";
+  });});
 }
-function posCenter(card){card.style.visibility='hidden';card.style.top='-9999px';card.style.left='-9999px';requestAnimationFrame(()=>requestAnimationFrame(()=>{const cw=card.offsetWidth||320,ch=card.offsetHeight||220;card.style.top=Math.max(16,(window.innerHeight-ch)/2)+'px';card.style.left=Math.max(16,(window.innerWidth-cw)/2)+'px';card.style.visibility='visible';}));}
+function posCenter(card){card.style.visibility="hidden";card.style.top="-9999px";card.style.left="-9999px";requestAnimationFrame(function(){requestAnimationFrame(function(){var cw=card.offsetWidth||320,ch=card.offsetHeight||220;card.style.top=Math.max(16,(window.innerHeight-ch)/2)+"px";card.style.left=Math.max(16,(window.innerWidth-cw)/2)+"px";card.style.visibility="visible";});});}
 
-// INIT
-setupTagInput('titles-wrap','titles-input',state.titles);
-setupTagInput('must-wrap','must-input',state.mustSkills);
-setupTagInput('nice-wrap','nice-input',state.niceSkills);
-setupTagInput('region-custom-wrap','region-custom-input',state.customRegions);
+// ── INIT ──
+setupTagInput("titles-wrap","titles-input","titles");
+setupTagInput("must-wrap","must-input","mustSkills");
+setupTagInput("nice-wrap","nice-input","niceSkills");
+setupTagInput("region-custom-wrap","region-custom-input","customRegions");
+updateMeter();
+
+// ── POPULAR SEARCHES ──
+function runPopular(p){
+  var knownRegions=["MENA","GCC","Saudi Arabia","UAE","Qatar","UK","Europe","USA","Asia Pacific","India","Pakistan","Sri Lanka","Nepal","Global"];
+  state.titles=[];state.regions=[];state.customRegions=[];state.mustSkills=[];state.niceSkills=[];
+  state.titles=p.titles.slice();
+  if(knownRegions.indexOf(p.region)!==-1)state.regions=[p.region];else state.customRegions=[p.region];
+  state.mustSkills=p.must.slice();state.niceSkills=p.nice.slice();
+  renderTags(state.titles,"titles-wrap","titles-input");renderTags(state.mustSkills,"must-wrap","must-input");renderTags(state.niceSkills,"nice-wrap","nice-input");renderTags(state.customRegions,"region-custom-wrap","region-custom-input");
+  document.querySelectorAll("#region-chips .chip").forEach(function(chip){chip.classList.toggle("selected",state.regions.indexOf(chip.dataset.region)!==-1);});
+  document.querySelectorAll("#skill-chips .chip").forEach(function(chip){chip.classList.toggle("selected",state.mustSkills.concat(state.niceSkills).indexOf(chip.dataset.skill)!==-1);});
+  updateMeter();trackEvent("popular_search_used",p.titles[0]+"_"+p.region);
+  setTimeout(function(){generateStrings();document.getElementById("card-titles").scrollIntoView({behavior:"smooth",block:"start"});},150);
+}
 
 // ── STICKY BAR ──
 (function(){
-  // Only show once per session; respect user dismissal
-  if(sessionStorage.getItem('stickyBarDismissed')) return;
-  setTimeout(function(){
-    const bar=document.getElementById('sticky-bar');
-    if(bar) bar.classList.add('visible');
-  }, 3000);
+  if(sessionStorage.getItem("stickyBarDismissed"))return;
+  setTimeout(function(){var bar=document.getElementById("sticky-bar");if(bar)bar.classList.add("visible");},3000);
 })();
+function closeStickyBar(){var bar=document.getElementById("sticky-bar");if(bar){bar.classList.remove("visible");setTimeout(function(){bar.style.display="none";},500);}sessionStorage.setItem("stickyBarDismissed","1");}
+function openStickyModal(){closeStickyBar();openModal({titles:[],regions:[],mustSkills:[],niceSkills:[]});}
 
-function closeStickyBar(){
-  const bar=document.getElementById('sticky-bar');
-  if(bar){bar.classList.remove('visible');setTimeout(()=>bar.style.display='none',500);}
-  sessionStorage.setItem('stickyBarDismissed','1');
-}
-
-function openStickyModal(){
-  closeStickyBar();
-  openModal();
-}
-
-// ── FAQ ACCORDION ──
+// ── FAQ ──
 function toggleFaq(idx){
-  const item=document.getElementById('faq-'+idx);
-  const body=document.getElementById('faq-body-'+idx);
-  if(!item||!body) return;
-  const isOpen=item.classList.contains('open');
-  if(isOpen){
-    // Close
-    body.style.maxHeight=body.scrollHeight+'px';
-    requestAnimationFrame(()=>{body.style.maxHeight='0';body.style.paddingTop='0';body.style.paddingBottom='0';});
-    item.classList.remove('open');
-  } else {
-    // Open
-    item.classList.add('open');
-    body.style.maxHeight='0';
-    body.style.paddingTop='';
-    body.style.paddingBottom='';
-    requestAnimationFrame(()=>{
-      body.style.maxHeight=body.scrollHeight+40+'px';
-    });
-    // After transition, set to auto so content reflow works
-    body.addEventListener('transitionend',function handler(){
-      if(item.classList.contains('open')) body.style.maxHeight='none';
-      body.removeEventListener('transitionend',handler);
-    });
-  }
-  trackEvent('faq_toggle','faq_'+idx+'_'+(isOpen?'close':'open'));
+  var item=document.getElementById("faq-"+idx),body=document.getElementById("faq-body-"+idx);
+  if(!item||!body)return;
+  var isOpen=item.classList.contains("open");
+  if(isOpen){body.style.maxHeight=body.scrollHeight+"px";requestAnimationFrame(function(){body.style.maxHeight="0";body.style.paddingTop="0";body.style.paddingBottom="0";});item.classList.remove("open");}
+  else{item.classList.add("open");body.style.maxHeight="0";body.style.paddingTop="";body.style.paddingBottom="";requestAnimationFrame(function(){body.style.maxHeight=(body.scrollHeight+40)+"px";});body.addEventListener("transitionend",function handler(){if(item.classList.contains("open"))body.style.maxHeight="none";body.removeEventListener("transitionend",handler);});}
+  trackEvent("faq_toggle","faq_"+idx+"_"+(isOpen?"close":"open"));
 }
+
 </script>
 </body>
 </html>
