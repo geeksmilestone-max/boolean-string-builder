@@ -556,7 +556,8 @@ input::placeholder { color: var(--muted); }
   <div class="card" id="card-titles">
     <div class="card-header">
       <div class="step-dot">1</div>
-      <div><div class="card-title">Job Title Preferences</div><div class="card-desc">Type a title and press Enter or comma to add</div></div>
+      <div style="flex:1;"><div class="card-title">Job Title Preferences</div><div class="card-desc">Type a title and press Enter or comma to add</div></div>
+      <button id="clearTitlesBtn" onclick="clearAllTitles()" style="display:none;background:none;border:1px solid rgba(255,255,255,0.1);color:var(--muted);font-size:11px;font-family:'Syne',sans-serif;font-weight:700;padding:4px 10px;border-radius:100px;cursor:pointer;transition:all 0.2s;letter-spacing:0.03em;white-space:nowrap;" onmouseover="this.style.borderColor='rgba(255,100,100,0.4)';this.style.color='#f87171'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)';this.style.color='var(--muted)'">✕ Clear all</button>
     </div>
     <div class="operator-row" style="margin-bottom:14px;">
       <span class="operator-label" style="white-space:nowrap;">Combine titles with</span>
@@ -1000,6 +1001,16 @@ function renderTags(arr,wrapId,inputId){
   wrap.innerHTML="";
   arr.forEach(function(t,i){var tag=document.createElement("span");tag.className="tag";tag.innerHTML=esc(t)+'<button class="tag-x" title="Remove">\xd7</button>';tag.querySelector(".tag-x").onclick=function(){removeTag(i,arr,wrapId,inputId);};wrap.appendChild(tag);});
   wrap.appendChild(inp);inp.value="";inp.focus();
+  // Show/hide Clear All button based on titles count
+  var clearBtn=document.getElementById("clearTitlesBtn");
+  if(clearBtn) clearBtn.style.display=(wrapId==="titles-wrap"&&arr.length>0)?"inline-flex":"none";
+}
+function clearAllTitles(){
+  state.titles=[];
+  renderTags(state.titles,"titles-wrap","titles-input");
+  hideSynonymSuggestions();
+  updateMeter();
+  trackEvent("clear_all_titles","");
 }
 function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
 
@@ -1361,12 +1372,8 @@ function runPopular(p){
   var knownRegions=["MENA","GCC","Saudi Arabia","UAE","Qatar","UK","Europe","USA","Asia Pacific","India","Pakistan","Sri Lanka","Nepal","Global"];
   state.titles=[];state.regions=[];state.customRegions=[];state.mustSkills=[];state.niceSkills=[];
 
-  // If synonymKey provided and SYNONYM_MAP has it, inject full cluster — otherwise use titles array
-  if(p.synonymKey && SYNONYM_MAP[p.synonymKey] && SYNONYM_MAP[p.synonymKey].synonyms && SYNONYM_MAP[p.synonymKey].synonyms.length){
-    state.titles = SYNONYM_MAP[p.synonymKey].synonyms.slice();
-  } else {
-    state.titles = p.titles.slice();
-  }
+  // Always inject single display title — synonym suggest row handles optional additions
+  state.titles = p.titles.slice();
 
   if(knownRegions.indexOf(p.region)!==-1)state.regions=[p.region];else state.customRegions=[p.region];
   state.mustSkills=p.must.slice();state.niceSkills=p.nice.slice();
@@ -1374,6 +1381,11 @@ function runPopular(p){
   document.querySelectorAll("#region-chips .chip").forEach(function(chip){chip.classList.toggle("selected",state.regions.indexOf(chip.dataset.region)!==-1);});
   document.querySelectorAll("#skill-chips .chip").forEach(function(chip){chip.classList.toggle("selected",state.mustSkills.concat(state.niceSkills).indexOf(chip.dataset.skill)!==-1);});
   updateMeter();trackEvent("popular_search_used",p.titles[0]+"_"+p.region);
+  // Auto-show synonym suggestions for the loaded role
+  if(p.synonymKey && SYNONYM_MAP[p.synonymKey]){
+    synonymDismissed = false;
+    showSynonymSuggestions(p.synonymKey, SYNONYM_MAP[p.synonymKey]);
+  }
   setTimeout(function(){generateStrings();document.getElementById("card-titles").scrollIntoView({behavior:"smooth",block:"start"});},150);
 }
 
