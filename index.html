@@ -924,8 +924,8 @@ function showSynonymSuggestions(clusterKey, cluster) {
     trackEvent("synonym_add_all", clusterKey);
   };
   dismissBtn.onclick = function() {
-    synonymDismissed = true;
     hideSynonymSuggestions();
+    // Don't set synonymDismissed permanently — user can type again to get suggestions
   };
   box.classList.add("visible");
 }
@@ -936,8 +936,9 @@ function hideSynonymSuggestions() {
 }
 
 function onTitlesInput(e) {
-  if (synonymDismissed) return;
   var val = e.target.value.trim();
+  // Reset dismissed state when user starts typing a new query
+  if (val.length > 0) synonymDismissed = false;
   clearTimeout(synonymDebounceTimer);
   if (!val || val.length < 3) { hideSynonymSuggestions(); return; }
   synonymDebounceTimer = setTimeout(function() {
