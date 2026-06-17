@@ -181,6 +181,13 @@ input::placeholder { color: var(--muted); }
 .navi-nudge:hover{color:var(--accent)}
 .navi-nudge-dot{width:6px;height:6px;border-radius:50%;background:var(--accent3);flex-shrink:0;animation:pulse 2s infinite}
 
+/* ── PLATFORM VALIDATOR ── */
+.platform-warning{display:none;margin-top:10px;padding:10px 14px;background:rgba(251,191,36,0.06);border:1px solid rgba(251,191,36,0.2);border-radius:var(--radius-sm);animation:fadeIn 0.2s ease both;}
+.platform-warning.visible{display:flex;align-items:flex-start;gap:8px;}
+.platform-warning-icon{font-size:14px;flex-shrink:0;margin-top:1px;}
+.platform-warning-text{font-size:12px;color:#fbbf24;line-height:1.5;font-family:'DM Sans',sans-serif;}
+.platform-warning-text strong{font-weight:600;color:#fcd34d;}
+
 /* ── MATRIX SUBLABELS & OPERATOR BADGES ── */
 .matrix-sublabel{font-size:11px;font-weight:700;font-family:'Syne',sans-serif;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:10px;display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:100px;}
 .matrix-sublabel.or{color:#4f8ef7;background:rgba(79,142,247,0.08);border:1px solid rgba(79,142,247,0.18);}
@@ -696,6 +703,10 @@ input::placeholder { color: var(--muted); }
     <!-- LinkedIn Tab -->
     <div class="tab-pane active" id="tab-li">
       <div class="string-box" id="li-output"></div>
+      <div class="platform-warning" id="li-warning">
+        <span class="platform-warning-icon">⚠️</span>
+        <span class="platform-warning-text" id="li-warning-text"></span>
+      </div>
       <label class="li-posts-toggle" id="liPostsToggleWrap">
         <input type="checkbox" id="liPostsToggle" onchange="toggleLinkedInPosts(this.checked)" />
         <div class="li-posts-toggle-text">
@@ -714,6 +725,10 @@ input::placeholder { color: var(--muted); }
         <div class="xray-site-block">
           <div class="xray-site-label"><span class="xray-site-name">LinkedIn</span><span class="xray-site-badge">Profiles</span></div>
           <div class="string-box" id="gx-li-output"></div>
+          <div class="platform-warning" id="gx-warning">
+            <span class="platform-warning-icon">⚠️</span>
+            <span class="platform-warning-text" id="gx-warning-text"></span>
+          </div>
           <div class="action-row">
             <button class="btn btn-primary" onclick="copyXray('li')">📋 Copy</button>
             <button class="btn btn-ghost" onclick="openXray('li')">↗ Search Google</button>
@@ -1093,6 +1108,7 @@ function generateStrings(){
     document.getElementById("gx-"+site.key+"-output").innerHTML=highlight(str);
   });
   plain.gx=xrayPlain.li;
+  validateStrings(li, xrayPlain.li);
   var sec=document.getElementById("output-section");sec.classList.add("visible");
   setTimeout(function(){sec.scrollIntoView({behavior:"smooth",block:"start"});},100);
   saveRecentSearch();
@@ -1107,7 +1123,36 @@ function generateStrings(){
   }
 }
 
-// ── SOURCING VAULT ──
+// ── PLATFORM VALIDATOR ──
+function validateStrings(li, gxLi) {
+  // LinkedIn validator
+  var liWarningEl = document.getElementById("li-warning");
+  var liWarningText = document.getElementById("li-warning-text");
+  var liWarnings = [];
+  var orMatches = li.match(/\bOR\b/g);
+  var orCount = orMatches ? orMatches.length + 1 : 1;
+  if (orCount > 5) liWarnings.push("<strong>OR chain is long (" + orCount + " terms).</strong> LinkedIn recommends keeping OR chains to 5 or fewer for best results — consider splitting into two searches.");
+  if (li.length > 500) liWarnings.push("<strong>String is " + li.length + " characters.</strong> LinkedIn may truncate queries over 500 characters — try removing some nice-to-have skills.");
+  if (liWarnings.length) {
+    liWarningText.innerHTML = liWarnings.join(" ");
+    liWarningEl.classList.add("visible");
+  } else {
+    liWarningEl.classList.remove("visible");
+  }
+
+  // Google X-Ray validator
+  var gxWarningEl = document.getElementById("gx-warning");
+  var gxWarningText = document.getElementById("gx-warning-text");
+  var wordCount = gxLi.split(/\s+/).filter(Boolean).length;
+  if (wordCount > 32) {
+    gxWarningText.innerHTML = "<strong>Query is " + wordCount + " words.</strong> Google works best under 32 words — your X-Ray string may return fewer results. Try reducing nice-to-have skills.";
+    gxWarningEl.classList.add("visible");
+  } else {
+    gxWarningEl.classList.remove("visible");
+  }
+}
+
+
 function logToSourcingVault(){
   var jobTitle=state.titles[0]||null;
   var region=state.regions.concat(state.customRegions)[0]||null;
