@@ -180,6 +180,52 @@ input::placeholder { color: var(--muted); }
 .navi-nudge{margin-top:10px;font-size:12.5px;color:var(--muted);cursor:pointer;display:inline-flex;align-items:center;gap:5px;transition:color 0.2s;user-select:none}
 .navi-nudge:hover{color:var(--accent)}
 .navi-nudge-dot{width:6px;height:6px;border-radius:50%;background:var(--accent3);flex-shrink:0;animation:pulse 2s infinite}
+
+/* ── PLATFORM VALIDATOR ── */
+.platform-warning{display:none;margin-top:10px;padding:10px 14px;background:rgba(251,191,36,0.06);border:1px solid rgba(251,191,36,0.2);border-radius:var(--radius-sm);animation:fadeIn 0.2s ease both;}
+.platform-warning.visible{display:flex;align-items:flex-start;gap:8px;}
+.platform-warning-icon{font-size:14px;flex-shrink:0;margin-top:1px;}
+.platform-warning-text{font-size:12px;color:#fbbf24;line-height:1.5;font-family:'DM Sans',sans-serif;}
+.platform-warning-text strong{font-weight:600;color:#fcd34d;}
+
+/* ── MATRIX SUBLABELS & OPERATOR BADGES ── */
+.matrix-sublabel{font-size:11px;font-weight:700;font-family:'Syne',sans-serif;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:10px;display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:100px;}
+.matrix-sublabel.or{color:#4f8ef7;background:rgba(79,142,247,0.08);border:1px solid rgba(79,142,247,0.18);}
+.matrix-sublabel.and{color:#38e8b5;background:rgba(56,232,181,0.08);border:1px solid rgba(56,232,181,0.18);}
+.matrix-sublabel.loc{color:#a78bfa;background:rgba(167,139,250,0.08);border:1px solid rgba(167,139,250,0.18);}
+.op-badge{display:inline-flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;font-family:'Syne',sans-serif;letter-spacing:0.08em;padding:2px 5px;border-radius:4px;margin:0 2px;vertical-align:middle;flex-shrink:0;}
+.op-badge.or{color:#4f8ef7;background:rgba(79,142,247,0.12);border:1px solid rgba(79,142,247,0.2);}
+.op-badge.and{color:#38e8b5;background:rgba(56,232,181,0.10);border:1px solid rgba(56,232,181,0.2);}
+
+/* ── COMMUNITY CORRECTION ── */
+#communityCorrect{display:none;margin-top:10px;padding:12px 14px;background:rgba(56,232,181,0.05);border:1px solid rgba(56,232,181,0.18);border-radius:var(--radius-sm);animation:fadeIn 0.2s ease both}
+#communityCorrect.visible{display:block}
+.cc-label{font-size:11px;font-weight:700;font-family:'Syne',sans-serif;color:var(--accent3);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.cc-desc{font-size:12.5px;color:var(--muted2);margin-bottom:10px;line-height:1.5}
+.cc-desc strong{color:var(--text);font-weight:500}
+.cc-inputs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.cc-input{flex:1;min-width:140px;background:var(--surface2);border:1px solid var(--border2);border-radius:var(--radius-sm);padding:7px 12px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;outline:none;transition:border-color 0.2s}
+.cc-input:focus{border-color:var(--accent3)}
+.cc-input::placeholder{color:var(--muted)}
+.cc-actions{display:flex;align-items:center;gap:8px}
+.cc-submit{background:var(--accent3);color:#07090f;font-size:11px;font-family:'Syne',sans-serif;font-weight:800;padding:5px 14px;border-radius:100px;border:none;cursor:pointer;letter-spacing:0.03em;transition:all 0.15s}
+.cc-submit:hover{filter:brightness(1.1);transform:translateY(-1px)}
+.cc-skip{background:none;border:none;color:var(--muted);font-size:11px;font-family:'Syne',sans-serif;font-weight:700;cursor:pointer;transition:color 0.15s;letter-spacing:0.03em}
+.cc-skip:hover{color:var(--text)}
+.cc-thanks{font-size:12.5px;color:var(--accent3);font-family:'Syne',sans-serif;font-weight:700;display:none;padding:4px 0}
+
+/* ── SYNONYM SUGGESTIONS ── */
+#synonymSuggest{display:none;margin-top:10px;padding:12px 14px;background:rgba(79,142,247,0.06);border:1px solid rgba(79,142,247,0.18);border-radius:var(--radius-sm);animation:fadeIn 0.2s ease both}
+#synonymSuggest.visible{display:block}
+.synonym-suggest-label{font-size:11px;font-weight:700;font-family:'Syne',sans-serif;color:var(--accent);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.synonym-chips-row{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.synonym-chip{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:100px;background:rgba(79,142,247,0.10);border:1px solid rgba(79,142,247,0.25);color:var(--accent);font-size:12px;font-family:'DM Sans',sans-serif;font-weight:500;cursor:pointer;transition:all 0.15s;white-space:nowrap}
+.synonym-chip:hover{background:rgba(79,142,247,0.22);border-color:rgba(79,142,247,0.5);transform:translateY(-1px)}
+.synonym-chip-plus{font-size:13px;font-weight:700;line-height:1}
+.synonym-add-all{display:inline-flex;align-items:center;gap:4px;padding:4px 12px;border-radius:100px;background:var(--accent);color:#fff;font-size:11px;font-family:'Syne',sans-serif;font-weight:700;cursor:pointer;border:none;letter-spacing:0.03em;transition:all 0.15s;white-space:nowrap;margin-left:4px}
+.synonym-add-all:hover{filter:brightness(1.12);transform:translateY(-1px)}
+.synonym-dismiss{margin-left:auto;background:none;border:none;color:var(--muted);font-size:15px;cursor:pointer;padding:0 2px;line-height:1;transition:color 0.15s;flex-shrink:0}
+.synonym-dismiss:hover{color:var(--text)}
 .navi-fab{position:fixed;bottom:24px;right:24px;z-index:800;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(79,142,247,0.45);transition:all 0.25s;animation:fadeUp 1s 1.2s ease both;opacity:0}
 .navi-fab:hover{transform:translateY(-3px) scale(1.06);box-shadow:0 8px 32px rgba(79,142,247,0.6)}
 .navi-fab-emoji{font-size:22px;line-height:1}
@@ -475,49 +521,76 @@ input::placeholder { color: var(--muted); }
 
   <!-- POPULAR SEARCHES -->
   <div class="popular-section">
-    <div class="popular-header">
-      <span class="popular-dot"></span>
-      <span class="popular-heading">Popular Searches</span>
+    <div class="recent-searches-header" onclick="togglePopularSearches()" style="padding:14px 20px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:background 0.2s;border-radius:var(--radius);" onmouseover="this.style.background='var(--surface2)'" onmouseout="this.style.background='transparent'">
+      <div class="popular-header" style="margin-bottom:0;">
+        <span class="popular-dot"></span>
+        <span class="popular-heading">Popular Searches</span>
+        <span class="recent-searches-count" style="margin-left:4px;">10</span>
+      </div>
+      <span class="recent-searches-chevron" id="popularChevron">▾</span>
     </div>
-    <div class="popular-grid" id="popularGrid">
-      <div class="popular-card" onclick="runPopular({titles:['Data Analyst'],region:'UAE',must:['SQL'],nice:['Power BI','Tableau','Excel','Python']})">
+    <div id="popularSearchesBody" style="display:none;">
+      <div class="popular-grid" id="popularGrid" style="padding:0 4px 4px;">
+      <div class="popular-card" onclick="runPopular({titles:['Data Analyst'],synonymKey:'data_analytics',region:'UAE',must:['SQL'],nice:['Power BI','Tableau','Excel','Python']})">
         <div class="popular-card-role">Data Analyst</div><div class="popular-card-region">UAE</div>
         <div class="popular-card-skills"><span class="popular-card-skill must">SQL</span><span class="popular-card-skill">Power BI</span><span class="popular-card-skill">Tableau</span><span class="popular-card-skill">Excel</span><span class="popular-card-skill">Python</span></div>
         <div class="popular-card-cta">Try this search →</div>
       </div>
-      <div class="popular-card" onclick="runPopular({titles:['HR Manager'],region:'Saudi Arabia',must:['SAP'],nice:['SuccessFactors','Oracle HCM','Workday','HRMS']})">
+      <div class="popular-card" onclick="runPopular({titles:['HR Manager'],synonymKey:'hr_generalist',region:'Saudi Arabia',must:['SAP'],nice:['SuccessFactors','Oracle HCM','Workday','HRMS']})">
         <div class="popular-card-role">HR Manager</div><div class="popular-card-region">Saudi Arabia</div>
         <div class="popular-card-skills"><span class="popular-card-skill must">SAP</span><span class="popular-card-skill">SuccessFactors</span><span class="popular-card-skill">Oracle HCM</span><span class="popular-card-skill">Workday</span><span class="popular-card-skill">HRMS</span></div>
         <div class="popular-card-cta">Try this search →</div>
       </div>
-      <div class="popular-card" onclick="runPopular({titles:['Software Engineer'],region:'GCC',must:['JavaScript'],nice:['React','Node.js','Python','Java']})">
+      <div class="popular-card" onclick="runPopular({titles:['Software Engineer'],synonymKey:'software_engineering',region:'GCC',must:['JavaScript'],nice:['React','Node.js','Python','Java']})">
         <div class="popular-card-role">Software Engineer</div><div class="popular-card-region">GCC</div>
         <div class="popular-card-skills"><span class="popular-card-skill must">JavaScript</span><span class="popular-card-skill">React</span><span class="popular-card-skill">Node.js</span><span class="popular-card-skill">Python</span><span class="popular-card-skill">Java</span></div>
         <div class="popular-card-cta">Try this search →</div>
       </div>
-      <div class="popular-card" onclick="runPopular({titles:['Finance Manager'],region:'Qatar',must:['Excel'],nice:['Financial Analysis','Budgeting','Forecasting','ERP']})">
+      <div class="popular-card" onclick="runPopular({titles:['Finance Manager'],synonymKey:'finance',region:'Qatar',must:['Excel'],nice:['Financial Analysis','Budgeting','Forecasting','ERP']})">
         <div class="popular-card-role">Finance Manager</div><div class="popular-card-region">Qatar</div>
         <div class="popular-card-skills"><span class="popular-card-skill must">Excel</span><span class="popular-card-skill">Financial Analysis</span><span class="popular-card-skill">Budgeting</span><span class="popular-card-skill">Forecasting</span><span class="popular-card-skill">ERP</span></div>
         <div class="popular-card-cta">Try this search →</div>
       </div>
-      <div class="popular-card" onclick="runPopular({titles:['Marketing Manager'],region:'MENA',must:['Digital Marketing'],nice:['SEO','Social Media','Google Ads','Content Marketing']})">
+      <div class="popular-card" onclick="runPopular({titles:['Marketing Manager'],synonymKey:'marketing_generalist',region:'MENA',must:['Digital Marketing'],nice:['SEO','Social Media','Google Ads','Content Marketing']})">
         <div class="popular-card-role">Marketing Manager</div><div class="popular-card-region">MENA</div>
         <div class="popular-card-skills"><span class="popular-card-skill must">Digital Marketing</span><span class="popular-card-skill">SEO</span><span class="popular-card-skill">Social Media</span><span class="popular-card-skill">Google Ads</span><span class="popular-card-skill">Content Marketing</span></div>
         <div class="popular-card-cta">Try this search →</div>
       </div>
-      <div class="popular-card" onclick="runPopular({titles:['Project Manager'],region:'GCC',must:['PMP'],nice:['Agile','Scrum','MS Project','Risk Management']})">
+      <div class="popular-card" onclick="runPopular({titles:['Project Manager'],synonymKey:'project_management',region:'GCC',must:['PMP'],nice:['Agile','Scrum','MS Project','Risk Management']})">
         <div class="popular-card-role">Project Manager</div><div class="popular-card-region">GCC</div>
         <div class="popular-card-skills"><span class="popular-card-skill must">PMP</span><span class="popular-card-skill">Agile</span><span class="popular-card-skill">Scrum</span><span class="popular-card-skill">MS Project</span><span class="popular-card-skill">Risk Management</span></div>
         <div class="popular-card-cta">Try this search →</div>
       </div>
-    </div>
-  </div>
+      <div class="popular-card" onclick="runPopular({titles:['Civil Engineer'],synonymKey:'civil_engineering',region:'Qatar',must:['AutoCAD'],nice:['Revit','BIM','Primavera','Civil 3D']})">
+        <div class="popular-card-role">Civil Engineer</div><div class="popular-card-region">Qatar</div>
+        <div class="popular-card-skills"><span class="popular-card-skill must">AutoCAD</span><span class="popular-card-skill">Revit</span><span class="popular-card-skill">BIM</span><span class="popular-card-skill">Primavera</span><span class="popular-card-skill">Civil 3D</span></div>
+        <div class="popular-card-cta">Try this search →</div>
+      </div>
+      <div class="popular-card" onclick="runPopular({titles:['Operations Manager'],synonymKey:'operations',region:'UAE',must:['Operations Management'],nice:['ERP','Six Sigma','Lean','Process Improvement']})">
+        <div class="popular-card-role">Operations Manager</div><div class="popular-card-region">UAE</div>
+        <div class="popular-card-skills"><span class="popular-card-skill must">Operations Management</span><span class="popular-card-skill">ERP</span><span class="popular-card-skill">Six Sigma</span><span class="popular-card-skill">Lean</span><span class="popular-card-skill">Process Improvement</span></div>
+        <div class="popular-card-cta">Try this search →</div>
+      </div>
+      <div class="popular-card" onclick="runPopular({titles:['Sales Manager'],synonymKey:'sales',region:'GCC',must:['B2B Sales'],nice:['CRM','Salesforce','Negotiation','Key Account Management']})">
+        <div class="popular-card-role">Sales Manager</div><div class="popular-card-region">GCC</div>
+        <div class="popular-card-skills"><span class="popular-card-skill must">B2B Sales</span><span class="popular-card-skill">CRM</span><span class="popular-card-skill">Salesforce</span><span class="popular-card-skill">Negotiation</span><span class="popular-card-skill">Key Account Management</span></div>
+        <div class="popular-card-cta">Try this search →</div>
+      </div>
+      <div class="popular-card" onclick="runPopular({titles:['Procurement Manager'],synonymKey:'procurement',region:'Saudi Arabia',must:['Procurement'],nice:['SAP','Vendor Management','Contract Negotiation','Supply Chain']})">
+        <div class="popular-card-role">Procurement Manager</div><div class="popular-card-region">Saudi Arabia</div>
+        <div class="popular-card-skills"><span class="popular-card-skill must">Procurement</span><span class="popular-card-skill">SAP</span><span class="popular-card-skill">Vendor Management</span><span class="popular-card-skill">Contract Negotiation</span><span class="popular-card-skill">Supply Chain</span></div>
+        <div class="popular-card-cta">Try this search →</div>
+      </div>
+      </div><!-- /.popular-grid -->
+    </div><!-- /#popularSearchesBody -->
+  </div><!-- /.popular-section -->
 
   <!-- Step 1: Job Titles -->
   <div class="card" id="card-titles">
     <div class="card-header">
       <div class="step-dot">1</div>
-      <div><div class="card-title">Job Title Preferences</div><div class="card-desc">Type a title and press Enter or comma to add</div></div>
+      <div style="flex:1;"><div class="card-title">Job Title Preferences</div><div class="card-desc">Type a title and press Enter or comma to add</div></div>
+      <button id="clearTitlesBtn" onclick="clearAllTitles()" style="display:none;background:none;border:1px solid rgba(255,255,255,0.1);color:var(--muted);font-size:11px;font-family:'Syne',sans-serif;font-weight:700;padding:4px 10px;border-radius:100px;cursor:pointer;transition:all 0.2s;letter-spacing:0.03em;white-space:nowrap;" onmouseover="this.style.borderColor='rgba(255,100,100,0.4)';this.style.color='#f87171'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)';this.style.color='var(--muted)'">✕ Clear all</button>
     </div>
     <div class="operator-row" style="margin-bottom:14px;">
       <span class="operator-label" style="white-space:nowrap;">Combine titles with</span>
@@ -526,8 +599,29 @@ input::placeholder { color: var(--muted); }
         <button class="toggle-btn" data-op="AND">AND</button>
       </div>
     </div>
+    <div class="matrix-sublabel or" id="titlesSublabel">⟳ Match at least one of these</div>
     <div class="tag-input-wrap" id="titles-wrap">
       <input type="text" class="tag-inline-input" id="titles-input" placeholder="e.g. Data Analyst, Business Analyst…" />
+    </div>
+    <div id="synonymSuggest">
+      <div class="synonym-suggest-label">💡 Related titles — click to add</div>
+      <div class="synonym-chips-row" id="synonymChipsRow">
+        <button class="synonym-add-all" id="synonymAddAll">+ Add All</button>
+        <button class="synonym-dismiss" id="synonymDismiss" title="Dismiss">✕</button>
+      </div>
+    </div>
+    <div id="communityCorrect">
+      <div class="cc-label">💡 Help us improve</div>
+      <div class="cc-desc">We don't have synonyms for <strong id="ccTitleSpan"></strong> yet. What are 2 alternative job titles for this role?</div>
+      <div class="cc-inputs">
+        <input type="text" class="cc-input" id="ccInput1" placeholder="Alternative title 1" maxlength="60" />
+        <input type="text" class="cc-input" id="ccInput2" placeholder="Alternative title 2 (optional)" maxlength="60" />
+      </div>
+      <div class="cc-actions">
+        <button class="cc-submit" onclick="submitCommunityCorrection()">Submit</button>
+        <button class="cc-skip" onclick="dismissCommunityCorrection()">No thanks</button>
+        <span class="cc-thanks" id="ccThanks">✓ Thank you — we'll review it shortly!</span>
+      </div>
     </div>
     <div class="navi-nudge" id="naviNudge" onclick="openNaviFromNudge()">
       <span class="navi-nudge-dot"></span>
@@ -541,6 +635,7 @@ input::placeholder { color: var(--muted); }
       <div class="step-dot">2</div>
       <div><div class="card-title">Target Market Region</div><div class="card-desc">Select a region or type a custom one</div></div>
     </div>
+    <div class="matrix-sublabel loc" style="margin-bottom:12px;">⊙ Narrow results to this location</div>
     <div class="chip-group" id="region-chips">
       <div class="chip" data-region="MENA">MENA</div>
       <div class="chip" data-region="GCC">GCC</div>
@@ -573,10 +668,12 @@ input::placeholder { color: var(--muted); }
     <div class="row-2">
       <div>
         <label>Must-have skills (AND)</label>
+        <div class="matrix-sublabel and">⊕ All of these must appear</div>
         <div class="tag-input-wrap" id="must-wrap"><input type="text" class="tag-inline-input" id="must-input" placeholder="e.g. SQL…" /></div>
       </div>
       <div>
         <label>Nice-to-have skills (OR)</label>
+        <div class="matrix-sublabel or">⟳ Any of these is a bonus</div>
         <div class="tag-input-wrap" id="nice-wrap"><input type="text" class="tag-inline-input" id="nice-input" placeholder="e.g. Power BI…" /></div>
       </div>
     </div>
@@ -631,10 +728,15 @@ input::placeholder { color: var(--muted); }
     <div class="output-tabs">
       <button class="output-tab active" onclick="switchTab('li',this)"><span class="tab-icon li"></span> LinkedIn Search</button>
       <button class="output-tab" onclick="switchTab('gx',this)"><span style="font-size:13px;">🔍</span> Google X-Ray</button>
+      <button class="output-tab" onclick="switchTab('raw',this)"><span style="font-size:13px;">{ }</span> Boolean Raw</button>
     </div>
     <!-- LinkedIn Tab -->
     <div class="tab-pane active" id="tab-li">
       <div class="string-box" id="li-output"></div>
+      <div class="platform-warning" id="li-warning">
+        <span class="platform-warning-icon">⚠️</span>
+        <span class="platform-warning-text" id="li-warning-text"></span>
+      </div>
       <label class="li-posts-toggle" id="liPostsToggleWrap">
         <input type="checkbox" id="liPostsToggle" onchange="toggleLinkedInPosts(this.checked)" />
         <div class="li-posts-toggle-text">
@@ -653,6 +755,10 @@ input::placeholder { color: var(--muted); }
         <div class="xray-site-block">
           <div class="xray-site-label"><span class="xray-site-name">LinkedIn</span><span class="xray-site-badge">Profiles</span></div>
           <div class="string-box" id="gx-li-output"></div>
+          <div class="platform-warning" id="gx-warning">
+            <span class="platform-warning-icon">⚠️</span>
+            <span class="platform-warning-text" id="gx-warning-text"></span>
+          </div>
           <div class="action-row">
             <button class="btn btn-primary" onclick="copyXray('li')">📋 Copy</button>
             <button class="btn btn-ghost" onclick="openXray('li')">↗ Search Google</button>
@@ -692,6 +798,16 @@ input::placeholder { color: var(--muted); }
         </div>
       </div>
     </div>
+    <!-- Boolean Raw Tab -->
+    <div class="tab-pane" id="tab-raw">
+      <div style="margin-bottom:12px;padding:10px 14px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:var(--radius-sm);">
+        <p style="font-size:12px;color:var(--muted2);line-height:1.7;margin:0;">The raw Boolean string — no platform-specific prefixes. Use this for ATS systems, Recruiter Lite, or any search tool that accepts pure Boolean logic.</p>
+      </div>
+      <div class="string-box" id="raw-output"></div>
+      <div class="action-row">
+        <button class="btn btn-primary" onclick="copyString('raw')">📋 Copy Raw String</button>
+      </div>
+    </div>
   </div>
 
 </div>
@@ -715,7 +831,7 @@ input::placeholder { color: var(--muted); }
   </div>
 </div>
 
-<div class="footer wrapper" style="padding-top:24px;">© The Daily Talent. All rights reserved.</div>
+<div class="footer wrapper" style="padding-top:24px;">© The Daily Talent. All rights reserved. · <a href="/privacy.html" style="color:var(--muted);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--muted)'">Privacy Policy</a></div>
 <!-- NAVI -->
 <div class="navi-backdrop" id="naviBackdrop" onclick="closeNavi()"></div>
 <div class="navi-panel" id="naviPanel">
@@ -730,6 +846,10 @@ input::placeholder { color: var(--muted); }
   <div class="navi-input-area">
     <textarea class="navi-input" id="naviInput" placeholder="Tell Navi what you're looking for…" rows="1" onkeydown="naviHandleKey(event)" oninput="autoResizeInput(this)"></textarea>
     <button class="navi-send" onclick="naviSend()"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></button>
+  </div>
+  <div style="padding:8px 16px;border-top:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:space-between;gap:8px;">
+    <span style="font-size:10px;color:var(--muted);line-height:1.4;">🔒 I only remember your name locally.</span>
+    <button id="naviForgetBtn" onclick="naviForgetMe()" style="display:none;background:none;border:1px solid rgba(255,255,255,0.08);color:var(--muted);font-size:10px;font-family:'Syne',sans-serif;font-weight:700;padding:3px 9px;border-radius:100px;cursor:pointer;transition:all 0.2s;white-space:nowrap;" onmouseover="this.style.borderColor='rgba(255,100,100,0.35)';this.style.color='#f87171'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)';this.style.color='var(--muted)'">✕ Forget me</button>
   </div>
 </div>
 <button class="navi-fab" id="naviFab" onclick="openNavi()">
@@ -797,6 +917,193 @@ const SUPABASE_URL = "https://uewyupjaptelyuxtcibv.supabase.co";
 const SUPABASE_KEY = "sb_publishable_ytI5QtnIt3qnBL_JxMSQyg_sQsPPw7C";
 const SESSION_ID = Math.random().toString(36).slice(2,10)+Date.now().toString(36);
 
+// ── SYNONYM MAP ──
+var SYNONYM_MAP = {};
+
+async function loadSynonymMap() {
+  try {
+    var res = await fetch(
+      SUPABASE_URL + "/rest/v1/synonym_map?approved=eq.true&select=key,display,synonyms",
+      {
+        headers: {
+          "apikey": SUPABASE_KEY,
+          "Authorization": "Bearer " + SUPABASE_KEY
+        }
+      }
+    );
+    if (!res.ok) return;
+    var rows = await res.json();
+    rows.forEach(function(row) {
+      SYNONYM_MAP[row.key] = {
+        display: row.display,
+        synonyms: row.synonyms
+      };
+    });
+  } catch(e) {
+    // Silent fail — tool works normally without synonyms
+  }
+}
+
+// ── SYNONYM SUGGEST ──
+var synonymDismissed = false;
+var synonymDebounceTimer = null;
+
+function findSynonymCluster(query) {
+  var q = query.toLowerCase().trim();
+  if (!q || q.length < 3) return null;
+  var keys = Object.keys(SYNONYM_MAP);
+  for (var i = 0; i < keys.length; i++) {
+    var cluster = SYNONYM_MAP[keys[i]];
+    var synonyms = cluster.synonyms || [];
+    for (var j = 0; j < synonyms.length; j++) {
+      if (synonyms[j].toLowerCase().indexOf(q) !== -1) {
+        return { key: keys[i], cluster: cluster };
+      }
+    }
+  }
+  return null;
+}
+
+function showSynonymSuggestions(clusterKey, cluster) {
+  var box = document.getElementById("synonymSuggest");
+  var row = document.getElementById("synonymChipsRow");
+  var addAllBtn = document.getElementById("synonymAddAll");
+  var dismissBtn = document.getElementById("synonymDismiss");
+  if (!box || !row) return;
+  var available = (cluster.synonyms || []).filter(function(s) {
+    return state.titles.indexOf(s) === -1;
+  });
+  if (!available.length) { hideSynonymSuggestions(); return; }
+  Array.from(row.children).forEach(function(el) {
+    if (el !== addAllBtn && el !== dismissBtn) el.remove();
+  });
+  available.forEach(function(syn) {
+    var chip = document.createElement("button");
+    chip.className = "synonym-chip";
+    chip.innerHTML = '<span class="synonym-chip-plus">+</span>' + esc(syn);
+    chip.addEventListener("click", function() {
+      addTag(syn, state.titles, "titles-wrap", "titles-input");
+      chip.remove();
+      var remaining = row.querySelectorAll(".synonym-chip");
+      if (!remaining.length) hideSynonymSuggestions();
+    });
+    row.insertBefore(chip, addAllBtn);
+  });
+  addAllBtn.onclick = function() {
+    available.forEach(function(syn) {
+      if (state.titles.indexOf(syn) === -1) addTag(syn, state.titles, "titles-wrap", "titles-input");
+    });
+    hideSynonymSuggestions();
+    trackEvent("synonym_add_all", clusterKey);
+  };
+  dismissBtn.onclick = function() {
+    hideSynonymSuggestions();
+    // Don't set synonymDismissed permanently — user can type again to get suggestions
+  };
+  box.classList.add("visible");
+}
+
+function hideSynonymSuggestions() {
+  var box = document.getElementById("synonymSuggest");
+  if (box) box.classList.remove("visible");
+}
+
+function onTitlesInput(e) {
+  var val = e.target.value.trim();
+  // Reset dismissed state when user starts typing a new query
+  if (val.length > 0) synonymDismissed = false;
+  clearTimeout(synonymDebounceTimer);
+  if (!val || val.length < 3) {
+    hideSynonymSuggestions();
+    hideCommunityCorrection();
+    return;
+  }
+  synonymDebounceTimer = setTimeout(function() {
+    var result = findSynonymCluster(val);
+    if (result) {
+      showSynonymSuggestions(result.key, result.cluster);
+      hideCommunityCorrection();
+    } else {
+      hideSynonymSuggestions();
+      checkCommunityCorrection(val);
+    }
+  }, 350);
+}
+
+function initSynonymSuggest() {
+  var inp = document.getElementById("titles-input");
+  if (inp) inp.addEventListener("input", onTitlesInput);
+}
+
+// ── COMMUNITY CORRECTION ──
+var ccDismissed = false;
+var ccCurrentTitle = "";
+var ccDebounceTimer = null;
+
+function checkCommunityCorrection(query) {
+  var q = query.toLowerCase().trim();
+  if (!q || q.length < 3 || ccDismissed) return;
+  // Only show if no synonym cluster matched
+  var matched = findSynonymCluster(q);
+  if (matched) { hideCommunityCorrection(); return; }
+  // Debounce — wait until user stops typing
+  clearTimeout(ccDebounceTimer);
+  ccDebounceTimer = setTimeout(function() {
+    ccCurrentTitle = query.trim();
+    var span = document.getElementById("ccTitleSpan");
+    if (span) span.textContent = '"' + ccCurrentTitle + '"';
+    document.getElementById("ccInput1").value = "";
+    document.getElementById("ccInput2").value = "";
+    document.getElementById("ccThanks").style.display = "none";
+    var box = document.getElementById("communityCorrect");
+    if (box) box.classList.add("visible");
+  }, 1500);
+}
+
+function hideCommunityCorrection() {
+  clearTimeout(ccDebounceTimer);
+  var box = document.getElementById("communityCorrect");
+  if (box) box.classList.remove("visible");
+}
+
+function dismissCommunityCorrection() {
+  ccDismissed = true;
+  hideCommunityCorrection();
+}
+
+function submitCommunityCorrection() {
+  var s1 = document.getElementById("ccInput1").value.trim();
+  var s2 = document.getElementById("ccInput2").value.trim();
+  if (!s1) { document.getElementById("ccInput1").focus(); return; }
+  var region = state.regions.concat(state.customRegions)[0] || null;
+  fetch(SUPABASE_URL + "/rest/v1/synonym_submissions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "apikey": SUPABASE_KEY,
+      "Authorization": "Bearer " + SUPABASE_KEY,
+      "Prefer": "return=minimal"
+    },
+    body: JSON.stringify({
+      original_title: ccCurrentTitle,
+      suggestion_1: s1,
+      suggestion_2: s2 || null,
+      session_id: SESSION_ID,
+      region_context: region,
+      approved: false,
+      source: "community"
+    })
+  }).catch(function(){});
+  // Show thank you, hide form after 2s
+  document.getElementById("ccThanks").style.display = "inline";
+  document.getElementById("ccInput1").disabled = true;
+  document.getElementById("ccInput2").disabled = true;
+  document.querySelector(".cc-submit").style.display = "none";
+  document.querySelector(".cc-skip").style.display = "none";
+  trackEvent("community_correction_submitted", ccCurrentTitle);
+  setTimeout(function() { hideCommunityCorrection(); }, 2000);
+}
+
 function trackEvent(event,detail){
   detail=detail||"";
   fetch(SUPABASE_URL+"/rest/v1/tool_events",{method:"POST",headers:{"Content-Type":"application/json","apikey":SUPABASE_KEY,"Authorization":"Bearer "+SUPABASE_KEY,"Prefer":"return=minimal"},body:JSON.stringify({event:event,detail:String(detail).slice(0,200),session_id:SESSION_ID})}).catch(function(){});
@@ -807,6 +1114,8 @@ window.addEventListener("DOMContentLoaded",function(){
   trackEvent("page_view",document.referrer||"direct");
   trackEvent("session_start",new Date(SESSION_START_TS).toISOString());
   initRecentSearches();
+  loadSynonymMap();
+  initSynonymSuggest();
 });
 function trackSessionEnd(){var duration=Math.round((Date.now()-SESSION_START_TS)/1000);trackEvent("session_end","duration_seconds:"+duration);}
 window.addEventListener("visibilitychange",function(){if(document.visibilityState==="hidden")trackSessionEnd();});
@@ -814,7 +1123,7 @@ window.addEventListener("pagehide",trackSessionEnd);
 
 // ── STATE ──
 var state={titles:[],titleOp:"OR",regions:[],customRegions:[],mustSkills:[],niceSkills:[]};
-var plain={li:"",gx:""};
+var plain={li:"",gx:"",raw:""};
 var xrayPlain={li:"",bayt:"",naukri:"",indeed:"",glassdoor:""};
 var liPostsMode=false;
 var XRAY_SITES=[
@@ -844,10 +1153,33 @@ function renderTags(arr,wrapId,inputId){
   wrap.innerHTML="";
   arr.forEach(function(t,i){var tag=document.createElement("span");tag.className="tag";tag.innerHTML=esc(t)+'<button class="tag-x" title="Remove">\xd7</button>';tag.querySelector(".tag-x").onclick=function(){removeTag(i,arr,wrapId,inputId);};wrap.appendChild(tag);});
   wrap.appendChild(inp);inp.value="";inp.focus();
+  // Show/hide Clear All button based on titles count
+  var clearBtn=document.getElementById("clearTitlesBtn");
+  if(clearBtn) clearBtn.style.display=(wrapId==="titles-wrap"&&arr.length>0)?"inline-flex":"none";
+}
+function clearAllTitles(){
+  state.titles=[];
+  renderTags(state.titles,"titles-wrap","titles-input");
+  hideSynonymSuggestions();
+  hideCommunityCorrection();
+  ccDismissed = false;
+  updateMeter();
+  trackEvent("clear_all_titles","");
 }
 function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
 
-document.querySelectorAll("#title-op-group .toggle-btn").forEach(function(btn){btn.addEventListener("click",function(){document.querySelectorAll("#title-op-group .toggle-btn").forEach(function(b){b.classList.remove("active");});btn.classList.add("active");state.titleOp=btn.dataset.op;updateMeter();});});
+document.querySelectorAll("#title-op-group .toggle-btn").forEach(function(btn){btn.addEventListener("click",function(){
+  document.querySelectorAll("#title-op-group .toggle-btn").forEach(function(b){b.classList.remove("active");});
+  btn.classList.add("active");
+  state.titleOp=btn.dataset.op;
+  updateMeter();
+  // Update matrix sublabel
+  var lbl=document.getElementById("titlesSublabel");
+  if(lbl){
+    if(btn.dataset.op==="OR"){lbl.className="matrix-sublabel or";lbl.textContent="⟳ Match at least one of these";}
+    else{lbl.className="matrix-sublabel and";lbl.textContent="⊕ All of these must appear";}
+  }
+});});
 document.querySelectorAll("#region-chips .chip").forEach(function(chip){chip.addEventListener("click",function(){chip.classList.toggle("selected");var r=chip.dataset.region;if(chip.classList.contains("selected"))state.regions.push(r);else state.regions=state.regions.filter(function(x){return x!==r;});updateMeter();});});
 document.querySelectorAll("#skill-chips .chip").forEach(function(chip){chip.addEventListener("click",function(){if(chip.classList.contains("selected")){chip.classList.remove("selected");var sk=chip.dataset.skill;state.mustSkills=state.mustSkills.filter(function(x){return x!==sk;});state.niceSkills=state.niceSkills.filter(function(x){return x!==sk;});renderTags(state.mustSkills,"must-wrap","must-input");renderTags(state.niceSkills,"nice-wrap","nice-input");updateMeter();}else{chip.classList.add("selected");addTag(chip.dataset.skill,state.niceSkills,"nice-wrap","nice-input");}});});
 
@@ -877,13 +1209,16 @@ function generateStrings(){
   var li=buildLinkedIn();
   if(!li){showToast("⚠️ Fill in at least one field first");return;}
   plain.li=li;
+  plain.raw=li;
   document.getElementById("li-output").innerHTML=highlight(liPostsMode?li+" AND (jobs OR vacancy OR hiring)":li);
+  document.getElementById("raw-output").innerHTML=highlight(li);
   XRAY_SITES.forEach(function(site){
     var str=site.prefix+" "+li;
     xrayPlain[site.key]=str;
     document.getElementById("gx-"+site.key+"-output").innerHTML=highlight(str);
   });
   plain.gx=xrayPlain.li;
+  validateStrings(li, xrayPlain.li);
   var sec=document.getElementById("output-section");sec.classList.add("visible");
   setTimeout(function(){sec.scrollIntoView({behavior:"smooth",block:"start"});},100);
   saveRecentSearch();
@@ -898,7 +1233,36 @@ function generateStrings(){
   }
 }
 
-// ── SOURCING VAULT ──
+// ── PLATFORM VALIDATOR ──
+function validateStrings(li, gxLi) {
+  // LinkedIn validator
+  var liWarningEl = document.getElementById("li-warning");
+  var liWarningText = document.getElementById("li-warning-text");
+  var liWarnings = [];
+  var orMatches = li.match(/\bOR\b/g);
+  var orCount = orMatches ? orMatches.length + 1 : 1;
+  if (orCount > 5) liWarnings.push("<strong>OR chain is long (" + orCount + " terms).</strong> LinkedIn recommends keeping OR chains to 5 or fewer for best results — consider splitting into two searches.");
+  if (li.length > 500) liWarnings.push("<strong>String is " + li.length + " characters.</strong> LinkedIn may truncate queries over 500 characters — try removing some nice-to-have skills.");
+  if (liWarnings.length) {
+    liWarningText.innerHTML = liWarnings.join(" ");
+    liWarningEl.classList.add("visible");
+  } else {
+    liWarningEl.classList.remove("visible");
+  }
+
+  // Google X-Ray validator
+  var gxWarningEl = document.getElementById("gx-warning");
+  var gxWarningText = document.getElementById("gx-warning-text");
+  var wordCount = gxLi.split(/\s+/).filter(Boolean).length;
+  if (wordCount > 32) {
+    gxWarningText.innerHTML = "<strong>Query is " + wordCount + " words.</strong> Google works best under 32 words — your X-Ray string may return fewer results. Try reducing nice-to-have skills.";
+    gxWarningEl.classList.add("visible");
+  } else {
+    gxWarningEl.classList.remove("visible");
+  }
+}
+
+
 function logToSourcingVault(){
   var jobTitle=state.titles[0]||null;
   var region=state.regions.concat(state.customRegions)[0]||null;
@@ -1059,8 +1423,15 @@ async function submitEmail(){
 // ── NAVI ──
 var NAVI_LS_KEY="tdt_navi_user";
 var naviOpen=false,naviHistory=[],naviState="idle",naviPendingExtraction=null,naviUserName="",naviFirstTime=true;
-function loadNaviUser(){try{var raw=localStorage.getItem(NAVI_LS_KEY);if(!raw)return;var d=JSON.parse(raw);if(d.name){naviUserName=d.name;naviFirstTime=false;}}catch(e){}}
-function saveNaviUser(name){try{localStorage.setItem(NAVI_LS_KEY,JSON.stringify({name:name,ts:Date.now()}));}catch(e){}}
+function loadNaviUser(){try{var raw=localStorage.getItem(NAVI_LS_KEY);if(!raw)return;var d=JSON.parse(raw);if(d.name){naviUserName=d.name;naviFirstTime=false;var btn=document.getElementById("naviForgetBtn");if(btn)btn.style.display="inline-flex";}}catch(e){}}
+function saveNaviUser(name){try{localStorage.setItem(NAVI_LS_KEY,JSON.stringify({name:name,ts:Date.now()}));var btn=document.getElementById("naviForgetBtn");if(btn)btn.style.display="inline-flex";}catch(e){}}
+function naviForgetMe(){
+  try{localStorage.removeItem(NAVI_LS_KEY);}catch(e){}
+  naviUserName="";naviFirstTime=true;
+  var btn=document.getElementById("naviForgetBtn");if(btn)btn.style.display="none";
+  naviAddMsg("bot","Done — I've forgotten your name. \uD83D\uDC4B Next time we chat I'll introduce myself fresh.");
+  trackEvent("navi_forget_me","");
+}
 loadNaviUser();
 function openNavi(){
   if(naviOpen)return;naviOpen=true;
@@ -1204,14 +1575,31 @@ updateMeter();
 function runPopular(p){
   var knownRegions=["MENA","GCC","Saudi Arabia","UAE","Qatar","UK","Europe","USA","Asia Pacific","India","Pakistan","Sri Lanka","Nepal","Global"];
   state.titles=[];state.regions=[];state.customRegions=[];state.mustSkills=[];state.niceSkills=[];
-  state.titles=p.titles.slice();
+
+  // Always inject single display title — synonym suggest row handles optional additions
+  state.titles = p.titles.slice();
+
   if(knownRegions.indexOf(p.region)!==-1)state.regions=[p.region];else state.customRegions=[p.region];
   state.mustSkills=p.must.slice();state.niceSkills=p.nice.slice();
   renderTags(state.titles,"titles-wrap","titles-input");renderTags(state.mustSkills,"must-wrap","must-input");renderTags(state.niceSkills,"nice-wrap","nice-input");renderTags(state.customRegions,"region-custom-wrap","region-custom-input");
   document.querySelectorAll("#region-chips .chip").forEach(function(chip){chip.classList.toggle("selected",state.regions.indexOf(chip.dataset.region)!==-1);});
   document.querySelectorAll("#skill-chips .chip").forEach(function(chip){chip.classList.toggle("selected",state.mustSkills.concat(state.niceSkills).indexOf(chip.dataset.skill)!==-1);});
   updateMeter();trackEvent("popular_search_used",p.titles[0]+"_"+p.region);
+  // Auto-show synonym suggestions for the loaded role
+  if(p.synonymKey && SYNONYM_MAP[p.synonymKey]){
+    synonymDismissed = false;
+    showSynonymSuggestions(p.synonymKey, SYNONYM_MAP[p.synonymKey]);
+  }
   setTimeout(function(){generateStrings();document.getElementById("card-titles").scrollIntoView({behavior:"smooth",block:"start"});},150);
+}
+
+function togglePopularSearches(){
+  var body=document.getElementById("popularSearchesBody");
+  var chevron=document.getElementById("popularChevron");
+  if(!body||!chevron)return;
+  var isOpen=body.style.display!=="none";
+  body.style.display=isOpen?"none":"block";
+  chevron.classList.toggle("open",!isOpen);
 }
 
 // ── STICKY BAR ──
