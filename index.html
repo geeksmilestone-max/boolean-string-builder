@@ -181,6 +181,15 @@ input::placeholder { color: var(--muted); }
 .navi-nudge:hover{color:var(--accent)}
 .navi-nudge-dot{width:6px;height:6px;border-radius:50%;background:var(--accent3);flex-shrink:0;animation:pulse 2s infinite}
 
+/* ── MATRIX SUBLABELS & OPERATOR BADGES ── */
+.matrix-sublabel{font-size:11px;font-weight:700;font-family:'Syne',sans-serif;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:10px;display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:100px;}
+.matrix-sublabel.or{color:#4f8ef7;background:rgba(79,142,247,0.08);border:1px solid rgba(79,142,247,0.18);}
+.matrix-sublabel.and{color:#38e8b5;background:rgba(56,232,181,0.08);border:1px solid rgba(56,232,181,0.18);}
+.matrix-sublabel.loc{color:#a78bfa;background:rgba(167,139,250,0.08);border:1px solid rgba(167,139,250,0.18);}
+.op-badge{display:inline-flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;font-family:'Syne',sans-serif;letter-spacing:0.08em;padding:2px 5px;border-radius:4px;margin:0 2px;vertical-align:middle;flex-shrink:0;}
+.op-badge.or{color:#4f8ef7;background:rgba(79,142,247,0.12);border:1px solid rgba(79,142,247,0.2);}
+.op-badge.and{color:#38e8b5;background:rgba(56,232,181,0.10);border:1px solid rgba(56,232,181,0.2);}
+
 /* ── SYNONYM SUGGESTIONS ── */
 #synonymSuggest{display:none;margin-top:10px;padding:12px 14px;background:rgba(79,142,247,0.06);border:1px solid rgba(79,142,247,0.18);border-radius:var(--radius-sm);animation:fadeIn 0.2s ease both}
 #synonymSuggest.visible{display:block}
@@ -566,6 +575,7 @@ input::placeholder { color: var(--muted); }
         <button class="toggle-btn" data-op="AND">AND</button>
       </div>
     </div>
+    <div class="matrix-sublabel or" id="titlesSublabel">⟳ Match at least one of these</div>
     <div class="tag-input-wrap" id="titles-wrap">
       <input type="text" class="tag-inline-input" id="titles-input" placeholder="e.g. Data Analyst, Business Analyst…" />
     </div>
@@ -588,6 +598,7 @@ input::placeholder { color: var(--muted); }
       <div class="step-dot">2</div>
       <div><div class="card-title">Target Market Region</div><div class="card-desc">Select a region or type a custom one</div></div>
     </div>
+    <div class="matrix-sublabel loc" style="margin-bottom:12px;">⊙ Narrow results to this location</div>
     <div class="chip-group" id="region-chips">
       <div class="chip" data-region="MENA">MENA</div>
       <div class="chip" data-region="GCC">GCC</div>
@@ -620,10 +631,12 @@ input::placeholder { color: var(--muted); }
     <div class="row-2">
       <div>
         <label>Must-have skills (AND)</label>
+        <div class="matrix-sublabel and">⊕ All of these must appear</div>
         <div class="tag-input-wrap" id="must-wrap"><input type="text" class="tag-inline-input" id="must-input" placeholder="e.g. SQL…" /></div>
       </div>
       <div>
         <label>Nice-to-have skills (OR)</label>
+        <div class="matrix-sublabel or">⟳ Any of these is a bonus</div>
         <div class="tag-input-wrap" id="nice-wrap"><input type="text" class="tag-inline-input" id="nice-input" placeholder="e.g. Power BI…" /></div>
       </div>
     </div>
@@ -678,6 +691,7 @@ input::placeholder { color: var(--muted); }
     <div class="output-tabs">
       <button class="output-tab active" onclick="switchTab('li',this)"><span class="tab-icon li"></span> LinkedIn Search</button>
       <button class="output-tab" onclick="switchTab('gx',this)"><span style="font-size:13px;">🔍</span> Google X-Ray</button>
+      <button class="output-tab" onclick="switchTab('raw',this)"><span style="font-size:13px;">{ }</span> Boolean Raw</button>
     </div>
     <!-- LinkedIn Tab -->
     <div class="tab-pane active" id="tab-li">
@@ -737,6 +751,16 @@ input::placeholder { color: var(--muted); }
             <button class="btn btn-ghost" onclick="openXray('glassdoor')">↗ Search Google</button>
           </div>
         </div>
+      </div>
+    </div>
+    <!-- Boolean Raw Tab -->
+    <div class="tab-pane" id="tab-raw">
+      <div style="margin-bottom:12px;padding:10px 14px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:var(--radius-sm);">
+        <p style="font-size:12px;color:var(--muted2);line-height:1.7;margin:0;">The raw Boolean string — no platform-specific prefixes. Use this for ATS systems, Recruiter Lite, or any search tool that accepts pure Boolean logic.</p>
+      </div>
+      <div class="string-box" id="raw-output"></div>
+      <div class="action-row">
+        <button class="btn btn-primary" onclick="copyString('raw')">📋 Copy Raw String</button>
       </div>
     </div>
   </div>
@@ -972,7 +996,7 @@ window.addEventListener("pagehide",trackSessionEnd);
 
 // ── STATE ──
 var state={titles:[],titleOp:"OR",regions:[],customRegions:[],mustSkills:[],niceSkills:[]};
-var plain={li:"",gx:""};
+var plain={li:"",gx:"",raw:""};
 var xrayPlain={li:"",bayt:"",naukri:"",indeed:"",glassdoor:""};
 var liPostsMode=false;
 var XRAY_SITES=[
@@ -1015,7 +1039,18 @@ function clearAllTitles(){
 }
 function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
 
-document.querySelectorAll("#title-op-group .toggle-btn").forEach(function(btn){btn.addEventListener("click",function(){document.querySelectorAll("#title-op-group .toggle-btn").forEach(function(b){b.classList.remove("active");});btn.classList.add("active");state.titleOp=btn.dataset.op;updateMeter();});});
+document.querySelectorAll("#title-op-group .toggle-btn").forEach(function(btn){btn.addEventListener("click",function(){
+  document.querySelectorAll("#title-op-group .toggle-btn").forEach(function(b){b.classList.remove("active");});
+  btn.classList.add("active");
+  state.titleOp=btn.dataset.op;
+  updateMeter();
+  // Update matrix sublabel
+  var lbl=document.getElementById("titlesSublabel");
+  if(lbl){
+    if(btn.dataset.op==="OR"){lbl.className="matrix-sublabel or";lbl.textContent="⟳ Match at least one of these";}
+    else{lbl.className="matrix-sublabel and";lbl.textContent="⊕ All of these must appear";}
+  }
+});});
 document.querySelectorAll("#region-chips .chip").forEach(function(chip){chip.addEventListener("click",function(){chip.classList.toggle("selected");var r=chip.dataset.region;if(chip.classList.contains("selected"))state.regions.push(r);else state.regions=state.regions.filter(function(x){return x!==r;});updateMeter();});});
 document.querySelectorAll("#skill-chips .chip").forEach(function(chip){chip.addEventListener("click",function(){if(chip.classList.contains("selected")){chip.classList.remove("selected");var sk=chip.dataset.skill;state.mustSkills=state.mustSkills.filter(function(x){return x!==sk;});state.niceSkills=state.niceSkills.filter(function(x){return x!==sk;});renderTags(state.mustSkills,"must-wrap","must-input");renderTags(state.niceSkills,"nice-wrap","nice-input");updateMeter();}else{chip.classList.add("selected");addTag(chip.dataset.skill,state.niceSkills,"nice-wrap","nice-input");}});});
 
@@ -1045,7 +1080,9 @@ function generateStrings(){
   var li=buildLinkedIn();
   if(!li){showToast("⚠️ Fill in at least one field first");return;}
   plain.li=li;
+  plain.raw=li;
   document.getElementById("li-output").innerHTML=highlight(liPostsMode?li+" AND (jobs OR vacancy OR hiring)":li);
+  document.getElementById("raw-output").innerHTML=highlight(li);
   XRAY_SITES.forEach(function(site){
     var str=site.prefix+" "+li;
     xrayPlain[site.key]=str;
