@@ -197,6 +197,23 @@ input::placeholder { color: var(--muted); }
 .op-badge.or{color:#4f8ef7;background:rgba(79,142,247,0.12);border:1px solid rgba(79,142,247,0.2);}
 .op-badge.and{color:#38e8b5;background:rgba(56,232,181,0.10);border:1px solid rgba(56,232,181,0.2);}
 
+/* ── COMMUNITY CORRECTION ── */
+#communityCorrect{display:none;margin-top:10px;padding:12px 14px;background:rgba(56,232,181,0.05);border:1px solid rgba(56,232,181,0.18);border-radius:var(--radius-sm);animation:fadeIn 0.2s ease both}
+#communityCorrect.visible{display:block}
+.cc-label{font-size:11px;font-weight:700;font-family:'Syne',sans-serif;color:var(--accent3);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.cc-desc{font-size:12.5px;color:var(--muted2);margin-bottom:10px;line-height:1.5}
+.cc-desc strong{color:var(--text);font-weight:500}
+.cc-inputs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.cc-input{flex:1;min-width:140px;background:var(--surface2);border:1px solid var(--border2);border-radius:var(--radius-sm);padding:7px 12px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;outline:none;transition:border-color 0.2s}
+.cc-input:focus{border-color:var(--accent3)}
+.cc-input::placeholder{color:var(--muted)}
+.cc-actions{display:flex;align-items:center;gap:8px}
+.cc-submit{background:var(--accent3);color:#07090f;font-size:11px;font-family:'Syne',sans-serif;font-weight:800;padding:5px 14px;border-radius:100px;border:none;cursor:pointer;letter-spacing:0.03em;transition:all 0.15s}
+.cc-submit:hover{filter:brightness(1.1);transform:translateY(-1px)}
+.cc-skip{background:none;border:none;color:var(--muted);font-size:11px;font-family:'Syne',sans-serif;font-weight:700;cursor:pointer;transition:color 0.15s;letter-spacing:0.03em}
+.cc-skip:hover{color:var(--text)}
+.cc-thanks{font-size:12.5px;color:var(--accent3);font-family:'Syne',sans-serif;font-weight:700;display:none;padding:4px 0}
+
 /* ── SYNONYM SUGGESTIONS ── */
 #synonymSuggest{display:none;margin-top:10px;padding:12px 14px;background:rgba(79,142,247,0.06);border:1px solid rgba(79,142,247,0.18);border-radius:var(--radius-sm);animation:fadeIn 0.2s ease both}
 #synonymSuggest.visible{display:block}
@@ -593,6 +610,19 @@ input::placeholder { color: var(--muted); }
         <button class="synonym-dismiss" id="synonymDismiss" title="Dismiss">✕</button>
       </div>
     </div>
+    <div id="communityCorrect">
+      <div class="cc-label">💡 Help us improve</div>
+      <div class="cc-desc">We don't have synonyms for <strong id="ccTitleSpan"></strong> yet. What are 2 alternative job titles for this role?</div>
+      <div class="cc-inputs">
+        <input type="text" class="cc-input" id="ccInput1" placeholder="Alternative title 1" maxlength="60" />
+        <input type="text" class="cc-input" id="ccInput2" placeholder="Alternative title 2 (optional)" maxlength="60" />
+      </div>
+      <div class="cc-actions">
+        <button class="cc-submit" onclick="submitCommunityCorrection()">Submit</button>
+        <button class="cc-skip" onclick="dismissCommunityCorrection()">No thanks</button>
+        <span class="cc-thanks" id="ccThanks">✓ Thank you — we'll review it shortly!</span>
+      </div>
+    </div>
     <div class="navi-nudge" id="naviNudge" onclick="openNaviFromNudge()">
       <span class="navi-nudge-dot"></span>
       Not sure what to type? Let Navi guide you →
@@ -983,17 +1013,95 @@ function onTitlesInput(e) {
   // Reset dismissed state when user starts typing a new query
   if (val.length > 0) synonymDismissed = false;
   clearTimeout(synonymDebounceTimer);
-  if (!val || val.length < 3) { hideSynonymSuggestions(); return; }
+  if (!val || val.length < 3) {
+    hideSynonymSuggestions();
+    hideCommunityCorrection();
+    return;
+  }
   synonymDebounceTimer = setTimeout(function() {
     var result = findSynonymCluster(val);
-    if (result) showSynonymSuggestions(result.key, result.cluster);
-    else hideSynonymSuggestions();
+    if (result) {
+      showSynonymSuggestions(result.key, result.cluster);
+      hideCommunityCorrection();
+    } else {
+      hideSynonymSuggestions();
+      checkCommunityCorrection(val);
+    }
   }, 350);
 }
 
 function initSynonymSuggest() {
   var inp = document.getElementById("titles-input");
   if (inp) inp.addEventListener("input", onTitlesInput);
+}
+
+// ── COMMUNITY CORRECTION ──
+var ccDismissed = false;
+var ccCurrentTitle = "";
+var ccDebounceTimer = null;
+
+function checkCommunityCorrection(query) {
+  var q = query.toLowerCase().trim();
+  if (!q || q.length < 3 || ccDismissed) return;
+  // Only show if no synonym cluster matched
+  var matched = findSynonymCluster(q);
+  if (matched) { hideCommunityCorrection(); return; }
+  // Debounce — wait until user stops typing
+  clearTimeout(ccDebounceTimer);
+  ccDebounceTimer = setTimeout(function() {
+    ccCurrentTitle = query.trim();
+    var span = document.getElementById("ccTitleSpan");
+    if (span) span.textContent = '"' + ccCurrentTitle + '"';
+    document.getElementById("ccInput1").value = "";
+    document.getElementById("ccInput2").value = "";
+    document.getElementById("ccThanks").style.display = "none";
+    var box = document.getElementById("communityCorrect");
+    if (box) box.classList.add("visible");
+  }, 1500);
+}
+
+function hideCommunityCorrection() {
+  clearTimeout(ccDebounceTimer);
+  var box = document.getElementById("communityCorrect");
+  if (box) box.classList.remove("visible");
+}
+
+function dismissCommunityCorrection() {
+  ccDismissed = true;
+  hideCommunityCorrection();
+}
+
+function submitCommunityCorrection() {
+  var s1 = document.getElementById("ccInput1").value.trim();
+  var s2 = document.getElementById("ccInput2").value.trim();
+  if (!s1) { document.getElementById("ccInput1").focus(); return; }
+  var region = state.regions.concat(state.customRegions)[0] || null;
+  fetch(SUPABASE_URL + "/rest/v1/synonym_submissions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "apikey": SUPABASE_KEY,
+      "Authorization": "Bearer " + SUPABASE_KEY,
+      "Prefer": "return=minimal"
+    },
+    body: JSON.stringify({
+      original_title: ccCurrentTitle,
+      suggestion_1: s1,
+      suggestion_2: s2 || null,
+      session_id: SESSION_ID,
+      region_context: region,
+      approved: false,
+      source: "community"
+    })
+  }).catch(function(){});
+  // Show thank you, hide form after 2s
+  document.getElementById("ccThanks").style.display = "inline";
+  document.getElementById("ccInput1").disabled = true;
+  document.getElementById("ccInput2").disabled = true;
+  document.querySelector(".cc-submit").style.display = "none";
+  document.querySelector(".cc-skip").style.display = "none";
+  trackEvent("community_correction_submitted", ccCurrentTitle);
+  setTimeout(function() { hideCommunityCorrection(); }, 2000);
 }
 
 function trackEvent(event,detail){
@@ -1053,6 +1161,8 @@ function clearAllTitles(){
   state.titles=[];
   renderTags(state.titles,"titles-wrap","titles-input");
   hideSynonymSuggestions();
+  hideCommunityCorrection();
+  ccDismissed = false;
   updateMeter();
   trackEvent("clear_all_titles","");
 }
