@@ -475,11 +475,16 @@ input::placeholder { color: var(--muted); }
 
   <!-- POPULAR SEARCHES -->
   <div class="popular-section">
-    <div class="popular-header">
-      <span class="popular-dot"></span>
-      <span class="popular-heading">Popular Searches</span>
+    <div class="recent-searches-header" onclick="togglePopularSearches()" style="padding:14px 20px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:background 0.2s;border-radius:var(--radius);" onmouseover="this.style.background='var(--surface2)'" onmouseout="this.style.background='transparent'">
+      <div class="popular-header" style="margin-bottom:0;">
+        <span class="popular-dot"></span>
+        <span class="popular-heading">Popular Searches</span>
+        <span class="recent-searches-count" style="margin-left:4px;">10</span>
+      </div>
+      <span class="recent-searches-chevron" id="popularChevron">▾</span>
     </div>
-    <div class="popular-grid" id="popularGrid">
+    <div id="popularSearchesBody" style="display:none;">
+      <div class="popular-grid" id="popularGrid" style="padding:0 4px 4px;">
       <div class="popular-card" onclick="runPopular({titles:['Data Analyst'],synonymKey:'data_analytics',region:'UAE',must:['SQL'],nice:['Power BI','Tableau','Excel','Python']})">
         <div class="popular-card-role">Data Analyst</div><div class="popular-card-region">UAE</div>
         <div class="popular-card-skills"><span class="popular-card-skill must">SQL</span><span class="popular-card-skill">Power BI</span><span class="popular-card-skill">Tableau</span><span class="popular-card-skill">Excel</span><span class="popular-card-skill">Python</span></div>
@@ -530,8 +535,9 @@ input::placeholder { color: var(--muted); }
         <div class="popular-card-skills"><span class="popular-card-skill must">Procurement</span><span class="popular-card-skill">SAP</span><span class="popular-card-skill">Vendor Management</span><span class="popular-card-skill">Contract Negotiation</span><span class="popular-card-skill">Supply Chain</span></div>
         <div class="popular-card-cta">Try this search →</div>
       </div>
-    </div>
-  </div>
+      </div><!-- /.popular-grid -->
+    </div><!-- /#popularSearchesBody -->
+  </div><!-- /.popular-section -->
 
   <!-- Step 1: Job Titles -->
   <div class="card" id="card-titles">
@@ -1225,7 +1231,7 @@ function runPopular(p){
   var knownRegions=["MENA","GCC","Saudi Arabia","UAE","Qatar","UK","Europe","USA","Asia Pacific","India","Pakistan","Sri Lanka","Nepal","Global"];
   state.titles=[];state.regions=[];state.customRegions=[];state.mustSkills=[];state.niceSkills=[];
 
-  // If a synonymKey is provided and SYNONYM_MAP has it, inject full cluster — otherwise use titles array
+  // If synonymKey provided and SYNONYM_MAP has it, inject full cluster — otherwise use titles array
   if(p.synonymKey && SYNONYM_MAP[p.synonymKey] && SYNONYM_MAP[p.synonymKey].synonyms && SYNONYM_MAP[p.synonymKey].synonyms.length){
     state.titles = SYNONYM_MAP[p.synonymKey].synonyms.slice();
   } else {
@@ -1239,6 +1245,15 @@ function runPopular(p){
   document.querySelectorAll("#skill-chips .chip").forEach(function(chip){chip.classList.toggle("selected",state.mustSkills.concat(state.niceSkills).indexOf(chip.dataset.skill)!==-1);});
   updateMeter();trackEvent("popular_search_used",p.titles[0]+"_"+p.region);
   setTimeout(function(){generateStrings();document.getElementById("card-titles").scrollIntoView({behavior:"smooth",block:"start"});},150);
+}
+
+function togglePopularSearches(){
+  var body=document.getElementById("popularSearchesBody");
+  var chevron=document.getElementById("popularChevron");
+  if(!body||!chevron)return;
+  var isOpen=body.style.display!=="none";
+  body.style.display=isOpen?"none":"block";
+  chevron.classList.toggle("open",!isOpen);
 }
 
 // ── STICKY BAR ──
