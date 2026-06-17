@@ -797,6 +797,33 @@ const SUPABASE_URL = "https://uewyupjaptelyuxtcibv.supabase.co";
 const SUPABASE_KEY = "sb_publishable_ytI5QtnIt3qnBL_JxMSQyg_sQsPPw7C";
 const SESSION_ID = Math.random().toString(36).slice(2,10)+Date.now().toString(36);
 
+// ── SYNONYM MAP ──
+var SYNONYM_MAP = {};
+
+async function loadSynonymMap() {
+  try {
+    var res = await fetch(
+      SUPABASE_URL + "/rest/v1/synonym_map?approved=eq.true&select=key,display,synonyms",
+      {
+        headers: {
+          "apikey": SUPABASE_KEY,
+          "Authorization": "Bearer " + SUPABASE_KEY
+        }
+      }
+    );
+    if (!res.ok) return;
+    var rows = await res.json();
+    rows.forEach(function(row) {
+      SYNONYM_MAP[row.key] = {
+        display: row.display,
+        synonyms: row.synonyms
+      };
+    });
+  } catch(e) {
+    // Silent fail — tool works normally without synonyms
+  }
+}
+
 function trackEvent(event,detail){
   detail=detail||"";
   fetch(SUPABASE_URL+"/rest/v1/tool_events",{method:"POST",headers:{"Content-Type":"application/json","apikey":SUPABASE_KEY,"Authorization":"Bearer "+SUPABASE_KEY,"Prefer":"return=minimal"},body:JSON.stringify({event:event,detail:String(detail).slice(0,200),session_id:SESSION_ID})}).catch(function(){});
@@ -807,6 +834,7 @@ window.addEventListener("DOMContentLoaded",function(){
   trackEvent("page_view",document.referrer||"direct");
   trackEvent("session_start",new Date(SESSION_START_TS).toISOString());
   initRecentSearches();
+  loadSynonymMap();
 });
 function trackSessionEnd(){var duration=Math.round((Date.now()-SESSION_START_TS)/1000);trackEvent("session_end","duration_seconds:"+duration);}
 window.addEventListener("visibilitychange",function(){if(document.visibilityState==="hidden")trackSessionEnd();});
