@@ -178,6 +178,19 @@ input::placeholder { color: var(--muted); }
 
 /* ── NAVI AI BOT ── */
 .navi-nudge{margin-top:10px;font-size:12.5px;color:var(--muted);cursor:pointer;display:inline-flex;align-items:center;gap:5px;transition:color 0.2s;user-select:none}
+
+/* ── SYNONYM SUGGESTIONS ── */
+#synonymSuggest{display:none;margin-top:10px;padding:12px 14px;background:rgba(79,142,247,0.06);border:1px solid rgba(79,142,247,0.18);border-radius:var(--radius-sm);animation:fadeIn 0.2s ease both}
+#synonymSuggest.visible{display:block}
+.synonym-suggest-label{font-size:11px;font-weight:700;font-family:'Syne',sans-serif;color:var(--accent);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.synonym-chips-row{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.synonym-chip{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:100px;background:rgba(79,142,247,0.10);border:1px solid rgba(79,142,247,0.25);color:var(--accent);font-size:12px;font-family:'DM Sans',sans-serif;font-weight:500;cursor:pointer;transition:all 0.15s;white-space:nowrap}
+.synonym-chip:hover{background:rgba(79,142,247,0.22);border-color:rgba(79,142,247,0.5);transform:translateY(-1px)}
+.synonym-chip-plus{font-size:13px;font-weight:700;line-height:1}
+.synonym-add-all{display:inline-flex;align-items:center;gap:4px;padding:4px 12px;border-radius:100px;background:var(--accent);color:#fff;font-size:11px;font-family:'Syne',sans-serif;font-weight:700;cursor:pointer;border:none;letter-spacing:0.03em;transition:all 0.15s;white-space:nowrap;margin-left:4px}
+.synonym-add-all:hover{filter:brightness(1.12);transform:translateY(-1px)}
+.synonym-dismiss{margin-left:auto;background:none;border:none;color:var(--muted);font-size:15px;cursor:pointer;padding:0 2px;line-height:1;transition:color 0.15s;flex-shrink:0}
+.synonym-dismiss:hover{color:var(--text)}
 .navi-nudge:hover{color:var(--accent)}
 .navi-nudge-dot{width:6px;height:6px;border-radius:50%;background:var(--accent3);flex-shrink:0;animation:pulse 2s infinite}
 .navi-fab{position:fixed;bottom:24px;right:24px;z-index:800;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(79,142,247,0.45);transition:all 0.25s;animation:fadeUp 1s 1.2s ease both;opacity:0}
@@ -529,6 +542,13 @@ input::placeholder { color: var(--muted); }
     <div class="tag-input-wrap" id="titles-wrap">
       <input type="text" class="tag-inline-input" id="titles-input" placeholder="e.g. Data Analyst, Business Analyst…" />
     </div>
+    <div id="synonymSuggest">
+      <div class="synonym-suggest-label">💡 Related titles — click to add</div>
+      <div class="synonym-chips-row" id="synonymChipsRow">
+        <button class="synonym-add-all" id="synonymAddAll">+ Add All</button>
+        <button class="synonym-dismiss" id="synonymDismiss" title="Dismiss">✕</button>
+      </div>
+    </div>
     <div class="navi-nudge" id="naviNudge" onclick="openNaviFromNudge()">
       <span class="navi-nudge-dot"></span>
       Not sure what to type? Let Navi guide you →
@@ -824,6 +844,103 @@ async function loadSynonymMap() {
   }
 }
 
+// ── SYNONYM SUGGEST ──
+var synonymDismissed = false;
+var synonymDebounceTimer = null;
+
+function findSynonymCluster(query) {
+  var q = query.toLowerCase().trim();
+  if (!q || q.length < 3) return null;
+  var keys = Object.keys(SYNONYM_MAP);
+  for (var i = 0; i < keys.length; i++) {
+    var cluster = SYNONYM_MAP[keys[i]];
+    var synonyms = cluster.synonyms || [];
+    for (var j = 0; j < synonyms.length; j++) {
+      if (synonyms[j].toLowerCase().indexOf(q) !== -1) {
+        return { key: keys[i], cluster: cluster };
+      }
+    }
+  }
+  return null;
+}
+
+function showSynonymSuggestions(clusterKey, cluster) {
+  var box = document.getElementById("synonymSuggest");
+  var row = document.getElementById("synonymChipsRow");
+  var addAllBtn = document.getElementById("synonymAddAll");
+  var dismissBtn = document.getElementById("synonymDismiss");
+  if (!box || !row) return;
+
+  // Build only synonyms not already added
+  var available = (cluster.synonyms || []).filter(function(s) {
+    return state.titles.indexOf(s) === -1;
+  });
+  if (!available.length) { hideSynonymSuggestions(); return; }
+
+  // Clear previous chips (keep Add All + Dismiss)
+  Array.from(row.children).forEach(function(el) {
+    if (el !== addAllBtn && el !== dismissBtn) el.remove();
+  });
+
+  // Insert chips before Add All button
+  available.forEach(function(syn) {
+    var chip = document.createElement("button");
+    chip.className = "synonym-chip";
+    chip.innerHTML = '<span class="synonym-chip-plus">+</span>' + esc(syn);
+    chip.addEventListener("click", function() {
+      addTag(syn, state.titles, "titles-wrap", "titles-input");
+      chip.remove();
+      var remaining = row.querySelectorAll(".synonym-chip");
+      if (!remaining.length) hideSynonymSuggestions();
+    });
+    row.insertBefore(chip, addAllBtn);
+  });
+
+  // Add All handler
+  addAllBtn.onclick = function() {
+    available.forEach(function(syn) {
+      if (state.titles.indexOf(syn) === -1) {
+        addTag(syn, state.titles, "titles-wrap", "titles-input");
+      }
+    });
+    hideSynonymSuggestions();
+    trackEvent("synonym_add_all", clusterKey);
+  };
+
+  // Dismiss handler
+  dismissBtn.onclick = function() {
+    synonymDismissed = true;
+    hideSynonymSuggestions();
+  };
+
+  box.classList.add("visible");
+}
+
+function hideSynonymSuggestions() {
+  var box = document.getElementById("synonymSuggest");
+  if (box) box.classList.remove("visible");
+}
+
+function onTitlesInput(e) {
+  if (synonymDismissed) return;
+  var val = e.target.value.trim();
+  clearTimeout(synonymDebounceTimer);
+  if (!val || val.length < 3) { hideSynonymSuggestions(); return; }
+  synonymDebounceTimer = setTimeout(function() {
+    var result = findSynonymCluster(val);
+    if (result) {
+      showSynonymSuggestions(result.key, result.cluster);
+    } else {
+      hideSynonymSuggestions();
+    }
+  }, 350);
+}
+
+function initSynonymSuggest() {
+  var inp = document.getElementById("titles-input");
+  if (inp) inp.addEventListener("input", onTitlesInput);
+}
+
 function trackEvent(event,detail){
   detail=detail||"";
   fetch(SUPABASE_URL+"/rest/v1/tool_events",{method:"POST",headers:{"Content-Type":"application/json","apikey":SUPABASE_KEY,"Authorization":"Bearer "+SUPABASE_KEY,"Prefer":"return=minimal"},body:JSON.stringify({event:event,detail:String(detail).slice(0,200),session_id:SESSION_ID})}).catch(function(){});
@@ -835,6 +952,7 @@ window.addEventListener("DOMContentLoaded",function(){
   trackEvent("session_start",new Date(SESSION_START_TS).toISOString());
   initRecentSearches();
   loadSynonymMap();
+  initSynonymSuggest();
 });
 function trackSessionEnd(){var duration=Math.round((Date.now()-SESSION_START_TS)/1000);trackEvent("session_end","duration_seconds:"+duration);}
 window.addEventListener("visibilitychange",function(){if(document.visibilityState==="hidden")trackSessionEnd();});
