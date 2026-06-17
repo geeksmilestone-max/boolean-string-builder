@@ -786,7 +786,7 @@ input::placeholder { color: var(--muted); }
   </div>
 </div>
 
-<div class="footer wrapper" style="padding-top:24px;">© The Daily Talent. All rights reserved.</div>
+<div class="footer wrapper" style="padding-top:24px;">© The Daily Talent. All rights reserved. · <a href="/privacy.html" style="color:var(--muted);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--muted)'">Privacy Policy</a></div>
 <!-- NAVI -->
 <div class="navi-backdrop" id="naviBackdrop" onclick="closeNavi()"></div>
 <div class="navi-panel" id="naviPanel">
@@ -801,6 +801,10 @@ input::placeholder { color: var(--muted); }
   <div class="navi-input-area">
     <textarea class="navi-input" id="naviInput" placeholder="Tell Navi what you're looking for…" rows="1" onkeydown="naviHandleKey(event)" oninput="autoResizeInput(this)"></textarea>
     <button class="navi-send" onclick="naviSend()"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></button>
+  </div>
+  <div style="padding:8px 16px;border-top:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:space-between;gap:8px;">
+    <span style="font-size:10px;color:var(--muted);line-height:1.4;">🔒 I only remember your name locally.</span>
+    <button id="naviForgetBtn" onclick="naviForgetMe()" style="display:none;background:none;border:1px solid rgba(255,255,255,0.08);color:var(--muted);font-size:10px;font-family:'Syne',sans-serif;font-weight:700;padding:3px 9px;border-radius:100px;cursor:pointer;transition:all 0.2s;white-space:nowrap;" onmouseover="this.style.borderColor='rgba(255,100,100,0.35)';this.style.color='#f87171'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)';this.style.color='var(--muted)'">✕ Forget me</button>
   </div>
 </div>
 <button class="navi-fab" id="naviFab" onclick="openNavi()">
@@ -1264,8 +1268,15 @@ async function submitEmail(){
 // ── NAVI ──
 var NAVI_LS_KEY="tdt_navi_user";
 var naviOpen=false,naviHistory=[],naviState="idle",naviPendingExtraction=null,naviUserName="",naviFirstTime=true;
-function loadNaviUser(){try{var raw=localStorage.getItem(NAVI_LS_KEY);if(!raw)return;var d=JSON.parse(raw);if(d.name){naviUserName=d.name;naviFirstTime=false;}}catch(e){}}
-function saveNaviUser(name){try{localStorage.setItem(NAVI_LS_KEY,JSON.stringify({name:name,ts:Date.now()}));}catch(e){}}
+function loadNaviUser(){try{var raw=localStorage.getItem(NAVI_LS_KEY);if(!raw)return;var d=JSON.parse(raw);if(d.name){naviUserName=d.name;naviFirstTime=false;var btn=document.getElementById("naviForgetBtn");if(btn)btn.style.display="inline-flex";}}catch(e){}}
+function saveNaviUser(name){try{localStorage.setItem(NAVI_LS_KEY,JSON.stringify({name:name,ts:Date.now()}));var btn=document.getElementById("naviForgetBtn");if(btn)btn.style.display="inline-flex";}catch(e){}}
+function naviForgetMe(){
+  try{localStorage.removeItem(NAVI_LS_KEY);}catch(e){}
+  naviUserName="";naviFirstTime=true;
+  var btn=document.getElementById("naviForgetBtn");if(btn)btn.style.display="none";
+  naviAddMsg("bot","Done — I've forgotten your name. \uD83D\uDC4B Next time we chat I'll introduce myself fresh.");
+  trackEvent("navi_forget_me","");
+}
 loadNaviUser();
 function openNavi(){
   if(naviOpen)return;naviOpen=true;
