@@ -126,7 +126,7 @@ input::placeholder { color: var(--muted); }
 .social-divider::before,.social-divider::after{content:'';flex:1;height:1px;background:var(--border)}
 .social-divider-label{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
 
-@media(max-width:480px){}
+
 
 
 
@@ -180,6 +180,62 @@ input::placeholder { color: var(--muted); }
 .navi-nudge{margin-top:10px;font-size:12.5px;color:var(--muted);cursor:pointer;display:inline-flex;align-items:center;gap:5px;transition:color 0.2s;user-select:none}
 .navi-nudge:hover{color:var(--accent)}
 .navi-nudge-dot{width:6px;height:6px;border-radius:50%;background:var(--accent3);flex-shrink:0;animation:pulse 2s infinite}
+
+/* ── STAR RATING MODAL ── */
+#ratingModal{display:none;position:fixed;bottom:90px;right:24px;z-index:900;width:340px;max-width:calc(100vw - 32px);animation:fadeUp 0.4s cubic-bezier(0.34,1.3,0.64,1) both;}
+#ratingModal.visible{display:block;}
+.rating-card{background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius);box-shadow:0 20px 60px rgba(0,0,0,0.5),0 0 0 1px rgba(79,142,247,0.1);overflow:hidden;position:relative;box-sizing:border-box;}
+.rating-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent3));}
+.rating-card-header{padding:16px 18px 0;display:flex;align-items:flex-start;justify-content:space-between;gap:8px;}
+.rating-card-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:800;color:var(--text);line-height:1.3;flex:1;min-width:0;}
+.rating-card-sub{font-size:12px;color:var(--muted2);margin-top:3px;line-height:1.4;}
+.rating-close-btn{background:none;border:none;color:var(--muted);font-size:16px;cursor:pointer;padding:0;line-height:1;flex-shrink:0;transition:color 0.2s;z-index:10;position:relative;}
+.rating-close-btn:hover{color:var(--text);}
+.rating-card-body{padding:16px 18px 20px;}
+/* Stars phase */
+#ratingStarsPhase{}
+.stars-row{display:flex;justify-content:center;gap:6px;margin:16px 0 10px;}
+.star-btn{background:none;border:none;cursor:pointer;font-size:32px;line-height:1;padding:2px;transition:all 0.15s;filter:grayscale(1) opacity(0.35);transform:scale(1);}
+.rating-hint{text-align:center;font-size:11px;color:var(--muted);font-family:'Syne',sans-serif;letter-spacing:0.04em;}
+/* Branch A — low */
+#ratingBranchLow{display:none;animation:fadeIn 0.3s ease both;}
+.branch-icon{font-size:28px;text-align:center;margin-bottom:8px;}
+.branch-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--text);margin-bottom:6px;}
+.branch-sub{font-size:12.5px;color:var(--muted2);margin-bottom:12px;line-height:1.5;}
+.rating-textarea{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border2);border-radius:var(--radius-sm);padding:10px 12px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;line-height:1.5;resize:none;outline:none;transition:border-color 0.2s;box-sizing:border-box;margin-bottom:10px;}
+.rating-textarea:focus{border-color:rgba(79,142,247,0.4);}
+.rating-textarea::placeholder{color:var(--muted);}
+.branch-actions{display:flex;gap:8px;align-items:center;}
+.btn-branch-submit{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-family:'Syne',sans-serif;font-size:12px;font-weight:800;padding:8px 20px;border-radius:100px;border:none;cursor:pointer;transition:all 0.2s;letter-spacing:0.03em;}
+.btn-branch-submit:hover{filter:brightness(1.1);transform:translateY(-1px);}
+.btn-branch-skip{background:none;border:none;color:var(--muted);font-size:12px;font-family:'Syne',sans-serif;cursor:pointer;transition:color 0.2s;}
+.btn-branch-skip:hover{color:var(--text);}
+/* Branch B — high */
+#ratingBranchHigh{display:none;animation:fadeIn 0.3s ease both;}
+.branch-celebrate{text-align:center;font-size:32px;margin-bottom:8px;}
+.branch-cta-row{display:flex;flex-direction:column;gap:8px;margin-top:14px;}
+.btn-cta-primary{display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-family:'Syne',sans-serif;font-size:12px;font-weight:800;padding:10px 16px;border-radius:100px;border:none;cursor:pointer;transition:all 0.2s;letter-spacing:0.03em;text-decoration:none;}
+.btn-cta-primary:hover{filter:brightness(1.1);transform:translateY(-1px);}
+.btn-cta-secondary{display:flex;align-items:center;justify-content:center;gap:8px;background:rgba(255,255,255,0.05);border:1px solid var(--border2);color:var(--text);font-family:'Syne',sans-serif;font-size:12px;font-weight:700;padding:10px 16px;border-radius:100px;cursor:pointer;transition:all 0.2s;text-decoration:none;}
+.btn-cta-secondary:hover{background:rgba(255,255,255,0.09);border-color:var(--accent);}
+/* Thank you state */
+#ratingThankYou{display:none;text-align:center;padding:8px 0;animation:fadeIn 0.3s ease both;}
+/* Aggregate badge — shown after rating */
+#ratingBadge{display:none;position:fixed;bottom:80px;left:24px;z-index:900;background:var(--surface);border:1px solid var(--border2);border-radius:100px;padding:7px 14px;align-items:center;gap:8px;box-shadow:0 4px 20px rgba(0,0,0,0.3);animation:fadeUp 0.4s ease both;}
+.badge-stars{color:#fbbf24;font-size:13px;letter-spacing:1px;}
+.badge-score{font-family:'Syne',sans-serif;font-size:13px;font-weight:800;color:var(--text);}
+.badge-count{font-size:11px;color:var(--muted);}
+@media(max-width:480px){
+  #ratingModal{bottom:80px;right:12px;left:12px;width:auto;max-width:none;}
+  #ratingBadge{bottom:80px;left:12px;}
+  .rating-card-title{font-size:14px;}
+  .branch-cta-row{gap:6px;}
+  .btn-cta-primary,.btn-cta-secondary{font-size:11px;padding:9px 12px;}
+  .stars-row{gap:4px;}
+  .star-btn{font-size:28px;}
+  .meter-status-row{flex-direction:column;gap:4px;}
+  .meter-nudge{text-align:left;flex:none;width:100%;}
+}
 
 /* ── PLATFORM VALIDATOR ── */
 .platform-warning{display:none;margin-top:10px;padding:10px 14px;background:rgba(251,191,36,0.06);border:1px solid rgba(251,191,36,0.2);border-radius:var(--radius-sm);animation:fadeIn 0.2s ease both;}
@@ -447,10 +503,10 @@ input::placeholder { color: var(--muted); }
 .meter-track{width:100%;height:6px;background:var(--surface2);border-radius:100px;overflow:hidden;margin-bottom:10px}
 .meter-fill{height:100%;border-radius:100px;width:0%;transition:width 0.5s cubic-bezier(0.4,0,0.2,1),background 0.5s ease}
 .meter-fill.amber{background:linear-gradient(90deg,#f6a84f,#f6c44f)}.meter-fill.blue{background:linear-gradient(90deg,#4f8ef7,#6b9cf7)}.meter-fill.teal{background:linear-gradient(90deg,#4f8ef7,#38e8b5)}
-.meter-status-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
-.meter-status-label{font-size:12.5px;font-weight:600;transition:color 0.4s;flex-shrink:0}
+.meter-status-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.meter-status-label{font-size:12.5px;font-weight:600;transition:color 0.4s;flex-shrink:0;max-width:100%}
 .meter-status-label.amber{color:#f6a84f}.meter-status-label.blue{color:#6b9cf7}.meter-status-label.teal{color:#38e8b5}
-.meter-nudge{font-size:12px;color:var(--muted);text-align:right;line-height:1.4;flex:1}
+.meter-nudge{font-size:12px;color:var(--muted);text-align:right;line-height:1.4;flex:1;min-width:0;word-break:break-word}
 /* ── EMAIL MODAL dynamic ── */
 .modal-context-banner{background:linear-gradient(135deg,rgba(56,232,181,0.08),rgba(79,142,247,0.08));border:1px solid rgba(56,232,181,0.2);border-radius:10px;padding:11px 14px;margin-bottom:18px;display:flex;align-items:flex-start;gap:9px}
 .modal-context-dot{width:8px;height:8px;border-radius:50%;background:var(--accent3);flex-shrink:0;margin-top:4px;animation:pulse 2s infinite}
@@ -832,6 +888,76 @@ input::placeholder { color: var(--muted); }
 </div>
 
 <div class="footer wrapper" style="padding-top:24px;">© The Daily Talent. All rights reserved. · <a href="/privacy.html" style="color:var(--muted);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--muted)'">Privacy Policy</a></div>
+<!-- RATING MODAL -->
+<div id="ratingModal">
+  <div class="rating-card">
+    <div class="rating-card-header">
+      <div>
+        <div class="rating-card-title">How did your search go? ✦</div>
+        <div class="rating-card-sub" id="ratingModalAgg"></div>
+      </div>
+      <button class="rating-close-btn" onclick="closeRatingModal()">✕</button>
+    </div>
+    <div class="rating-card-body">
+      <!-- Phase 1: Stars -->
+      <div id="ratingStarsPhase">
+        <div class="stars-row">
+          <button class="star-btn" data-value="1" onclick="selectStar(1)" title="Poor">⭐</button>
+          <button class="star-btn" data-value="2" onclick="selectStar(2)" title="Fair">⭐</button>
+          <button class="star-btn" data-value="3" onclick="selectStar(3)" title="Good">⭐</button>
+          <button class="star-btn" data-value="4" onclick="selectStar(4)" title="Great">⭐</button>
+          <button class="star-btn" data-value="5" onclick="selectStar(5)" title="Excellent">⭐</button>
+        </div>
+        <div class="rating-hint" id="ratingHint">Tap a star to rate</div>
+        <div id="ratingConfirmRow" style="display:none;margin-top:12px;justify-content:center;gap:8px;">
+          <button class="btn-branch-submit" onclick="confirmRating()">Confirm Rating</button>
+          <button class="btn-branch-skip" onclick="resetStars()">Change</button>
+        </div>
+      </div>
+      <!-- Branch A: Low rating (1–3) -->
+      <div id="ratingBranchLow">
+        <div class="branch-icon">😕</div>
+        <div class="branch-title">Sorry to hear that!</div>
+        <div class="branch-sub">What went wrong? Did the string yield irrelevant results, or did the search engine reject the syntax?</div>
+        <textarea class="rating-textarea" id="ratingLowComment" placeholder="Tell us what happened — we read every response…" rows="3" maxlength="300"></textarea>
+        <div class="branch-actions">
+          <button class="btn-branch-submit" onclick="submitLowRating()">Send Feedback</button>
+          <button class="btn-branch-skip" onclick="closeRatingModal()">Skip</button>
+        </div>
+      </div>
+      <!-- Branch B: High rating (4–5) -->
+      <div id="ratingBranchHigh">
+        <div class="branch-celebrate">🎉</div>
+        <div class="branch-title">Awesome! Glad we could help.</div>
+        <div class="branch-sub">We publish fresh Boolean templates every week for MENA job seekers. Want in?</div>
+        <div class="branch-cta-row">
+          <button class="btn-cta-primary" onclick="openModal({titles:state.titles,regions:state.regions.concat(state.customRegions),mustSkills:state.mustSkills,niceSkills:state.niceSkills});closeRatingModal();">
+            📩 Get Free Templates
+          </button>
+          <a class="btn-cta-secondary" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Ftools.thedailytalent.com" target="_blank" rel="noopener" onclick="trackEvent('rating_share_linkedin','');closeRatingModal();">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            Share on LinkedIn
+          </a>
+        </div>
+      </div>
+      <!-- Thank you state -->
+      <div id="ratingThankYou">
+        <div style="font-size:32px;margin-bottom:8px;">🙏</div>
+        <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:800;color:var(--text);margin-bottom:6px;">Thank you!</div>
+        <div style="font-size:12.5px;color:var(--muted2);line-height:1.5;">Your feedback helps us make the tool better for every job seeker in the region.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RATING AGGREGATE BADGE -->
+<div id="ratingBadge">
+  <span class="badge-stars" id="badgeStars">★★★★★</span>
+  <span class="badge-score" id="badgeScore">–</span>
+  <span class="badge-count" id="badgeCount"></span>
+  <button onclick="dismissRatingBadge()" style="background:none;border:none;color:var(--muted);font-size:13px;cursor:pointer;padding:0 0 0 4px;line-height:1;transition:color 0.2s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--muted)'">✕</button>
+</div>
+
 <!-- NAVI -->
 <div class="navi-backdrop" id="naviBackdrop" onclick="closeNavi()"></div>
 <div class="navi-panel" id="naviPanel">
@@ -1116,6 +1242,7 @@ window.addEventListener("DOMContentLoaded",function(){
   initRecentSearches();
   loadSynonymMap();
   initSynonymSuggest();
+  initRatingWidget();
 });
 function trackSessionEnd(){var duration=Math.round((Date.now()-SESSION_START_TS)/1000);trackEvent("session_end","duration_seconds:"+duration);}
 window.addEventListener("visibilitychange",function(){if(document.visibilityState==="hidden")trackSessionEnd();});
@@ -1274,12 +1401,12 @@ function switchTab(id,btn){trackEvent("tab_switch",id);document.querySelectorAll
 function copyString(id){
   var str=plain[id]||"";
   if(id==="li"&&liPostsMode)str+=' AND (jobs OR vacancy OR hiring)';
-  navigator.clipboard.writeText(str).then(function(){showToast('✓ Copied to clipboard!');trackEvent('copy_string',id);});
+  navigator.clipboard.writeText(str).then(function(){showToast('✓ Copied to clipboard!');trackEvent('copy_string',id);triggerRatingPrompt();});
 }
-function copyXray(k){navigator.clipboard.writeText(xrayPlain[k]||"").then(function(){showToast('✓ Copied to clipboard!');trackEvent('copy_xray',k);});}
+function copyXray(k){navigator.clipboard.writeText(xrayPlain[k]||"").then(function(){showToast('✓ Copied to clipboard!');trackEvent('copy_xray',k);triggerRatingPrompt();});}
 function openXray(k){var q=xrayPlain[k]||"";if(!q)return;trackEvent('open_xray_search',k);window.open('https://www.google.com/search?q='+encodeURIComponent(q),'_blank');}
-function openLinkedIn(){var q=plain.li||state.titles.join(' OR ');if(liPostsMode)q+=' AND (jobs OR vacancy OR hiring)';trackEvent('open_linkedin_search',q.slice(0,80));window.open('https://www.linkedin.com/search/results/jobs/?keywords='+encodeURIComponent(q),'_blank');}
-function openGoogle(){var q=plain.gx||plain.li||state.titles.join(" OR ");trackEvent("open_google_xray",q.slice(0,80));window.open("https://www.google.com/search?q="+encodeURIComponent(q),"_blank");}
+function openLinkedIn(){var q=plain.li||state.titles.join(' OR ');if(liPostsMode)q+=' AND (jobs OR vacancy OR hiring)';trackEvent('open_linkedin_search',q.slice(0,80));triggerRatingPrompt();window.open('https://www.linkedin.com/search/results/jobs/?keywords='+encodeURIComponent(q),'_blank');}
+function openGoogle(){var q=plain.gx||plain.li||state.titles.join(" OR ");trackEvent("open_google_xray",q.slice(0,80));triggerRatingPrompt();window.open("https://www.google.com/search?q="+encodeURIComponent(q),"_blank");}
 function showToast(msg){var t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");setTimeout(function(){t.classList.remove("show");},2500);}
 
 // ── STRENGTH METER ──
@@ -1600,6 +1727,212 @@ function togglePopularSearches(){
   var isOpen=body.style.display!=="none";
   body.style.display=isOpen?"none":"block";
   chevron.classList.toggle("open",!isOpen);
+}
+
+// ── STAR RATING WIDGET (Branching Logic) ──
+var ratingSelected = 0;
+var RATING_LS_KEY = "tdt_tool_rated";
+var ratingTriggered = false;
+
+function initRatingWidget() {
+  loadRatingAggregate();
+  // Wire hover group effect
+  var stars = document.querySelectorAll(".star-btn");
+  stars.forEach(function(btn) {
+    btn.addEventListener("mouseover", function() {
+      var hVal = parseInt(btn.dataset.value);
+      stars.forEach(function(s) {
+        var v = parseInt(s.dataset.value);
+        s.style.filter = v <= hVal ? "grayscale(0) opacity(1)" : "grayscale(1) opacity(0.25)";
+        s.style.transform = v <= hVal ? "scale(1.2)" : "scale(0.95)";
+      });
+    });
+    btn.addEventListener("mouseout", function() {
+      stars.forEach(function(s) {
+        var v = parseInt(s.dataset.value);
+        s.style.filter = v <= ratingSelected ? "grayscale(0) opacity(1)" : "grayscale(1) opacity(0.35)";
+        s.style.transform = v <= ratingSelected ? "scale(1.1)" : "scale(1)";
+      });
+    });
+  });
+}
+
+function triggerRatingPrompt() {
+  // Only trigger if output section is visible — user has generated a string
+  var outputSection = document.getElementById("output-section");
+  if (!outputSection || !outputSection.classList.contains("visible")) return;
+  // If already rated (localStorage), show aggregate badge only
+  if (localStorage.getItem(RATING_LS_KEY)) {
+    showRatingAggregateBadge();
+    return;
+  }
+  if (ratingTriggered) return;
+  ratingTriggered = true;
+  setTimeout(function() {
+    var modal = document.getElementById("ratingModal");
+    if (modal) {
+      modal.classList.add("visible");
+      trackEvent("rating_prompt_shown", "");
+    }
+  }, 3000);
+}
+
+function showRatingAggregateBadge() {
+  var badge = document.getElementById("ratingBadge");
+  if (badge) {
+    badge.style.display = "flex";
+    // Auto-dismiss after 8 seconds
+    setTimeout(function() { dismissRatingBadge(); }, 8000);
+  }
+}
+
+function dismissRatingBadge() {
+  var badge = document.getElementById("ratingBadge");
+  if (badge) {
+    badge.style.opacity = "0";
+    badge.style.transform = "translateY(8px)";
+    badge.style.transition = "all 0.3s ease";
+    setTimeout(function() { badge.style.display = "none"; badge.style.cssText = ""; }, 300);
+  }
+}
+
+function selectStar(value) {
+  ratingSelected = value;
+  // Update star visuals
+  document.querySelectorAll(".star-btn").forEach(function(btn) {
+    var v = parseInt(btn.dataset.value);
+    btn.style.filter = v <= value ? "grayscale(0) opacity(1)" : "grayscale(1) opacity(0.25)";
+    btn.style.transform = v <= value ? "scale(1.1)" : "scale(1)";
+  });
+  // Update hint text
+  var hints = {1:"😕 Not what I expected",2:"😐 Needs improvement",3:"🙂 Pretty good",4:"😊 Really helpful!",5:"🤩 Absolutely love it!"};
+  var hint = document.getElementById("ratingHint");
+  if (hint) { hint.textContent = hints[value]; hint.style.color = value >= 4 ? "var(--accent3)" : value === 3 ? "var(--accent)" : "#f87171"; }
+  // Show confirm row — don't branch yet
+  var confirmRow = document.getElementById("ratingConfirmRow");
+  if (confirmRow) confirmRow.style.display = "flex";
+}
+
+function resetStars() {
+  ratingSelected = 0;
+  document.querySelectorAll(".star-btn").forEach(function(btn) {
+    btn.style.filter = "grayscale(1) opacity(0.35)";
+    btn.style.transform = "scale(1)";
+  });
+  var hint = document.getElementById("ratingHint");
+  if (hint) { hint.textContent = "Tap a star to rate"; hint.style.color = ""; }
+  var confirmRow = document.getElementById("ratingConfirmRow");
+  if (confirmRow) confirmRow.style.display = "none";
+}
+
+function confirmRating() {
+  if (!ratingSelected) return;
+  branchRating(ratingSelected);
+}
+
+function closeRatingModal() {
+  var modal = document.getElementById("ratingModal");
+  if (modal) {
+    modal.style.opacity = "0";
+    modal.style.transform = "translateY(12px)";
+    modal.style.transition = "all 0.3s ease";
+    setTimeout(function() {
+      modal.classList.remove("visible");
+      modal.style.cssText = "";
+    }, 300);
+  }
+  showRatingAggregateBadge();
+}
+
+function branchRating(value) {
+  document.getElementById("ratingStarsPhase").style.display = "none";
+  if (value <= 3) {
+    // Branch A — Low rating — diagnostic
+    document.getElementById("ratingBranchLow").style.display = "block";
+  } else {
+    // Branch B — High rating — growth CTA
+    document.getElementById("ratingBranchHigh").style.display = "block";
+  }
+  // Save to Supabase
+  var jobTitle = state.titles[0] || null;
+  var region = state.regions.concat(state.customRegions)[0] || null;
+  fetch(SUPABASE_URL + "/rest/v1/ratings", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "apikey": SUPABASE_KEY,
+      "Authorization": "Bearer " + SUPABASE_KEY,
+      "Prefer": "return=minimal"
+    },
+    body: JSON.stringify({
+      score: value,
+      job_title: jobTitle,
+      region: region,
+      session_id: SESSION_ID
+    })
+  }).catch(function(){});
+  localStorage.setItem(RATING_LS_KEY, "true");
+  trackEvent("rating_submitted", value);
+}
+
+function submitLowRating() {
+  var comment = (document.getElementById("ratingLowComment").value || "").trim();
+  if (comment) {
+    fetch(SUPABASE_URL + "/rest/v1/ratings", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "apikey": SUPABASE_KEY,
+        "Authorization": "Bearer " + SUPABASE_KEY,
+        "Prefer": "return=minimal"
+      },
+      body: JSON.stringify({ comment: comment })
+    }).catch(function(){});
+    trackEvent("rating_low_comment", comment.slice(0, 80));
+  }
+  document.getElementById("ratingBranchLow").style.display = "none";
+  document.getElementById("ratingThankYou").style.display = "block";
+  setTimeout(function() { closeRatingModal(); }, 2500);
+}
+
+function closeRatingModal() {
+  var modal = document.getElementById("ratingModal");
+  if (modal) {
+    modal.style.opacity = "0";
+    modal.style.transform = "translateY(12px)";
+    setTimeout(function() {
+      modal.classList.remove("visible");
+      modal.style.opacity = "";
+      modal.style.transform = "";
+    }, 300);
+  }
+  showRatingAggregateBadge();
+}
+
+function loadRatingAggregate() {
+  fetch(SUPABASE_URL + "/rest/v1/ratings?select=score&limit=2000", {
+    headers: { "apikey": SUPABASE_KEY, "Authorization": "Bearer " + SUPABASE_KEY }
+  }).then(function(r) { return r.json(); })
+  .then(function(rows) {
+    if (!rows || rows.length < 10) return;
+    var total = rows.reduce(function(sum, r) { return sum + (r.score || 0); }, 0);
+    var avg = (total / rows.length).toFixed(1);
+    var count = rows.length;
+    var fullStars = Math.round(parseFloat(avg));
+    var starsStr = "★".repeat(fullStars) + "☆".repeat(5 - fullStars);
+    // Update badge
+    var badgeStars = document.getElementById("badgeStars");
+    var badgeScore = document.getElementById("badgeScore");
+    var badgeCount = document.getElementById("badgeCount");
+    if (badgeStars) badgeStars.textContent = starsStr;
+    if (badgeScore) badgeScore.textContent = avg + " / 5";
+    if (badgeCount) badgeCount.textContent = count.toLocaleString() + " ratings";
+    // Update modal aggregate line
+    var modalAgg = document.getElementById("ratingModalAgg");
+    if (modalAgg) modalAgg.textContent = starsStr + " " + avg + " from " + count + " users";
+    // If already rated, show badge
+    if (localStorage.getItem(RATING_LS_KEY)) showRatingAggregateBadge();
+  }).catch(function(){});
 }
 
 // ── STICKY BAR ──
