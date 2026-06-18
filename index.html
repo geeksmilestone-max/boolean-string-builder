@@ -126,7 +126,7 @@ input::placeholder { color: var(--muted); }
 .social-divider::before,.social-divider::after{content:'';flex:1;height:1px;background:var(--border)}
 .social-divider-label{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
 
-@media(max-width:480px){}
+
 
 
 
@@ -182,14 +182,14 @@ input::placeholder { color: var(--muted); }
 .navi-nudge-dot{width:6px;height:6px;border-radius:50%;background:var(--accent3);flex-shrink:0;animation:pulse 2s infinite}
 
 /* ── STAR RATING MODAL ── */
-#ratingModal{display:none;position:fixed;bottom:90px;right:24px;z-index:850;width:340px;max-width:calc(100vw - 48px);animation:fadeUp 0.4s cubic-bezier(0.34,1.3,0.64,1) both;}
+#ratingModal{display:none;position:fixed;bottom:90px;right:24px;z-index:900;width:340px;max-width:calc(100vw - 32px);animation:fadeUp 0.4s cubic-bezier(0.34,1.3,0.64,1) both;}
 #ratingModal.visible{display:block;}
-.rating-card{background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius);box-shadow:0 20px 60px rgba(0,0,0,0.5),0 0 0 1px rgba(79,142,247,0.1);overflow:hidden;position:relative;}
+.rating-card{background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius);box-shadow:0 20px 60px rgba(0,0,0,0.5),0 0 0 1px rgba(79,142,247,0.1);overflow:hidden;position:relative;box-sizing:border-box;}
 .rating-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent3));}
 .rating-card-header{padding:16px 18px 0;display:flex;align-items:flex-start;justify-content:space-between;gap:8px;}
-.rating-card-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:800;color:var(--text);line-height:1.3;}
+.rating-card-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:800;color:var(--text);line-height:1.3;flex:1;min-width:0;}
 .rating-card-sub{font-size:12px;color:var(--muted2);margin-top:3px;line-height:1.4;}
-.rating-close-btn{background:none;border:none;color:var(--muted);font-size:16px;cursor:pointer;padding:0;line-height:1;flex-shrink:0;transition:color 0.2s;}
+.rating-close-btn{background:none;border:none;color:var(--muted);font-size:16px;cursor:pointer;padding:0;line-height:1;flex-shrink:0;transition:color 0.2s;z-index:10;position:relative;}
 .rating-close-btn:hover{color:var(--text);}
 .rating-card-body{padding:16px 18px 20px;}
 /* Stars phase */
@@ -221,11 +221,19 @@ input::placeholder { color: var(--muted); }
 /* Thank you state */
 #ratingThankYou{display:none;text-align:center;padding:8px 0;animation:fadeIn 0.3s ease both;}
 /* Aggregate badge — shown after rating */
-#ratingBadge{display:none;position:fixed;bottom:90px;right:24px;z-index:840;background:var(--surface);border:1px solid var(--border2);border-radius:100px;padding:8px 16px;align-items:center;gap:8px;box-shadow:0 4px 20px rgba(0,0,0,0.3);animation:fadeUp 0.4s ease both;}
+#ratingBadge{display:none;position:fixed;bottom:90px;right:24px;z-index:900;background:var(--surface);border:1px solid var(--border2);border-radius:100px;padding:8px 16px;align-items:center;gap:8px;box-shadow:0 4px 20px rgba(0,0,0,0.3);animation:fadeUp 0.4s ease both;}
 .badge-stars{color:#fbbf24;font-size:13px;letter-spacing:1px;}
 .badge-score{font-family:'Syne',sans-serif;font-size:13px;font-weight:800;color:var(--text);}
 .badge-count{font-size:11px;color:var(--muted);}
-@media(max-width:480px){#ratingModal{bottom:80px;right:12px;left:12px;width:auto;max-width:none;}#ratingBadge{bottom:80px;right:12px;}}
+@media(max-width:480px){
+  #ratingModal{bottom:80px;right:12px;left:12px;width:auto;max-width:none;}
+  #ratingBadge{bottom:80px;right:12px;}
+  .rating-card-title{font-size:14px;}
+  .branch-cta-row{gap:6px;}
+  .btn-cta-primary,.btn-cta-secondary{font-size:11px;padding:9px 12px;}
+  .stars-row{gap:4px;}
+  .star-btn{font-size:28px;}
+}
 
 /* ── PLATFORM VALIDATOR ── */
 .platform-warning{display:none;margin-top:10px;padding:10px 14px;background:rgba(251,191,36,0.06);border:1px solid rgba(251,191,36,0.2);border-radius:var(--radius-sm);animation:fadeIn 0.2s ease both;}
@@ -1743,7 +1751,10 @@ function initRatingWidget() {
 }
 
 function triggerRatingPrompt() {
-  // If already rated (localStorage), show aggregate only
+  // Only trigger if output section is visible — user has generated a string
+  var outputSection = document.getElementById("output-section");
+  if (!outputSection || !outputSection.classList.contains("visible")) return;
+  // If already rated (localStorage), show aggregate badge only
   if (localStorage.getItem(RATING_LS_KEY)) {
     showRatingAggregateBadge();
     return;
