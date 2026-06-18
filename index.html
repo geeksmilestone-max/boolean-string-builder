@@ -221,13 +221,13 @@ input::placeholder { color: var(--muted); }
 /* Thank you state */
 #ratingThankYou{display:none;text-align:center;padding:8px 0;animation:fadeIn 0.3s ease both;}
 /* Aggregate badge — shown after rating */
-#ratingBadge{display:none;position:fixed;bottom:90px;right:24px;z-index:900;background:var(--surface);border:1px solid var(--border2);border-radius:100px;padding:8px 16px;align-items:center;gap:8px;box-shadow:0 4px 20px rgba(0,0,0,0.3);animation:fadeUp 0.4s ease both;}
+#ratingBadge{display:none;position:fixed;bottom:80px;left:24px;z-index:900;background:var(--surface);border:1px solid var(--border2);border-radius:100px;padding:7px 14px;align-items:center;gap:8px;box-shadow:0 4px 20px rgba(0,0,0,0.3);animation:fadeUp 0.4s ease both;}
 .badge-stars{color:#fbbf24;font-size:13px;letter-spacing:1px;}
 .badge-score{font-family:'Syne',sans-serif;font-size:13px;font-weight:800;color:var(--text);}
 .badge-count{font-size:11px;color:var(--muted);}
 @media(max-width:480px){
   #ratingModal{bottom:80px;right:12px;left:12px;width:auto;max-width:none;}
-  #ratingBadge{bottom:80px;right:12px;}
+  #ratingBadge{bottom:80px;left:12px;}
   .rating-card-title{font-size:14px;}
   .branch-cta-row{gap:6px;}
   .btn-cta-primary,.btn-cta-secondary{font-size:11px;padding:9px 12px;}
@@ -953,6 +953,7 @@ input::placeholder { color: var(--muted); }
   <span class="badge-stars" id="badgeStars">★★★★★</span>
   <span class="badge-score" id="badgeScore">–</span>
   <span class="badge-count" id="badgeCount"></span>
+  <button onclick="dismissRatingBadge()" style="background:none;border:none;color:var(--muted);font-size:13px;cursor:pointer;padding:0 0 0 4px;line-height:1;transition:color 0.2s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--muted)'">✕</button>
 </div>
 
 <!-- NAVI -->
@@ -1776,7 +1777,21 @@ function triggerRatingPrompt() {
 
 function showRatingAggregateBadge() {
   var badge = document.getElementById("ratingBadge");
-  if (badge) badge.style.display = "flex";
+  if (badge) {
+    badge.style.display = "flex";
+    // Auto-dismiss after 8 seconds
+    setTimeout(function() { dismissRatingBadge(); }, 8000);
+  }
+}
+
+function dismissRatingBadge() {
+  var badge = document.getElementById("ratingBadge");
+  if (badge) {
+    badge.style.opacity = "0";
+    badge.style.transform = "translateY(8px)";
+    badge.style.transition = "all 0.3s ease";
+    setTimeout(function() { badge.style.display = "none"; badge.style.cssText = ""; }, 300);
+  }
 }
 
 function selectStar(value) {
