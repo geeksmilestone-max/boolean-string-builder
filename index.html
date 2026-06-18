@@ -35,6 +35,10 @@
   gtag('js', new Date());
   gtag('config', 'G-1E7X6LMBTQ');
 </script>
+<script>
+  // Apply theme immediately before paint to prevent flash
+  (function(){var t=localStorage.getItem("tdt_theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");})();
+</script>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
 <script defer src="/_vercel/insights/script.js"></script>
 <style>
@@ -48,9 +52,22 @@
   --li-blue: #0a66c2; --tag-bg: rgba(79,142,247,0.10); --tag-border: rgba(79,142,247,0.25);
   --radius: 14px; --radius-sm: 8px;
 }
+/* ── LIGHT THEME ── */
+[data-theme="light"] {
+  --bg: #f4f6fb;
+  --surface: #ffffff;
+  --surface2: #eef1f8;
+  --border: rgba(0,0,0,0.08);
+  --border2: rgba(0,0,0,0.14);
+  --text: #0f1219;
+  --muted: #7a85a0;
+  --muted2: #4a5568;
+}
 html { scroll-behavior: smooth; }
-body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 15px; line-height: 1.6; min-height: 100vh; overflow-x: hidden; }
+body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 15px; line-height: 1.6; min-height: 100vh; overflow-x: hidden; transition: background 0.25s ease, color 0.25s ease; }
 body::before { content: ''; position: fixed; top: -30vh; left: 50%; transform: translateX(-50%); width: 80vw; height: 60vh; background: radial-gradient(ellipse at center, rgba(79,142,247,0.08) 0%, rgba(123,92,240,0.05) 50%, transparent 70%); pointer-events: none; z-index: 0; }
+/* Light mode h1 — use dark text gradient instead of light */
+[data-theme="light"] h1 { background: linear-gradient(135deg, #0f1219 30%, #3a6fd8 70%, #6b4cc0 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 .wrapper { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 48px 24px 80px; }
 .header { text-align: center; margin-bottom: 52px; animation: fadeUp 0.6s ease both; }
 .badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(79,142,247,0.08); border: 1px solid var(--tag-border); color: var(--accent); font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 5px 14px; border-radius: 100px; margin-bottom: 20px; }
@@ -237,7 +254,23 @@ input::placeholder { color: var(--muted); }
   .meter-nudge{text-align:left;flex:none;width:100%;}
 }
 
-/* ── PLATFORM VALIDATOR ── */
+/* ── THEME TOGGLE ── */
+.theme-toggle{position:fixed;top:16px;right:16px;z-index:950;background:var(--surface);border:1px solid var(--border2);border-radius:100px;padding:7px 14px;display:flex;align-items:center;gap:8px;cursor:pointer;transition:all 0.2s;box-shadow:0 2px 12px rgba(0,0,0,0.2);}
+.theme-toggle:hover{border-color:var(--accent);box-shadow:0 4px 16px rgba(79,142,247,0.15);}
+.theme-toggle-icon{font-size:15px;line-height:1;transition:transform 0.4s ease;}
+.theme-toggle-label{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;color:var(--muted2);letter-spacing:0.04em;transition:color 0.2s;}
+[data-theme="light"] .theme-toggle-icon{transform:rotate(180deg);}
+
+/* ── LIGHT MODE OVERRIDES ── */
+[data-theme="light"] .card{box-shadow:0 2px 12px rgba(0,0,0,0.06);}
+[data-theme="light"] .string-box{background:#f0f4ff;border-color:rgba(0,0,0,0.1);}
+[data-theme="light"] .popular-card{box-shadow:0 2px 8px rgba(0,0,0,0.05);}
+[data-theme="light"] .recent-searches-bar{background:var(--surface);border-color:var(--border);}
+[data-theme="light"] .navi-panel{background:#f8faff;}
+[data-theme="light"] .meter-wrap{box-shadow:0 2px 8px rgba(0,0,0,0.05);}
+[data-theme="light"] .output-section{background:var(--surface);}
+[data-theme="light"] .tag-input-wrap{background:var(--surface2);}
+[data-theme="light"] body::before{background:radial-gradient(ellipse at center, rgba(79,142,247,0.05) 0%, rgba(123,92,240,0.03) 50%, transparent 70%);}
 .platform-warning{display:none;margin-top:10px;padding:10px 14px;background:rgba(251,191,36,0.06);border:1px solid rgba(251,191,36,0.2);border-radius:var(--radius-sm);animation:fadeIn 0.2s ease both;}
 .platform-warning.visible{display:flex;align-items:flex-start;gap:8px;}
 .platform-warning-icon{font-size:14px;flex-shrink:0;margin-top:1px;}
@@ -549,6 +582,12 @@ input::placeholder { color: var(--muted); }
   <button id="sticky-bar-cta" onclick="openStickyModal()">Get Free Templates</button>
   <button id="sticky-bar-close" onclick="closeStickyBar()" aria-label="Close">×</button>
 </div>
+
+<!-- THEME TOGGLE -->
+<button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle light/dark mode">
+  <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+  <span class="theme-toggle-label" id="themeLabel">Dark</span>
+</button>
 
 <div class="wrapper">
 
@@ -1243,6 +1282,7 @@ window.addEventListener("DOMContentLoaded",function(){
   loadSynonymMap();
   initSynonymSuggest();
   initRatingWidget();
+  initTheme();
 });
 function trackSessionEnd(){var duration=Math.round((Date.now()-SESSION_START_TS)/1000);trackEvent("session_end","duration_seconds:"+duration);}
 window.addEventListener("visibilitychange",function(){if(document.visibilityState==="hidden")trackSessionEnd();});
@@ -1933,6 +1973,36 @@ function loadRatingAggregate() {
     // If already rated, show badge
     if (localStorage.getItem(RATING_LS_KEY)) showRatingAggregateBadge();
   }).catch(function(){});
+}
+
+// ── THEME TOGGLE ──
+var THEME_LS_KEY = "tdt_theme";
+
+function toggleTheme() {
+  var current = document.documentElement.getAttribute("data-theme");
+  var next = current === "light" ? "dark" : "light";
+  applyTheme(next);
+  localStorage.setItem(THEME_LS_KEY, next);
+  trackEvent("theme_toggle", next);
+}
+
+function applyTheme(theme) {
+  var icon = document.getElementById("themeIcon");
+  var label = document.getElementById("themeLabel");
+  if (theme === "light") {
+    document.documentElement.setAttribute("data-theme", "light");
+    if (icon) icon.textContent = "☀️";
+    if (label) label.textContent = "Light";
+  } else {
+    document.documentElement.removeAttribute("data-theme");
+    if (icon) icon.textContent = "🌙";
+    if (label) label.textContent = "Dark";
+  }
+}
+
+function initTheme() {
+  var saved = localStorage.getItem(THEME_LS_KEY);
+  if (saved) applyTheme(saved);
 }
 
 // ── STICKY BAR ──
