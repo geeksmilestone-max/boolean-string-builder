@@ -906,7 +906,11 @@ input::placeholder { color: var(--muted); }
           <button class="star-btn" data-value="4" onclick="selectStar(4)" title="Great">⭐</button>
           <button class="star-btn" data-value="5" onclick="selectStar(5)" title="Excellent">⭐</button>
         </div>
-        <div class="rating-hint">Tap a star to rate</div>
+        <div class="rating-hint" id="ratingHint">Tap a star to rate</div>
+        <div id="ratingConfirmRow" style="display:none;margin-top:12px;justify-content:center;gap:8px;">
+          <button class="btn-branch-submit" onclick="confirmRating()">Confirm Rating</button>
+          <button class="btn-branch-skip" onclick="resetStars()">Change</button>
+        </div>
       </div>
       <!-- Branch A: Low rating (1–3) -->
       <div id="ratingBranchLow">
@@ -1777,14 +1781,50 @@ function showRatingAggregateBadge() {
 
 function selectStar(value) {
   ratingSelected = value;
+  // Update star visuals
   document.querySelectorAll(".star-btn").forEach(function(btn) {
     var v = parseInt(btn.dataset.value);
     btn.style.filter = v <= value ? "grayscale(0) opacity(1)" : "grayscale(1) opacity(0.25)";
     btn.style.transform = v <= value ? "scale(1.1)" : "scale(1)";
   });
-  trackEvent("rating_star_hover", value);
-  // Immediately branch after short delay for feel
-  setTimeout(function() { branchRating(value); }, 300);
+  // Update hint text
+  var hints = {1:"😕 Not what I expected",2:"😐 Needs improvement",3:"🙂 Pretty good",4:"😊 Really helpful!",5:"🤩 Absolutely love it!"};
+  var hint = document.getElementById("ratingHint");
+  if (hint) { hint.textContent = hints[value]; hint.style.color = value >= 4 ? "var(--accent3)" : value === 3 ? "var(--accent)" : "#f87171"; }
+  // Show confirm row — don't branch yet
+  var confirmRow = document.getElementById("ratingConfirmRow");
+  if (confirmRow) confirmRow.style.display = "flex";
+}
+
+function resetStars() {
+  ratingSelected = 0;
+  document.querySelectorAll(".star-btn").forEach(function(btn) {
+    btn.style.filter = "grayscale(1) opacity(0.35)";
+    btn.style.transform = "scale(1)";
+  });
+  var hint = document.getElementById("ratingHint");
+  if (hint) { hint.textContent = "Tap a star to rate"; hint.style.color = ""; }
+  var confirmRow = document.getElementById("ratingConfirmRow");
+  if (confirmRow) confirmRow.style.display = "none";
+}
+
+function confirmRating() {
+  if (!ratingSelected) return;
+  branchRating(ratingSelected);
+}
+
+function closeRatingModal() {
+  var modal = document.getElementById("ratingModal");
+  if (modal) {
+    modal.style.opacity = "0";
+    modal.style.transform = "translateY(12px)";
+    modal.style.transition = "all 0.3s ease";
+    setTimeout(function() {
+      modal.classList.remove("visible");
+      modal.style.cssText = "";
+    }, 300);
+  }
+  showRatingAggregateBadge();
 }
 
 function branchRating(value) {
