@@ -244,6 +244,7 @@ module.exports = async (req, res) => {
       body: JSON.stringify({
         from: process.env.RESEND_FROM,
         to: email,
+        reply_to: "support@thedailytalent.com",
         subject: "Your 10 Boolean strings are ready \u2192",
         html: html,
       }),
@@ -253,6 +254,29 @@ module.exports = async (req, res) => {
       const errText = await sendRes.text();
       console.error("Resend error:", errText);
       return res.status(502).json({ error: "Email send failed" });
+    }
+
+    // Best-effort: stamp the source row so you can query who's actually
+    // received a pack (and, by absence, who hasn't — a built-in failure log).
+    if (record.id) {
+      try {
+        await fetch(
+          `${process.env.SUPABASE_URL}/rest/v1/boolean_requests?id=eq.${encodeURIComponent(record.id)}`,
+          {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+              apikey: process.env.SUPABASE_SECRET_KEY,
+              Authorization: "Bearer " + process.env.SUPABASE_SECRET_KEY,
+              Prefer: "return=minimal",
+            },
+            body: JSON.stringify({ pack_sent_at: new Date().toISOString() }),
+          }
+        );
+      } catch (e) {
+        console.error("pack_sent_at stamp error:", e);
+        // Non-fatal — the email already sent successfully either way.
+      }
     }
 
     return res.status(200).json({ success: true });
