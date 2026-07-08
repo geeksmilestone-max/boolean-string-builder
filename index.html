@@ -611,11 +611,12 @@ body::before{background:radial-gradient(ellipse at center, rgba(79,142,247,0.05)
 @keyframes tdtPing{75%,100%{transform:scale(2);opacity:0;}}
 @media(max-width:520px){
   .tdt-nav-status{display:none;}
-  .tdt-nav-inner{gap:8px;padding:8px 12px;}
-  .tdt-nav-word{display:none;}
-  .tdt-nav-brand{padding-right:8px;}
-  .tdt-nav-links{font-size:11px;gap:5px;}
-  .tdt-nav-link{padding:4px 6px;}
+  .tdt-nav-inner{gap:6px;padding:7px 10px;max-width:calc(100vw - 24px);box-sizing:border-box;overflow:hidden;}
+  .tdt-nav-word{font-size:11px;}
+  .tdt-nav-brand{padding-right:6px;gap:5px;}
+  .tdt-nav-links{font-size:10px;gap:3px;}
+  .tdt-nav-link{padding:3px 4px;}
+  .tdt-nav-sep{font-size:9px;}
   .theme-toggle{top:66px;right:12px;}
   .wrapper{padding-top:112px;}
 }
