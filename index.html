@@ -39,7 +39,7 @@
 {"@context":"https://schema.org","@type":"WebApplication","name":"Boolean String Builder","url":"https://tools.thedailytalent.com/","description":"A free Boolean search string generator for job seekers.","applicationCategory":"BusinessApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Person","name":"Ameer Khan","url":"https://www.linkedin.com/in/ameer-khan-88b67ba0"},"publisher":{"@type":"Organization","name":"The Daily Talent","url":"https://thedailytalent.com"},"featureList":["LinkedIn Boolean search string generator","Google X-Ray search string builder","MENA and GCC job market targeting","No sign-up required","Unlimited free searches"],"screenshot":"https://tools.thedailytalent.com/og-image.png","browserRequirements":"Requires JavaScript. Compatible with all modern browsers.","inLanguage":"en"}
 </script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a Boolean search string?","acceptedAnswer":{"@type":"Answer","text":"A Boolean search string is a structured query that uses logic operators — AND, OR, and NOT — to narrow or broaden search results. Recruiters have used them for years to find candidates precisely. This tool lets job seekers use the same technique to find jobs and opportunities that standard search filters miss entirely."}},{"@type":"Question","name":"Does this work on LinkedIn's free version?","acceptedAnswer":{"@type":"Answer","text":"Yes — Boolean search works on LinkedIn's free version. Simply paste the generated string into LinkedIn's main search bar and press Enter. You don't need LinkedIn Premium or Recruiter to benefit from this."}},{"@type":"Question","name":"How is this different from LinkedIn's built-in filters?","acceptedAnswer":{"@type":"Answer","text":"LinkedIn's filters are broad and limited — they match on a small set of predefined fields. Boolean search scans the full text of profiles and job listings, including headlines, summaries, and experience sections."}},{"@type":"Question","name":"Can I use this for Google search too?","acceptedAnswer":{"@type":"Answer","text":"Yes. The Google X-Ray tab generates a string specifically formatted for Google, using site:linkedin.com/in/ to search inside LinkedIn's profile pages directly from Google."}},{"@type":"Question","name":"Do I need to create an account?","acceptedAnswer":{"@type":"Answer","text":"No account, no login, no sign-up required. This tool is completely free to use as many times as you need."}},{"@type":"Question","name":"What is Google X-Ray search?","acceptedAnswer":{"@type":"Answer","text":"Google X-Ray is a technique that uses Google to search within a specific website — in this case, LinkedIn. By adding site:linkedin.com/in/ to your search query, you instruct Google to only return results from LinkedIn profile pages."}},{"@type":"Question","name":"Who is this tool built for?","acceptedAnswer":{"@type":"Answer","text":"Primarily built for job seekers who want to search smarter — finding roles and companies that standard search misses. Equally useful for recruiters and freelancers in the MENA and GCC region and globally."}}]}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a Boolean search string?","acceptedAnswer":{"@type":"Answer","text":"A Boolean search string is a structured query that uses logic operators — AND, OR, and NOT — to narrow or broaden search results. Recruiters have used them for years to find candidates precisely. This tool lets job seekers use the same technique to find jobs and opportunities that standard search filters miss entirely."}},{"@type":"Question","name":"Does this work on LinkedIn's free version?","acceptedAnswer":{"@type":"Answer","text":"Yes — Boolean search works on LinkedIn's free version. Simply paste the generated string into LinkedIn's main search bar and press Enter. You don't need LinkedIn Premium or Recruiter to benefit from this."}},{"@type":"Question","name":"How is this different from LinkedIn's built-in filters?","acceptedAnswer":{"@type":"Answer","text":"LinkedIn's filters are broad and limited — they match on a small set of predefined fields. Boolean search scans the full text of profiles and job listings, including headlines, summaries, and experience sections."}},{"@type":"Question","name":"Can I use this for Google search too?","acceptedAnswer":{"@type":"Answer","text":"Yes. The Google X-Ray tab generates ready-to-use strings for Google — including site:linkedin.com/jobs/view/ to surface LinkedIn job postings, and site:linkedin.com/in/ to search LinkedIn profile pages directly from Google."}},{"@type":"Question","name":"Do I need to create an account?","acceptedAnswer":{"@type":"Answer","text":"No account, no login, no sign-up required. This tool is completely free to use as many times as you need."}},{"@type":"Question","name":"What is Google X-Ray search?","acceptedAnswer":{"@type":"Answer","text":"Google X-Ray is a technique that uses Google to search within a specific website — in this case, LinkedIn. Adding site:linkedin.com/jobs/view/ restricts results to LinkedIn job postings, while site:linkedin.com/in/ restricts results to LinkedIn profile pages — both from a single Google search."}},{"@type":"Question","name":"Who is this tool built for?","acceptedAnswer":{"@type":"Answer","text":"Primarily built for job seekers who want to search smarter — finding roles and companies that standard search misses. Equally useful for recruiters and freelancers in the MENA and GCC region and globally."}}]}
 </script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1E7X6LMBTQ"></script>
 <script>
@@ -590,8 +590,8 @@ body::before{background:radial-gradient(ellipse at center, rgba(79,142,247,0.05)
 
 /* ── TOP NAV PILL ── */
 .tdt-nav{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:900;display:flex;justify-content:center;pointer-events:none;}
-.tdt-nav-inner{pointer-events:auto;display:flex;align-items:center;gap:16px;flex-wrap:nowrap;white-space:nowrap;background:rgba(28,32,43,0.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.18);border-radius:100px;padding:10px 20px;box-shadow:0 4px 30px rgba(0,0,0,0.55),inset 0 1px 1px rgba(255,255,255,0.08);transition:border-color 0.25s ease;}
-.tdt-nav-inner:hover{border-color:rgba(255,255,255,0.18);}
+.tdt-nav-inner{pointer-events:auto;display:flex;align-items:center;gap:16px;flex-wrap:nowrap;white-space:nowrap;background:rgba(24,27,38,0.62);backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);border:1px solid rgba(255,255,255,0.16);border-radius:100px;padding:10px 20px;box-shadow:0 8px 28px rgba(0,0,0,0.4),inset 0 1px 1px rgba(255,255,255,0.07);transition:border-color 0.25s ease;}
+.tdt-nav-inner:hover{border-color:rgba(255,255,255,0.24);}
 .tdt-nav-brand{display:flex;align-items:center;gap:8px;padding-right:12px;border-right:1px solid rgba(255,255,255,0.1);text-decoration:none;}
 .tdt-nav-dot{color:#C8A84B;font-size:10px;line-height:1;}
 .tdt-nav-word{font-family:'Syne',sans-serif;font-weight:800;font-size:13px;letter-spacing:-0.01em;color:#e8ecf4;transition:color 0.2s ease;}
@@ -601,7 +601,10 @@ body::before{background:radial-gradient(ellipse at center, rgba(79,142,247,0.05)
 .tdt-nav-link::after{content:'';position:absolute;left:8px;right:8px;bottom:0;height:1px;background:linear-gradient(90deg,transparent,currentColor,transparent);transform:scaleX(0);transition:transform 0.25s ease;}
 .tdt-nav-link:hover::after{transform:scaleX(1);}
 .tdt-nav-link.tool:hover{color:#38e8b5;}
+.tdt-nav-link.library:hover{color:#C8A84B;}
 .tdt-nav-link.contact:hover{color:#7b5cf0;}
+.tdt-nav-link.current{color:#C8A84B;}
+.tdt-nav-link.current::after{transform:scaleX(1);background:linear-gradient(90deg,transparent,#C8A84B,transparent);}
 .tdt-nav-sep{font-size:10px;color:rgba(255,255,255,0.65);font-weight:700;user-select:none;}
 .tdt-nav-status{display:flex;align-items:center;gap:8px;padding-left:12px;border-left:1px solid rgba(255,255,255,0.1);}
 .tdt-nav-dot-wrap{position:relative;display:flex;height:6px;width:6px;}
@@ -609,14 +612,36 @@ body::before{background:radial-gradient(ellipse at center, rgba(79,142,247,0.05)
 .tdt-nav-dot-solid{position:relative;display:inline-flex;border-radius:50%;height:6px;width:6px;background:#2fb89a;}
 .tdt-nav-status-text{font-family:'DM Mono','Fira Code',monospace;font-size:10px;color:#6b7794;letter-spacing:0.08em;text-transform:uppercase;}
 @keyframes tdtPing{75%,100%{transform:scale(2);opacity:0;}}
-@media(max-width:520px){
+
+/* Glowing hamburger — hidden above the mobile breakpoint */
+.tdt-hamburger-wrap{display:none;position:relative;width:34px;height:34px;flex-shrink:0;}
+.tdt-hamburger-wrap::before{content:'';position:absolute;inset:-5px;border-radius:50%;z-index:0;background:linear-gradient(120deg,#C8A84B,#7b5cf0,#4f8ef7,#38e8b5,#C8A84B);background-size:300% 300%;filter:blur(7px);opacity:0.6;animation:tdtHamGlow 5s linear infinite;}
+@keyframes tdtHamGlow{0%{background-position:0% 50%;}100%{background-position:300% 50%;}}
+.tdt-hamburger-btn{position:relative;z-index:1;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.16);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background 0.2s ease;}
+.tdt-hamburger-btn:hover{background:rgba(255,255,255,0.09);}
+.tdt-ham-bars{position:relative;width:15px;height:11px;}
+.tdt-ham-bar{position:absolute;left:0;width:15px;height:2px;border-radius:2px;background:#eef;transition:transform .4s cubic-bezier(.4,0,.2,1),opacity .25s ease,top .4s cubic-bezier(.4,0,.2,1);}
+.tdt-ham-bar.top{top:0;}
+.tdt-ham-bar.mid{top:4.5px;}
+.tdt-ham-bar.bottom{top:9px;}
+.tdt-hamburger-btn.open .tdt-ham-bar.top{top:4.5px;transform:rotate(45deg);}
+.tdt-hamburger-btn.open .tdt-ham-bar.mid{opacity:0;}
+.tdt-hamburger-btn.open .tdt-ham-bar.bottom{top:4.5px;transform:rotate(-45deg);}
+
+/* Dropdown — hidden above the mobile breakpoint */
+.tdt-nav-dropdown{position:fixed;top:70px;left:50%;transform:translateX(-50%);width:calc(100vw - 40px);max-width:280px;max-height:0;overflow:hidden;opacity:0;pointer-events:none;transition:max-height .3s ease,opacity .25s ease;z-index:899;}
+.tdt-nav-dropdown.open{max-height:240px;opacity:1;pointer-events:auto;}
+.tdt-nav-dropdown-inner{background:rgba(24,27,38,0.85);backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);border:1px solid rgba(255,255,255,0.16);border-radius:18px;padding:6px;box-shadow:0 16px 40px rgba(0,0,0,0.45);}
+.tdt-nav-drop-link{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 14px;border-radius:12px;text-decoration:none;color:#dfe3ee;font-family:'DM Sans',sans-serif;font-weight:600;font-size:14px;transition:background .15s ease;position:relative;}
+.tdt-nav-drop-link:hover{background:rgba(255,255,255,0.07);}
+.tdt-nav-drop-link.current{color:#C8A84B;background:rgba(200,168,75,0.1);}
+.tdt-nav-drop-link.current::after{content:'';position:absolute;left:14px;right:14px;bottom:6px;height:1px;background:linear-gradient(90deg,transparent,#C8A84B,transparent);}
+.tdt-nav-drop-link .tdt-drop-arrow{font-size:12px;color:#565e70;}
+
+@media(max-width:760px){
+  .tdt-nav-links{display:none;}
   .tdt-nav-status{display:none;}
-  .tdt-nav-inner{gap:6px;padding:7px 10px;max-width:calc(100vw - 24px);box-sizing:border-box;overflow:hidden;}
-  .tdt-nav-word{font-size:11px;}
-  .tdt-nav-brand{padding-right:6px;gap:5px;}
-  .tdt-nav-links{font-size:10px;gap:3px;}
-  .tdt-nav-link{padding:3px 4px;}
-  .tdt-nav-sep{font-size:9px;}
+  .tdt-hamburger-wrap{display:flex;}
   .theme-toggle{top:66px;right:12px;}
   .wrapper{padding-top:112px;}
 }
@@ -659,7 +684,9 @@ body::before{background:radial-gradient(ellipse at center, rgba(79,142,247,0.05)
       <span class="tdt-nav-word">The Daily Talent</span>
     </a>
     <div class="tdt-nav-links">
-      <a href="/" class="tdt-nav-link tool">Tool</a>
+      <a href="/" class="tdt-nav-link tool current">Tool</a>
+      <span class="tdt-nav-sep" aria-hidden="true">AND</span>
+      <a href="/boolean-library.html" class="tdt-nav-link library">Library</a>
       <span class="tdt-nav-sep" aria-hidden="true">AND</span>
       <a href="/about-contact.html" class="tdt-nav-link contact">Contact Us</a>
     </div>
@@ -667,8 +694,43 @@ body::before{background:radial-gradient(ellipse at center, rgba(79,142,247,0.05)
       <span class="tdt-nav-dot-wrap" aria-hidden="true"><span class="tdt-nav-ping"></span><span class="tdt-nav-dot-solid"></span></span>
       <span class="tdt-nav-status-text">GCC Live</span>
     </div>
+    <div class="tdt-hamburger-wrap">
+      <div class="tdt-hamburger-btn" id="tdtHamBtn" role="button" tabindex="0" aria-label="Open menu" aria-expanded="false">
+        <div class="tdt-ham-bars">
+          <div class="tdt-ham-bar top"></div>
+          <div class="tdt-ham-bar mid"></div>
+          <div class="tdt-ham-bar bottom"></div>
+        </div>
+      </div>
+    </div>
   </div>
 </nav>
+<div class="tdt-nav-dropdown" id="tdtNavDropdown">
+  <div class="tdt-nav-dropdown-inner">
+    <a href="/" class="tdt-nav-drop-link current">Tool <span class="tdt-drop-arrow">&#8594;</span></a>
+    <a href="/boolean-library.html" class="tdt-nav-drop-link">Library <span class="tdt-drop-arrow">&#8594;</span></a>
+    <a href="/about-contact.html" class="tdt-nav-drop-link">Contact Us <span class="tdt-drop-arrow">&#8594;</span></a>
+  </div>
+</div>
+<script>
+(function(){
+  var btn = document.getElementById('tdtHamBtn');
+  var dropdown = document.getElementById('tdtNavDropdown');
+  if(!btn || !dropdown) return;
+  function closeMenu(){ btn.classList.remove('open'); dropdown.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
+  function toggleMenu(){
+    var isOpen = !btn.classList.contains('open');
+    btn.classList.toggle('open', isOpen);
+    dropdown.classList.toggle('open', isOpen);
+    btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  }
+  btn.addEventListener('click', function(e){ e.stopPropagation(); toggleMenu(); });
+  btn.addEventListener('keydown', function(e){ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); toggleMenu(); } });
+  document.addEventListener('click', function(e){
+    if(!dropdown.contains(e.target) && !btn.contains(e.target)) closeMenu();
+  });
+})();
+</script>
 
 <!-- STICKY BAR -->
 <div id="sticky-bar">
@@ -903,10 +965,10 @@ body::before{background:radial-gradient(ellipse at center, rgba(79,142,247,0.05)
     <div class="faq-item" id="faq-0"><button class="faq-q" onclick="toggleFaq(0)"><span>What is a Boolean search string?</span><span class="faq-icon">+</span></button><div class="faq-body" id="faq-body-0"><div class="faq-body-inner">A Boolean search string is a structured query that uses logic operators — <strong>AND</strong>, <strong>OR</strong>, and <strong>NOT</strong> — to narrow or broaden search results. Recruiters have used them for years to find candidates precisely. This tool lets you use the same technique to find jobs and opportunities that standard search filters miss entirely.</div></div></div>
     <div class="faq-item" id="faq-1"><button class="faq-q" onclick="toggleFaq(1)"><span>Does this work on LinkedIn's free version?</span><span class="faq-icon">+</span></button><div class="faq-body" id="faq-body-1"><div class="faq-body-inner">Yes — Boolean search works on LinkedIn's free version. Simply paste the generated string into LinkedIn's main search bar and press Enter. You don't need LinkedIn Premium or Recruiter to benefit from this.</div></div></div>
     <div class="faq-item" id="faq-2"><button class="faq-q" onclick="toggleFaq(2)"><span>How is this different from LinkedIn's built-in filters?</span><span class="faq-icon">+</span></button><div class="faq-body" id="faq-body-2"><div class="faq-body-inner">LinkedIn's filters are broad and limited — they match on a small set of predefined fields. Boolean search scans the full text of profiles and job listings, including headlines, summaries, and experience sections.</div></div></div>
-    <div class="faq-item" id="faq-3"><button class="faq-q" onclick="toggleFaq(3)"><span>Can I use this for Google search too?</span><span class="faq-icon">+</span></button><div class="faq-body" id="faq-body-3"><div class="faq-body-inner">Absolutely. The <strong>Google X-Ray</strong> tab generates a string specifically formatted for Google, using <strong>site:linkedin.com/in/</strong> to search inside LinkedIn's profile pages directly.</div></div></div>
+    <div class="faq-item" id="faq-3"><button class="faq-q" onclick="toggleFaq(3)"><span>Can I use this for Google search too?</span><span class="faq-icon">+</span></button><div class="faq-body" id="faq-body-3"><div class="faq-body-inner">Absolutely. The <strong>Google X-Ray</strong> tab generates ready-to-use strings for Google — <strong>site:linkedin.com/jobs/view/</strong> to surface LinkedIn job postings, and <strong>site:linkedin.com/in/</strong> to search LinkedIn profile pages directly.</div></div></div>
     <div class="faq-item" id="faq-4"><button class="faq-q" onclick="toggleFaq(4)"><span>Do I need to create an account?</span><span class="faq-icon">+</span></button><div class="faq-body" id="faq-body-4"><div class="faq-body-inner">No account, no login, no sign-up required. This tool is completely free to use as many times as you need.</div></div></div>
     <div class="faq-item" id="faq-5"><button class="faq-q" onclick="toggleFaq(5)"><span>How many searches can I do?</span><span class="faq-icon">+</span></button><div class="faq-body" id="faq-body-5"><div class="faq-body-inner">Unlimited. There are no search caps, no daily limits, and no paywalls.</div></div></div>
-    <div class="faq-item" id="faq-6"><button class="faq-q" onclick="toggleFaq(6)"><span>What is Google X-Ray search?</span><span class="faq-icon">+</span></button><div class="faq-body" id="faq-body-6"><div class="faq-body-inner">Google X-Ray is a technique that uses Google to search within a specific website — in this case, LinkedIn. By adding <strong>site:linkedin.com/in/</strong> to your search query, you instruct Google to only return results from LinkedIn profile pages.</div></div></div>
+    <div class="faq-item" id="faq-6"><button class="faq-q" onclick="toggleFaq(6)"><span>What is Google X-Ray search?</span><span class="faq-icon">+</span></button><div class="faq-body" id="faq-body-6"><div class="faq-body-inner">Google X-Ray is a technique that uses Google to search within a specific website — in this case, LinkedIn. Adding <strong>site:linkedin.com/jobs/view/</strong> restricts results to LinkedIn job postings, while <strong>site:linkedin.com/in/</strong> restricts results to LinkedIn profile pages — both from a single Google search.</div></div></div>
     <div class="faq-item" id="faq-7"><button class="faq-q" onclick="toggleFaq(7)"><span>Who is this tool built for?</span><span class="faq-icon">+</span></button><div class="faq-body" id="faq-body-7"><div class="faq-body-inner">Primarily built for <strong>job seekers</strong> who want to search smarter — finding roles and companies that standard search misses. Equally useful for <strong>recruiters</strong> and <strong>freelancers</strong>.</div></div></div>
   </div>
 
@@ -945,7 +1007,15 @@ body::before{background:radial-gradient(ellipse at center, rgba(79,142,247,0.05)
     <div class="tab-pane" id="tab-gx">
       <div class="xray-sites" id="xray-sites-wrap">
         <div class="xray-site-block">
-          <div class="xray-site-label"><span class="xray-site-name">LinkedIn</span><span class="xray-site-badge">Profiles</span></div>
+          <div class="xray-site-label"><span class="xray-site-name">LinkedIn Jobs</span><span class="xray-site-badge">Job Posts</span></div>
+          <div class="string-box" id="gx-lijobs-output"></div>
+          <div class="action-row">
+            <button class="btn btn-primary" onclick="copyXray('lijobs')">📋 Copy</button>
+            <button class="btn btn-ghost" onclick="openXray('lijobs')">↗ Search Google</button>
+          </div>
+        </div>
+        <div class="xray-site-block">
+          <div class="xray-site-label"><span class="xray-site-name">LinkedIn Profiles</span><span class="xray-site-badge">People</span></div>
           <div class="string-box" id="gx-li-output"></div>
           <div class="platform-warning" id="gx-warning">
             <span class="platform-warning-icon">⚠️</span>
@@ -1422,29 +1492,32 @@ function submitCommunityCorrection() {
 
 function trackEvent(event,detail){
   detail=detail||"";
-  fetch(SUPABASE_URL+"/rest/v1/tool_events",{method:"POST",headers:{"Content-Type":"application/json","apikey":SUPABASE_KEY,"Authorization":"Bearer "+SUPABASE_KEY,"Prefer":"return=minimal"},body:JSON.stringify({event:event,detail:String(detail).slice(0,200),session_id:SESSION_ID,source:SESSION_SOURCE})}).catch(function(){});
+  try{
+    fetch(SUPABASE_URL+"/rest/v1/tool_events",{method:"POST",headers:{"Content-Type":"application/json","apikey":SUPABASE_KEY,"Authorization":"Bearer "+SUPABASE_KEY,"Prefer":"return=minimal"},body:JSON.stringify({event:event,detail:String(detail).slice(0,200),session_id:SESSION_ID,source:SESSION_SOURCE})}).catch(function(){});
+  }catch(e){}
 }
 
 const SESSION_START_TS=Date.now();
 window.addEventListener("DOMContentLoaded",function(){
-  trackEvent("page_view",document.referrer||"direct");
-  trackEvent("session_start",new Date(SESSION_START_TS).toISOString());
+  trackEvent("page_view",location.pathname+"|"+(document.referrer||"direct"));
+  trackEvent("session_start",location.pathname+"|"+new Date(SESSION_START_TS).toISOString());
   initRecentSearches();
   loadSynonymMap();
   initSynonymSuggest();
   initRatingWidget();
   initTheme();
 });
-function trackSessionEnd(){var duration=Math.round((Date.now()-SESSION_START_TS)/1000);trackEvent("session_end","duration_seconds:"+duration);}
+function trackSessionEnd(){var duration=Math.round((Date.now()-SESSION_START_TS)/1000);trackEvent("session_end",location.pathname+"|duration_seconds:"+duration);}
 window.addEventListener("visibilitychange",function(){if(document.visibilityState==="hidden")trackSessionEnd();});
 window.addEventListener("pagehide",trackSessionEnd);
 
 // ── STATE ──
 var state={titles:[],titleOp:"OR",regions:[],customRegions:[],mustSkills:[],niceSkills:[]};
 var plain={li:"",gx:"",raw:""};
-var xrayPlain={li:"",bayt:"",naukri:"",indeed:"",glassdoor:""};
+var xrayPlain={lijobs:"",li:"",bayt:"",naukri:"",indeed:"",glassdoor:""};
 var liPostsMode=false;
 var XRAY_SITES=[
+  {key:"lijobs",    prefix:"site:linkedin.com/jobs/view/"},
   {key:"li",        prefix:"site:linkedin.com/in/"},
   {key:"bayt",      prefix:"site:bayt.com/en/jobs/"},
   {key:"naukri",    prefix:"site:naukrigulf.com/jobs-in-"},
