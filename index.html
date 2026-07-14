@@ -1206,6 +1206,33 @@ const SUPABASE_URL = "https://uewyupjaptelyuxtcibv.supabase.co";
 const SUPABASE_KEY = "sb_publishable_ytI5QtnIt3qnBL_JxMSQyg_sQsPPw7C";
 const SESSION_ID = Math.random().toString(36).slice(2,10)+Date.now().toString(36);
 
+// ── TRAFFIC SOURCE (computed once per session, sent on every trackEvent call) ──
+function detectSource(){
+  try{
+    var utm = new URLSearchParams(window.location.search).get('utm_source');
+    if(utm){
+      var u = utm.toLowerCase();
+      if(u.indexOf('linkedin')>-1) return 'LinkedIn';
+      if(u.indexOf('reddit')>-1) return 'Reddit';
+      if(u.indexOf('instagram')>-1) return 'Instagram';
+      if(u.indexOf('facebook')>-1) return 'Facebook';
+      return utm;
+    }
+    var ref = document.referrer;
+    if(!ref) return 'Direct';
+    var host = new URL(ref).hostname.toLowerCase();
+    if(host.indexOf('linkedin.com')>-1) return 'LinkedIn';
+    if(host.indexOf('reddit.com')>-1) return 'Reddit';
+    if(host.indexOf('instagram.com')>-1) return 'Instagram';
+    if(host.indexOf('facebook.com')>-1) return 'Facebook';
+    if(host.indexOf('mail.google.com')>-1) return 'Gmail';
+    if(host.indexOf('vercel.app')>-1) return 'Vercel';
+    if(host.indexOf('thedailytalent.com')>-1) return 'Direct';
+    return 'Other';
+  }catch(e){ return 'Other'; }
+}
+const SESSION_SOURCE = detectSource();
+
 // ── SYNONYM MAP ──
 var SYNONYM_MAP = {};
 
@@ -1395,7 +1422,7 @@ function submitCommunityCorrection() {
 
 function trackEvent(event,detail){
   detail=detail||"";
-  fetch(SUPABASE_URL+"/rest/v1/tool_events",{method:"POST",headers:{"Content-Type":"application/json","apikey":SUPABASE_KEY,"Authorization":"Bearer "+SUPABASE_KEY,"Prefer":"return=minimal"},body:JSON.stringify({event:event,detail:String(detail).slice(0,200),session_id:SESSION_ID})}).catch(function(){});
+  fetch(SUPABASE_URL+"/rest/v1/tool_events",{method:"POST",headers:{"Content-Type":"application/json","apikey":SUPABASE_KEY,"Authorization":"Bearer "+SUPABASE_KEY,"Prefer":"return=minimal"},body:JSON.stringify({event:event,detail:String(detail).slice(0,200),session_id:SESSION_ID,source:SESSION_SOURCE})}).catch(function(){});
 }
 
 const SESSION_START_TS=Date.now();
