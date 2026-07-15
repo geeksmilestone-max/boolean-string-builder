@@ -10,7 +10,34 @@
 <meta property="og:description" content="200+ ready-to-copy Boolean search strings scoped to Saudi, UAE, Qatar, Kuwait, Bahrain, USA and India.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://tools.thedailytalent.com/boolean-library.html">
+<meta property="og:image" content="https://tools.thedailytalent.com/og-image-boolean-library.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Boolean Library — Country-Specific Search Strings | The Daily Talent">
+<meta name="twitter:description" content="200+ ready-to-copy Boolean search strings scoped to Saudi, UAE, Qatar, Kuwait, Bahrain, USA and India.">
+<meta name="twitter:image" content="https://tools.thedailytalent.com/og-image-boolean-library.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Boolean Library \u2014 200+ GCC, USA & India Search Strings",
+  "description": "Country-specific Boolean search strings for GCC, MENA, USA and India. Free library of ready-to-copy strings using each market's own compliance and hiring vocabulary.",
+  "url": "https://tools.thedailytalent.com/boolean-library.html",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "The Daily Talent",
+    "url": "https://tools.thedailytalent.com/"
+  },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Boolean String Builder", "item": "https://tools.thedailytalent.com/"},
+      {"@type": "ListItem", "position": 2, "name": "Boolean Library", "item": "https://tools.thedailytalent.com/boolean-library.html"}
+    ]
+  }
+}
+</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -247,17 +274,22 @@ h2.section-h2{ font-family:'Syne', sans-serif; font-weight:700; font-size:20px; 
    and never get one. Toggling marks the chip "excluded" (strikethrough,
    dimmed) rather than deleting it from the page — the term stays in the
    static HTML for SEO, it's just left out of the assembled string until
-   tapped again. Given its own padding and spacing from the info-dot so
-   the two tap targets don't crowd each other on mobile. */
+   tapped again. Sized and contrasted to actually be noticed and hit
+   reliably — a 15px, 50%-opacity circle proved too subtle in real use,
+   so this is bigger, has a persistent visible border, and gets an
+   invisible expanded tap zone via ::before for mobile margin-of-error. */
 .chip-remove{
   display:inline-flex; align-items:center; justify-content:center;
-  width:15px; height:15px; margin-left:3px; border-radius:50%;
-  font-size:10px; line-height:1; cursor:pointer; opacity:0.5; flex-shrink:0;
-  transition:opacity .15s ease, background .15s ease; -webkit-tap-highlight-color:transparent;
+  width:18px; height:18px; margin-left:4px; border-radius:50%;
+  font-size:11px; font-weight:700; line-height:1; cursor:pointer; opacity:0.8; flex-shrink:0;
+  background:rgba(0,0,0,0.07); border:1px solid currentColor; position:relative;
+  transition:opacity .15s ease, background .15s ease, transform .15s ease;
+  -webkit-tap-highlight-color:transparent;
 }
-.chip-remove:hover{ opacity:1; background:rgba(255,255,255,0.14); }
+.chip-remove::before{ content:''; position:absolute; inset:-7px; }
+.chip-remove:hover{ opacity:1; background:rgba(0,0,0,0.14); transform:scale(1.08); }
 .chip.excluded{ opacity:0.42; text-decoration:line-through; }
-.chip.excluded .chip-remove{ opacity:0.9; text-decoration:none; }
+.chip.excluded .chip-remove{ opacity:1; background:rgba(56,232,181,0.18); text-decoration:none; }
 .chip.excluded .tip{ text-decoration:none; }
 
 .load-more{ display:block; margin:22px auto 0; padding:10px 22px; border-radius:9px; background:var(--surface); border:1px solid var(--border); color:var(--muted); font-size:13px; cursor:pointer; transition:all .15s ease; font-family:'DM Sans',sans-serif; }
@@ -3382,6 +3414,25 @@ function openGoogleForQuery(query, label){
   trackEvent('library_open_google', currentRoleTitle + ' (' + label + ')');
 }
 
+/* Google-specific string — always omits the local/compliance clause,
+   confirmed necessary by direct testing: even a single site: restriction
+   combined with the local clause returned zero results, and removing
+   it fixed it. This is a real limitation of Google's public search
+   parser, not something to leave to manual chip-exclusion to catch
+   every time. Copy and the native "Open in LinkedIn Jobs" button keep
+   full fidelity (including local terms) since neither has this same
+   fragility. Must-have stays AND'd (non-negotiable), nice-to-have
+   stays OR'd (bonus) — same logic as buildFullString, just without
+   the local segment ever being included. */
+function buildGoogleQueryString(parts, extraSuffix){
+  var clauses = [];
+  if(parts.must.length) clauses.push('(' + parts.must.map(q).join(' AND ') + ')');
+  if(parts.nice.length) clauses.push('(' + parts.nice.map(q).join(' OR ') + ')');
+  var tail = clauses.map(function(c){ return 'AND ' + c; }).join(' ');
+  var base = '("'+parts.title+'")' + (tail ? ' ' + tail : '');
+  return extraSuffix ? base + extraSuffix : base;
+}
+
 function renderGoogleBoardMenu(){
   var menu = document.getElementById('googleBoardMenuInner');
   menu.innerHTML = '';
@@ -3395,7 +3446,7 @@ function renderGoogleBoardMenu(){
          informal "we are hiring / open position / apply to" phrasing
          on top of it is redundant and structured job-board pages
          essentially never contain that literal casual phrasing. */
-      var query = 'site:' + site.prefix + ' ' + currentRoleBase;
+      var query = 'site:' + site.prefix + ' ' + buildGoogleQueryString(currentRoleParts);
       openGoogleForQuery(query, site.label);
       closeGoogleMenu();
     });
@@ -3659,8 +3710,12 @@ document.getElementById('openGoogleBtn').addEventListener('click', function(){
   }
   /* Peers/Hiring Managers: single destination (LinkedIn profile pages),
      no menu needed — same reasoning as the main tool's own single-site
-     X-Ray cards, just one site: restriction, no OR-cluster involved. */
-  var gQuery = 'site:linkedin.com/in/ ' + rawAssembledString;
+     X-Ray cards, just one site: restriction, no OR-cluster involved.
+     Still uses buildGoogleQueryString (local term omitted) — the same
+     parser fragility applies regardless of how many clauses stack on
+     top of a single site: restriction, not just the 5-way cluster case. */
+  var suffix = (activeIntent === 'manager') ? INTENT_SUFFIX.manager : '';
+  var gQuery = 'site:linkedin.com/in/ ' + buildGoogleQueryString(currentRoleParts, suffix);
   openGoogleForQuery(gQuery, 'LinkedIn Profiles');
 });
 document.getElementById('openLinkedinBtn').addEventListener('click', function(){
