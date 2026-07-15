@@ -6,29 +6,59 @@
 <title>Privacy Policy | The Daily Talent</title>
 <meta name="description" content="Privacy Policy for The Daily Talent Boolean String Builder — what we collect, how we use it, and your rights." />
 <meta name="robots" content="index, follow" />
-<link rel="canonical" href="https://tools.thedailytalent.com/privacy.html" />
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-1E7X6LMBTQ"></script>
+<meta name="theme-color" content="#07090f">
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-1E7X6LMBTQ');
+  (function(){var t=localStorage.getItem("tdt_theme");if(t==="dark")document.documentElement.setAttribute("data-theme","dark");})();
 </script>
+<link rel="canonical" href="https://tools.thedailytalent.com/privacy.html" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Daily Talent">
+<meta property="og:title" content="Privacy Policy | The Daily Talent">
+<meta property="og:description" content="Privacy Policy for The Daily Talent Boolean String Builder — what we collect, how we use it, and your rights.">
+<meta property="og:url" content="https://tools.thedailytalent.com/privacy.html">
+<meta property="og:image" content="https://tools.thedailytalent.com/og-image.png">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Privacy Policy | The Daily Talent">
+<meta name="twitter:description" content="Privacy Policy for The Daily Talent Boolean String Builder — what we collect, how we use it, and your rights.">
+<meta name="twitter:image" content="https://tools.thedailytalent.com/og-image.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Privacy Policy | The Daily Talent",
+  "description": "Privacy Policy for The Daily Talent Boolean String Builder — what we collect, how we use it, and your rights.",
+  "url": "https://tools.thedailytalent.com/privacy.html",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "The Daily Talent",
+    "url": "https://tools.thedailytalent.com"
+  }
+}
+</script>
+
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --bg: #07090f; --surface: #0f1219; --surface2: #161b26;
-  --border: rgba(255,255,255,0.07); --border2: rgba(255,255,255,0.12);
-  --accent: #4f8ef7; --accent2: #7b5cf0; --accent3: #38e8b5;
-  --text: #e8ecf4; --muted: #6b7794; --muted2: #9aa3b8;
+  --bg:#f4f6fb; --surface:#ffffff; --surface2:#eef1f8;
+  --border: rgba(0,0,0,0.08); --border2: rgba(0,0,0,0.14);
+  --accent: #4f8ef7; --accent2: #7b5cf0; --accent3: #38e8b5; --gold:#C8A84B;
+  --text:#0f1219; --muted:#7a85a0; --muted2:#4a5568;
   --radius: 14px; --radius-sm: 8px;
 }
-body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 15px; line-height: 1.75; min-height: 100vh; }
+[data-theme="dark"] {
+  --bg: #07090f; --surface: #0f1219; --surface2: #161b26;
+  --border: rgba(255,255,255,0.07); --border2: rgba(255,255,255,0.14);
+  --text: #e8ecf4; --muted: #6b7794; --muted2: #9aa3b8;
+}
+body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 15px; line-height: 1.75; min-height: 100vh; transition: background .25s ease, color .25s ease; }
 .wrapper { max-width: 720px; margin: 0 auto; padding: 0 24px; }
 .header { padding: 48px 0 40px; border-bottom: 1px solid var(--border); margin-bottom: 48px; }
-.back-link { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: 13px; font-family: 'Syne', sans-serif; font-weight: 700; text-decoration: none; letter-spacing: 0.03em; transition: color 0.2s; margin-bottom: 24px; }
-.back-link:hover { color: var(--accent); }
 .badge { display: inline-block; font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); background: rgba(79,142,247,0.1); border: 1px solid rgba(79,142,247,0.2); padding: 4px 12px; border-radius: 100px; margin-bottom: 16px; }
 h1 { font-family: 'Syne', sans-serif; font-size: clamp(28px, 5vw, 40px); font-weight: 800; color: var(--text); line-height: 1.15; margin-bottom: 12px; }
 .last-updated { font-size: 13px; color: var(--muted); }
@@ -42,13 +72,134 @@ a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 .highlight-box { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent3); border-radius: var(--radius-sm); padding: 16px 20px; margin: 24px 0; }
 .highlight-box p { margin: 0; color: var(--muted2); font-size: 14px; }
-.footer { text-align: center; padding: 32px 0; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; margin-top: 40px; }
+
+/* ============== TOP NAV PILL (unified across all 4 pages) ============== */
+.tdt-nav{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:900;display:flex;justify-content:center;pointer-events:none;}
+.tdt-nav-inner{pointer-events:auto;display:flex;align-items:center;gap:16px;flex-wrap:nowrap;white-space:nowrap;background:rgba(24,27,38,0.62);backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);border:1px solid rgba(255,255,255,0.16);border-radius:100px;padding:10px 20px;box-shadow:0 8px 28px rgba(0,0,0,0.4),inset 0 1px 1px rgba(255,255,255,0.07);transition:border-color 0.25s ease;}
+.tdt-nav-inner:hover{border-color:rgba(255,255,255,0.24);}
+.tdt-nav-brand{display:flex;align-items:center;gap:8px;padding-right:12px;border-right:1px solid rgba(255,255,255,0.1);text-decoration:none;}
+.tdt-nav-dot{color:#C8A84B;font-size:10px;line-height:1;}
+.tdt-nav-word{font-family:'Syne',sans-serif;font-weight:800;font-size:13px;letter-spacing:-0.01em;color:#e8ecf4;transition:color 0.2s ease;}
+.tdt-nav-brand:hover .tdt-nav-word{color:#fff;}
+.tdt-nav-links{display:flex;align-items:center;gap:10px;font-family:'DM Mono','Fira Code',monospace;font-size:12px;font-weight:500;}
+.tdt-nav-link{position:relative;color:#9aa3b8;text-decoration:none;padding:4px 8px;transition:color 0.2s ease;}
+.tdt-nav-link::after{content:'';position:absolute;left:8px;right:8px;bottom:0;height:1px;background:linear-gradient(90deg,transparent,currentColor,transparent);transform:scaleX(0);transition:transform 0.25s ease;}
+.tdt-nav-link:hover::after{transform:scaleX(1);}
+.tdt-nav-link.tool:hover{color:#38e8b5;}
+.tdt-nav-link.library:hover{color:#C8A84B;}
+.tdt-nav-link.contact:hover{color:#7b5cf0;}
+.tdt-nav-link.current{color:#C8A84B;}
+.tdt-nav-link.current::after{transform:scaleX(1);background:linear-gradient(90deg,transparent,#C8A84B,transparent);}
+.tdt-nav-sep{font-size:10px;color:rgba(255,255,255,0.65);font-weight:700;user-select:none;}
+.tdt-nav-status{display:flex;align-items:center;gap:8px;padding-left:12px;border-left:1px solid rgba(255,255,255,0.1);}
+.tdt-nav-dot-wrap{position:relative;display:flex;height:6px;width:6px;}
+.tdt-nav-ping{position:absolute;inset:0;border-radius:50%;background:#38e8b5;opacity:0.75;animation:tdtPing 2s cubic-bezier(0,0,0.2,1) infinite;}
+.tdt-nav-dot-solid{position:relative;display:inline-flex;border-radius:50%;height:6px;width:6px;background:#2fb89a;}
+.tdt-nav-status-text{font-family:'DM Mono','Fira Code',monospace;font-size:10px;color:#6b7794;letter-spacing:0.08em;text-transform:uppercase;}
+@keyframes tdtPing{75%,100%{transform:scale(2);opacity:0;}}
+
+.tdt-hamburger-wrap{display:none;position:relative;width:34px;height:34px;flex-shrink:0;}
+.tdt-hamburger-wrap::before{content:'';position:absolute;inset:-5px;border-radius:50%;z-index:0;background:linear-gradient(120deg,#C8A84B,#7b5cf0,#4f8ef7,#38e8b5,#C8A84B);background-size:300% 300%;filter:blur(7px);opacity:0.6;animation:tdtHamGlow 5s linear infinite;}
+@keyframes tdtHamGlow{0%{background-position:0% 50%;}100%{background-position:300% 50%;}}
+.tdt-hamburger-btn{position:relative;z-index:1;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.16);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background 0.2s ease;}
+.tdt-hamburger-btn:hover{background:rgba(255,255,255,0.09);}
+.tdt-ham-bars{position:relative;width:15px;height:11px;}
+.tdt-ham-bar{position:absolute;left:0;width:15px;height:2px;border-radius:2px;background:#eef;transition:transform .4s cubic-bezier(.4,0,.2,1),opacity .25s ease,top .4s cubic-bezier(.4,0,.2,1);}
+.tdt-ham-bar.top{top:0;}
+.tdt-ham-bar.mid{top:4.5px;}
+.tdt-ham-bar.bottom{top:9px;}
+.tdt-hamburger-btn.open .tdt-ham-bar.top{top:4.5px;transform:rotate(45deg);}
+.tdt-hamburger-btn.open .tdt-ham-bar.mid{opacity:0;}
+.tdt-hamburger-btn.open .tdt-ham-bar.bottom{top:4.5px;transform:rotate(-45deg);}
+
+.tdt-nav-dropdown{position:fixed;top:70px;left:50%;transform:translateX(-50%);width:calc(100vw - 40px);max-width:280px;max-height:0;overflow:hidden;opacity:0;pointer-events:none;transition:max-height .3s ease,opacity .25s ease;z-index:899;}
+.tdt-nav-dropdown.open{max-height:240px;opacity:1;pointer-events:auto;}
+.tdt-nav-dropdown-inner{background:rgba(24,27,38,0.85);backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);border:1px solid rgba(255,255,255,0.16);border-radius:18px;padding:6px;box-shadow:0 16px 40px rgba(0,0,0,0.45);}
+.tdt-nav-drop-link{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 14px;border-radius:12px;text-decoration:none;color:#dfe3ee;font-family:'DM Sans',sans-serif;font-weight:600;font-size:14px;transition:background .15s ease;position:relative;}
+.tdt-nav-drop-link:hover{background:rgba(255,255,255,0.07);}
+.tdt-nav-drop-link .tdt-drop-arrow{font-size:12px;color:#565e70;}
+
+@media(max-width:760px){
+  .tdt-nav-links{display:none;}
+  .tdt-nav-status{display:none;}
+  .tdt-hamburger-wrap{display:flex;}
+}
+
+.page-top-space{ padding-top:112px; }
+
+/* ============== THEME TOGGLE (matches about-contact.html / index.html) ============== */
+.theme-toggle{position:fixed;top:16px;right:16px;z-index:950;background:var(--surface);border:1px solid var(--border2);border-radius:100px;padding:7px 14px;display:flex;align-items:center;gap:8px;cursor:pointer;transition:all 0.2s;box-shadow:0 2px 12px rgba(0,0,0,0.2);}
+.theme-toggle:hover{border-color:var(--accent);box-shadow:0 4px 16px rgba(79,142,247,0.15);}
+.theme-toggle-icon{font-size:15px;line-height:1;transition:transform 0.4s ease;}
+.theme-toggle-label{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;color:var(--muted2);letter-spacing:0.04em;transition:color 0.2s;}
+[data-theme="dark"] .theme-toggle-icon{transform:rotate(180deg);}
+@media(max-width:760px){ .theme-toggle{ top:66px; right:12px; } }
+
+/* ============== FOOTER (matches about-contact.html) ============== */
+.container{ max-width:1152px; margin:0 auto; padding:0 24px; position:relative; }
+@media (min-width:768px){ .container{ padding:0 40px; } }
+.link-underline{ position:relative; text-decoration:none; }
+.link-underline::after{ content:''; position:absolute; left:0; bottom:-3px; width:0; height:1px; background:currentColor; transition:width .2s ease; }
+.link-underline:hover::after{ width:100%; }
+.footer{ z-index:10; border-top:1px solid var(--border); margin-top:40px; }
+.footer__grid{ display:grid; gap:36px; padding-top:44px; padding-bottom:44px; }
+@media (min-width:768px){ .footer__grid{ grid-template-columns:1.3fr 1fr 1fr; padding-top:48px; padding-bottom:48px; } }
+.footer__brand{ font-family:'Syne',sans-serif; font-weight:800; font-size:15px; display:flex; align-items:center; gap:8px; margin-bottom:12px; }
+.footer__desc{ font-size:13.5px; color:var(--muted); max-width:38ch; line-height:1.7; }
+.footer__heading{ font-family:'Syne',sans-serif; font-weight:700; font-size:11.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted2); margin-bottom:14px; }
+.footer__links{ display:flex; flex-direction:column; gap:11px; font-size:13.5px; color:var(--muted2); }
+.footer__links a{ text-decoration:none; width:fit-content; }
+.footer__bottom{ border-top:1px solid var(--border); padding-top:22px; padding-bottom:22px; display:flex; flex-direction:column; align-items:center;
+  justify-content:space-between; gap:12px; font-size:11.5px; color:var(--muted); text-align:center; }
+@media (min-width:640px){ .footer__bottom{ flex-direction:row; text-align:left; } }
+.footer__loc{ display:flex; align-items:center; gap:6px; }
 </style>
 </head>
 <body>
-<div class="wrapper">
+
+<nav class="tdt-nav" aria-label="Primary">
+  <div class="tdt-nav-inner">
+    <a href="/" class="tdt-nav-brand">
+      <span class="tdt-nav-dot" aria-hidden="true">&#9679;</span>
+      <span class="tdt-nav-word">The Daily Talent</span>
+    </a>
+    <div class="tdt-nav-links">
+      <a href="/" class="tdt-nav-link tool">Tool</a>
+      <span class="tdt-nav-sep" aria-hidden="true">AND</span>
+      <a href="/boolean-library.html" class="tdt-nav-link library">Library</a>
+      <span class="tdt-nav-sep" aria-hidden="true">AND</span>
+      <a href="/about-contact.html#contact" class="tdt-nav-link contact">Contact Us</a>
+    </div>
+    <div class="tdt-nav-status">
+      <span class="tdt-nav-dot-wrap" aria-hidden="true"><span class="tdt-nav-ping"></span><span class="tdt-nav-dot-solid"></span></span>
+      <span class="tdt-nav-status-text">GCC Live</span>
+    </div>
+    <div class="tdt-hamburger-wrap">
+      <div class="tdt-hamburger-btn" id="tdtHamBtn" role="button" tabindex="0" aria-label="Open menu" aria-expanded="false">
+        <div class="tdt-ham-bars">
+          <div class="tdt-ham-bar top"></div>
+          <div class="tdt-ham-bar mid"></div>
+          <div class="tdt-ham-bar bottom"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+<div class="tdt-nav-dropdown" id="tdtNavDropdown">
+  <div class="tdt-nav-dropdown-inner">
+    <a href="/" class="tdt-nav-drop-link">Tool <span class="tdt-drop-arrow">&#8594;</span></a>
+    <a href="/boolean-library.html" class="tdt-nav-drop-link">Library <span class="tdt-drop-arrow">&#8594;</span></a>
+    <a href="/about-contact.html#contact" class="tdt-nav-drop-link">Contact Us <span class="tdt-drop-arrow">&#8594;</span></a>
+  </div>
+</div>
+
+<button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle light/dark mode">
+  <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+  <span class="theme-toggle-label" id="themeLabel">Dark</span>
+</button>
+
+<div class="wrapper page-top-space">
   <div class="header">
-    <a href="/" class="back-link">← Back to Boolean String Builder</a>
     <div class="badge">Legal</div>
     <h1>Privacy Policy</h1>
     <p class="last-updated">Last updated: June 2025</p>
@@ -124,10 +275,104 @@ a:hover { text-decoration: underline; }
     <p>Questions about this policy? Reach us at <a href="mailto:support@thedailytalent.com">support@thedailytalent.com</a>.</p>
 
   </div>
-
-  <div class="footer">
-    © The Daily Talent. All rights reserved. · <a href="/" style="color:var(--muted);">Back to tool</a>
-  </div>
 </div>
+
+<footer class="footer">
+  <div class="container footer__grid">
+    <div>
+      <div class="footer__brand"><span style="color:var(--gold)">●</span> The Daily Talent</div>
+      <p class="footer__desc">Recruiter-grade Boolean sourcing, built for job seekers across the GCC and wider MENA region. One tool. No noise.</p>
+    </div>
+    <div>
+      <div class="footer__heading">Navigate</div>
+      <div class="footer__links">
+        <a href="/" class="link-underline">Boolean String Builder</a>
+        <a href="/boolean-library.html" class="link-underline">Boolean Library</a>
+        <a href="/about-contact.html#contact" class="link-underline">Contact</a>
+        <a href="/#faq-section" class="link-underline">FAQ</a>
+        <a href="/privacy.html" class="link-underline">Privacy Policy</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer__heading">Get in Touch</div>
+      <div class="footer__links">
+        <a href="mailto:support@thedailytalent.com" class="link-underline">support@thedailytalent.com</a>
+      </div>
+    </div>
+  </div>
+  <div class="container footer__bottom">
+    <span>© <span id="year"></span> The Daily Talent. Built for the GCC & MENA, one search at a time.</span>
+    <span class="footer__loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg> Made in the region, for the region.</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var btn = document.getElementById('tdtHamBtn');
+  var dropdown = document.getElementById('tdtNavDropdown');
+  if(!btn || !dropdown) return;
+  function closeMenu(){ btn.classList.remove('open'); dropdown.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
+  function toggleMenu(){
+    var isOpen = !btn.classList.contains('open');
+    btn.classList.toggle('open', isOpen);
+    dropdown.classList.toggle('open', isOpen);
+    btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  }
+  btn.addEventListener('click', function(e){ e.stopPropagation(); toggleMenu(); });
+  btn.addEventListener('keydown', function(e){ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); toggleMenu(); } });
+  document.addEventListener('click', function(e){
+    if(!dropdown.contains(e.target) && !btn.contains(e.target)) closeMenu();
+  });
+})();
+
+document.getElementById('year').textContent = new Date().getFullYear();
+
+/* ---------------- theme toggle (shared state with other pages via localStorage) ---------------- */
+var THEME_LS_KEY = "tdt_theme";
+
+function applyTheme(theme) {
+  var icon = document.getElementById('themeIcon');
+  var label = document.getElementById('themeLabel');
+  if (theme === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    if (icon) icon.textContent = '🌙';
+    if (label) label.textContent = 'Dark';
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+    if (icon) icon.textContent = '☀️';
+    if (label) label.textContent = 'Light';
+  }
+}
+
+function toggleTheme() {
+  var current = document.documentElement.getAttribute('data-theme');
+  var next = current === 'dark' ? 'light' : 'dark';
+  applyTheme(next);
+  localStorage.setItem(THEME_LS_KEY, next);
+  if (window.gtag) gtag('event', 'theme_toggle', { theme: next });
+}
+
+function initTheme() {
+  var saved = localStorage.getItem(THEME_LS_KEY);
+  if (saved) applyTheme(saved);
+}
+initTheme();
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1E7X6LMBTQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'G-1E7X6LMBTQ');
+</script>
+<script>
+  (function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window, document, "clarity", "script", "wsdla8xels");
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>

@@ -590,8 +590,8 @@ body::before{background:radial-gradient(ellipse at center, rgba(79,142,247,0.05)
 
 /* ── TOP NAV PILL ── */
 .tdt-nav{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:900;display:flex;justify-content:center;pointer-events:none;}
-.tdt-nav-inner{pointer-events:auto;display:flex;align-items:center;gap:16px;flex-wrap:nowrap;white-space:nowrap;background:rgba(28,32,43,0.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.18);border-radius:100px;padding:10px 20px;box-shadow:0 4px 30px rgba(0,0,0,0.55),inset 0 1px 1px rgba(255,255,255,0.08);transition:border-color 0.25s ease;}
-.tdt-nav-inner:hover{border-color:rgba(255,255,255,0.18);}
+.tdt-nav-inner{pointer-events:auto;display:flex;align-items:center;gap:16px;flex-wrap:nowrap;white-space:nowrap;background:rgba(24,27,38,0.62);backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);border:1px solid rgba(255,255,255,0.16);border-radius:100px;padding:10px 20px;box-shadow:0 8px 28px rgba(0,0,0,0.4),inset 0 1px 1px rgba(255,255,255,0.07);transition:border-color 0.25s ease;}
+.tdt-nav-inner:hover{border-color:rgba(255,255,255,0.24);}
 .tdt-nav-brand{display:flex;align-items:center;gap:8px;padding-right:12px;border-right:1px solid rgba(255,255,255,0.1);text-decoration:none;}
 .tdt-nav-dot{color:#C8A84B;font-size:10px;line-height:1;}
 .tdt-nav-word{font-family:'Syne',sans-serif;font-weight:800;font-size:13px;letter-spacing:-0.01em;color:#e8ecf4;transition:color 0.2s ease;}
@@ -601,7 +601,10 @@ body::before{background:radial-gradient(ellipse at center, rgba(79,142,247,0.05)
 .tdt-nav-link::after{content:'';position:absolute;left:8px;right:8px;bottom:0;height:1px;background:linear-gradient(90deg,transparent,currentColor,transparent);transform:scaleX(0);transition:transform 0.25s ease;}
 .tdt-nav-link:hover::after{transform:scaleX(1);}
 .tdt-nav-link.tool:hover{color:#38e8b5;}
+.tdt-nav-link.library:hover{color:#C8A84B;}
 .tdt-nav-link.contact:hover{color:#7b5cf0;}
+.tdt-nav-link.current{color:#C8A84B;}
+.tdt-nav-link.current::after{transform:scaleX(1);background:linear-gradient(90deg,transparent,#C8A84B,transparent);}
 .tdt-nav-sep{font-size:10px;color:rgba(255,255,255,0.65);font-weight:700;user-select:none;}
 .tdt-nav-status{display:flex;align-items:center;gap:8px;padding-left:12px;border-left:1px solid rgba(255,255,255,0.1);}
 .tdt-nav-dot-wrap{position:relative;display:flex;height:6px;width:6px;}
@@ -609,17 +612,66 @@ body::before{background:radial-gradient(ellipse at center, rgba(79,142,247,0.05)
 .tdt-nav-dot-solid{position:relative;display:inline-flex;border-radius:50%;height:6px;width:6px;background:#2fb89a;}
 .tdt-nav-status-text{font-family:'DM Mono','Fira Code',monospace;font-size:10px;color:#6b7794;letter-spacing:0.08em;text-transform:uppercase;}
 @keyframes tdtPing{75%,100%{transform:scale(2);opacity:0;}}
-@media(max-width:520px){
+
+/* Glowing hamburger — hidden above the mobile breakpoint */
+.tdt-hamburger-wrap{display:none;position:relative;width:34px;height:34px;flex-shrink:0;}
+.tdt-hamburger-wrap::before{content:'';position:absolute;inset:-5px;border-radius:50%;z-index:0;background:linear-gradient(120deg,#C8A84B,#7b5cf0,#4f8ef7,#38e8b5,#C8A84B);background-size:300% 300%;filter:blur(7px);opacity:0.6;animation:tdtHamGlow 5s linear infinite;}
+@keyframes tdtHamGlow{0%{background-position:0% 50%;}100%{background-position:300% 50%;}}
+.tdt-hamburger-btn{position:relative;z-index:1;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.16);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background 0.2s ease;}
+.tdt-hamburger-btn:hover{background:rgba(255,255,255,0.09);}
+.tdt-ham-bars{position:relative;width:15px;height:11px;}
+.tdt-ham-bar{position:absolute;left:0;width:15px;height:2px;border-radius:2px;background:#eef;transition:transform .4s cubic-bezier(.4,0,.2,1),opacity .25s ease,top .4s cubic-bezier(.4,0,.2,1);}
+.tdt-ham-bar.top{top:0;}
+.tdt-ham-bar.mid{top:4.5px;}
+.tdt-ham-bar.bottom{top:9px;}
+.tdt-hamburger-btn.open .tdt-ham-bar.top{top:4.5px;transform:rotate(45deg);}
+.tdt-hamburger-btn.open .tdt-ham-bar.mid{opacity:0;}
+.tdt-hamburger-btn.open .tdt-ham-bar.bottom{top:4.5px;transform:rotate(-45deg);}
+
+/* Dropdown — hidden above the mobile breakpoint */
+.tdt-nav-dropdown{position:fixed;top:70px;left:50%;transform:translateX(-50%);width:calc(100vw - 40px);max-width:280px;max-height:0;overflow:hidden;opacity:0;pointer-events:none;transition:max-height .3s ease,opacity .25s ease;z-index:899;}
+.tdt-nav-dropdown.open{max-height:240px;opacity:1;pointer-events:auto;}
+.tdt-nav-dropdown-inner{background:rgba(24,27,38,0.85);backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);border:1px solid rgba(255,255,255,0.16);border-radius:18px;padding:6px;box-shadow:0 16px 40px rgba(0,0,0,0.45);}
+.tdt-nav-drop-link{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 14px;border-radius:12px;text-decoration:none;color:#dfe3ee;font-family:'DM Sans',sans-serif;font-weight:600;font-size:14px;transition:background .15s ease;position:relative;}
+.tdt-nav-drop-link:hover{background:rgba(255,255,255,0.07);}
+.tdt-nav-drop-link.current{color:#C8A84B;background:rgba(200,168,75,0.1);}
+.tdt-nav-drop-link.current::after{content:'';position:absolute;left:14px;right:14px;bottom:6px;height:1px;background:linear-gradient(90deg,transparent,#C8A84B,transparent);}
+.tdt-nav-drop-link .tdt-drop-arrow{font-size:12px;color:#565e70;}
+
+@media(max-width:760px){
+  .tdt-nav-links{display:none;}
   .tdt-nav-status{display:none;}
-  .tdt-nav-inner{gap:6px;padding:7px 10px;max-width:calc(100vw - 24px);box-sizing:border-box;overflow:hidden;}
-  .tdt-nav-word{font-size:11px;}
-  .tdt-nav-brand{padding-right:6px;gap:5px;}
-  .tdt-nav-links{font-size:10px;gap:3px;}
-  .tdt-nav-link{padding:3px 4px;}
-  .tdt-nav-sep{font-size:9px;}
+  .tdt-hamburger-wrap{display:flex;}
   .theme-toggle{top:66px;right:12px;}
   .wrapper{padding-top:112px;}
 }
+
+/* ── LIBRARY CROSS-PROMO ── */
+.lib-promo{ margin:56px auto 0; max-width:860px; padding:0 24px; display:grid; grid-template-columns:1fr; gap:32px; }
+@media(min-width:820px){ .lib-promo{ grid-template-columns:1fr 1fr; align-items:center; gap:44px; } }
+.lib-promo-eyebrow{ font-family:'Syne',sans-serif; font-size:11px; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color:#C8A84B; margin-bottom:14px; }
+.lib-promo-h2{ font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(22px,3.4vw,30px); line-height:1.2; color:var(--text); margin-bottom:14px; letter-spacing:-0.01em; }
+.lib-promo-body{ font-size:14.5px; color:var(--muted2); line-height:1.7; margin-bottom:22px; max-width:44ch; }
+.lib-promo-cta{ display:inline-flex; align-items:center; gap:8px; font-family:'Syne',sans-serif; font-weight:700; font-size:14px; color:#fff; background:linear-gradient(135deg,var(--accent),var(--accent2)); padding:13px 22px; border-radius:10px; text-decoration:none; transition:filter .2s ease, transform .2s ease; }
+.lib-promo-cta:hover{ filter:brightness(1.08); transform:translateY(-1px); }
+
+.lib-promo-card{ position:relative; background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:20px; box-shadow:0 10px 30px rgba(0,0,0,0.06); overflow:hidden; cursor:pointer; transition:border-color .2s ease, transform .2s ease; }
+[data-theme="dark"] .lib-promo-card{ box-shadow:0 10px 30px rgba(0,0,0,0.35); }
+.lib-promo-card::before{ content:''; position:absolute; inset:0; background:radial-gradient(280px circle at var(--mx,50%) var(--my,50%), rgba(200,168,75,0.16), transparent 45%); opacity:0; transition:opacity .3s ease; pointer-events:none; }
+.lib-promo-card:hover, .lib-promo-card:focus-visible{ border-color:rgba(200,168,75,0.4); transform:translateY(-2px); outline:none; }
+.lib-promo-card:hover::before, .lib-promo-card:focus-visible::before{ opacity:1; }
+.lib-promo-card-top{ display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; position:relative; z-index:1; }
+.lib-promo-card-title{ font-family:'Syne',sans-serif; font-weight:700; font-size:16px; color:var(--text); }
+.lib-promo-card-flag{ font-family:'DM Mono',monospace; font-size:11px; color:var(--muted); background:var(--surface2); padding:3px 9px; border-radius:6px; }
+.lib-promo-chip-row{ display:flex; gap:6px; flex-wrap:wrap; margin-bottom:14px; position:relative; z-index:1; }
+.lib-chip{ font-size:10.5px; padding:4px 9px; border-radius:6px; font-family:'DM Mono','Fira Code',monospace; display:inline-flex; align-items:center; gap:4px; }
+.lib-chip.local{ background:rgba(200,168,75,0.10); color:#8a6d1f; border:1px solid rgba(200,168,75,0.3); }
+[data-theme="dark"] .lib-chip.local{ color:#C8A84B; }
+.lib-chip.must{ background:rgba(79,142,247,0.10); color:#2a5db0; border:1px solid rgba(79,142,247,0.3); font-weight:600; }
+[data-theme="dark"] .lib-chip.must{ color:#6b9cf7; }
+.lib-chip.nice{ background:transparent; color:var(--muted); border:1px dashed var(--border2); }
+.lib-promo-string{ position:relative; z-index:1; padding:12px 14px; font-size:12px; min-height:unset; }
+.lib-promo-tap-hint{ font-size:11.5px; color:var(--muted); margin-top:12px; font-style:italic; position:relative; z-index:1; }
 
 /* ── FOOTER ── */
 .tdt-footer{margin-top:24px;border-top:1px solid var(--border);background:var(--surface);}
@@ -659,7 +711,9 @@ body::before{background:radial-gradient(ellipse at center, rgba(79,142,247,0.05)
       <span class="tdt-nav-word">The Daily Talent</span>
     </a>
     <div class="tdt-nav-links">
-      <a href="/" class="tdt-nav-link tool">Tool</a>
+      <a href="/" class="tdt-nav-link tool current">Tool</a>
+      <span class="tdt-nav-sep" aria-hidden="true">AND</span>
+      <a href="/boolean-library.html" class="tdt-nav-link library">Library</a>
       <span class="tdt-nav-sep" aria-hidden="true">AND</span>
       <a href="/about-contact.html" class="tdt-nav-link contact">Contact Us</a>
     </div>
@@ -667,8 +721,43 @@ body::before{background:radial-gradient(ellipse at center, rgba(79,142,247,0.05)
       <span class="tdt-nav-dot-wrap" aria-hidden="true"><span class="tdt-nav-ping"></span><span class="tdt-nav-dot-solid"></span></span>
       <span class="tdt-nav-status-text">GCC Live</span>
     </div>
+    <div class="tdt-hamburger-wrap">
+      <div class="tdt-hamburger-btn" id="tdtHamBtn" role="button" tabindex="0" aria-label="Open menu" aria-expanded="false">
+        <div class="tdt-ham-bars">
+          <div class="tdt-ham-bar top"></div>
+          <div class="tdt-ham-bar mid"></div>
+          <div class="tdt-ham-bar bottom"></div>
+        </div>
+      </div>
+    </div>
   </div>
 </nav>
+<div class="tdt-nav-dropdown" id="tdtNavDropdown">
+  <div class="tdt-nav-dropdown-inner">
+    <a href="/" class="tdt-nav-drop-link current">Tool <span class="tdt-drop-arrow">&#8594;</span></a>
+    <a href="/boolean-library.html" class="tdt-nav-drop-link">Library <span class="tdt-drop-arrow">&#8594;</span></a>
+    <a href="/about-contact.html" class="tdt-nav-drop-link">Contact Us <span class="tdt-drop-arrow">&#8594;</span></a>
+  </div>
+</div>
+<script>
+(function(){
+  var btn = document.getElementById('tdtHamBtn');
+  var dropdown = document.getElementById('tdtNavDropdown');
+  if(!btn || !dropdown) return;
+  function closeMenu(){ btn.classList.remove('open'); dropdown.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
+  function toggleMenu(){
+    var isOpen = !btn.classList.contains('open');
+    btn.classList.toggle('open', isOpen);
+    dropdown.classList.toggle('open', isOpen);
+    btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  }
+  btn.addEventListener('click', function(e){ e.stopPropagation(); toggleMenu(); });
+  btn.addEventListener('keydown', function(e){ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); toggleMenu(); } });
+  document.addEventListener('click', function(e){
+    if(!dropdown.contains(e.target) && !btn.contains(e.target)) closeMenu();
+  });
+})();
+</script>
 
 <!-- STICKY BAR -->
 <div id="sticky-bar">
@@ -1030,6 +1119,37 @@ body::before{background:radial-gradient(ellipse at center, rgba(79,142,247,0.05)
     </button>
   </div>
 </div>
+
+<!-- ============================================================
+     LIBRARY CROSS-PROMO — H2 (not H1, to preserve single-H1
+     hierarchy), reuses this page's own .string-box/.kw-* classes
+     verbatim, and the Library's real cursor-glow hover technique,
+     so this reads as a genuine fragment of the product rather than
+     a separate marketing component bolted on.
+============================================================ -->
+<section class="lib-promo">
+  <div class="lib-promo-col1">
+    <div class="lib-promo-eyebrow">Stop rebuilding the wheel</div>
+    <h2 class="lib-promo-h2">Access 249+ pre-saved sourcing strings</h2>
+    <p class="lib-promo-body">Why type your criteria from scratch every time? The Boolean Library has ready-to-copy strings for GCC, MENA, USA &amp; India roles — each already scoped to that market's own vocabulary.</p>
+    <a href="/boolean-library.html" class="lib-promo-cta" onclick="if(window.trackEvent)trackEvent('library_promo_click','tool_page_cta')">Explore the free Library →</a>
+  </div>
+  <div class="lib-promo-col2">
+    <div class="lib-promo-card" id="libPromoCard" role="link" tabindex="0" aria-label="Open the Boolean Library">
+      <div class="lib-promo-card-top">
+        <div class="lib-promo-card-title">Software Engineer</div>
+        <div class="lib-promo-card-flag">🇦🇪 UAE</div>
+      </div>
+      <div class="lib-promo-chip-row">
+        <span class="lib-chip local">Dubai Internet City</span>
+        <span class="lib-chip must">React</span>
+        <span class="lib-chip nice">MongoDB</span>
+      </div>
+      <div class="string-box lib-promo-string">"Software Engineer" <span class="kw-and">AND</span> (<span class="kw-phrase">"Dubai Internet City"</span> <span class="kw-or">OR</span> ICV) <span class="kw-and">AND</span> (React <span class="kw-and">AND</span> <span class="kw-phrase">"Node.js"</span>)</div>
+      <div class="lib-promo-tap-hint">One of 249 — tap to open the full Library →</div>
+    </div>
+  </div>
+</section>
 
 <footer class="tdt-footer">
   <div class="tdt-footer-inner">
@@ -1430,20 +1550,39 @@ function submitCommunityCorrection() {
 
 function trackEvent(event,detail){
   detail=detail||"";
-  fetch(SUPABASE_URL+"/rest/v1/tool_events",{method:"POST",headers:{"Content-Type":"application/json","apikey":SUPABASE_KEY,"Authorization":"Bearer "+SUPABASE_KEY,"Prefer":"return=minimal"},body:JSON.stringify({event:event,detail:String(detail).slice(0,200),session_id:SESSION_ID,source:SESSION_SOURCE})}).catch(function(){});
+  try{
+    fetch(SUPABASE_URL+"/rest/v1/tool_events",{method:"POST",headers:{"Content-Type":"application/json","apikey":SUPABASE_KEY,"Authorization":"Bearer "+SUPABASE_KEY,"Prefer":"return=minimal"},body:JSON.stringify({event:event,detail:String(detail).slice(0,200),session_id:SESSION_ID,source:SESSION_SOURCE})}).catch(function(){});
+  }catch(e){}
 }
+
+/* ── Library promo card: same cursor-glow technique as the real Library cards ── */
+(function(){
+  var card = document.getElementById('libPromoCard');
+  if(!card) return;
+  card.addEventListener('mousemove', function(e){
+    var r = card.getBoundingClientRect();
+    card.style.setProperty('--mx', (e.clientX-r.left)+'px');
+    card.style.setProperty('--my', (e.clientY-r.top)+'px');
+  });
+  function goToLibrary(){
+    trackEvent('library_promo_click','tool_page_card');
+    window.location.href = '/boolean-library.html';
+  }
+  card.addEventListener('click', goToLibrary);
+  card.addEventListener('keydown', function(e){ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); goToLibrary(); } });
+})();
 
 const SESSION_START_TS=Date.now();
 window.addEventListener("DOMContentLoaded",function(){
-  trackEvent("page_view",document.referrer||"direct");
-  trackEvent("session_start",new Date(SESSION_START_TS).toISOString());
+  trackEvent("page_view",location.pathname+"|"+(document.referrer||"direct"));
+  trackEvent("session_start",location.pathname+"|"+new Date(SESSION_START_TS).toISOString());
   initRecentSearches();
   loadSynonymMap();
   initSynonymSuggest();
   initRatingWidget();
   initTheme();
 });
-function trackSessionEnd(){var duration=Math.round((Date.now()-SESSION_START_TS)/1000);trackEvent("session_end","duration_seconds:"+duration);}
+function trackSessionEnd(){var duration=Math.round((Date.now()-SESSION_START_TS)/1000);trackEvent("session_end",location.pathname+"|duration_seconds:"+duration);}
 window.addEventListener("visibilitychange",function(){if(document.visibilityState==="hidden")trackSessionEnd();});
 window.addEventListener("pagehide",trackSessionEnd);
 
