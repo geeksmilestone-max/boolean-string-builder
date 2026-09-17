@@ -106,6 +106,7 @@ body::before{ content:''; position:fixed; top:-30vh; left:50%; transform:transla
 .tdt-nav-link:hover::after{transform:scaleX(1);}
 .tdt-nav-link.tool:hover{color:#38e8b5;}
 .tdt-nav-link.library:hover{color:#C8A84B;}
+.tdt-nav-link.jobs:hover{color:#4f8ef7;}
 .tdt-nav-link.contact:hover{color:#7b5cf0;}
 .tdt-nav-link.current{color:#C8A84B;}
 .tdt-nav-link.current::after{transform:scaleX(1);background:linear-gradient(90deg,transparent,#C8A84B,transparent);}
@@ -149,10 +150,10 @@ body::before{ content:''; position:fixed; top:-30vh; left:50%; transform:transla
 }
 .page-top-space{ padding-top:112px; }
 
-/* Theme toggle button (verbatim pattern) */
-.theme-toggle{position:fixed;top:20px;right:20px;z-index:900;display:flex;align-items:center;gap:6px;background:rgba(28,32,43,0.88);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.18);border-radius:100px;padding:8px 14px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;color:#e8ecf4;box-shadow:0 4px 30px rgba(0,0,0,0.4);transition:border-color .2s ease;}
-.theme-toggle:hover{border-color:rgba(255,255,255,0.3);}
-@media(max-width:760px){ .theme-toggle{ top:auto; bottom:20px; right:20px; } }
+/* Theme toggle button (icon-only, matches the rest of the site) */
+.theme-toggle{position:fixed;top:16px;right:16px;z-index:950;background:var(--surface);border:1px solid var(--border2);border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s;box-shadow:0 2px 12px rgba(0,0,0,0.2);padding:0;}
+.theme-toggle:hover{border-color:var(--accent);box-shadow:0 4px 16px rgba(79,142,247,0.15);}
+@media(max-width:760px){ .theme-toggle{ top:66px; right:12px; } }
 
 /* ============ HERO ============ */
 .hero{ padding:0 0 36px; text-align:center; }
@@ -220,6 +221,8 @@ h2.section-h2{ font-family:'Syne', sans-serif; font-weight:700; font-size:20px; 
 .chip-legend{ display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
 .legend-item{ display:flex; align-items:center; gap:6px; font-size:11px; color:var(--muted); white-space:nowrap; }
 .legend-item.legend-hint{ font-style:italic; color:var(--faint,var(--muted)); white-space:normal; }
+.legend-item.legend-report{ color:var(--blue); text-decoration:none; white-space:nowrap; transition:color .15s ease; }
+.legend-item.legend-report:hover{ color:var(--gold); text-decoration:underline; }
 .legend-dot{ width:9px; height:9px; border-radius:3px; flex-shrink:0; }
 .legend-dot.legend-local{ background:rgba(200,168,75,0.25); border:1px solid rgba(200,168,75,0.6); }
 .legend-dot.legend-must{ background:rgba(79,142,247,0.25); border:1px solid rgba(79,142,247,0.6); }
@@ -370,6 +373,32 @@ h2.section-h2{ font-family:'Syne', sans-serif; font-weight:700; font-size:20px; 
 @media (max-width:640px){
   .dock-actions{ flex-direction:column; align-items:stretch; }
 }
+
+/* ── JOB BOARDS CROSS-PROMO (standalone — this page has no existing lib-promo component to reuse) ── */
+.lib-promo{ margin:56px auto 0; max-width:1140px; padding:0 24px; display:grid; grid-template-columns:1fr; gap:32px; }
+@media(min-width:820px){ .lib-promo{ grid-template-columns:1fr 1fr; align-items:center; gap:44px; } }
+.lib-promo-eyebrow{ font-family:'Syne',sans-serif; font-size:11px; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color:#C8A84B; margin-bottom:14px; }
+.lib-promo-h2{ font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(22px,3.4vw,30px); line-height:1.2; color:var(--text); margin-bottom:14px; letter-spacing:-0.01em; }
+.lib-promo-body{ font-size:14.5px; color:var(--muted); line-height:1.7; margin-bottom:22px; max-width:44ch; }
+.lib-promo-cta{ display:inline-flex; align-items:center; gap:8px; font-family:'Syne',sans-serif; font-weight:700; font-size:14px; color:#fff; background:linear-gradient(135deg,var(--accent),var(--accent2)); padding:13px 22px; border-radius:10px; text-decoration:none; transition:filter .2s ease, transform .2s ease; }
+.lib-promo-cta:hover{ filter:brightness(1.08); transform:translateY(-1px); }
+.lib-promo-card{ position:relative; background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:20px; box-shadow:0 10px 30px rgba(0,0,0,0.06); overflow:hidden; cursor:pointer; transition:border-color .2s ease, transform .2s ease; }
+[data-theme="dark"] .lib-promo-card{ box-shadow:0 10px 30px rgba(0,0,0,0.35); }
+.lib-promo-card::before{ content:''; position:absolute; inset:0; background:radial-gradient(280px circle at var(--mx,50%) var(--my,50%), rgba(200,168,75,0.16), transparent 45%); opacity:0; transition:opacity .3s ease; pointer-events:none; }
+.lib-promo-card:hover, .lib-promo-card:focus-visible{ border-color:rgba(200,168,75,0.4); transform:translateY(-2px); outline:none; }
+.lib-promo-card:hover::before, .lib-promo-card:focus-visible::before{ opacity:1; }
+.lib-promo-card-top{ display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; position:relative; z-index:1; }
+.lib-promo-card-title{ font-family:'Syne',sans-serif; font-weight:700; font-size:16px; color:var(--text); }
+.lib-promo-card-flag{ font-family:'DM Mono',monospace; font-size:11px; color:var(--muted); background:var(--surface2); padding:3px 9px; border-radius:6px; }
+.lib-promo-chip-row{ display:flex; gap:6px; flex-wrap:wrap; margin-bottom:14px; position:relative; z-index:1; }
+.lib-chip{ font-size:10.5px; padding:4px 9px; border-radius:6px; font-family:'DM Mono','Fira Code',monospace; display:inline-flex; align-items:center; gap:4px; }
+.lib-chip.local{ background:rgba(200,168,75,0.10); color:#8a6d1f; border:1px solid rgba(200,168,75,0.3); }
+[data-theme="dark"] .lib-chip.local{ color:#C8A84B; }
+.lib-chip.must{ background:rgba(79,142,247,0.10); color:#2a5db0; border:1px solid rgba(79,142,247,0.3); font-weight:600; }
+[data-theme="dark"] .lib-chip.must{ color:#6b9cf7; }
+.lib-chip.nice{ background:transparent; color:var(--muted); border:1px dashed var(--border2); }
+.lib-promo-string{ position:relative; z-index:1; background:var(--surface2); border:1px solid var(--border); border-radius:8px; padding:12px 14px; font-size:12px; color:var(--muted2); font-family:'DM Sans',sans-serif; line-height:1.6; }
+.lib-promo-tap-hint{ font-size:11.5px; color:var(--muted); margin-top:12px; font-style:italic; position:relative; z-index:1; }
 </style>
 </head>
 <body>
@@ -384,6 +413,8 @@ h2.section-h2{ font-family:'Syne', sans-serif; font-weight:700; font-size:20px; 
       <a href="/" class="tdt-nav-link tool">Tool</a>
       <span class="tdt-nav-sep" aria-hidden="true">AND</span>
       <a href="/boolean-library.html" class="tdt-nav-link library current">Library</a>
+      <span class="tdt-nav-sep" aria-hidden="true">AND</span>
+      <a href="/job-boards-qatar.html" class="tdt-nav-link jobs">Job Boards</a>
       <span class="tdt-nav-sep" aria-hidden="true">AND</span>
       <a href="/about-contact.html" class="tdt-nav-link contact">Contact Us</a>
     </div>
@@ -406,6 +437,7 @@ h2.section-h2{ font-family:'Syne', sans-serif; font-weight:700; font-size:20px; 
   <div class="tdt-nav-dropdown-inner">
     <a href="/" class="tdt-nav-drop-link">Tool <span class="tdt-drop-arrow">&#8594;</span></a>
     <a href="/boolean-library.html" class="tdt-nav-drop-link current">Library <span class="tdt-drop-arrow">&#8594;</span></a>
+    <a href="/job-boards-qatar.html" class="tdt-nav-drop-link">Job Boards <span class="tdt-drop-arrow">&#8594;</span></a>
     <a href="/about-contact.html" class="tdt-nav-drop-link">Contact Us <span class="tdt-drop-arrow">&#8594;</span></a>
   </div>
 </div>
@@ -431,7 +463,6 @@ h2.section-h2{ font-family:'Syne', sans-serif; font-weight:700; font-size:20px; 
 
 <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle light/dark mode">
   <span id="themeIcon">🌙</span>
-  <span id="themeLabel">Dark</span>
 </button>
 
 <div class="wrap page-top-space">
@@ -488,6 +519,7 @@ h2.section-h2{ font-family:'Syne', sans-serif; font-weight:700; font-size:20px; 
         <span class="legend-item"><span class="legend-dot legend-must"></span>Must-have skill</span>
         <span class="legend-item"><span class="legend-dot legend-nice"></span>Nice-to-have skill</span>
         <span class="legend-item legend-hint">Tap &#215; on a term to exclude it from your search</span>
+        <a href="/about-contact.html#contact" class="legend-item legend-report">Spot something off? Let us know &#8594;</a>
       </div>
     </div>
 <div class="country-panel" data-country="SA">
@@ -2535,6 +2567,7 @@ h2.section-h2{ font-family:'Syne', sans-serif; font-weight:700; font-size:20px; 
         <span class="legend-item"><span class="legend-dot legend-must"></span>Must-have skill</span>
         <span class="legend-item"><span class="legend-dot legend-nice"></span>Nice-to-have skill</span>
         <span class="legend-item legend-hint">Tap &#215; on a term to exclude it from your search</span>
+        <a href="/about-contact.html#contact" class="legend-item legend-report">Spot something off? Let us know &#8594;</a>
       </div>
     </div>
 <div class="country-panel" data-country="US">
@@ -3102,6 +3135,50 @@ h2.section-h2{ font-family:'Syne', sans-serif; font-weight:700; font-size:20px; 
 
 <div class="toast" id="toast">Copied to clipboard</div>
 
+<!-- ============================================================
+     JOB BOARDS CROSS-PROMO
+============================================================ -->
+<section class="lib-promo">
+  <div class="lib-promo-col1">
+    <div class="lib-promo-eyebrow">Have your string? Now use it</div>
+    <h2 class="lib-promo-h2">See exactly where to search in Qatar</h2>
+    <p class="lib-promo-body">A Boolean string is only as useful as where you run it. 10 job boards for Qatar, personally verified — ranked by real usefulness, not who paid for placement.</p>
+    <a href="/job-boards-qatar.html" class="lib-promo-cta" onclick="if(window.trackEvent)trackEvent('job_boards_promo_click','library_page_cta')">Explore Job Boards in Qatar →</a>
+  </div>
+  <div class="lib-promo-col2">
+    <div class="lib-promo-card" id="jobBoardsPromoCard" role="link" tabindex="0" aria-label="Open Job Boards in Qatar">
+      <div class="lib-promo-card-top">
+        <div class="lib-promo-card-title">Job Boards in Qatar</div>
+        <div class="lib-promo-card-flag">🇶🇦 10 Verified</div>
+      </div>
+      <div class="lib-promo-chip-row">
+        <span class="lib-chip local">LinkedIn</span>
+        <span class="lib-chip must">Bayt</span>
+        <span class="lib-chip nice">GulfTalent</span>
+      </div>
+      <div class="lib-promo-string">Curated by a GCC recruiter with 12+ years of hiring experience — not scraped, not pay-to-list.</div>
+      <div class="lib-promo-tap-hint">One list of 10 — tap to explore →</div>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var card = document.getElementById('jobBoardsPromoCard');
+  if(!card) return;
+  card.addEventListener('mousemove', function(e){
+    var r = card.getBoundingClientRect();
+    card.style.setProperty('--mx', (e.clientX-r.left)+'px');
+    card.style.setProperty('--my', (e.clientY-r.top)+'px');
+  });
+  function goToJobBoards(){
+    if(window.trackEvent) trackEvent('job_boards_promo_click','library_page_card');
+    window.location.href = '/job-boards-qatar.html';
+  }
+  card.addEventListener('click', goToJobBoards);
+  card.addEventListener('keydown', function(e){ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); goToJobBoards(); } });
+})();
+</script>
+
 <footer class="tdt-footer">
   <div class="tdt-footer-inner">
     <div>
@@ -3113,6 +3190,7 @@ h2.section-h2{ font-family:'Syne', sans-serif; font-weight:700; font-size:20px; 
       <div class="tdt-footer-links">
         <a href="/">Boolean String Builder</a>
         <a href="/boolean-library.html">Boolean Library</a>
+        <a href="/job-boards-qatar.html">Job Boards in Qatar</a>
         <a href="/about-contact.html">Contact</a>
         <a href="/privacy.html">Privacy Policy</a>
       </div>
