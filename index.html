@@ -1024,7 +1024,7 @@ body::before{background:radial-gradient(ellipse at center, rgba(79,142,247,0.05)
         <input type="checkbox" id="liPostsToggle" onchange="toggleLinkedInPosts(this.checked)" />
         <div class="li-posts-toggle-text">
           <span class="li-posts-toggle-label">Searching LinkedIn Posts? (not the Jobs tab)</span>
-          <span class="li-posts-toggle-desc">Switch LinkedIn's filter from <strong>Jobs</strong> to <strong>Posts</strong>, then check this box — it appends <code>(jobs OR vacancy OR hiring)</code> to surface hiring posts from managers and department heads.</span>
+          <span class="li-posts-toggle-desc">Switch LinkedIn's filter from <strong>Jobs</strong> to <strong>Posts</strong>, then check this box — it appends <code>(vacancy OR hiring)</code> to surface hiring posts from managers and department heads.</span>
         </div>
       </label>
       <div class="action-row">
@@ -1714,8 +1714,9 @@ function highlight(str){
 function toggleLinkedInPosts(checked){
   liPostsMode=checked;
   if(!plain.li)return;
-  var displayed=checked?plain.li+' AND (jobs OR vacancy OR hiring)':plain.li;
+  var displayed=checked?plain.li+' AND (vacancy OR hiring)':plain.li;
   document.getElementById('li-output').innerHTML=highlight(displayed);
+  validateStrings(plain.li, xrayPlain.li);
   trackEvent('li_posts_toggle',checked?'on':'off');
 }
 
@@ -1725,7 +1726,7 @@ function generateStrings(){
   if(!li){showToast("⚠️ Fill in at least one field first");return;}
   plain.li=li;
   plain.raw=li;
-  document.getElementById("li-output").innerHTML=highlight(liPostsMode?li+" AND (jobs OR vacancy OR hiring)":li);
+  document.getElementById("li-output").innerHTML=highlight(liPostsMode?li+" AND (vacancy OR hiring)":li);
   document.getElementById("raw-output").innerHTML=highlight(li);
   XRAY_SITES.forEach(function(site){
     var str=site.prefix+" "+li;
@@ -1758,6 +1759,11 @@ function validateStrings(li, gxLi) {
   var orCount = orMatches ? orMatches.length + 1 : 1;
   if (orCount > 5) liWarnings.push("<strong>OR chain is long (" + orCount + " terms).</strong> LinkedIn recommends keeping OR chains to 5 or fewer for best results — consider splitting into two searches.");
   if (li.length > 500) liWarnings.push("<strong>String is " + li.length + " characters.</strong> LinkedIn may truncate queries over 500 characters — try removing some nice-to-have skills.");
+  if (liPostsMode) {
+    var postsStr = li + " AND (vacancy OR hiring)";
+    var postsWordCount = postsStr.split(/\s+/).filter(Boolean).length;
+    if (postsWordCount > 14) liWarnings.push("<strong>Posts search is " + postsWordCount + " words.</strong> LinkedIn's Posts search returns no results past roughly 14 words — try trimming a skill or two.");
+  }
   if (liWarnings.length) {
     liWarningText.innerHTML = liWarnings.join(" ");
     liWarningEl.classList.add("visible");
@@ -1788,12 +1794,12 @@ function logToSourcingVault(){
 function switchTab(id,btn){trackEvent("tab_switch",id);document.querySelectorAll(".output-tab").forEach(function(t){t.classList.remove("active");});document.querySelectorAll(".tab-pane").forEach(function(p){p.classList.remove("active");});btn.classList.add("active");document.getElementById("tab-"+id).classList.add("active");}
 function copyString(id){
   var str=plain[id]||"";
-  if(id==="li"&&liPostsMode)str+=' AND (jobs OR vacancy OR hiring)';
+  if(id==="li"&&liPostsMode)str+=' AND (vacancy OR hiring)';
   navigator.clipboard.writeText(str).then(function(){showToast('✓ Copied to clipboard!');trackEvent('copy_string',id);triggerRatingPrompt();});
 }
 function copyXray(k){navigator.clipboard.writeText(xrayPlain[k]||"").then(function(){showToast('✓ Copied to clipboard!');trackEvent('copy_xray',k);triggerRatingPrompt();});}
 function openXray(k){var q=xrayPlain[k]||"";if(!q)return;trackEvent('open_xray_search',k);window.open('https://www.google.com/search?q='+encodeURIComponent(q),'_blank');}
-function openLinkedIn(){var q=plain.li||state.titles.join(' OR ');if(liPostsMode)q+=' AND (jobs OR vacancy OR hiring)';trackEvent('open_linkedin_search',q.slice(0,80));triggerRatingPrompt();window.open('https://www.linkedin.com/search/results/jobs/?keywords='+encodeURIComponent(q),'_blank');}
+function openLinkedIn(){var q=plain.li||state.titles.join(' OR ');if(liPostsMode)q+=' AND (vacancy OR hiring)';trackEvent('open_linkedin_search',q.slice(0,80));triggerRatingPrompt();window.open('https://www.linkedin.com/search/results/jobs/?keywords='+encodeURIComponent(q),'_blank');}
 function openGoogle(){var q=plain.gx||plain.li||state.titles.join(" OR ");trackEvent("open_google_xray",q.slice(0,80));triggerRatingPrompt();window.open("https://www.google.com/search?q="+encodeURIComponent(q),"_blank");}
 function showToast(msg){var t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");setTimeout(function(){t.classList.remove("show");},2500);}
 
