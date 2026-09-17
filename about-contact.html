@@ -138,6 +138,7 @@
   .tdt-nav-link:hover::after{transform:scaleX(1);}
   .tdt-nav-link.tool:hover{color:#38e8b5;}
   .tdt-nav-link.library:hover{color:#C8A84B;}
+  .tdt-nav-link.jobs:hover{color:#4f8ef7;}
   .tdt-nav-link.contact:hover{color:#7b5cf0;}
   .tdt-nav-link.current{color:#C8A84B;}
   .tdt-nav-link.current::after{transform:scaleX(1);background:linear-gradient(90deg,transparent,#C8A84B,transparent);}
@@ -178,11 +179,10 @@
     .tdt-hamburger-wrap{display:flex;}
   }
 
-  .theme-toggle{position:fixed;top:16px;right:16px;z-index:950;background:var(--surface);border:1px solid var(--border2);border-radius:100px;padding:7px 14px;display:flex;align-items:center;gap:8px;cursor:pointer;transition:all 0.2s;box-shadow:0 2px 12px rgba(0,0,0,0.2);}
+  .theme-toggle{position:fixed;top:16px;right:16px;z-index:950;background:var(--surface);border:1px solid var(--border2);border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s;box-shadow:0 2px 12px rgba(0,0,0,0.2);padding:0;}
   .theme-toggle:hover{border-color:var(--blue);box-shadow:0 4px 16px rgba(79,142,247,0.15);}
   .theme-toggle-icon{font-size:15px;line-height:1;transition:transform 0.4s ease;}
-  .theme-toggle-label{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;color:var(--muted2);letter-spacing:0.04em;transition:color 0.2s;}
-  [data-theme="dark"] .theme-toggle-icon{transform:rotate(180deg);}
+    [data-theme="dark"] .theme-toggle-icon{transform:rotate(180deg);}
   @media(max-width:760px){ .theme-toggle{ top:66px; right:12px; } }
 
   /* ============== HERO ============== */
@@ -387,7 +387,6 @@
 
 <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle light/dark mode">
   <span class="theme-toggle-icon" id="themeIcon">🌙</span>
-  <span class="theme-toggle-label" id="themeLabel">Dark</span>
 </button>
 
 <div class="noise-bg"></div>
@@ -406,6 +405,8 @@
       <a href="/" class="tdt-nav-link tool">Tool</a>
       <span class="tdt-nav-sep" aria-hidden="true">AND</span>
       <a href="/boolean-library.html" class="tdt-nav-link library">Library</a>
+      <span class="tdt-nav-sep" aria-hidden="true">AND</span>
+      <a href="/job-boards-qatar.html" class="tdt-nav-link jobs">Job Boards</a>
       <span class="tdt-nav-sep" aria-hidden="true">AND</span>
       <a href="#contact" class="tdt-nav-link contact current">Contact Us</a>
     </div>
@@ -428,6 +429,7 @@
   <div class="tdt-nav-dropdown-inner">
     <a href="/" class="tdt-nav-drop-link">Tool <span class="tdt-drop-arrow">&#8594;</span></a>
     <a href="/boolean-library.html" class="tdt-nav-drop-link">Library <span class="tdt-drop-arrow">&#8594;</span></a>
+    <a href="/job-boards-qatar.html" class="tdt-nav-drop-link">Job Boards <span class="tdt-drop-arrow">&#8594;</span></a>
     <a href="#contact" class="tdt-nav-drop-link current">Contact Us <span class="tdt-drop-arrow">&#8594;</span></a>
   </div>
 </div>
@@ -714,6 +716,7 @@
       <div class="footer__links">
         <a href="/" class="link-underline">Boolean String Builder</a>
         <a href="/boolean-library.html" class="link-underline">Boolean Library</a>
+        <a href="/job-boards-qatar.html" class="link-underline">Job Boards in Qatar</a>
         <a href="#contact" class="link-underline">Contact</a>
         <a href="/#faq-section" class="link-underline">FAQ</a>
         <a href="/privacy.html" class="link-underline">Privacy Policy</a>

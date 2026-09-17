@@ -277,10 +277,9 @@ input::placeholder { color: var(--muted); }
 }
 
 /* ── THEME TOGGLE ── */
-.theme-toggle{position:fixed;top:16px;right:16px;z-index:950;background:var(--surface);border:1px solid var(--border2);border-radius:100px;padding:7px 14px;display:flex;align-items:center;gap:8px;cursor:pointer;transition:all 0.2s;box-shadow:0 2px 12px rgba(0,0,0,0.2);}
+.theme-toggle{position:fixed;top:16px;right:16px;z-index:950;background:var(--surface);border:1px solid var(--border2);border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s;box-shadow:0 2px 12px rgba(0,0,0,0.2);padding:0;}
 .theme-toggle:hover{border-color:var(--accent);box-shadow:0 4px 16px rgba(79,142,247,0.15);}
 .theme-toggle-icon{font-size:15px;line-height:1;transition:transform 0.4s ease;}
-.theme-toggle-label{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;color:var(--muted2);letter-spacing:0.04em;transition:color 0.2s;}
 [data-theme="dark"] .theme-toggle-icon{transform:rotate(180deg);}
 
 /* ── DARK MODE OVERRIDES ── */
@@ -529,7 +528,7 @@ body::before{background:radial-gradient(ellipse at center, rgba(79,142,247,0.05)
 }
 
 /* ── POPULAR SEARCHES ── */
-.popular-section{margin-bottom:28px;animation:fadeUp 0.5s 0.05s ease both}
+.popular-section{margin-bottom:28px;animation:fadeUp 0.5s 0.05s ease both;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
 .popular-header{display:flex;align-items:center;gap:10px;margin-bottom:14px}
 .popular-heading{font-family:'Syne',sans-serif;font-size:13px;font-weight:800;color:var(--muted2);letter-spacing:0.08em;text-transform:uppercase}
 .popular-dot{width:6px;height:6px;border-radius:50%;background:var(--accent3);animation:pulse 2s infinite;flex-shrink:0}
@@ -602,6 +601,7 @@ body::before{background:radial-gradient(ellipse at center, rgba(79,142,247,0.05)
 .tdt-nav-link:hover::after{transform:scaleX(1);}
 .tdt-nav-link.tool:hover{color:#38e8b5;}
 .tdt-nav-link.library:hover{color:#C8A84B;}
+.tdt-nav-link.jobs:hover{color:#4f8ef7;}
 .tdt-nav-link.contact:hover{color:#7b5cf0;}
 .tdt-nav-link.current{color:#C8A84B;}
 .tdt-nav-link.current::after{transform:scaleX(1);background:linear-gradient(90deg,transparent,#C8A84B,transparent);}
@@ -715,6 +715,8 @@ body::before{background:radial-gradient(ellipse at center, rgba(79,142,247,0.05)
       <span class="tdt-nav-sep" aria-hidden="true">AND</span>
       <a href="/boolean-library.html" class="tdt-nav-link library">Library</a>
       <span class="tdt-nav-sep" aria-hidden="true">AND</span>
+      <a href="/job-boards-qatar.html" class="tdt-nav-link jobs">Job Boards</a>
+      <span class="tdt-nav-sep" aria-hidden="true">AND</span>
       <a href="/about-contact.html" class="tdt-nav-link contact">Contact Us</a>
     </div>
     <div class="tdt-nav-status">
@@ -736,6 +738,7 @@ body::before{background:radial-gradient(ellipse at center, rgba(79,142,247,0.05)
   <div class="tdt-nav-dropdown-inner">
     <a href="/" class="tdt-nav-drop-link current">Tool <span class="tdt-drop-arrow">&#8594;</span></a>
     <a href="/boolean-library.html" class="tdt-nav-drop-link">Library <span class="tdt-drop-arrow">&#8594;</span></a>
+    <a href="/job-boards-qatar.html" class="tdt-nav-drop-link">Job Boards <span class="tdt-drop-arrow">&#8594;</span></a>
     <a href="/about-contact.html" class="tdt-nav-drop-link">Contact Us <span class="tdt-drop-arrow">&#8594;</span></a>
   </div>
 </div>
@@ -771,7 +774,6 @@ body::before{background:radial-gradient(ellipse at center, rgba(79,142,247,0.05)
 <!-- THEME TOGGLE -->
 <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle light/dark mode">
   <span class="theme-toggle-icon" id="themeIcon">🌙</span>
-  <span class="theme-toggle-label" id="themeLabel">Dark</span>
 </button>
 
 <div class="wrapper">
@@ -1022,7 +1024,7 @@ body::before{background:radial-gradient(ellipse at center, rgba(79,142,247,0.05)
         <input type="checkbox" id="liPostsToggle" onchange="toggleLinkedInPosts(this.checked)" />
         <div class="li-posts-toggle-text">
           <span class="li-posts-toggle-label">Searching LinkedIn Posts? (not the Jobs tab)</span>
-          <span class="li-posts-toggle-desc">Switch LinkedIn's filter from <strong>Jobs</strong> to <strong>Posts</strong>, then check this box — it appends <code>(jobs OR vacancy OR hiring)</code> to surface hiring posts from managers and department heads.</span>
+          <span class="li-posts-toggle-desc">Switch LinkedIn's filter from <strong>Jobs</strong> to <strong>Posts</strong>, then check this box — it appends <code>(vacancy OR hiring)</code> to surface hiring posts from managers and department heads.</span>
         </div>
       </label>
       <div class="action-row">
@@ -1151,6 +1153,34 @@ body::before{background:radial-gradient(ellipse at center, rgba(79,142,247,0.05)
   </div>
 </section>
 
+<!-- ============================================================
+     JOB BOARDS CROSS-PROMO — same lib-promo component reused
+     for a second product, so no new CSS is introduced here.
+============================================================ -->
+<section class="lib-promo">
+  <div class="lib-promo-col1">
+    <div class="lib-promo-eyebrow">Built your string? Now use it</div>
+    <h2 class="lib-promo-h2">See exactly where to search in Qatar</h2>
+    <p class="lib-promo-body">A Boolean string is only as useful as where you run it. 10 job boards for Qatar, personally verified — ranked by real usefulness, not who paid for placement.</p>
+    <a href="/job-boards-qatar.html" class="lib-promo-cta" onclick="if(window.trackEvent)trackEvent('job_boards_promo_click','tool_page_cta')">Explore Job Boards in Qatar →</a>
+  </div>
+  <div class="lib-promo-col2">
+    <div class="lib-promo-card" id="jobBoardsPromoCard" role="link" tabindex="0" aria-label="Open Job Boards in Qatar">
+      <div class="lib-promo-card-top">
+        <div class="lib-promo-card-title">Job Boards in Qatar</div>
+        <div class="lib-promo-card-flag">🇶🇦 10 Verified</div>
+      </div>
+      <div class="lib-promo-chip-row">
+        <span class="lib-chip local">LinkedIn</span>
+        <span class="lib-chip must">Bayt</span>
+        <span class="lib-chip nice">GulfTalent</span>
+      </div>
+      <div class="string-box lib-promo-string" style="font-family:'DM Sans',sans-serif;">Curated by a GCC recruiter with 12+ years of hiring experience — not scraped, not pay-to-list.</div>
+      <div class="lib-promo-tap-hint">One list of 10 — tap to explore →</div>
+    </div>
+  </div>
+</section>
+
 <footer class="tdt-footer">
   <div class="tdt-footer-inner">
     <div>
@@ -1161,6 +1191,8 @@ body::before{background:radial-gradient(ellipse at center, rgba(79,142,247,0.05)
       <div class="tdt-footer-heading">Navigate</div>
       <div class="tdt-footer-links">
         <a href="/">Boolean String Builder</a>
+        <a href="/boolean-library.html">Boolean Library</a>
+        <a href="/job-boards-qatar.html">Job Boards in Qatar</a>
         <a href="/about-contact.html">Contact</a>
         <a href="#faq-section">FAQ</a>
         <a href="/privacy.html">Privacy Policy</a>
@@ -1572,6 +1604,23 @@ function trackEvent(event,detail){
   card.addEventListener('keydown', function(e){ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); goToLibrary(); } });
 })();
 
+/* ── Job Boards promo card: same cursor-glow technique ── */
+(function(){
+  var card = document.getElementById('jobBoardsPromoCard');
+  if(!card) return;
+  card.addEventListener('mousemove', function(e){
+    var r = card.getBoundingClientRect();
+    card.style.setProperty('--mx', (e.clientX-r.left)+'px');
+    card.style.setProperty('--my', (e.clientY-r.top)+'px');
+  });
+  function goToJobBoards(){
+    trackEvent('job_boards_promo_click','tool_page_card');
+    window.location.href = '/job-boards-qatar.html';
+  }
+  card.addEventListener('click', goToJobBoards);
+  card.addEventListener('keydown', function(e){ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); goToJobBoards(); } });
+})();
+
 const SESSION_START_TS=Date.now();
 window.addEventListener("DOMContentLoaded",function(){
   trackEvent("page_view",location.pathname+"|"+(document.referrer||"direct"));
@@ -1665,8 +1714,9 @@ function highlight(str){
 function toggleLinkedInPosts(checked){
   liPostsMode=checked;
   if(!plain.li)return;
-  var displayed=checked?plain.li+' AND (jobs OR vacancy OR hiring)':plain.li;
+  var displayed=checked?plain.li+' AND (vacancy OR hiring)':plain.li;
   document.getElementById('li-output').innerHTML=highlight(displayed);
+  validateStrings(plain.li, xrayPlain.li);
   trackEvent('li_posts_toggle',checked?'on':'off');
 }
 
@@ -1676,7 +1726,7 @@ function generateStrings(){
   if(!li){showToast("⚠️ Fill in at least one field first");return;}
   plain.li=li;
   plain.raw=li;
-  document.getElementById("li-output").innerHTML=highlight(liPostsMode?li+" AND (jobs OR vacancy OR hiring)":li);
+  document.getElementById("li-output").innerHTML=highlight(liPostsMode?li+" AND (vacancy OR hiring)":li);
   document.getElementById("raw-output").innerHTML=highlight(li);
   XRAY_SITES.forEach(function(site){
     var str=site.prefix+" "+li;
@@ -1709,6 +1759,11 @@ function validateStrings(li, gxLi) {
   var orCount = orMatches ? orMatches.length + 1 : 1;
   if (orCount > 5) liWarnings.push("<strong>OR chain is long (" + orCount + " terms).</strong> LinkedIn recommends keeping OR chains to 5 or fewer for best results — consider splitting into two searches.");
   if (li.length > 500) liWarnings.push("<strong>String is " + li.length + " characters.</strong> LinkedIn may truncate queries over 500 characters — try removing some nice-to-have skills.");
+  if (liPostsMode) {
+    var postsStr = li + " AND (vacancy OR hiring)";
+    var postsWordCount = postsStr.split(/\s+/).filter(Boolean).length;
+    if (postsWordCount > 14) liWarnings.push("<strong>Posts search is " + postsWordCount + " words.</strong> LinkedIn's Posts search returns no results past roughly 14 words — try trimming a skill or two.");
+  }
   if (liWarnings.length) {
     liWarningText.innerHTML = liWarnings.join(" ");
     liWarningEl.classList.add("visible");
@@ -1739,12 +1794,12 @@ function logToSourcingVault(){
 function switchTab(id,btn){trackEvent("tab_switch",id);document.querySelectorAll(".output-tab").forEach(function(t){t.classList.remove("active");});document.querySelectorAll(".tab-pane").forEach(function(p){p.classList.remove("active");});btn.classList.add("active");document.getElementById("tab-"+id).classList.add("active");}
 function copyString(id){
   var str=plain[id]||"";
-  if(id==="li"&&liPostsMode)str+=' AND (jobs OR vacancy OR hiring)';
+  if(id==="li"&&liPostsMode)str+=' AND (vacancy OR hiring)';
   navigator.clipboard.writeText(str).then(function(){showToast('✓ Copied to clipboard!');trackEvent('copy_string',id);triggerRatingPrompt();});
 }
 function copyXray(k){navigator.clipboard.writeText(xrayPlain[k]||"").then(function(){showToast('✓ Copied to clipboard!');trackEvent('copy_xray',k);triggerRatingPrompt();});}
 function openXray(k){var q=xrayPlain[k]||"";if(!q)return;trackEvent('open_xray_search',k);window.open('https://www.google.com/search?q='+encodeURIComponent(q),'_blank');}
-function openLinkedIn(){var q=plain.li||state.titles.join(' OR ');if(liPostsMode)q+=' AND (jobs OR vacancy OR hiring)';trackEvent('open_linkedin_search',q.slice(0,80));triggerRatingPrompt();window.open('https://www.linkedin.com/search/results/jobs/?keywords='+encodeURIComponent(q),'_blank');}
+function openLinkedIn(){var q=plain.li||state.titles.join(' OR ');if(liPostsMode)q+=' AND (vacancy OR hiring)';trackEvent('open_linkedin_search',q.slice(0,80));triggerRatingPrompt();window.open('https://www.linkedin.com/search/results/jobs/?keywords='+encodeURIComponent(q),'_blank');}
 function openGoogle(){var q=plain.gx||plain.li||state.titles.join(" OR ");trackEvent("open_google_xray",q.slice(0,80));triggerRatingPrompt();window.open("https://www.google.com/search?q="+encodeURIComponent(q),"_blank");}
 function showToast(msg){var t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");setTimeout(function(){t.classList.remove("show");},2500);}
 
