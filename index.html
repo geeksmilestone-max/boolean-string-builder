@@ -1788,7 +1788,7 @@ function logToSourcingVault(){
   var jobTitle=state.titles[0]||null;
   var region=state.regions.concat(state.customRegions)[0]||null;
   if(!jobTitle||!region)return;
-  fetch(SUPABASE_URL+"/rest/v1/sourcing_vault",{method:"POST",headers:{"Content-Type":"application/json","apikey":SUPABASE_KEY,"Authorization":"Bearer "+SUPABASE_KEY,"Prefer":"resolution=merge-duplicates,return=minimal"},body:JSON.stringify({job_title:jobTitle,region:region,must_skills:state.mustSkills,generation_count:1,last_generated_at:new Date().toISOString()})}).catch(function(){});
+  fetch(SUPABASE_URL+"/rest/v1/rpc/log_vault_generation",{method:"POST",headers:{"Content-Type":"application/json","apikey":SUPABASE_KEY,"Authorization":"Bearer "+SUPABASE_KEY},body:JSON.stringify({p_job_title:jobTitle,p_region:region,p_must_skills:state.mustSkills})}).catch(function(){});
 }
 
 function switchTab(id,btn){trackEvent("tab_switch",id);document.querySelectorAll(".output-tab").forEach(function(t){t.classList.remove("active");});document.querySelectorAll(".tab-pane").forEach(function(p){p.classList.remove("active");});btn.classList.add("active");document.getElementById("tab-"+id).classList.add("active");}
