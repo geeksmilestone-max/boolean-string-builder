@@ -2272,15 +2272,14 @@ function branchRating(value) {
 function submitLowRating() {
   var comment = (document.getElementById("ratingLowComment").value || "").trim();
   if (comment) {
-    fetch(SUPABASE_URL + "/rest/v1/ratings", {
-      method: "PATCH",
+    fetch(SUPABASE_URL + "/rest/v1/rpc/add_rating_comment", {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
         "apikey": SUPABASE_KEY,
-        "Authorization": "Bearer " + SUPABASE_KEY,
-        "Prefer": "return=minimal"
+        "Authorization": "Bearer " + SUPABASE_KEY
       },
-      body: JSON.stringify({ comment: comment })
+      body: JSON.stringify({ p_session_id: SESSION_ID, p_comment: comment })
     }).catch(function(){});
     trackEvent("rating_low_comment", comment.slice(0, 80));
   }
